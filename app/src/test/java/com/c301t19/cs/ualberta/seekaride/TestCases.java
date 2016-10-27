@@ -2,6 +2,13 @@ package com.c301t19.cs.ualberta.seekaride;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.c301t19.cs.ualberta.seekaride.activities.MainActivity;
+import com.c301t19.cs.ualberta.seekaride.core.Driver;
+import com.c301t19.cs.ualberta.seekaride.core.Profile;
+import com.c301t19.cs.ualberta.seekaride.core.Rider;
+import com.c301t19.cs.ualberta.seekaride.core.Request;
+import com.c301t19.cs.ualberta.seekaride.core.User;
+
 import java.util.ArrayList;
 
 /**
@@ -9,9 +16,9 @@ import java.util.ArrayList;
  */
 public class TestCases extends ActivityInstrumentationTestCase2 {
     public TestCases(){
-        super(com.c301t19.cs.ualberta.seekaride.MainActivity.class);
+        super(MainActivity.class);
     }
-
+/*
     //    Requests
     //
     //    US 01.01.01
@@ -27,7 +34,7 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    As a rider, I want to see current requests I have open.
     public void request2(){
         Rider rider = new Rider();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         assertTrue(request == rider.getRequest());
     }
 
@@ -75,7 +82,7 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    As a rider, I want to confirm a driver's acceptance. This allows us to choose from a list of acceptances if more than 1 driver accepts simultaneously.
     public void request8(){
         Rider rider = new Rider();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
 
         rider.accept(request);
         assertFalse(rider.isCompleted());
@@ -89,7 +96,7 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     public void request9(){
         Rider rider = new Rider();
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         rider.setRequest(request);
         driver.setRequest(request);
         assertTrue(request == rider.getRequest());
@@ -157,7 +164,7 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    As a driver,  I want to accept a request I agree with and accept that offered payment upon completion.
     public void request15(){
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         driver.accept(request);
         assertFalse(driver.isCompleted());
 
@@ -167,9 +174,9 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    As a driver, I want to view a list of things I have accepted that are pending, each request with its description, and locations.
     public void request16(){
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         driver.setRequest(request);
-        ArrayList<RiderRequest> requestList= driver.getList();
+        ArrayList<Request> requestList= driver.getList();
         assertFalse(requestList.get(0) == request);
     }
     //
@@ -177,9 +184,9 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    As a driver, I want to see if my acceptance was accepted.
     public void request17(){
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         driver.setRequest(request);
-        ArrayList<RiderRequest> requestList= driver.getList();
+        ArrayList<Request> requestList= driver.getList();
         assertFalse(requestList.get(0) == request);
         driver.accept(request);
         assertFalse(driver.isCompleted());
@@ -189,9 +196,9 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    As a driver, I want to be notified if my ride offer was accepted.
     public void request18(){
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         driver.setRequest(request);
-        ArrayList<RiderRequest> requestList= driver.getList();
+        ArrayList<Request> requestList= driver.getList();
         assertFalse(requestList.get(0) == request);
         driver.accept(request);
         assertFalse(driver.isCompleted());
@@ -206,9 +213,9 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    As an driver, I want to see requests that I already accepted while offline.
     public void request19(){
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         driver.setRequest(request);
-        ArrayList<RiderRequest> requestList= driver.getList();
+        ArrayList<Request> requestList= driver.getList();
         assertFalse(requestList.get(0) == request);
         driver.accept(request);
         assertFalse(driver.isCompleted());
@@ -223,7 +230,7 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     public void request20(){
         Rider rider = new Rider();
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         rider.setRequest(request);
         driver.setRequest(request);
         assertTrue(request == rider.getRequest());
@@ -235,7 +242,7 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     public void request21(){
         Rider rider = new Rider();
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         rider.setRequest(request);
         driver.setRequest(request);
         assertTrue(request == rider.getRequest());
@@ -250,9 +257,9 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    As a driver, I want to accept requests that will be sent once I get connectivity again.
     public void request22(){
         Driver driver = new Driver();
-        RiderRequest request = new RiderRequest();
+        Request request = new Request();
         driver.setRequest(request);
-        ArrayList<RiderRequest> requestList= driver.getList();
+        ArrayList<Request> requestList= driver.getList();
         assertFalse(requestList.get(0) == request);
         driver.accept(request);
         assertFalse(driver.isCompleted());
@@ -292,5 +299,5 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         assertTrue(driver.search(location1));
 
     }
-
+*/
 }
