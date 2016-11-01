@@ -12,32 +12,43 @@ public class Request {
     private String description;
     private Location start;
     private Location destination;
-    private String riderName;
-    private ArrayList<String> acceptedDriverNames;
+    //private String riderName;
+    private ArrayList<Profile> acceptedDriverProfiles;
     private float price;
 
+    private Boolean waitingForDriver;
+    private Profile riderProfile;
+    private Boolean completion;
+    private Profile driverProfile;
+
     public Request(String descrip, Location st, Location dest,
-                   String name, float pr) {
+                    float pr,Profile riderProfile) {
         requestTime = new Date();
         description = descrip;
         start = st;
         destination = dest;
-        riderName = name;
-        acceptedDriverNames = new ArrayList<String>();
+        //riderName = name;
+        acceptedDriverProfiles = new ArrayList<Profile>();
         price = pr;
+
+        waitingForDriver = true;
+        this.riderProfile = riderProfile;
+        completion = false;
     }
 
-    public void driverAccepted(String driverName) {
-        acceptedDriverNames.add(driverName);
+    public void driverAccepted(Profile driverProfile) {
+        acceptedDriverProfiles.add(driverProfile);
     }
 
-    public void driverUnaccepted(String driverName) {
-        acceptedDriverNames.remove(driverName);
-    }
+//    public void driverUnaccepted(Profile driverName) {
+//        acceptedDriverProfile.remove(driverName);
+//    }
 
     public void riderAccepted(String driverName) {
         
     }
+
+    public boolean isWaitingForDriver(){return waitingForDriver;}
 
     public Date getRequestTime() {
         return requestTime;
@@ -55,15 +66,34 @@ public class Request {
         return destination;
     }
 
-    public String getRiderName() {
-        return riderName;
+    public Profile getRiderProfile() {
+        return riderProfile;
     }
 
-    public ArrayList<String> getAcceptedDriverNames() {
-        return acceptedDriverNames;
+    public ArrayList<Profile> getAcceptedDriverProfiles() {
+        return acceptedDriverProfiles;
     }
 
     public float getPrice() {
         return price;
+    }
+
+
+    public void complete() {
+        completion = true;
+    }
+
+
+    public boolean isCompleted() {
+        return completion;
+    }
+
+    public void riderAccept(int index) {
+        waitingForDriver = false;
+        driverProfile = acceptedDriverProfiles.get(index);
+    }
+
+    public Profile getDriverProfile() {
+        return driverProfile;
     }
 }
