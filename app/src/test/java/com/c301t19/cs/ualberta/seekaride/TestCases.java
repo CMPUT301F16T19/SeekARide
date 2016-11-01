@@ -32,6 +32,7 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         Location destination = new Location("112st");
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
+        // add the reqeust in the elastic search
         assertTrue(new Request("lol trip",startPoint,destination,price,userProfile)==rider.getCurrentRequests());
         assertTrue(Boolean.TRUE);
         assertTrue(Boolean.FALSE);
