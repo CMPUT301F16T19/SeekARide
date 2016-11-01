@@ -10,6 +10,28 @@ public class Driver extends User {
     private ArrayList<Request> searchedRequests;
     private ArrayList<Request> acceptedRequests;
 
+
+    // singleton
+    // pass in the username to create a new driver
+    /*
+    private static Driver ourInstance = null;
+    public static Driver getInstance(String username) {
+        ourInstance = new Driver(username);
+        return ourInstance;
+    }
+    public static Driver getInstance() {
+        return ourInstance;
+    }
+    private Driver(String username) {
+
+    }
+    */
+
+    public Driver(Profile profile, ArrayList<Request> searchedRequests) {
+        super(profile);
+        this.searchedRequests = searchedRequests;
+    }
+
     public void searchRequestsByKeyword(ArrayList<String> keywords, int radius) {
         // search requests and store in searchedRequests
     }
