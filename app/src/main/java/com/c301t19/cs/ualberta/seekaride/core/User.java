@@ -7,6 +7,10 @@ public class User {
 
     protected Profile profile;
 
+    public User(Profile profile) {
+        this.profile = profile;
+    }
+
     public Profile getProfile() {
         return profile;
     }
@@ -17,5 +21,9 @@ public class User {
 
     public void contactByEmail(String email) {
 
+    }
+
+    public float getRecommendedPrice(Location start, Location end) {
+        return 0;
     }
 }
