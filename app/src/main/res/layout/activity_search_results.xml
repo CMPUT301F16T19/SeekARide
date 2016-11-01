@@ -1,39 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activities.DriverActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.c301t19.cs.ualberta.seekaride.activities.SearchResultsActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="My Requests"
-        android:id="@+id/driver_my_Text"
+        android:text="Search Results"
+        android:id="@+id/results_R_Text"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search for Requests"
-        android:id="@+id/driver_Search_Button"
+        android:text="Back"
+        android:id="@+id/results_Back_Button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/driver_my_Text" />
+        android:layout_alignParentEnd="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rider_Requests"
-        android:layout_below="@+id/driver_my_Text"
+        android:id="@+id/result_List"
+        android:layout_below="@+id/results_R_Text"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/driver_Search_Button"
+        android:layout_above="@+id/results_Back_Button"
         android:choiceMode="singleChoice" />
 </RelativeLayout>

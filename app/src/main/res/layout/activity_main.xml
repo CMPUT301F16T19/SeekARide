@@ -9,8 +9,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.MainActivity">
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Login"
+        android:id="@+id/login_Button"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/password_text" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Account"
+        android:id="@+id/newA_Button"
+        android:layout_below="@+id/login_Button"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/login_Button" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/username_Text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="Username" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_text"
+        android:layout_below="@+id/username_Text"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/username_Text"
+        android:text="Password" />
 </RelativeLayout>

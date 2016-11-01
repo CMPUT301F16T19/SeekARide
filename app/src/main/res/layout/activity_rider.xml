@@ -9,4 +9,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.RiderActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Request"
+        android:id="@+id/request_Ride_Button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/current_Requests" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/current_Requests"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/request_Ride_Button"
+        android:choiceMode="singleChoice" />
 </RelativeLayout>

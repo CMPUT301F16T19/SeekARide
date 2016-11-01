@@ -9,4 +9,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.SearchRequestsActivity">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_Keywords_Text"
+        android:layout_alignParentTop="true"
+        android:text="Enter Keywords"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/search_Search_Button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_Radius_Text"
+        android:layout_above="@+id/search_Search_Button"
+        android:text="Search Radius"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/search_Search_Button" />
+
+    <VideoView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Map"
+        android:layout_below="@+id/search_Keywords_Text"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/search_Radius_Text" />
+
 </RelativeLayout>
