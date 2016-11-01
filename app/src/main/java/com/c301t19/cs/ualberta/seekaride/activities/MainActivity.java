@@ -3,6 +3,8 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.os.Bundle;
 
+
+
 public class MainActivity extends Activity {
 
     @Override

@@ -10,6 +10,11 @@ public class Driver extends User {
     private ArrayList<Request> searchedRequests;
     private ArrayList<Request> acceptedRequests;
 
+    public Driver(Profile profile, ArrayList<Request> searchedRequests) {
+        super(profile);
+        this.searchedRequests = searchedRequests;
+    }
+
     public void searchRequestsByKeyword(ArrayList<String> keywords, int radius) {
         // search requests and store in searchedRequests
     }
