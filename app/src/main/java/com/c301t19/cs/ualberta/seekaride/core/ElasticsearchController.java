@@ -9,6 +9,7 @@ import com.searchly.jestdroid.JestDroidClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.core.DocumentResult;
@@ -20,7 +21,7 @@ public class ElasticsearchController {
 
     // used to indicate search/edit targets
     public enum UserField { NAME, EMAIL, PHONE }
-    public enum RequestField { START, END, DATE, RIDER, DRIVERS }
+    public enum RequestField { DESCRIPTION, START, END, DATE, RIDER, DRIVERS }
 
     private static JestDroidClient client;
 
@@ -40,14 +41,16 @@ public class ElasticsearchController {
         }
     }
 
-    // gets a User from elasticsearch. pass in the field you want to search by
+    // gets a User from elasticsearch. pass in the field you want to search by and the search string
     public static class GetUserTask extends AsyncTask<Void, Void, User> {
 
         private UserField userField;
+        private String keyword;
 
-        public GetUserTask(UserField uf) {
+        public GetUserTask(UserField uf, String k) {
             super();
             userField = uf;
+            keyword = k;
         }
 
         @Override
@@ -60,10 +63,12 @@ public class ElasticsearchController {
     public static class EditUserTask extends AsyncTask<Void, Void, Boolean> {
 
         private UserField userField;
+        private String newValue;
 
-        public EditUserTask(UserField uf) {
+        public EditUserTask(UserField uf, String nv) {
             super();
             userField = uf;
+            newValue = nv;
         }
 
         @Override
@@ -88,24 +93,65 @@ public class ElasticsearchController {
         }
     }
 
-    // gets a User from elasticsearch. pass in the field you want to search by
-    public static class GetUserTask extends AsyncTask<UserField, Void, User> {
+    // gets a Request from elasticsearch. meant to be used when you have a specific request
+    // you are looking for, rather than for searching over many requests. mostly likely will
+    // be used with a request ID
+    public static class GetRequestTask extends AsyncTask<Void, Void, Request> {
 
-        private Request request;
+        private RequestField requestField;
+        private String keyword;
 
-        public AddRequestTask(Request r) {
+        public GetRequestTask(RequestField rf, String k) {
             super();
-            request = r;
+            requestField = rf;
+            keyword = k;
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Request doInBackground(Void... params) {
             return null;
         }
     }
 
-    // gets a User from elasticsearch. pass in the field you want to search by
-    public static class GetUserTask extends AsyncTask<UserField, Void, User> {
+    // searches for Requests from elasticsearch. pass in an object of the following structure:
+    // ArrayList<Map<RequestField, ArrayList<String>>>
+    // maps fields to a list of search terms, and more than one field can be searched (using OR logic)
+    // returns list of requests
+    public static class SearchRequestsTask extends AsyncTask<Void, Void, ArrayList<Request>> {
+
+        private ArrayList<Map<RequestField, ArrayList<String>>> searchParams;
+
+        public SearchRequestsTask(ArrayList<Map<RequestField, ArrayList<String>>> sp) {
+            super();
+            searchParams = sp;
+        }
+
+        @Override
+        protected ArrayList<Request> doInBackground(Void... params) {
+            return null;
+        }
+    }
+
+    // searches for Requests from elasticsearch. similar to the above, but just takes one field and one search term
+    public static class SearchRequestsTaskSimple extends AsyncTask<Void, Void, ArrayList<Request>> {
+
+        private RequestField requestField;
+        private String keyword;
+
+        public SearchRequestsTaskSimple(RequestField rf, String k) {
+            super();
+            requestField = rf;
+            keyword = k;
+        }
+
+        @Override
+        protected ArrayList<Request> doInBackground(Void... params) {
+            return null;
+        }
+    }
+
+    // IMPLEMENTATION UNCLEAR
+    public static class EditRequestTask extends AsyncTask<UserField, Void, User> {
 
         @Override
         protected User doInBackground(UserField... params) {
@@ -113,8 +159,8 @@ public class ElasticsearchController {
         }
     }
 
-    // gets a User from elasticsearch. pass in the field you want to search by
-    public static class GetUserTask extends AsyncTask<UserField, Void, User> {
+    // IMPLEMENTATION UNCLEAR
+    public static class DeleteRequestTask extends AsyncTask<UserField, Void, User> {
 
         @Override
         protected User doInBackground(UserField... params) {

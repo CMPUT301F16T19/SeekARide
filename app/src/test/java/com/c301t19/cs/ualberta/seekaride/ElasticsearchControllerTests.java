@@ -31,6 +31,14 @@ public class ElasticsearchControllerTests extends ActivityInstrumentationTestCas
 
     }
 
+    public void testSearchRequests() {
+
+    }
+
+    public void testSearchRequestsSimple() {
+
+    }
+
     public void testEditRequest() {
 
     }
