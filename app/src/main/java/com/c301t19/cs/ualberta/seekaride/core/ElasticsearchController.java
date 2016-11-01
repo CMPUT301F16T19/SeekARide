@@ -8,6 +8,7 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,16 +29,31 @@ public class ElasticsearchController {
     // add a User to elasticsearch. returns true on success
     public static class AddUserTask extends AsyncTask<Void, Void, Boolean> {
 
-        private User user;
+        private Profile user;
 
-        public AddUserTask(User u) {
+        public AddUserTask(Profile u) {
             super();
             user = u;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return null;
+            verifySettings();
+            String username = user.getUsername();
+            String email = user.getEmail();
+            String phone = user.getPhoneNumber();
+            Map<String, String> source = new LinkedHashMap<String,String>();
+            source.put("username", username);
+            source.put("email", email);
+            source.put("phone", phone);
+            Index index = new Index.Builder(source).index("T19SeekARide").type("User").build();
+            try {
+                client.execute(index);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return Boolean.TRUE;
         }
     }
 
