@@ -1,9 +1,11 @@
-package com.c301t19.cs.ualberta.seekaride;
+package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.c301t19.cs.ualberta.seekaride.R;
 
 public class RCompleteActivity extends Activity {
 

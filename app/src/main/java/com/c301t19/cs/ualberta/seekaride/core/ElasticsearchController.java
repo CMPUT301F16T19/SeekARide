@@ -9,14 +9,9 @@ import com.searchly.jestdroid.JestDroidClient;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import io.searchbox.client.JestClient;
-import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
 
 public class ElasticsearchController {
 

@@ -59,7 +59,7 @@
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name=".RCompleteActivity"
+            android:name=".activities.RCompleteActivity"
             android:label="@string/title_activity_rcomplete" >
         </activity>
     </application>
