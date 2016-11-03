@@ -2,10 +2,12 @@ package com.c301t19.cs.ualberta.seekaride;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
+import com.c301t19.cs.ualberta.seekaride.core.User;
 
 import org.junit.Test;
 
@@ -34,7 +36,7 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         rider.makeRequest("lol trip", startPoint, destination, price);
         // add the reqeust in the elastic search
         assertTrue(new Request("lol trip",startPoint,destination,price,userProfile)==rider.getCurrentRequests());
-        assertTrue(Boolean.TRUE);
+        assertFalse(Boolean.TRUE);
         assertTrue(Boolean.FALSE);
     }
 
@@ -175,62 +177,71 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         rider.acceptDriverOffer(0);
         assertEquals(driverProfile,rider.getCurrentRequests().getDriverProfile());
     }
-    /*
+
     //
     //
     //    Status
     //
     //    US 02.01.01
     //    As a rider or driver, I want to see the status of a request that I am involved in
-    public void request9(){
-        Rider rider = new Rider();
-        Driver driver = new Driver();
-        Request request = new Request();
-        rider.setRequest(request);
-        driver.setRequest(request);
-        assertTrue(request == rider.getRequest());
-        assertTrue(request == driver.getRequest());
+    public void testRequest9(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        Request testRequest = rider.getCurrentRequests();
+
+        Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
+        Driver driver = new Driver(driverProfile);
+        driver.acceptRequest(testRequest);
+        //testRequest.driverAccepted(driverProfile);
+        rider.updateRequest(testRequest);
+
+        rider.getCurrentRequests(); // returns the request info
+        driver.getCurrentRequest(); // returns the request info
+
     }
+
     //
     //    User profile
     //
     //    US 03.01.01
     //    As a user, I want a profile with a unique username and my contact information.
-    public void request10(){
-        User user = new User();
-        Profile profile = new Profile();
-        user.setProfile(profile);
-        assertTrue(profile==user.getProfile());
+    public void testRequest10(){
+        // when create it, we have to check is that unique or not by elastic search
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        User user = new User(userProfile);
+
+        assertTrue(userProfile==user.getProfile());
     }
+
     //
     //    US 03.02.01
     //    As a user, I want to edit the contact information in my profile.
-    public void request11(){
-        User user = new User();
-        Profile profile = new Profile();
-        user.setProfile(profile);
-        assertTrue(profile==user.getProfile());
-        Profile profile2 = new Profile();
-        profile2.setName("lol");
-        user.setProfile(profile2);
-        assertFalse(profile==user.getProfile());
-        assertFalse(profile2==user.getProfile());
+    public void testRequest11(){
+        // when create it, we have to check is that unique or not by elastic search
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        User user = new User(userProfile);
+        // get the info from user
+        Profile newProfile = new Profile("MC","9989989988","mqu@ualberta.ca");
+        user.setProfile(newProfile);
+        assertTrue(newProfile==user.getProfile());
     }
+
     //
     //    US 03.03.01
     //    As a user, I want to, when a username is presented for a thing, retrieve and show its contact information.
-    //    MC: not sure with this
-    public void request12(){
-        User user = new User();
-        Profile profile = new Profile();
-        user.setProfile(profile);
-        assertTrue(profile==user.getProfile());
-        Profile profile2 = new Profile();
-        profile2.setName("lol");
-        user.setProfile(profile2);
-        assertFalse(profile==user.getProfile());
-        assertFalse(profile2==user.getProfile());
+
+    public void testRequest12(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        User user = new User(userProfile);
+        String username = "mc";
+        // have to use elastic search not working yet
+        user.searchPhone(username);
     }
+    /*
     //
     //            Searching
     //
