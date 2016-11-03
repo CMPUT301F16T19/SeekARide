@@ -26,4 +26,13 @@ public class User {
     public float getRecommendedPrice(Location start, Location end) {
         return 0;
     }
+
+    public void setProfile(Profile newProfile) {
+        this.profile = newProfile;
+    }
+
+    public String searchPhone(String username) {
+        String phoneNumber = "idk";// should change to elastic search here
+        return phoneNumber;
+    }
 }

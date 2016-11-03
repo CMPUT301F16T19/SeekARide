@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 public class Driver extends User {
 
-    private ArrayList<Request> searchedRequests;
-    private ArrayList<Request> acceptedRequests;
+    private ArrayList<Request> searchedRequests; //never update it, after we accept a request, until the request ends
+    private Request acceptedRequest;
 
 
     // singleton
@@ -27,9 +27,16 @@ public class Driver extends User {
     }
     */
 
+    public Driver(Profile profile) {
+        super(profile);
+        this.searchedRequests = new ArrayList<Request>();
+        acceptedRequest = null;
+    }
+
     public Driver(Profile profile, ArrayList<Request> searchedRequests) {
         super(profile);
         this.searchedRequests = searchedRequests;
+        acceptedRequest = null;
     }
 
     public void searchRequestsByKeyword(ArrayList<String> keywords, int radius) {
@@ -40,15 +47,23 @@ public class Driver extends User {
         // search requests and store in searchedRequests
     }
 
-    public void acceptRequest() {
+    //
+    public void acceptRequest(Request testRequest) {
         // accept a request and add to acceptedRequests
+        testRequest.driverAccepted(this.getProfile());
+        acceptedRequest = testRequest;
     }
 
-    public void unacceptRequest() {
-        // unaccept a request and remove from acceptedRequests
+    public void removeSearchedRequest(int index) {
+        // remove a request and remove from searchedRequests
+        searchedRequests.remove(index);
     }
 
     public void acceptPayment() {
 
+    }
+
+    public Request getCurrentRequest() {
+        return acceptedRequest;
     }
 }
