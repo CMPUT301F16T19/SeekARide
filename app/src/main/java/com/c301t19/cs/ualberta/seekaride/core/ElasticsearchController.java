@@ -124,17 +124,17 @@ public class ElasticsearchController {
         }
     }
 
-    // searches for Requests from elasticsearch. pass in an object of the following structure:
-    // ArrayList<Map<RequestField, ArrayList<String>>>
-    // maps fields to a list of search terms, and more than one field can be searched (using OR logic)
-    // returns list of requests
-    public static class SearchRequestsTask extends AsyncTask<Void, Void, ArrayList<Request>> {
+    // searches for Requests from elasticsearch. pass in location and radius; get array of Results
+    // does not distinguish between start and end location; a class that uses this method should handle that on their own
+    public static class SearchRequestsByLocationTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
-        private ArrayList<Map<RequestField, ArrayList<String>>> searchParams;
+        private Location location;
+        private int radius;
 
-        public SearchRequestsTask(ArrayList<Map<RequestField, ArrayList<String>>> sp) {
+        public SearchRequestsByLocationTask(Location l, int r) {
             super();
-            searchParams = sp;
+            location = l;
+            radius = r;
         }
 
         @Override
@@ -143,16 +143,14 @@ public class ElasticsearchController {
         }
     }
 
-    // searches for Requests from elasticsearch. similar to the above, but just takes one field and one search term
-    public static class SearchRequestsTaskSimple extends AsyncTask<Void, Void, ArrayList<Request>> {
+    // searches for Requests from elasticsearch. pass in array of strings; get array of Results
+    public static class SearchRequestsByKeywordTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
-        private RequestField requestField;
-        private String keyword;
+        private ArrayList<String> keywords;
 
-        public SearchRequestsTaskSimple(RequestField rf, String k) {
+        public SearchRequestsByKeywordTask(ArrayList<String> k) {
             super();
-            requestField = rf;
-            keyword = k;
+            keywords = k;
         }
 
         @Override
@@ -161,7 +159,10 @@ public class ElasticsearchController {
         }
     }
 
-    // IMPLEMENTATION UNCLEAR
+    // simply overwrites a request with an updated request
+    // if security is desired, in Request class, protect methods like deleteRequest and setRider with a check like
+    // "if requestRider.name != currentUser.name: return"
+    // this way drivers will only be allowed to add/remove driver. make sure the driver they are adding or removing = currentDriver.name
     public static class EditRequestTask extends AsyncTask<UserField, Void, User> {
 
         @Override

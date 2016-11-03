@@ -14,7 +14,7 @@ public class Request {
     private Location destination;
     //private String riderName;
     private ArrayList<Profile> acceptedDriverProfiles;
-    private float price;
+    private double price;
 
     private Boolean waitingForDriver;
     private Profile riderProfile;
@@ -22,7 +22,7 @@ public class Request {
     private Profile driverProfile;
 
     public Request(String descrip, Location st, Location dest,
-                    float pr,Profile riderProfile) {
+                    double pr,Profile riderProfile) {
         requestTime = new Date();
         description = descrip;
         start = st;
@@ -74,7 +74,7 @@ public class Request {
         return acceptedDriverProfiles;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
