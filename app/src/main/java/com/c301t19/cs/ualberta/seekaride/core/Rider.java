@@ -37,8 +37,8 @@ public class Rider extends User {
         openRequests.get(indexR).riderAccept(indexD);
     }
 
-    public void makePayment() {
-
+    public void makePayment(int indexR) {
+        openRequests.get(indexR).riderPay();
     }
 
 

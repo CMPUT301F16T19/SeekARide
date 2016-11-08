@@ -43,7 +43,7 @@ public class Driver extends User {
         // search requests and store in searchedRequests
     }
 
-    public void searchRequestsByLocation() {
+    public void searchRequestsByLocation(Location location) {
         // search requests and store in searchedRequests
     }
 
@@ -59,11 +59,14 @@ public class Driver extends User {
         searchedRequests.remove(index);
     }
 
-    public void acceptPayment() {
-
-    }
 
     public Request getCurrentRequest() {
         return acceptedRequest;
+    }
+
+    public void receivePayment() {
+        if(acceptedRequest.isPaid()) {
+            acceptedRequest.driverReceivePayment();
+        }
     }
 }

@@ -19,6 +19,8 @@ public class Request {
     private Boolean waitingForDriver;
     private Profile riderProfile;
     private Boolean completion;
+    private Boolean riderPaid;
+    private Boolean driverIsPaid;
     private Profile driverProfile;
 
     public Request(String descrip, Location st, Location dest,
@@ -34,6 +36,8 @@ public class Request {
         waitingForDriver = true;
         this.riderProfile = riderProfile;
         completion = false;
+        riderPaid = false;
+        driverIsPaid = false;
     }
 
     public void driverAccepted(Profile driverProfile) {
@@ -95,5 +99,21 @@ public class Request {
 
     public Profile getDriverProfile() {
         return driverProfile;
+    }
+
+    public void riderPay() {
+        riderPaid = true;
+    }
+
+    public boolean isPaid(){
+        return riderPaid;
+    }
+
+    public boolean isGotPayment(){
+        return driverIsPaid;
+    }
+
+    public void driverReceivePayment() {
+        driverIsPaid = true;
     }
 }

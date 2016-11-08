@@ -153,7 +153,7 @@ public class TestCases extends TestCase {
 
         rider.completeRequest(0);
         // for current request
-        rider.makePayment();
+        rider.makePayment(0);
         // not sure how to let driver receive it
 
         assertTrue(rider.getRequest(0).isCompleted());
@@ -249,44 +249,75 @@ public class TestCases extends TestCase {
         // have to use elastic search not working yet
         user.searchPhone(username);
     }
-    /*
+
     //
     //            Searching
     //
     //    US 04.01.01
     //    As a driver, I want to browse and search for open requests by geo-location.
-    public void request13(){
-        Driver driver = new Driver();
-        assertTrue(driver.search("111st"));
+    public void testRequest13(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Driver driver = new Driver(userProfile);
+        // does nothing right now, wait for geo location
+        driver.searchRequestsByLocation(new Location("111st"));
     }
+
     //
     //            US 04.02.01
     //    As a driver, I want to browse and search for open requests by keyword.
-    public void request14(){
-        Driver driver = new Driver();
-        assertTrue(driver.search("uofa"));
+    public void testRequest14(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Driver driver = new Driver(userProfile);
+        // does nothing right now, wait for geo location
+        // driver.searchRequestsByKeyword("111st");
     }
+
     //
     //    Accepting
     //    US 05.01.01
     //    As a driver,  I want to accept a request I agree with and accept that offered payment upon completion.
-    public void request15(){
-        Driver driver = new Driver();
-        Request request = new Request();
-        driver.accept(request);
-        assertFalse(driver.isCompleted());
+    public void testRequest15(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        Request testRequest = rider.getRequest(0);
+
+        Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
+        Driver driver = new Driver(driverProfile);
+        driver.acceptRequest(testRequest);
+
+        rider.acceptDriverOffer(0,0);
+        rider.getRequest(0).complete();
+        rider.makePayment(0);
+
+        if(testRequest.isPaid()){
+            driver.receivePayment();
+        }
+        assertFalse(driver.getCurrentRequest().isCompleted());
 
     }
+
     //
     //    US 05.02.01
     //    As a driver, I want to view a list of things I have accepted that are pending, each request with its description, and locations.
-    public void request16(){
-        Driver driver = new Driver();
-        Request request = new Request();
-        driver.setRequest(request);
-        ArrayList<Request> requestList= driver.getList();
-        assertFalse(requestList.get(0) == request);
+    public void testRequest16(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        Request testRequest = rider.getRequest(0);
+
+        Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
+        Driver driver = new Driver(driverProfile);
+
+        // BY elastic search and looking at the location, we can then search by elastic search, and return an ArrayList of OpenRequests
     }
+    /*
     //
     //            US 05.03.01
     //    As a driver, I want to see if my acceptance was accepted.
