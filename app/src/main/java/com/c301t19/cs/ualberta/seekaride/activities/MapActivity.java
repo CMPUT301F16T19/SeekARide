@@ -7,12 +7,26 @@ import android.view.MenuItem;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
+import org.osmdroid.api.IMapController;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+
 public class MapActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        MapView map = (MapView) findViewById(R.id.map_Map);
+        map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setBuiltInZoomControls(true);
+        map.setMultiTouchControls(true);
+
+        GeoPoint startPoint = new GeoPoint(48.13, -1.63);
+        IMapController mapController = map.getController();
+        mapController.setZoom(9);
+        mapController.setCenter(startPoint);
     }
 
     @Override
