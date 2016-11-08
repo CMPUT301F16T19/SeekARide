@@ -1,7 +1,5 @@
 package com.c301t19.cs.ualberta.seekaride;
 
-import android.test.ActivityInstrumentationTestCase2;
-
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
@@ -9,14 +7,18 @@ import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.c301t19.cs.ualberta.seekaride.core.User;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 /**
  * Created by mc on 16/10/13.
  */
-public class TestCases extends ActivityInstrumentationTestCase2 {
+public class TestCases extends TestCase {
     public TestCases(){
-        super(com.c301t19.cs.ualberta.seekaride.activities.MainActivity.class);
+        super();
     }
 
     //    Requests
@@ -24,9 +26,6 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
     //    US 01.01.01
     //    As a rider, I want to request rides between two locations.
     @Test
-    public void testNothing() {
-        assertTrue(false);
-    }
     public void testRequest1(){
         Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
         Rider rider = new Rider(userProfile);
@@ -35,9 +34,8 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
         // add the reqeust in the elastic search
-        assertTrue(new Request("lol trip",startPoint,destination,price,userProfile)==rider.getCurrentRequests());
-        assertFalse(Boolean.TRUE);
-        assertTrue(Boolean.FALSE);
+        assertFalse(new Request("lol trip",startPoint,destination,price,userProfile).equals(rider.getRequest(0)));
+        assertEquals(rider.getRequest(0).getRiderProfile(),userProfile);
     }
 
     //    US 01.02.01
@@ -49,8 +47,8 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         Location destination = new Location("112st");
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
-        assertTrue(new Request("lol trip",startPoint,destination,price,userProfile)==rider.getCurrentRequests());
-
+        assertFalse(new Request("lol trip",startPoint,destination,price,userProfile).equals(rider.getRequest(0)));
+        assertEquals(rider.getRequest(0).getRiderProfile(),userProfile);
     }
 
     //            US 01.03.01
@@ -62,16 +60,23 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         Location destination = new Location("112st");
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
-        assertTrue(new Request("lol trip",startPoint,destination,price,userProfile)==rider.getCurrentRequests());
-        Request testRequest = rider.getCurrentRequests();
+        assertFalse(new Request("lol trip",startPoint,destination,price,userProfile).equals(rider.getRequest(0)));
+        assertEquals(rider.getRequest(0).getRiderProfile(),userProfile);
 
+        Request testRequest = rider.getRequest(0);
         Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
 
         testRequest.driverAccepted(driverProfile);
+
+        // since the object is passing by reference all the time, maybe we dont need to have update file
+        assertEquals(rider.getRequest(0),testRequest);
         // in the activity, after we make the request, it will be in the waiting screen and use elascity search to check it
         // and update the request every time we check, may be after we found something, we can slow the clicking rate
-        rider.updateRequest(testRequest);
+        ArrayList<Request> testRequestList = new ArrayList<Request>();
+        testRequestList.add(testRequest);
+        rider.updateOpenRequests(testRequestList);
         // in the activity, the view of quest should be changed
+        assertEquals(rider.getOpenRequests(),testRequestList);
 
     }
 
@@ -86,10 +91,11 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         Location destination = new Location("112st");
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
-        assertTrue(new Request("lol trip",startPoint,destination,price,userProfile)==rider.getCurrentRequests());
+        assertFalse(new Request("lol trip",startPoint,destination,price,userProfile).equals(rider.getRequest(0)));
+        assertEquals(rider.getRequest(0).getRiderProfile(),userProfile);
         // use rider.getCurrentRequests() get the request and find it in the elastic search and remove it, then delete it in t
         rider.deleteRequest(0);
-        assertTrue(rider.hasCurrentRequest());
+        assertFalse(rider.hasRequests());
     }
 
     //
@@ -102,15 +108,16 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         Location destination = new Location("112st");
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
-        Request testRequest = rider.getCurrentRequests();
+        ArrayList<Request> testRequests = rider.getOpenRequests();
 
         Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
 
-        testRequest.driverAccepted(driverProfile);
-        rider.updateRequest(testRequest);
+        testRequests.get(0).driverAccepted(driverProfile);
 
-        rider.contactByPhone(rider.getCurrentRequests().getAcceptedDriverProfiles().get(0).getPhoneNumber());
-        assertEquals(rider.getCurrentRequests().getAcceptedDriverProfiles().get(0).getPhoneNumber(),"0010010010");
+        rider.updateOpenRequests(testRequests);
+
+        rider.contactByPhone(rider.getRequest(0).getAcceptedDriverProfiles().get(0).getPhoneNumber());
+        assertEquals(rider.getRequest(0).getAcceptedDriverProfiles().get(0).getPhoneNumber(),"0010010010");
     }
 
     //
@@ -138,19 +145,18 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         Location destination = new Location("112st");
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
-        Request testRequest = rider.getCurrentRequests();
+        Request testRequest = rider.getRequest(0);
 
         Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
 
         testRequest.driverAccepted(driverProfile);
-        rider.updateRequest(testRequest);
 
-        rider.completeCurrentRequest();
+        rider.completeRequest(0);
         // for current request
         rider.makePayment();
         // not sure how to let driver receive it
 
-        assertTrue(rider.getCurrentRequests().isCompleted());
+        assertTrue(rider.getRequest(0).isCompleted());
 
     }
 
@@ -164,18 +170,20 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         Location destination = new Location("112st");
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
-        Request testRequest = rider.getCurrentRequests();
+        Request testRequest = rider.getRequest(0);
 
         Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
         testRequest.driverAccepted(driverProfile);
-        rider.updateRequest(testRequest);
+        //rider.updateRequest(testRequest);
         Profile driverProfile2 = new Profile("raichu","0020020020","raichu@pokemon.com");
         testRequest.driverAccepted(driverProfile2);
-        rider.updateRequest(testRequest);
+        //rider.updateRequest(testRequest);
 
         // accept pikachu
-        rider.acceptDriverOffer(0);
-        assertEquals(driverProfile,rider.getCurrentRequests().getDriverProfile());
+        rider.acceptDriverOffer(0,0);
+        assertEquals(driverProfile,rider.getRequest(0).getDriverProfile());
+        rider.acceptDriverOffer(0,1);
+        assertEquals(driverProfile2,rider.getRequest(0).getDriverProfile());
     }
 
     //
@@ -191,15 +199,15 @@ public class TestCases extends ActivityInstrumentationTestCase2 {
         Location destination = new Location("112st");
         float price = 998;
         rider.makeRequest("lol trip", startPoint, destination, price);
-        Request testRequest = rider.getCurrentRequests();
+        Request testRequest = rider.getRequest(0);
 
         Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
         Driver driver = new Driver(driverProfile);
         driver.acceptRequest(testRequest);
         //testRequest.driverAccepted(driverProfile);
-        rider.updateRequest(testRequest);
+        //rider.updateRequest(testRequest);
 
-        rider.getCurrentRequests(); // returns the request info
+        rider.getRequest(0); // returns the request info
         driver.getCurrentRequest(); // returns the request info
 
     }
