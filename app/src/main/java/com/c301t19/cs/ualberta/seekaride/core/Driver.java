@@ -69,4 +69,8 @@ public class Driver extends User {
             acceptedRequest.driverReceivePayment();
         }
     }
+
+    public boolean isConfirmed() {
+        return acceptedRequest.isRiderConfirmed();
+    }
 }

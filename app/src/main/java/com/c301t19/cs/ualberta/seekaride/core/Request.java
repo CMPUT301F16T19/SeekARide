@@ -17,11 +17,12 @@ public class Request {
     private double price;
 
     private Boolean waitingForDriver;
-    private Profile riderProfile;
     private Boolean completion;
     private Boolean riderPaid;
     private Boolean driverIsPaid;
+
     private Profile driverProfile;
+    private Profile riderProfile;
 
     public Request(String descrip, Location st, Location dest,
                     double pr,Profile riderProfile) {
@@ -38,6 +39,7 @@ public class Request {
         completion = false;
         riderPaid = false;
         driverIsPaid = false;
+        driverProfile = null;
     }
 
     public void driverAccepted(Profile driverProfile) {
@@ -115,5 +117,13 @@ public class Request {
 
     public void driverReceivePayment() {
         driverIsPaid = true;
+    }
+
+    public boolean isRiderConfirmed() {
+        if (driverProfile == null){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

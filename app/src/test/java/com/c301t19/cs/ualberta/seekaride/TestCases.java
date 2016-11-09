@@ -296,7 +296,7 @@ public class TestCases extends TestCase {
         if(testRequest.isPaid()){
             driver.receivePayment();
         }
-        assertFalse(driver.getCurrentRequest().isCompleted());
+        assertTrue(driver.getCurrentRequest().isCompleted());
 
     }
 
@@ -317,126 +317,172 @@ public class TestCases extends TestCase {
 
         // BY elastic search and looking at the location, we can then search by elastic search, and return an ArrayList of OpenRequests
     }
-    /*
+
     //
     //            US 05.03.01
     //    As a driver, I want to see if my acceptance was accepted.
-    public void request17(){
-        Driver driver = new Driver();
-        Request request = new Request();
-        driver.setRequest(request);
-        ArrayList<Request> requestList= driver.getList();
-        assertFalse(requestList.get(0) == request);
-        driver.accept(request);
-        assertFalse(driver.isCompleted());
+    public void testRequest17(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        Request testRequest = rider.getRequest(0);
+
+        Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
+        Driver driver = new Driver(driverProfile);
+        driver.acceptRequest(testRequest);
+        assertFalse(driver.isConfirmed());
+        rider.acceptDriverOffer(0,0);
+        assertTrue(driver.isConfirmed());
     }
+
     //
     //    US 05.04.01
     //    As a driver, I want to be notified if my ride offer was accepted.
-    public void request18(){
-        Driver driver = new Driver();
-        Request request = new Request();
-        driver.setRequest(request);
-        ArrayList<Request> requestList= driver.getList();
-        assertFalse(requestList.get(0) == request);
-        driver.accept(request);
-        assertFalse(driver.isCompleted());
-        driver.beAccepted();
-        assertFalse(driver.isCompleted());
+    public void testRequest18(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        Request testRequest = rider.getRequest(0);
+
+        Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
+        Driver driver = new Driver(driverProfile);
+        driver.acceptRequest(testRequest);
+        assertFalse(driver.isConfirmed());
+        rider.acceptDriverOffer(0,0);
+        assertTrue(driver.isConfirmed());
+        //
     }
+
     //
     //
     //
     //            Offline behavior
     //    US 08.01.01
     //    As an driver, I want to see requests that I already accepted while offline.
-    public void request19(){
-        Driver driver = new Driver();
-        Request request = new Request();
-        driver.setRequest(request);
-        ArrayList<Request> requestList= driver.getList();
-        assertFalse(requestList.get(0) == request);
-        driver.accept(request);
-        assertFalse(driver.isCompleted());
-        driver.beAccepted();
-        assertFalse(driver.isCompleted());
+    public void testRequest19(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        Request testRequest = rider.getRequest(0);
 
-        assertTrue(request == driver.getRequest());
+        Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
+        Driver driver = new Driver(driverProfile);
+        driver.acceptRequest(testRequest);
+        assertFalse(driver.isConfirmed());
+        rider.acceptDriverOffer(0,0);
+        assertTrue(driver.isConfirmed());
+
+        driver.getCurrentRequest();
     }
+
     //
     //            US 08.02.01
     //    As a rider, I want to see requests that I have made while offline.
-    public void request20(){
-        Rider rider = new Rider();
-        Driver driver = new Driver();
-        Request request = new Request();
-        rider.setRequest(request);
-        driver.setRequest(request);
-        assertTrue(request == rider.getRequest());
-        assertTrue(request == driver.getRequest());
+    public void testRequest20(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+
+        ArrayList<Request> testRequests = rider.getOpenRequests();
+
+
     }
+
     //
     //            US 08.03.01
     //    As a rider, I want to make requests that will be sent once I get connectivity again.
-    public void request21(){
-        Rider rider = new Rider();
-        Driver driver = new Driver();
-        Request request = new Request();
-        rider.setRequest(request);
-        driver.setRequest(request);
-        assertTrue(request == rider.getRequest());
-        assertTrue(request == driver.getRequest());
-        rider.reconnect();
-        assertTrue(request == rider.getRequest());
-        assertTrue(request == driver.getRequest());
+    public void testRequest21(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+
+        // should check it connects or not here
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        // add the reqeust in the elastic search
+        assertFalse(new Request("lol trip",startPoint,destination,price,userProfile).equals(rider.getRequest(0)));
+        assertEquals(rider.getRequest(0).getRiderProfile(),userProfile);
     }
+
     //
     //
     //    US 08.04.01
     //    As a driver, I want to accept requests that will be sent once I get connectivity again.
-    public void request22(){
-        Driver driver = new Driver();
-        Request request = new Request();
-        driver.setRequest(request);
-        ArrayList<Request> requestList= driver.getList();
-        assertFalse(requestList.get(0) == request);
-        driver.accept(request);
-        assertFalse(driver.isCompleted());
-        driver.beAccepted();
-        assertFalse(driver.isCompleted());
+    public void testRequest22(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        Request testRequest = rider.getRequest(0);
 
-        assertTrue(request == driver.getRequest());
-        driver.reconnect();
-        assertFalse(driver.isCompleted());
+        Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
+        Driver driver = new Driver(driverProfile);
 
-        assertTrue(request == driver.getRequest());
+        // should check it is connect or not
+        driver.acceptRequest(testRequest);
+        assertFalse(driver.isConfirmed());
     }
+
     //
     //
     //
     //    Location
     //    US 10.01.01
     //    As a rider, I want to specify a start and end geo locations on a map for a request.
-    public void request23(){
-
-        Rider rider = new Rider();
-        String location1 = "111st";
-        String location2 = "112st";
-        assertTrue(rider.search(location1));
-        assertTrue(rider.request(location1,location2));
-
+    public void testRequest23(){
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        // add the reqeust in the elastic search
+        // the way to use map need to input
+        assertFalse(new Request("lol trip",startPoint,destination,price,userProfile).equals(rider.getRequest(0)));
+        assertEquals(rider.getRequest(0).getRiderProfile(),userProfile);
     }
+
     //
     //    US 10.02.01 (added 2016-02-29)
     //
     //    As a driver, I want to view start and end geo locations on a map for a request.
-    public void request24(){
+    public void testRequest24(){
 
-        Driver driver = new Driver();
-        String location1 = "111st";
-        String location2 = "112st";
-        assertTrue(driver.search(location1));
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider rider = new Rider(userProfile);
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        rider.makeRequest("lol trip", startPoint, destination, price);
+        Request testRequest = rider.getRequest(0);
+
+        Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
+        Driver driver = new Driver(driverProfile);
+
+        // should check it is connect or not
+        driver.acceptRequest(testRequest);
+        assertFalse(driver.isConfirmed());
+
+        driver.getCurrentRequest().getStart();
+        driver.getCurrentRequest().getDestination();
+
+
 
     }
-*/
+
 }
