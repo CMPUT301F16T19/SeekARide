@@ -63,8 +63,8 @@ public class ElasticsearchController {
         }
     }
 
-    // gets a User from elasticsearch. pass in the field you want to search by and the search string
-    public static class GetUserTask extends AsyncTask<Void, Void, User> {
+    // gets a Profile from elasticsearch. pass in the field you want to search by and the search string
+    public static class GetUserTask extends AsyncTask<Void, Void, Profile> {
 
         private UserField userField;
         private String keyword;
@@ -76,7 +76,7 @@ public class ElasticsearchController {
         }
 
         @Override
-        protected User doInBackground(Void... params) {
+        protected Profile doInBackground(Void... params) {
             return null;
         }
     }

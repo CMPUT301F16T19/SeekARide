@@ -21,12 +21,12 @@ public class MainActivity extends Activity {
         username = (EditText) findViewById(R.id.username_Text);
     }
 
-    public void onNewAccountClick() {
+    public void onNewAccountClick(View v) {
         Intent intent = new Intent(this, NewAccountActivity.class);
         startActivity(intent);
     }
 
-    public void onLoginClick() {
+    public void onLoginClick(View v) {
         String name = username.getText().toString();
         if (name.length() <  5)
         {
