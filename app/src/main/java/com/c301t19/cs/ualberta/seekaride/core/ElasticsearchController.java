@@ -41,7 +41,7 @@ public class ElasticsearchController {
             source.put("username", username);
             source.put("email", email);
             source.put("phone", phone);
-            Index index = new Index.Builder(source).index("T19SeekARide").type("User").build();
+            Index index = new Index.Builder(source).index("t19seekaride").type("user").build();
             try {
                 client.execute(index);
             }

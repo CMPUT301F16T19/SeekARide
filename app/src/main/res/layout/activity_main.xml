@@ -52,5 +52,6 @@
         android:id="@+id/testingButton"
         android:layout_below="@+id/newA_Button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="61dp" />
+        android:layout_marginTop="61dp"
+        android:onClick="testScreenButton"/>
 </RelativeLayout>
