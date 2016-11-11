@@ -16,7 +16,8 @@
         android:id="@+id/login_Button"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/password_text" />
+        android:layout_alignEnd="@+id/password_text"
+        android:onClick="onLoginClick"/>
 
     <Button
         android:layout_width="wrap_content"
