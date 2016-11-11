@@ -20,38 +20,39 @@
         <activity android:name=".activities.SearchRequestsActivity" />
         <activity
             android:name=".activities.NewAccountActivity"
-            android:label="@string/title_activity_new_account"></activity>
+            android:label="@string/title_activity_new_account" />
         <activity
             android:name=".activities.ViewProfileActivity"
-            android:label="@string/title_activity_view_profile"></activity>
+            android:label="@string/title_activity_view_profile" />
         <activity
             android:name=".activities.EditAccountActivity"
-            android:label="@string/title_activity_edit_account"></activity>
+            android:label="@string/title_activity_edit_account" />
         <activity
             android:name=".activities.EditRequestActivity"
-            android:label="@string/title_activity_edit_request"></activity>
+            android:label="@string/title_activity_edit_request" />
         <activity
             android:name=".AcceptRiderActivity"
-            android:label="@string/title_activity_accept_rider"></activity>
+            android:label="@string/title_activity_accept_rider" />
         <activity
             android:name=".activities.AcceptDriverActivity"
-            android:label="@string/title_activity_accept_driver"></activity>
+            android:label="@string/title_activity_accept_driver" />
         <activity
             android:name=".activities.SearchResultsActivity"
-            android:label="@string/title_activity_search_results"></activity>
+            android:label="@string/title_activity_search_results" />
         <activity
             android:name=".activities.ViewOfferActivity"
-            android:label="@string/title_activity_view_offer"></activity>
+            android:label="@string/title_activity_view_offer" />
         <activity
             android:name=".activities.ReviewOfferActivity"
-            android:label="@string/title_activity_review_offer"></activity>
+            android:label="@string/title_activity_review_offer" />
         <activity
             android:name=".activities.MapActivity"
-            android:label="@string/title_activity_map"></activity>
+            android:label="@string/title_activity_map" />
         <activity
             android:name=".activities.RCompleteActivity"
-            android:label="@string/title_activity_rcomplete"></activity>
-        <activity android:name=".activities.TestingActivity"></activity>
+            android:label="@string/title_activity_rcomplete" />
+        <activity android:name=".activities.TestingActivity" />
+        <activity android:name=".activities.ChooseLocationsActivity"></activity>
     </application>
 
 </manifest>

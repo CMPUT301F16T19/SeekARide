@@ -23,7 +23,7 @@ public class MapActivity extends Activity {
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
 
-        GeoPoint startPoint = new GeoPoint(48.13, -1.63);
+        GeoPoint startPoint = new GeoPoint(53.52676, -113.52715);
         IMapController mapController = map.getController();
         mapController.setZoom(9);
         mapController.setCenter(startPoint);

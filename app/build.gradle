@@ -24,9 +24,11 @@ android {
 
     // (Phillip) I had some duplicate file errors while compiling
     packagingOptions {
-        pickFirst('META-INF/maven/org.apache.commons/commons-lang3/pom.xml')
-        pickFirst('META-INF/maven/org.apache.commons/commons-lang3/pom.properties')
+        //pickFirst('META-INF/maven/org.apache.commons/commons-lang3/pom.xml')
+        //pickFirst('META-INF/maven/org.apache.commons/commons-lang3/pom.properties')
+        //pickFirst('META-INF/maven/org.apache.commons/commons-lang3/AnnotationUtils$1.class')
     }
+
 }
 
 dependencies {
@@ -35,6 +37,9 @@ dependencies {
     //compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'io.searchbox:jest-droid:2.0.0'
     compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
-    compile 'com.github.MKergall:osmbonuspack:6.0'
+    compile ('com.github.MKergall:osmbonuspack:6.0') {
+        exclude module: 'gson'
+        exclude group: 'org.apache.commons'
+    }
     compile 'com.android.support:appcompat-v7:18.0.0'
 }
