@@ -33,7 +33,7 @@ public class RiderActivity extends Activity {
             if (profile == null) {
                 Profile newProfile = new Profile(username, "PHONE", "EMAIL");
                 ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(newProfile);
-                
+                addUserTask.execute();
             }
             else {
                 rider = new Rider(profile);
