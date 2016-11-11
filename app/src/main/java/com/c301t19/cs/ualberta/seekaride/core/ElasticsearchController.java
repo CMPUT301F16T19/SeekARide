@@ -81,7 +81,15 @@ public class ElasticsearchController {
         @Override
         protected Profile doInBackground(Void... params) {
             verifySettings();
-            String query = "";
+            String query = "{\n" +
+                           "    \"query\": {\n" +
+                           "        \"filtered\" : {\n" +
+                           "            \"filter\" : {\n" +
+                           "                \"term\" : { \"username\" : \"" + keyword + "\" }\n" +
+                           "            }\n" +
+                           "        }\n" +
+                           "    }\n" +
+                           "}";
             Search search = new Search.Builder(query)
                             .addIndex("t19seekaride")
                             .addType("user")
@@ -94,7 +102,7 @@ public class ElasticsearchController {
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-            if (profiles == null) {
+            if (profiles == null || profiles.size() < 1) {
                 return null;
             }
             else {

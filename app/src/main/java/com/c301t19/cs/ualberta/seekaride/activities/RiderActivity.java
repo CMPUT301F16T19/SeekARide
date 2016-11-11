@@ -3,6 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.*;
@@ -20,7 +21,6 @@ public class RiderActivity extends Activity {
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
-
         // instantiate a Rider with a Profile obtained from Elasticsearch
         // search Elasticsearch using the username when logging in
         // if user exists, retrieve profile
@@ -33,6 +33,7 @@ public class RiderActivity extends Activity {
             if (profile == null) {
                 Profile newProfile = new Profile(username, "PHONE", "EMAIL");
                 ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(newProfile);
+                
             }
             else {
                 rider = new Rider(profile);
