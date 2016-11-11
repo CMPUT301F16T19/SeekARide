@@ -9,10 +9,13 @@ import com.searchly.jestdroid.JestDroidClient;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 public class ElasticsearchController {
 
@@ -77,7 +80,26 @@ public class ElasticsearchController {
 
         @Override
         protected Profile doInBackground(Void... params) {
-            return null;
+            verifySettings();
+            String query = "";
+            Search search = new Search.Builder(query)
+                            .addIndex("t19seekaride")
+                            .addType("user")
+                            .build();
+            List<Profile> profiles = null;
+            try {
+                SearchResult result = client.execute(search);
+                profiles = result.getSourceAsObjectList(Profile.class);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            if (profiles == null) {
+                return null;
+            }
+            else {
+                return profiles.get(0);
+            }
         }
     }
 
