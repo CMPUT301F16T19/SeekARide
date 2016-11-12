@@ -16,14 +16,17 @@ public class SearchRequestsActivity extends Activity {
     private EditText keywords;
     private EditText radius;
 
+    String keywordsText;
+    String radiusText;
+
     //gets the keywords used and the radius inputted.
     public void write(){
         keywords = (EditText) findViewById(R.id.search_Keywords_Text);
         radius = (EditText) findViewById(R.id.search_Radius_Text);
 
         //we don't always need keywords, so what should we do to handle cases when it isn't used?
-        String keywordsText = keywords.getText().toString();
-        String radiusText = radius.getText().toString();
+        keywordsText = keywords.getText().toString();
+        radiusText = radius.getText().toString();
     }
 
     public void move(){
@@ -33,7 +36,10 @@ public class SearchRequestsActivity extends Activity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Nswitch = new Intent(SearchRequestsActivity.this, SearchRequestsActivity.class);
+                write();
+                Intent Nswitch = new Intent(SearchRequestsActivity.this, SearchResultsActivity.class);
+                Nswitch.putExtra("keywords", keywordsText);
+                Nswitch.putExtra("radius", radiusText);
                 startActivity(Nswitch);
             }
         });

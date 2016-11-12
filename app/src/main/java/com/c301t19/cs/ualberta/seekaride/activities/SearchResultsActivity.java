@@ -7,11 +7,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.Driver;
+import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 public class SearchResultsActivity extends Activity {
-    public Button Back;
+
+    private Button Back;
+    private ListView results;
+    private RequestsAdapter adapter;
 
     public void move(){
         Back = (Button) findViewById(R.id.driver_Search_Button);
@@ -29,7 +35,13 @@ public class SearchResultsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        Driver.getInstance().searchRequestsByKeyword(intent.getStringExtra("keywords"),
+                intent.getStringExtra("radius"));
+        adapter = new RequestsAdapter(this,
+                R.layout.request_list_item, Driver.getInstance().getSearchedRequests(), getLayoutInflater());
         setContentView(R.layout.activity_search_results);
+        results.setAdapter(adapter);
         move();
     }
 
