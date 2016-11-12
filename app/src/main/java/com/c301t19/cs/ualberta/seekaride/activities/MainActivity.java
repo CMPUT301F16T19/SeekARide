@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
 
     //remove before final build
     public void testScreenButton(View v) {
-        Intent intent = new Intent(this, TestingActivity.class);
+        Intent intent = new Intent(this, ChooseLocationActivity.class);
         startActivity(intent);
     }
 }

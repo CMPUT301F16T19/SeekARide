@@ -49,7 +49,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TEST SCREEN"
+        android:text="ChooseLocationActivityTest"
         android:id="@+id/testingButton"
         android:layout_below="@+id/newA_Button"
         android:layout_centerHorizontal="true"
