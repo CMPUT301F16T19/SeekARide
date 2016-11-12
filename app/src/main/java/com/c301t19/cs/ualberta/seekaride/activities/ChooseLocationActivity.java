@@ -1,6 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
@@ -25,8 +27,9 @@ import java.util.ArrayList;
 public class ChooseLocationActivity extends Activity {
 
     private EditText location;
-
     private GeoPoint startPoint;
+    private ArrayList<POI> pois;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class ChooseLocationActivity extends Activity {
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
 
+        // SET TO CURRENT PHONE LOCATION
         startPoint = new GeoPoint(53.52676, -113.52715);
         IMapController mapController = map.getController();
         mapController.setZoom(9);
@@ -54,8 +58,19 @@ public class ChooseLocationActivity extends Activity {
             public void onClick(View v) {
                 if (location.getText().toString() != null) {
                     NominatimPOIProvider poiProvider = new NominatimPOIProvider("wat");
-                    ArrayList<POI> pois = poiProvider.getPOICloseTo(startPoint,
-                            location.getText().toString(), 50, 0.1);
+                    if (pois != null) {
+                        pois.clear();
+                        map.getOverlays().clear();
+                    }
+
+                    pois = poiProvider.getPOICloseTo(startPoint,
+                            location.getText().toString(), 50, 0.2);
+
+                    if (pois.size() == 0) {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "No Results Found", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
 
                     FolderOverlay poiMarkers = new FolderOverlay(ChooseLocationActivity.this);
                     map.getOverlays().add(poiMarkers);
