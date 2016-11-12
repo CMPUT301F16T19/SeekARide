@@ -3,6 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.*;
+
+import java.util.concurrent.TimeUnit;
 
 public class RiderActivity extends Activity {
 
@@ -32,8 +35,14 @@ public class RiderActivity extends Activity {
         super.onResume();
         // refresh data
         Rider.getInstance().updateOpenRequests();
+        /*try {
+            TimeUnit.SECONDS.sleep(5);
+        }
+        catch (InterruptedException e) {
+
+        }*/
         adapter = new RequestsAdapter(this,
-                R.id.current_Requests, Rider.getInstance().getOpenRequests(), getLayoutInflater());
+                R.layout.request_list_item, Rider.getInstance().getOpenRequests(), getLayoutInflater());
         requests.setAdapter(adapter);
     }
 

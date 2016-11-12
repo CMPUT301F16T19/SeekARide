@@ -1,5 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**

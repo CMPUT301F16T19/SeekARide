@@ -175,12 +175,19 @@ public class ElasticsearchController {
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
             verifySettings();
-            String query = "{\n" +
+            /*String query = "{\n" +
                     "    \"query\": {\n" +
                     "        \"filtered\" : {\n" +
                     "            \"filter\" : {\n" +
-                    "                \"term\" : { \"_id\" : \"" + keyword + "\" }\n" +
+                    "                \"term\" : { \"riderId\" : \"" + keyword + "\" }\n" +
                     "            }\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";*/
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"match\" : {\n" +
+                    "            \"riderId\" : \"" + keyword + "\"\n" +
                     "        }\n" +
                     "    }\n" +
                     "}";
@@ -196,12 +203,8 @@ public class ElasticsearchController {
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-            if (requests == null) {
-                return new ArrayList<Request>();
-            }
-            else {
-                return (ArrayList<Request>) requests;
-            }
+            Log.i("E", ((Integer)requests.size()).toString());
+            return (ArrayList<Request>) requests;
         }
     }
 
