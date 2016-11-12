@@ -37,8 +37,8 @@ public class EditRequestActivity extends Activity {
         recommendedFare = (TextView) findViewById(R.id.edit_RecFare_Text);
 
         String desciptText = description.getText().toString();
-        String startText = sLocation.getText().toString();
-        String endText = eLocation.getText().toString();
+        //String startText = sLocation.getText().toString();
+        //String endText = eLocation.getText().toString();
         String fareText = fare.getText().toString();
         // I don't know how we're setting our recommended fares, so it's commented out.
         //recommendedFare.setText();
@@ -52,26 +52,28 @@ public class EditRequestActivity extends Activity {
         editR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Eswitch = new Intent(EditRequestActivity.this, RiderActivity.class);
-                startActivity(Eswitch);
+                finish();
             }
         });
         //deletes the request entirely, and moves you back to the rider screen.
         deleteR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Dswitch = new Intent(EditRequestActivity.this, RiderActivity.class);
-                startActivity(Dswitch);
+                finish();
             }
         });
         //just moves you back to the rider screen.
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Cswitch = new Intent(EditRequestActivity.this, RiderActivity.class);
-                startActivity(Cswitch);
+                finish();
             }
         });
+    }
+
+    public void load() {
+        description = (TextView) findViewById(R.id.edit_Description_Text);
+        description.setText(request.getDescription());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class EditRequestActivity extends Activity {
         request = Rider.getInstance().getOpenRequests().get(getIntent().getIntExtra("requestId", -1));
         move();
         write();
+        load();
     }
 
     @Override
