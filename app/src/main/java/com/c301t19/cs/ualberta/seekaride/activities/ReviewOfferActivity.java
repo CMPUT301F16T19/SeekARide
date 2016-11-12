@@ -22,8 +22,10 @@ public class ReviewOfferActivity extends Activity {
     //fills in the blank text views with the relavent information from the request.
     public void write(){
         description = (TextView) findViewById(R.id.review_Description_Text);
+        /* someone fix this plz
         sLocation = (TextView) findViewById(R.id.review_SLocation_Text);
         eLocation = (TextView) findViewById(R.id.review_ELocation_Text);
+        */
         riderInfo = (TextView) findViewById(R.id.review_Info_Text);
 
         //The commands to fill the text, just needs the proper variable in the brackets.

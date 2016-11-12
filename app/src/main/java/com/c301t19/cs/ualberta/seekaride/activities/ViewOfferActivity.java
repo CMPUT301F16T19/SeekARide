@@ -23,8 +23,10 @@ public class ViewOfferActivity extends Activity {
     //fills in the blank text views with the relavent information from the request.
     public void write(){
         description = (TextView) findViewById(R.id.view_Description_Text);
+        /* someone fix this plz
         sLocation = (TextView) findViewById(R.id.view_SLocation_Text);
         eLocation = (TextView) findViewById(R.id.view_ELocation_Text);
+        */
         fare = (TextView) findViewById(R.id.view_Fare_Text);
         riderInfo = (TextView) findViewById(R.id.view_Info_Text);
 

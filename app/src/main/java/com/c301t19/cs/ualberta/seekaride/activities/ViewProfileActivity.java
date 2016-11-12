@@ -21,10 +21,14 @@ public class ViewProfileActivity extends Activity {
 
     //sets up the text boxes and lets you fill them in.
     public void write() {
+
+        /* someone fix this plz
         username = (TextView) findViewById(R.id.view_User_Text);
         phoneNumber = (TextView) findViewById(R.id.view_Phone_Text);
         email = (TextView) findViewById(R.id.view_Email_Text);
         car = (TextView) findViewById(R.id.view_Car_Text);
+        */
+        
         //The correct variables just need to go into the brackets. Til then it's commented out.
         /*
         username.setText();

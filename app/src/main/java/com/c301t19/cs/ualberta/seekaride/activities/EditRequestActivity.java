@@ -25,8 +25,10 @@ public class EditRequestActivity extends Activity {
     //takes the filled in information sets variables to it.
     public void write() {
         description = (TextView) findViewById(R.id.edit_Description_Text);
+        /* someone fix this plz
         sLocation = (TextView) findViewById(R.id.edit_SLocation_Text);
         eLocation = (TextView) findViewById(R.id.edit_ELocation_Text);
+        */
         fare = (TextView) findViewById(R.id.edit_Fare_Text);
         recommendedFare = (TextView) findViewById(R.id.edit_RecFare_Text);
 
