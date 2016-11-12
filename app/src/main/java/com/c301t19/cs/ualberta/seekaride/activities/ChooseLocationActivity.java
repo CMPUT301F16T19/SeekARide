@@ -16,20 +16,53 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.location.NominatimPOIProvider;
 import org.osmdroid.bonuspack.location.POI;
+import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.FolderOverlay;
+import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 
-public class ChooseLocationActivity extends Activity {
+public class ChooseLocationActivity extends Activity implements MapEventsReceiver {
 
     private EditText location;
     private GeoPoint startPoint;
     private ArrayList<POI> pois;
+    private Marker longTapMarker;
+    private Drawable poiIcon;
 
+
+    MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);
+
+    @Override public boolean singleTapConfirmedHelper(GeoPoint p) {
+        return true;
+    }
+
+    @Override public boolean longPressHelper(GeoPoint p) {
+        final MapView map = (MapView) findViewById(R.id.chooseMap);
+        if (pois != null) {
+            pois.clear();
+            map.getOverlays().clear();
+            map.getOverlays().add(0, mapEventsOverlay);
+        }
+        if (longTapMarker != null) {
+            longTapMarker.remove(map);
+        }
+
+        longTapMarker = new Marker(map);
+        longTapMarker.setTitle("Custom Location");
+        longTapMarker.setPosition(p);
+        longTapMarker.setIcon(poiIcon);
+        map.getOverlays().add(longTapMarker);
+
+        map.invalidate();
+
+        //Toast.makeText(this, "long tap", Toast.LENGTH_LONG).show();
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +73,13 @@ public class ChooseLocationActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        poiIcon = getResources().getDrawable(R.drawable.marker_default);
+
         final MapView map = (MapView) findViewById(R.id.chooseMap);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
+        map.getOverlays().add(0, mapEventsOverlay);
 
         // SET TO CURRENT PHONE LOCATION
         startPoint = new GeoPoint(53.52676, -113.52715);
@@ -61,6 +97,7 @@ public class ChooseLocationActivity extends Activity {
                     if (pois != null) {
                         pois.clear();
                         map.getOverlays().clear();
+                        map.getOverlays().add(0, mapEventsOverlay);
                     }
 
                     pois = poiProvider.getPOICloseTo(startPoint,
@@ -75,7 +112,7 @@ public class ChooseLocationActivity extends Activity {
                     FolderOverlay poiMarkers = new FolderOverlay(ChooseLocationActivity.this);
                     map.getOverlays().add(poiMarkers);
 
-                    Drawable poiIcon = getResources().getDrawable(R.drawable.marker_default);
+
                     for (POI poi:pois){
                         Marker poiMarker = new Marker(map);
                         poiMarker.setTitle(poi.mType);
