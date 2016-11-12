@@ -10,8 +10,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.Request;
+import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 public class EditRequestActivity extends Activity {
+
+    Request request;
+
     private Button editR;
     private Button deleteR;
     private Button Cancel;
@@ -20,7 +25,6 @@ public class EditRequestActivity extends Activity {
     private TextView eLocation;
     private TextView fare;
     private TextView recommendedFare;
-
 
     //takes the filled in information sets variables to it.
     public void write() {
@@ -73,6 +77,7 @@ public class EditRequestActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_request);
+        request = Rider.getInstance().getOpenRequests().get(getIntent().getIntExtra("requestId", -1));
         move();
         write();
     }

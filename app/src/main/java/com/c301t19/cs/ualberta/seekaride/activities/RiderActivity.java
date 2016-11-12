@@ -61,7 +61,14 @@ public class RiderActivity extends Activity {
         requests.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id){
-                selectedRequest = (Request) requests.getItemAtPosition(position);
+                selectedRequest = (Request) adapter.getItem(position);
+                int requestIndex = Rider.getInstance().getOpenRequests().indexOf(selectedRequest);
+                if (requestIndex < 0) {
+                    return;
+                }
+                Intent intent = new Intent(RiderActivity.this, EditRequestActivity.class);
+                intent.putExtra("requestId", requestIndex);
+                startActivity(intent);
             }
         });
 

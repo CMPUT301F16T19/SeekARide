@@ -175,15 +175,6 @@ public class ElasticsearchController {
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
             verifySettings();
-            /*String query = "{\n" +
-                    "    \"query\": {\n" +
-                    "        \"filtered\" : {\n" +
-                    "            \"filter\" : {\n" +
-                    "                \"term\" : { \"riderId\" : \"" + keyword + "\" }\n" +
-                    "            }\n" +
-                    "        }\n" +
-                    "    }\n" +
-                    "}";*/
             String query = "{\n" +
                     "    \"query\": {\n" +
                     "        \"match\" : {\n" +

@@ -136,4 +136,15 @@ public class Request {
     }
 
     public String getId() { return id; }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (id == null) {
+            return false;
+        }
+        if (((Request)(obj)).getId().equals(id)) {
+            return true;
+        }
+        return false;
+    }
 }

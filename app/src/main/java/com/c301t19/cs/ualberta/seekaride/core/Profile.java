@@ -45,4 +45,14 @@ public class Profile {
         email = e;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (id == null) {
+            return false;
+        }
+        if (((Profile)(obj)).getId().equals(id)) {
+            return true;
+        }
+        return false;
+    }
 }
