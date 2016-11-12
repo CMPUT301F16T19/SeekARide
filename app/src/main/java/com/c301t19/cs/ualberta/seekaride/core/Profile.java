@@ -1,5 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by mc on 16/10/13.
  */
@@ -8,6 +10,8 @@ public class Profile {
     private String username;
     private String phoneNumber;
     private String email;
+    @JestId
+    private String id;
 
     public Profile(String u, String p, String e) {
         username = u;
@@ -26,6 +30,8 @@ public class Profile {
     public String getEmail() {
         return email;
     }
+
+    public String getId() { return id; }
 
     public void setUsername(String name) {
         username = name;

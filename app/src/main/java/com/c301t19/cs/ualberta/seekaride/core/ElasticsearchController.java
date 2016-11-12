@@ -39,17 +39,21 @@ public class ElasticsearchController {
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
+            /*
             String username = user.getUsername();
             String email = user.getEmail();
             String phone = user.getPhoneNumber();
+            */
 
+            /*
             Map<String, String> source = new LinkedHashMap<String,String>();
             source.put("username", username);
             source.put("email", email);
             source.put("phone", phone);
             Index index = new Index.Builder(source).index("t19seekaride").type("user").build();
+            */
 
-            //Index index = new Index.Builder(user).index("t19seekaride").type("user").build();
+            Index index = new Index.Builder(user).index("t19seekaride").type("user").build();
             /*
             String source = "{\n" +
                                 "\"username\" : " + username + ",\n" +

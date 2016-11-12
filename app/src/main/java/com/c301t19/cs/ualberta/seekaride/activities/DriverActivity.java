@@ -3,6 +3,8 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,10 +38,35 @@ public class DriverActivity extends Activity {
         });
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
         move();
+    }
+
+    @Override
+    // dropdown menu
+    public boolean onCreateOptionsMenu(Menu m) {
+        getMenuInflater().inflate(R.menu.main, m);
+        return true;
+    }
+
+    // dropdown menu
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mainMenuDriver:
+                return false;
+            case R.id.mainMenuRider:
+                startActivity(new Intent(this, RiderActivity.class));
+                return true;
+            case R.id.mainMenuProfile:
+                startActivity(new Intent(this, ViewProfileActivity.class));
+                return true;
+            default:
+                return false;
+            //return super.onOptionsItemSelected(item);
+        }
     }
 }
