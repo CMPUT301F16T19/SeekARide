@@ -1,8 +1,0 @@
-An edit by mmooney (Also know as MJ Mooney)
-<<<<<<< HEAD
-Tommy's edit
-=======
-An edit by Mingcheng 
-An edit by phillip2 (Phillip Hoang)
-An edit by yhou5(Harold)
->>>>>>> e17d0924a0e89e458d87db1eb5af635b5ec76580

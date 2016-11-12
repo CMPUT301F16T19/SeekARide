@@ -1,3 +1,0 @@
-"# SeekARide" 
-"# SeekARide" 
-"# SeekARide" 
