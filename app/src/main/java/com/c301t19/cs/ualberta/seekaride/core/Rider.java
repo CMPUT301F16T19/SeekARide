@@ -10,10 +10,25 @@ public class Rider extends User {
     //Request currentRequest;
     private ArrayList<Request> openRequests;
 
+    // singleton
+    private static Rider ourInstance = null;
+    public static Rider getInstance() {
+        return ourInstance;
+    }
+    private Rider(Profile p) {
+        super(p);
+        openRequests = new ArrayList<Request>();
+    }
+    public static void instantiate(Profile p) {
+        ourInstance = new Rider(p);
+    }
+
+    /*
     public Rider (Profile userProfile) {
         super(userProfile );
         openRequests = new ArrayList<Request>();
     }
+    */
 
     public Request getRequest(int index) {
         return openRequests.get(index);

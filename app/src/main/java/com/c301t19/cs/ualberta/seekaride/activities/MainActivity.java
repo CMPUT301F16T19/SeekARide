@@ -8,17 +8,20 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.LoginController;
 
 
 public class MainActivity extends Activity {
 
     EditText username;
+    LoginController loginController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         username = (EditText) findViewById(R.id.username_Text);
+        loginController = new LoginController();
     }
 
     public void onNewAccountClick(View v) {
@@ -28,12 +31,12 @@ public class MainActivity extends Activity {
 
     public void onLoginClick(View v) {
         String name = username.getText().toString();
-        if (name.length() <  5)
+        if (!loginController.login(name))
         {
             return;
         }
         Intent intent = new Intent(this, RiderActivity.class);
-        intent.putExtra("username", name);
+        //intent.putExtra("username", name);
         startActivity(intent);
     }
 

@@ -19,12 +19,13 @@ public class RiderActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
 
-        Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
+        //Intent intent = getIntent();
+        //String username = intent.getStringExtra("username");
         // instantiate a Rider with a Profile obtained from Elasticsearch
         // search Elasticsearch using the username when logging in
         // if user exists, retrieve profile
         // else make new profile
+        /*
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
                 ElasticsearchController.UserField.NAME, username);
         getUserTask.execute();
@@ -34,6 +35,7 @@ public class RiderActivity extends Activity {
                 Profile newProfile = new Profile(username, "PHONE", "EMAIL");
                 ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(newProfile);
                 addUserTask.execute();
+
             }
             else {
                 rider = new Rider(profile);
@@ -41,6 +43,6 @@ public class RiderActivity extends Activity {
         }
         catch (Exception e) {
 
-        }
+        }*/
     }
 }

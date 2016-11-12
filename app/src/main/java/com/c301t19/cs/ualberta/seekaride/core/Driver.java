@@ -12,21 +12,20 @@ public class Driver extends User {
 
 
     // singleton
-    // pass in the username to create a new driver
-    /*
     private static Driver ourInstance = null;
-    public static Driver getInstance(String username) {
-        ourInstance = new Driver(username);
-        return ourInstance;
-    }
     public static Driver getInstance() {
         return ourInstance;
     }
-    private Driver(String username) {
-
+    private Driver(Profile p) {
+        super(p);
+        searchedRequests = new ArrayList<Request>();
+        acceptedRequest = null;
     }
-    */
+    public static void instantiate(Profile p) {
+        ourInstance = new Driver(p);
+    }
 
+    /*
     public Driver(Profile profile) {
         super(profile);
         this.searchedRequests = new ArrayList<Request>();
@@ -37,7 +36,7 @@ public class Driver extends User {
         super(profile);
         this.searchedRequests = searchedRequests;
         acceptedRequest = null;
-    }
+    }*/
 
     public void searchRequestsByKeyword(ArrayList<String> keywords, int radius) {
         // search requests and store in searchedRequests
