@@ -11,6 +11,7 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 
 public class AddRequestActivity extends Activity {
+
     public Button createR;
     public Button Back;
     private TextView description;
@@ -19,14 +20,11 @@ public class AddRequestActivity extends Activity {
     private TextView fare;
     private TextView recommendedFare;
 
-
     //takes the filled in information sets variables to it.
     public void write() {
         description = (TextView) findViewById(R.id.add_Description_Text);
-        /* someone fix this plz
-        sLocation = (TextView) findViewById(R.id.add_Start_Location);
-        eLocation = (TextView) findViewById(R.id.add_ELocation_Text);
-        */
+        sLocation = (TextView) findViewById(R.id.add_Slocation_Text);
+        eLocation = (TextView) findViewById(R.id.add_Elocation_Text);
         fare = (TextView) findViewById(R.id.add_Fare_Text);
         recommendedFare = (TextView) findViewById(R.id.add_RecFare_Text);
 
@@ -45,16 +43,23 @@ public class AddRequestActivity extends Activity {
         createR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 Intent Cswitch = new Intent(AddRequestActivity.this, RiderActivity.class);
                 startActivity(Cswitch);
+                */
+                write();
+                finish();
             }
         });
         //moves you back to the initial rider screen without creating a request.
         Back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                /*
                 Intent Bswitch = new Intent(AddRequestActivity.this, RiderActivity.class);
                 startActivity(Bswitch);
+                */
+                finish();
             }
         });
     }

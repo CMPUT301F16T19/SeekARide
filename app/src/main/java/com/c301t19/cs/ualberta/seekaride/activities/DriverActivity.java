@@ -14,15 +14,16 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 
 public class DriverActivity extends Activity {
-    public Button Search;
+
+    private Button search;
     private ListView requests;
     private Request selectedRequest;
 
     public void move(){
-        Search = (Button) findViewById(R.id.driver_Search_Button);
+        search = (Button) findViewById(R.id.driver_Search_Button);
         requests = (ListView) findViewById(R.id.rider_Requests);
         //Moves you to the search for requests screen.
-        Search.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent Nswitch = new Intent(DriverActivity.this, SearchRequestsActivity.class);
