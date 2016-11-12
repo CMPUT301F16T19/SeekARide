@@ -22,7 +22,7 @@ public class ElasticsearchController {
 
     // used to indicate search/edit targets
     public enum UserField { NAME, EMAIL, PHONE }
-    public enum RequestField { DESCRIPTION, START, END, DATE, RIDER, DRIVERS }
+    public enum RequestField { DESCRIPTION, START, END, DATE, RIDERID, DRIVERS }
 
     private static JestDroidClient client;
 
@@ -161,20 +161,47 @@ public class ElasticsearchController {
     // gets a Request from elasticsearch. meant to be used when you have a specific request
     // you are looking for, rather than for searching over many requests. mostly likely will
     // be used with a request ID
-    public static class GetRequestTask extends AsyncTask<Void, Void, Request> {
+    public static class GetRequestsTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
         private RequestField requestField;
         private String keyword;
 
-        public GetRequestTask(RequestField rf, String k) {
+        public GetRequestsTask(RequestField rf, String k) {
             super();
             requestField = rf;
             keyword = k;
         }
 
         @Override
-        protected Request doInBackground(Void... params) {
-            return null;
+        protected ArrayList<Request> doInBackground(Void... params) {
+            verifySettings();
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"filtered\" : {\n" +
+                    "            \"filter\" : {\n" +
+                    "                \"term\" : { \"_id\" : \"" + keyword + "\" }\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+            Search search = new Search.Builder(query)
+                    .addIndex("t19seekaride")
+                    .addType("request")
+                    .build();
+            List<Request> requests = new ArrayList<Request>();
+            try {
+                SearchResult result = client.execute(search);
+                requests = result.getSourceAsObjectList(Request.class);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            if (requests == null) {
+                return new ArrayList<Request>();
+            }
+            else {
+                return (ArrayList<Request>) requests;
+            }
         }
     }
 

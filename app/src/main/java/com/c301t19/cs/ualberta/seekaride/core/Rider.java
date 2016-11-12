@@ -60,6 +60,21 @@ public class Rider extends User {
 
 
     public void updateOpenRequests() {
+        ElasticsearchController.GetRequestsTask getRequestsTask = new ElasticsearchController.GetRequestsTask(
+                ElasticsearchController.RequestField.RIDERID, getProfile().getId());
+        getRequestsTask.execute();
+        try {
+            ArrayList<Request> requests = getRequestsTask.get();
+            if (requests == null) {
+                openRequests = new ArrayList<Request>();
+            }
+            else {
+                openRequests = requests;
+            }
+        }
+        catch (Exception e) {
+
+        }
     }
 
     public boolean hasRequests() {
