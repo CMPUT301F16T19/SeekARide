@@ -17,8 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.RiderActivity" />
-        <activity android:name=".activities.DriverActivity" />
+        <activity android:name=".activities.RiderActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activities.DriverActivity" android:launchMode="singleTask"/>
         <activity android:name=".activities.AddRequestActivity" />
         <activity android:name=".activities.SearchRequestsActivity" />
         <activity
