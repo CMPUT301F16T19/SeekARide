@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
             return;
         }
         Intent intent = new Intent(this, RiderActivity.class);
-        //intent.putExtra("username", name);
         startActivity(intent);
     }
 
