@@ -18,12 +18,23 @@ public class RiderActivity extends Activity {
     private Button addRequest;
     private ListView requests;
     private Request selectedRequest;
+    private RequestsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
         move();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // refresh data
+        Rider.getInstance().updateOpenRequests();
+        adapter = new RequestsAdapter(this,
+                R.id.current_Requests, Rider.getInstance().getOpenRequests(), getLayoutInflater());
+        requests.setAdapter(adapter);
     }
 
     public void move(){

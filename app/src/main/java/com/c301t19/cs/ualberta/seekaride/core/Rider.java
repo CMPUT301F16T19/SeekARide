@@ -59,8 +59,7 @@ public class Rider extends User {
     }
 
 
-    public void updateOpenRequests(ArrayList<Request> updateRequests) {
-        openRequests = updateRequests;
+    public void updateOpenRequests() {
     }
 
     public boolean hasRequests() {
