@@ -147,6 +147,13 @@ public class ElasticsearchController {
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
+            Index index = new Index.Builder(request).index("t19seekaride").type("request").build();
+            try {
+                client.execute(index);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
             return Boolean.TRUE;
         }
     }

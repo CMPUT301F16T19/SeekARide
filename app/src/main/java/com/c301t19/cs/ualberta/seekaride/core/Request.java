@@ -12,6 +12,7 @@ public class Request {
 
     @JestId
     private String id;
+    private String riderId;
 
     private Date requestTime;
     private String description;
@@ -30,7 +31,7 @@ public class Request {
     private Profile riderProfile;
 
     public Request(String descrip, Location st, Location dest,
-                    double pr,Profile riderProfile) {
+                    double pr,Profile riderProfile, String riderId) {
         requestTime = new Date();
         description = descrip;
         start = st;
@@ -45,6 +46,8 @@ public class Request {
         riderPaid = false;
         driverIsPaid = false;
         driverProfile = null;
+
+        this.riderId = riderId;
     }
 
     public void driverAccepted(Profile driverProfile) {

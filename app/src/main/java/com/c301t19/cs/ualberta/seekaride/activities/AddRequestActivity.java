@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
+import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 public class AddRequestActivity extends Activity {
 
@@ -20,6 +21,8 @@ public class AddRequestActivity extends Activity {
     private TextView fare;
     private TextView recommendedFare;
 
+    String descriptText;
+
     //takes the filled in information sets variables to it.
     public void write() {
         description = (TextView) findViewById(R.id.add_Description_Text);
@@ -28,7 +31,7 @@ public class AddRequestActivity extends Activity {
         fare = (TextView) findViewById(R.id.add_Fare_Text);
         recommendedFare = (TextView) findViewById(R.id.add_RecFare_Text);
 
-        String desciptText = description.getText().toString();
+        descriptText = description.getText().toString();
         String startText = sLocation.getText().toString();
         String endText = eLocation.getText().toString();
         String fareText = fare.getText().toString();
@@ -48,6 +51,7 @@ public class AddRequestActivity extends Activity {
                 startActivity(Cswitch);
                 */
                 write();
+                Rider.getInstance().makeRequest(descriptText, new Location(""), new Location(""), 0);
                 finish();
             }
         });
