@@ -120,11 +120,21 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                         poiMarker.setPosition(poi.mLocation);
                         poiMarker.setIcon(poiIcon);
                         poiMarkers.add(poiMarker);
+                        poiMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(Marker item, MapView map) {
+                                item.showInfoWindow();
+                                //ADD THE RETURN HERE
+                                return true;
+                            }
+                        });
                     }
                     map.invalidate();
 
                 }
             }
         });
+
+
     }
 }

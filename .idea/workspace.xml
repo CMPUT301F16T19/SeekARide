@@ -32,14 +32,16 @@
       <file leaf-file-name="ChooseLocationActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ChooseLocationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.78089887">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9044944">
+              <caret line="126" column="53" selection-start-line="126" selection-start-column="53" selection-end-line="126" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1313#1314#0" expanded="true" />
                 <element signature="e#1340#1341#0" expanded="true" />
-                <element signature="e#3150#4618#0" expanded="true" />
-                <element signature="e#4617#4618#0" expanded="true" />
+                <element signature="e#3150#5049#0" expanded="true" />
+                <element signature="e#4575#4944#0" expanded="true" />
+                <element signature="e#4943#4944#0" expanded="true" />
+                <element signature="e#5048#5049#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2169,14 +2171,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ChooseLocationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.78089887">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.9044944">
+          <caret line="126" column="53" selection-start-line="126" selection-start-column="53" selection-end-line="126" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1313#1314#0" expanded="true" />
             <element signature="e#1340#1341#0" expanded="true" />
-            <element signature="e#3150#4618#0" expanded="true" />
-            <element signature="e#4617#4618#0" expanded="true" />
+            <element signature="e#3150#5049#0" expanded="true" />
+            <element signature="e#4575#4944#0" expanded="true" />
+            <element signature="e#4943#4944#0" expanded="true" />
+            <element signature="e#5048#5049#0" expanded="true" />
           </folding>
         </state>
       </provider>
