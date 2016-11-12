@@ -1,0 +1,104 @@
+-injars 'C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\build\intermediates\transforms\jarMerging\debug\jars\1\1f\combined.jar'
+-outjars 'C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\build\intermediates\multi-dex\debug\componentClasses.jar'
+
+-libraryjars 'C:\Users\Master Chief\AppData\Local\Android\Sdk\build-tools\22.0.1\lib\shrinkedAndroid.jar'
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontnote **,com.android.tools.fd.**,android.support.multidex.MultiDexExtractor
+-dontwarn **
+-printconfiguration 'C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\build\intermediates\multi-dex\debug\components.flags'
+
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.MainActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.RiderActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.DriverActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.AddRequestActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.SearchRequestsActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.NewAccountActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.ViewProfileActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.EditAccountActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.EditRequestActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.AcceptRiderActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.AcceptDriverActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.SearchResultsActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.ViewOfferActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.ReviewOfferActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.MapActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.RCompleteActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.TestingActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.ChooseLocationsActivity {
+    <init>();
+}
+
+-keep class com.c301t19.cs.ualberta.seekaride.activities.LoginActivity {
+    <init>();
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.android.tools.fd.** {
+    <fields>;
+    <methods>;
+}

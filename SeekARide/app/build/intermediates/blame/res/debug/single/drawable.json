@@ -1,0 +1,142 @@
+[
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_default_focused_base.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\marker_default_focused_base.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_mapmode.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\ic_menu_mapmode.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\direction_arrow.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\direction_arrow.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\navto_small.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\navto_small.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_clear.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_ic_clear.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\bonuspack_bubble.9.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\bonuspack_bubble.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_search_dropdown_light.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_search_dropdown_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\next.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\next.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\person.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\person.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\moreinfo_arrow.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\moreinfo_arrow.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_offline.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\ic_menu_offline.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_searchview_right_holo_light.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_textfield_searchview_right_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\zoom_in.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\zoom_in.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_default.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\marker_default.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_compass.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\ic_menu_compass.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_searchview_holo_dark.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_textfield_searchview_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\previous.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\previous.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_searchview_holo_light.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_textfield_searchview_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\center.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\center.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_ab_holo.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_tab_indicator_ab_holo.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_mylocation.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\ic_menu_mylocation.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_moreinfo.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\btn_moreinfo.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\zoom_out.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\zoom_out.png"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_search_dropdown_dark.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_search_dropdown_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_ab_holo_light.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_spinner_ab_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_clear_holo_light.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_ic_clear_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_light.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_searchview_right_holo_dark.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_textfield_searchview_right_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_ab_holo_dark.xml",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\18.0.0\\res\\drawable\\abc_spinner_ab_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\moreinfo_arrow_pressed.png",
+        "source": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\org.osmdroid\\osmdroid-android\\5.5\\release\\res\\drawable\\moreinfo_arrow_pressed.png"
+    }
+]

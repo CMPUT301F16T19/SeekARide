@@ -1,0 +1,406 @@
+[
+    {
+        "outputFile": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\res\\merged\\debug\\values-fr\\values-fr.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 72,
+                    "endOffset": 123
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 72,
+                        "endOffset": 123
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 128,
+                    "endColumn": 80,
+                    "endOffset": 204
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 128,
+                        "endColumn": 80,
+                        "endOffset": 204
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 209,
+                    "endColumn": 93,
+                    "endOffset": 298
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 209,
+                        "endColumn": 93,
+                        "endOffset": 298
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 303,
+                    "endColumn": 93,
+                    "endOffset": 392
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 303,
+                        "endColumn": 93,
+                        "endOffset": 392
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 397,
+                    "endColumn": 92,
+                    "endOffset": 485
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 397,
+                        "endColumn": 92,
+                        "endOffset": 485
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 490,
+                    "endColumn": 65,
+                    "endOffset": 551
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 490,
+                        "endColumn": 65,
+                        "endOffset": 551
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 556,
+                    "endColumn": 99,
+                    "endOffset": 651
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 556,
+                        "endColumn": 99,
+                        "endOffset": 651
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 656,
+                    "endColumn": 104,
+                    "endOffset": 756
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 656,
+                        "endColumn": 104,
+                        "endOffset": 756
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 761,
+                    "endColumn": 104,
+                    "endOffset": 861
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 761,
+                        "endColumn": 104,
+                        "endOffset": 861
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 866,
+                    "endColumn": 105,
+                    "endOffset": 967
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 866,
+                        "endColumn": 105,
+                        "endOffset": 967
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 972,
+                    "endColumn": 90,
+                    "endOffset": 1058
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 972,
+                        "endColumn": 90,
+                        "endOffset": 1058
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 1063,
+                    "endColumn": 105,
+                    "endOffset": 1164
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1063,
+                        "endColumn": 105,
+                        "endOffset": 1164
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1169,
+                    "endColumn": 105,
+                    "endOffset": 1270
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1169,
+                        "endColumn": 105,
+                        "endOffset": 1270
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1275,
+                    "endColumn": 103,
+                    "endOffset": 1374
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1275,
+                        "endColumn": 103,
+                        "endOffset": 1374
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1379,
+                    "endColumn": 104,
+                    "endOffset": 1479
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1379,
+                        "endColumn": 104,
+                        "endOffset": 1479
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1484,
+                    "endColumn": 104,
+                    "endOffset": 1584
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1484,
+                        "endColumn": 104,
+                        "endOffset": 1584
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1589,
+                    "endColumn": 79,
+                    "endOffset": 1664
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1589,
+                        "endColumn": 79,
+                        "endOffset": 1664
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1669,
+                    "endColumn": 89,
+                    "endOffset": 1754
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1669,
+                        "endColumn": 89,
+                        "endOffset": 1754
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1759,
+                    "endColumn": 90,
+                    "endOffset": 1845
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1759,
+                        "endColumn": 90,
+                        "endOffset": 1845
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1850,
+                    "endColumn": 79,
+                    "endOffset": 1925
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1850,
+                        "endColumn": 79,
+                        "endOffset": 1925
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1930,
+                    "endColumn": 89,
+                    "endOffset": 2015
+                },
+                "from": {
+                    "file": "C:\\Users\\Master Chief\\Documents\\SeekARide\\SeekARide\\app\\build\\intermediates\\exploded-aar\\com.github.MKergall\\osmbonuspack\\6.0\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 1930,
+                        "endColumn": 89,
+                        "endOffset": 2015
+                    }
+                }
+            }
+        ]
+    }
+]
