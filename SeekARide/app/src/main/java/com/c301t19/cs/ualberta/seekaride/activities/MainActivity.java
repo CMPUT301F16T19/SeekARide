@@ -12,9 +12,10 @@ import com.c301t19.cs.ualberta.seekaride.R;
 
 public class MainActivity extends Activity {
 
-    EditText username;
-    public Button NewA;
-    public Button Login;
+    private EditText username;
+    private EditText password;
+    private Button NewA;
+    private Button Login;
 
     public void move(){
         NewA = (Button) findViewById(R.id.newA_Button);
@@ -43,6 +44,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         username = (EditText) findViewById(R.id.username_Text);
+        //are we even doing anything with passwords?
+        password = (EditText) findViewById(R.id.password_Text);
         move();
     }
 

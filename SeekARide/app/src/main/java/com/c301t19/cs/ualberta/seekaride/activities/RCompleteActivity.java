@@ -7,11 +7,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
 public class RCompleteActivity extends Activity {
-    public Button confirmP;
+    private Button confirmP;
+    private EditText review;
+
+    //handles getting the review, but doesn't save it anywhere.
+    public void write(){
+        review = (EditText) findViewById(R.id.complete_Review_Text);
+
+        String reviewText = review.getText().toString();
+    }
 
     public void move(){
         confirmP = (Button) findViewById(R.id.complete_Confirm_Button);

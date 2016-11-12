@@ -7,13 +7,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
 public class NewAccountActivity extends Activity {
     public Button createA;
     public Button cancelA;
+    private TextView username;
+    private TextView password;
+    private TextView cPassword;
+    private TextView phoneNumber;
+    private TextView email;
+    private TextView car;
 
+    //sets up the text boxes and lets you fill them in.
+    public void write() {
+        username = (TextView) findViewById(R.id.edit_User_Text);
+        password = (TextView) findViewById(R.id.edit_Password_Text);
+        cPassword = (TextView) findViewById(R.id.edit_ConfirmP_Text);
+        phoneNumber = (TextView) findViewById(R.id.edit_Phone_Text);
+        email = (TextView) findViewById(R.id.edit_Email_Text);
+        car = (TextView) findViewById(R.id.edit_Car_Text);
+
+        //the cariables aren't actually passed anywhere yet.
+        String usernameText = username.getText().toString();
+        String passwordText = password.getText().toString();
+        String confirmPassword = cPassword.getText().toString();
+        String phoneNumberText = phoneNumber.getText().toString();
+        String emailText = email.getText().toString();
+        String carText = car.getText().toString();
+
+    }
     public void move(){
         createA = (Button) findViewById(R.id.newA_Button);
         cancelA = (Button) findViewById(R.id.newA_Cancel_Button);
@@ -40,6 +65,7 @@ public class NewAccountActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
+        write();
         move();
     }
 

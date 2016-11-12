@@ -7,13 +7,34 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
 public class ViewProfileActivity extends Activity {
     public Button editP;
     public Button Back;
+    private TextView username;
+    private TextView phoneNumber;
+    private TextView email;
+    private TextView car;
 
+    //sets up the text boxes and lets you fill them in.
+    public void write() {
+        username = (TextView) findViewById(R.id.view_User_Text);
+        phoneNumber = (TextView) findViewById(R.id.view_Phone_Text);
+        email = (TextView) findViewById(R.id.view_Email_Text);
+        car = (TextView) findViewById(R.id.view_Car_Text);
+        //The correct variables just need to go into the brackets. Til then it's commented out.
+        /*
+        username.setText();
+        phoneNumber.setText();
+        email.setText();
+        car.setText();
+        */
+
+
+    }
     public void move(){
         editP = (Button) findViewById(R.id.view_Changes_Button);
         Back = (Button) findViewById(R.id.view_Logout_Button);

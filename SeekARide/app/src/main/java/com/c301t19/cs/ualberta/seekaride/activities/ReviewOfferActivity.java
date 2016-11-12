@@ -7,12 +7,34 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
 public class ReviewOfferActivity extends Activity {
-    public Button cOffer;
-    public Button Back;
+    private Button cOffer;
+    private Button Back;
+    private TextView description;
+    private TextView sLocation;
+    private TextView eLocation;
+    private TextView riderInfo;
+
+    //fills in the blank text views with the relavent information from the request.
+    public void write(){
+        description = (TextView) findViewById(R.id.review_Description_Text);
+        sLocation = (TextView) findViewById(R.id.review_SLocation_Text);
+        eLocation = (TextView) findViewById(R.id.review_ELocation_Text);
+        riderInfo = (TextView) findViewById(R.id.review_Info_Text);
+
+        //The commands to fill the text, just needs the proper variable in the brackets.
+        /*
+        description.setText();
+        sLocation.setText();
+        eLocation.setText();
+        riderInfo.setText();
+         */
+    }
+
 
     public void move(){
         cOffer = (Button) findViewById(R.id.review_Cancel_Button);
@@ -40,6 +62,7 @@ public class ReviewOfferActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_offer);
+        write();
         move();
     }
 

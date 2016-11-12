@@ -7,15 +7,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
 public class EditRequestActivity extends Activity {
-    public Button editR;
-    public Button deleteR;
-    public Button Cancel;
+    private Button editR;
+    private Button deleteR;
+    private Button Cancel;
+    private TextView description;
+    private TextView sLocation;
+    private TextView eLocation;
+    private TextView fare;
+    private TextView recommendedFare;
 
-    public void move(){
+
+    //takes the filled in information sets variables to it.
+    public void write() {
+        description = (TextView) findViewById(R.id.edit_Description_Text);
+        sLocation = (TextView) findViewById(R.id.edit_SLocation_Text);
+        eLocation = (TextView) findViewById(R.id.edit_ELocation_Text);
+        fare = (TextView) findViewById(R.id.edit_Fare_Text);
+        recommendedFare = (TextView) findViewById(R.id.edit_RecFare_Text);
+
+        String desciptText = description.getText().toString();
+        String startText = sLocation.getText().toString();
+        String endText = eLocation.getText().toString();
+        String fareText = fare.getText().toString();
+        // I don't know how we're setting our recommended fares, so it's commented out.
+        //recommendedFare.setText();
+    }
+
+    public void move() {
         editR = (Button) findViewById(R.id.edit_Edit_Button);
         deleteR = (Button) findViewById(R.id.edit_Delete_Button);
         Cancel = (Button) findViewById(R.id.edit_Cancel_Button);
@@ -28,26 +51,28 @@ public class EditRequestActivity extends Activity {
             }
         });
         //deletes the request entirely, and moves you back to the rider screen.
-        deleteR.setOnClickListener(new View.OnClickListener(){
+        deleteR.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent Dswitch = new Intent(EditRequestActivity.this, RiderActivity.class);
                 startActivity(Dswitch);
             }
         });
         //just moves you back to the rider screen.
-        Cancel.setOnClickListener(new View.OnClickListener(){
+        Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent Cswitch = new Intent(EditRequestActivity.this, RiderActivity.class);
                 startActivity(Cswitch);
             }
         });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_request);
-            move();
+        move();
+        write();
     }
 
     @Override
