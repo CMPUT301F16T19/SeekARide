@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activities.ChooseLocationActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/chooseLocationText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:hint="Location" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/locationSearchButton"
+        android:layout_alignBottom="@+id/chooseLocationText"
+        android:layout_alignParentEnd="true" />
+
+    <org.osmdroid.views.MapView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chooseMap"
+        android:layout_below="@+id/chooseLocationText"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/locationSearchButton"
+        android:layout_above="@+id/locationSelectButton"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Select"
+        android:id="@+id/locationSelectButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
