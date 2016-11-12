@@ -10,7 +10,6 @@ import android.widget.EditText;
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.LoginController;
 
-
 public class MainActivity extends Activity {
 
     EditText username;

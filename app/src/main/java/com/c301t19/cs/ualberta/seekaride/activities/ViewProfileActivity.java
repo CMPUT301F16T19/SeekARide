@@ -28,7 +28,7 @@ public class ViewProfileActivity extends Activity {
         email = (TextView) findViewById(R.id.view_Email_Text);
         car = (TextView) findViewById(R.id.view_Car_Text);
         */
-        
+
         //The correct variables just need to go into the brackets. Til then it's commented out.
         /*
         username.setText();
