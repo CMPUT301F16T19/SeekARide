@@ -10,8 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.Driver;
+import com.c301t19.cs.ualberta.seekaride.core.Request;
+import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 public class ViewOfferActivity extends Activity {
+
+    private Request request;
+
     private Button acceptO;
     private Button Back;
     private TextView description;
@@ -30,14 +36,12 @@ public class ViewOfferActivity extends Activity {
         fare = (TextView) findViewById(R.id.view_Fare_Text);
         riderInfo = (TextView) findViewById(R.id.view_Info_Text);
 
-        //The commands to fill the text, just needs the proper variable in the brackets.
-        /*
-        description.setText();
-        sLocation.setText();
-        eLocation.setText();
-        fare.setText();
-        riderInfo.setText();
-         */
+        //The commands to fill the text, just needs the proper variable in the brackets
+        description.setText(request.getDescription());
+        //sLocation.setText();
+        //eLocation.setText();
+        fare.setText(((Double)request.getPrice()).toString());
+        riderInfo.setText(request.getRiderProfile().getUsername());
     }
     public void move(){
         acceptO = (Button) findViewById(R.id.view_Accept_Button);
@@ -47,16 +51,14 @@ public class ViewOfferActivity extends Activity {
         acceptO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Aswitch = new Intent(ViewOfferActivity.this, DriverActivity.class);
-                startActivity(Aswitch);
+                finish();
             }
         });
         //returns you to the search results screen
         Back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent Bswitch = new Intent(ViewOfferActivity.this, SearchRequestsActivity.class);
-                startActivity(Bswitch);
+                finish();
             }
         });
     }
@@ -64,6 +66,7 @@ public class ViewOfferActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_offer);
+        request = Driver.getInstance().getSearchedRequests().get(getIntent().getIntExtra("requestId", -1));
         write();
         move();
     }

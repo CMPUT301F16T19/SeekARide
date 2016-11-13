@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
+import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class SearchResultsActivity extends Activity {
     private Button Back;
     private ListView results;
     private RequestsAdapter adapter;
+    private Request selectedRequest;
 
     public void move(){
         Back = (Button) findViewById(R.id.results_Back_Button);
@@ -33,7 +36,20 @@ public class SearchResultsActivity extends Activity {
                 startActivity(Nswitch);
             }
         });
-
+        //Choose a request from the list to see more details about it.
+        results.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick (AdapterView<?> parent, View view, int position, long id){
+                selectedRequest = (Request) adapter.getItem(position);
+                int requestIndex = Driver.getInstance().getSearchedRequests().indexOf(selectedRequest);
+                if (requestIndex < 0) {
+                    return;
+                }
+                Intent intent = new Intent(SearchResultsActivity.this, ViewOfferActivity.class);
+                intent.putExtra("requestId", requestIndex);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
