@@ -88,6 +88,9 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
         map.setMultiTouchControls(true);
         map.getOverlays().add(0, mapEventsOverlay);
 
+        Intent intention = getIntent();
+        startOrEnd = intention.getStringExtra("key");
+
         // SET TO CURRENT PHONE LOCATION
         startPoint = new GeoPoint(53.52676, -113.52715);
         IMapController mapController = map.getController();
@@ -133,7 +136,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                             @Override
                             public boolean onMarkerClick(Marker item, MapView map) {
                                 item.showInfoWindow();
-                                //ADD THE RETURN HERE
+
                                 locToSend = new Location(title);
                                 locToSend.setGeoLocation(loc);
                                 return true;

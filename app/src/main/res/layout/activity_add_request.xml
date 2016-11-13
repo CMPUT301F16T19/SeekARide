@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:text="Description" />
+        android:hint="Description" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -25,7 +25,9 @@
         android:layout_below="@+id/add_Description_Text"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/add_Description_Text"
-        android:text="Start Location" />
+        android:hint="Start Location"
+        android:focusableInTouchMode="false"
+        android:clickable="true"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -34,7 +36,9 @@
         android:layout_below="@+id/add_Slocation_Text"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/add_Slocation_Text"
-        android:text="End Location" />
+        android:hint="End Location"
+        android:focusableInTouchMode="false"
+        android:clickable="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,4 +75,14 @@
         android:layout_above="@+id/add_Back_Button"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/add_Back_Button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="$0.00"
+        android:id="@+id/recommendedFareNumber"
+        android:layout_below="@+id/add_Elocation_Text"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
