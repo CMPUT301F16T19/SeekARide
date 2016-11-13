@@ -259,13 +259,29 @@ public class ElasticsearchController {
     // if security is desired, in Request class, protect methods like deleteRequest and setRider with a check like
     // "if requestRider.name != currentUser.name: return"
     // this way drivers will only be allowed to add/remove driver. make sure the driver they are adding or removing = currentDriver.name
-    public static class EditRequestTask extends AsyncTask<UserField, Void, User> {
+    /*public static class EditRequestTask extends AsyncTask<Void, Void, Boolean> {
+
+        private RequestField requestField;
+        private Object editValue;
+
+        public EditRequestTask(RequestField rf, Object ev) {
+            requestField = rf;
+            editValue = ev;
+        }
 
         @Override
-        protected User doInBackground(UserField... params) {
-            return null;
+        protected Boolean doInBackground(Void... params) {
+            verifySettings();
+            Index index = new Index.Builder(request).index("t19seekaride").type("request").build();
+            try {
+                client.execute(index);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return Boolean.TRUE;
         }
-    }
+    }*/
 
     // IMPLEMENTATION UNCLEAR
     public static class DeleteRequestTask extends AsyncTask<UserField, Void, User> {
