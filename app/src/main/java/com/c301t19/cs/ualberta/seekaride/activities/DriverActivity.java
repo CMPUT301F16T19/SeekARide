@@ -47,9 +47,11 @@ public class DriverActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
-        requests = (ListView) findViewById(R.id.result_List);
+        requests = (ListView) findViewById(R.id.rider_Requests);
         adapter = new RequestsAdapter(this,
                 R.layout.request_list_item, Driver.getInstance().getAcceptedRequests(), getLayoutInflater());
+        Log.i("adapter", ((Boolean)(adapter==null)).toString());
+        Log.i("requests", ((Boolean)(requests==null)).toString());
         requests.setAdapter(adapter);
         move();
     }
