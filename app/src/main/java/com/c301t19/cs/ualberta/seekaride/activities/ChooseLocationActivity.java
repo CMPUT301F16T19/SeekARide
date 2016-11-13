@@ -2,6 +2,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.Location;
+import com.google.gson.Gson;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.location.NominatimPOIProvider;
@@ -34,6 +37,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
     private Marker longTapMarker;
     private Drawable poiIcon;
 
+    private Location locToSend;
 
     MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);
 
@@ -51,6 +55,9 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
         if (longTapMarker != null) {
             longTapMarker.remove(map);
         }
+
+        locToSend = new Location("Custom Location");
+        locToSend.setGeoLocation(p);
 
         longTapMarker = new Marker(map);
         longTapMarker.setTitle("Custom Location");
@@ -115,8 +122,10 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
 
                     for (POI poi:pois){
                         Marker poiMarker = new Marker(map);
+                        final String title = poi.mDescription;
                         poiMarker.setTitle(poi.mType);
                         poiMarker.setSnippet(poi.mDescription);
+                        final GeoPoint loc = poi.mLocation;
                         poiMarker.setPosition(poi.mLocation);
                         poiMarker.setIcon(poiIcon);
                         poiMarkers.add(poiMarker);
@@ -125,16 +134,29 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                             public boolean onMarkerClick(Marker item, MapView map) {
                                 item.showInfoWindow();
                                 //ADD THE RETURN HERE
+                                locToSend = new Location(title);
+                                locToSend.setGeoLocation(loc);
                                 return true;
                             }
                         });
                     }
                     map.invalidate();
-
                 }
             }
         });
 
+        Button selectButton = (Button) findViewById(R.id.locationSelectButton);
 
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if (locToSend != null) {
+                    Gson gson = new Gson();
+                    gson.toJson(locToSend);
+                    Intent intent = new Intent(getApplicationContext(), getCallingActivity().getClass());
+                    intent.putExtra("location", gson.toString());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }
