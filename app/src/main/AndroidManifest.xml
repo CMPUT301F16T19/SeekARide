@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".activities.RiderActivity" android:launchMode="singleTask"/>
         <activity android:name=".activities.DriverActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activities.AddRequestActivity" />
+        <activity android:name=".activities.AddRequestActivity" android:launchMode="singleTask"/>
         <activity android:name=".activities.SearchRequestsActivity" />
         <activity
             android:name=".activities.NewAccountActivity"
