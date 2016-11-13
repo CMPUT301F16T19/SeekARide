@@ -38,6 +38,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
     private Drawable poiIcon;
 
     private Location locToSend;
+    private String startOrEnd; // PULL FROM INTENT;
 
     MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);
 
@@ -67,7 +68,6 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
 
         map.invalidate();
 
-        //Toast.makeText(this, "long tap", Toast.LENGTH_LONG).show();
         return false;
     }
 
@@ -153,8 +153,9 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                     Gson gson = new Gson();
                     gson.toJson(locToSend);
                     Intent intent = new Intent(getApplicationContext(), getCallingActivity().getClass());
-                    intent.putExtra("location", gson.toString());
+                    intent.putExtra(startOrEnd, gson.toString());
                     startActivity(intent);
+                    finish();
                 }
             }
         });
