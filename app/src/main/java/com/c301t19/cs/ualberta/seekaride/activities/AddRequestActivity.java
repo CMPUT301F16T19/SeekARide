@@ -49,6 +49,7 @@ public class AddRequestActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(),
                         ChooseLocationActivity.class);
                 intent.putExtra("key", "start");
+                intent.putExtra("callingActivity", "add");
                 startActivityForResult(intent, RESULT_OK);
             }
         });
@@ -87,6 +88,7 @@ public class AddRequestActivity extends Activity {
         Intent intent = getIntent();
         Gson gson = new Gson();
         if(intent.getStringExtra("start") != null) {
+            startLoc = new Location("");
             startLoc = gson.fromJson(intent.getStringExtra("start"), startLoc.getClass());
             Toast.makeText(getApplicationContext(), startLoc.getAddress(),
                     Toast.LENGTH_LONG).show();

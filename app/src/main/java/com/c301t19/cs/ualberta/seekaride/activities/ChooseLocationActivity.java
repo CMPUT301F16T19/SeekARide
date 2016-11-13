@@ -39,6 +39,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
 
     private Location locToSend;
     private String startOrEnd; // PULL FROM INTENT;
+    private String callingActivity;
 
     MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);
 
@@ -89,7 +90,9 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
         map.getOverlays().add(0, mapEventsOverlay);
 
         Intent intention = getIntent();
-        startOrEnd = intention.getStringExtra("key");
+        startOrEnd =  intention.getStringExtra("key");
+        callingActivity = intention.getStringExtra("callingActivity");
+
 
         // SET TO CURRENT PHONE LOCATION
         startPoint = new GeoPoint(53.52676, -113.52715);
@@ -154,9 +157,24 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
             public void onClick(View view) {
                 if (locToSend != null) {
                     Gson gson = new Gson();
-                    gson.toJson(locToSend);
-                    Intent intent = new Intent(getApplicationContext(), getCallingActivity().getClass());
-                    intent.putExtra(startOrEnd, gson.toString());
+                    String send;
+                    send = gson.toJson(locToSend);
+                    Intent intent;
+                    if (callingActivity.equals("add")) {
+                        intent = new Intent(getApplicationContext(), AddRequestActivity.class);
+                    }
+                    else if (callingActivity.equals("edit")) {
+                        intent = new Intent(getApplicationContext(), EditRequestActivity.class);
+                    }
+                    else if (callingActivity.equals("drive")) {
+                        intent = new Intent(getApplicationContext(), SearchRequestsActivity.class);
+                    }
+                    else {
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Toast.makeText(getApplicationContext(), "ChooseLocationActivity intents bugged",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    intent.putExtra(startOrEnd, /*gson.toString()*/ send);
                     startActivity(intent);
                     finish();
                 }
