@@ -61,8 +61,6 @@ public class SearchResultsActivity extends Activity {
                 intent.getStringExtra("radius"));
         adapter = new RequestsAdapter(this,
                 R.layout.request_list_item, Driver.getInstance().getSearchedRequests(), getLayoutInflater());
-        Log.i("results", ((Boolean)(results==null)).toString());
-        Log.i("adapter", ((Boolean)(adapter==null)).toString());
         results.setAdapter(adapter);
         move();
     }
