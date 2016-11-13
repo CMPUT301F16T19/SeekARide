@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".activities.ChooseLocationActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,7 +55,7 @@
             android:name=".activities.RCompleteActivity"
             android:label="@string/title_activity_rcomplete" />
         <activity android:name=".activities.TestingActivity" />
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.ChooseLocationActivity"></activity>
     </application>
 
 </manifest>
