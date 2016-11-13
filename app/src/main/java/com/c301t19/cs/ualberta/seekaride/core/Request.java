@@ -51,7 +51,10 @@ public class Request {
     }
 
     public void driverAccepted(Profile driverProfile) {
+
         acceptedDriverProfiles.add(driverProfile);
+        ElasticsearchController.EditRequestTask editRequestTask = new ElasticsearchController.EditRequestTask();
+        editRequestTask.execute();
     }
 
 //    public void driverUnaccepted(Profile driverName) {

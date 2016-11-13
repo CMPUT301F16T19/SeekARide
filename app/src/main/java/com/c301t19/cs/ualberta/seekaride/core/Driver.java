@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class Driver extends User {
 
     private ArrayList<Request> searchedRequests; //never update it, after we accept a request, until the request ends
+    private ArrayList<Request> acceptedRequests;
     private Request acceptedRequest;
 
     // singleton
@@ -19,6 +20,7 @@ public class Driver extends User {
     private Driver(Profile p) {
         super(p);
         searchedRequests = new ArrayList<Request>();
+        acceptedRequests = new ArrayList<Request>();
         acceptedRequest = null;
     }
     public static void instantiate(Profile p) {
@@ -58,10 +60,10 @@ public class Driver extends User {
         // search requests and store in searchedRequests
     }
 
-    public void acceptRequest(Request testRequest) {
+    public void acceptRequest(Request request) {
         // accept a request and add to acceptedRequests
-        testRequest.driverAccepted(this.getProfile());
-        acceptedRequest = testRequest;
+        request.driverAccepted(getProfile());
+        acceptedRequests.add(request);
     }
 
     public void removeSearchedRequest(int index) {
@@ -70,8 +72,8 @@ public class Driver extends User {
     }
 
 
-    public Request getCurrentRequest() {
-        return acceptedRequest;
+    public ArrayList<Request> getAcceptedRequests() {
+        return acceptedRequests;
     }
 
     public void receivePayment() {

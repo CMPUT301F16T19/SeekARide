@@ -51,6 +51,7 @@ public class ViewOfferActivity extends Activity {
         acceptO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Driver.getInstance().acceptRequest(request);
                 finish();
             }
         });
