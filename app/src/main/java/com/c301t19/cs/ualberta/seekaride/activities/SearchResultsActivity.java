@@ -3,6 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,7 @@ public class SearchResultsActivity extends Activity {
     private RequestsAdapter adapter;
 
     public void move(){
-        Back = (Button) findViewById(R.id.driver_Search_Button);
+        Back = (Button) findViewById(R.id.results_Back_Button);
 
         //moves you back to the Driver screen without doing anything else.
         Back.setOnClickListener(new View.OnClickListener() {
@@ -37,13 +38,15 @@ public class SearchResultsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_results);
         results = (ListView) findViewById(R.id.result_List);
         Intent intent = getIntent();
         Driver.getInstance().searchRequestsByKeyword(intent.getStringExtra("keywords"),
                 intent.getStringExtra("radius"));
         adapter = new RequestsAdapter(this,
                 R.layout.request_list_item, Driver.getInstance().getSearchedRequests(), getLayoutInflater());
-        setContentView(R.layout.activity_search_results);
+        Log.i("results", ((Boolean)(results==null)).toString());
+        Log.i("adapter", ((Boolean)(adapter==null)).toString());
         results.setAdapter(adapter);
         move();
     }
