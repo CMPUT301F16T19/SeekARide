@@ -213,6 +213,8 @@ public class ElasticsearchController {
 
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
+            verifySettings();
+
             return null;
         }
     }
@@ -220,16 +222,36 @@ public class ElasticsearchController {
     // searches for Requests from elasticsearch. pass in array of strings; get array of Results
     public static class SearchRequestsByKeywordTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
-        private ArrayList<String> keywords;
+        private String keywords;
 
-        public SearchRequestsByKeywordTask(ArrayList<String> k) {
+        public SearchRequestsByKeywordTask(String k) {
             super();
             keywords = k;
         }
 
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
-            return null;
+            verifySettings();
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"match\" : {\n" +
+                    "            \"description\" : \"" + keywords + "\"\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+            Search search = new Search.Builder(query)
+                    .addIndex("t19seekaride")
+                    .addType("request")
+                    .build();
+            List<Request> requests = new ArrayList<Request>();
+            try {
+                SearchResult result = client.execute(search);
+                requests = result.getSourceAsObjectList(Request.class);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return (ArrayList<Request>) requests;
         }
     }
 

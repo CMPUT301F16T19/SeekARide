@@ -13,6 +13,8 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
+import java.util.List;
+
 public class SearchResultsActivity extends Activity {
 
     private Button Back;
@@ -35,6 +37,7 @@ public class SearchResultsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        results = (ListView) findViewById(R.id.result_List);
         Intent intent = getIntent();
         Driver.getInstance().searchRequestsByKeyword(intent.getStringExtra("keywords"),
                 intent.getStringExtra("radius"));

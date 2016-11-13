@@ -43,8 +43,8 @@ public class Driver extends User {
         // taken from http://stackoverflow.com/questions/4674850/converting-a-sentence-string-to-a-string-array-of-words-in-java
         // 2016-11-12, 4:53 PM, author helloworld922
         // and from http://stackoverflow.com/questions/157944/create-arraylist-from-array, author Tom
-        ArrayList<String> words = new ArrayList<String>(Arrays.asList(keywords.replace(".", "").replace(",", "").replace("?", "").replace("!","").split(" ")));
-        ElasticsearchController.SearchRequestsByKeywordTask searchTask = new ElasticsearchController.SearchRequestsByKeywordTask(words);
+        //ArrayList<String> words = new ArrayList<String>(Arrays.asList(keywords.replace(".", "").replace(",", "").replace("?", "").replace("!","").split(" ")));
+        ElasticsearchController.SearchRequestsByKeywordTask searchTask = new ElasticsearchController.SearchRequestsByKeywordTask(keywords);
         searchTask.execute();
         try {
             searchedRequests = searchTask.get();
