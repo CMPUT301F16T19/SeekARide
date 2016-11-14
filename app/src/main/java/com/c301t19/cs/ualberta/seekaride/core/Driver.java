@@ -1,7 +1,6 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A Singleton controller class for Driver activities.
@@ -111,13 +110,13 @@ public class Driver extends User {
     }
 
     public void receivePayment() {
-        if(acceptedRequest.isPaid()) {
-            acceptedRequest.driverReceivePayment();
+        if(acceptedRequests.get(0).isPaid()) {
+            acceptedRequests.get(0).driverReceivePayment();
         }
     }
 
-    public boolean isConfirmed() {
-        return acceptedRequest.isRiderConfirmed();
+    public boolean isConfirmed(int index) {
+        return acceptedRequests.get(index).isRiderConfirmed();
     }
 
     /**
