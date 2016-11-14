@@ -21,14 +21,17 @@ public class TestCases extends TestCase {
         super();
     }
 
+    void setUp() {
+        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        Rider.instantiate(userProfile);
+    }
+
     //    Requests
     //
     //    US 01.01.01
     //    As a rider, I want to request rides between two locations.
     @Test
     public void testRequest1(){
-        Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
-        Rider rider = new Rider(userProfile);
         Location startPoint = new Location("111st");
         Location destination = new Location("112st");
         float price = 998;

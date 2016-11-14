@@ -23,12 +23,12 @@ public class NewAccountActivity extends Activity {
 
     //sets up the text boxes and lets you fill them in.
     public void write() {
-        username = (TextView) findViewById(R.id.edit_User_Text);
-        password = (TextView) findViewById(R.id.edit_Password_Text);
-        cPassword = (TextView) findViewById(R.id.edit_ConfirmP_Text);
-        phoneNumber = (TextView) findViewById(R.id.edit_Phone_Text);
-        email = (TextView) findViewById(R.id.edit_Email_Text);
-        car = (TextView) findViewById(R.id.edit_Car_Text);
+        username = (TextView) findViewById(R.id.new_Username_Text);
+        password = (TextView) findViewById(R.id.new_Password_Text);
+        cPassword = (TextView) findViewById(R.id.new_ConfirmP_Text);
+        phoneNumber = (TextView) findViewById(R.id.new_Phone_Text);
+        email = (TextView) findViewById(R.id.new_Email_Text);
+        car = (TextView) findViewById(R.id.new_Car_Text);
 
         //the cariables aren't actually passed anywhere yet.
         String usernameText = username.getText().toString();
@@ -40,7 +40,7 @@ public class NewAccountActivity extends Activity {
 
     }
     public void move(){
-        createA = (Button) findViewById(R.id.newA_Button);
+        createA = (Button) findViewById(R.id.newA_Account_Button);
         cancelA = (Button) findViewById(R.id.newA_Cancel_Button);
 
         //Creates an account, moves you to the main screen

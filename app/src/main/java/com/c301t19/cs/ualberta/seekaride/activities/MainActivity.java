@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.LoginController;
@@ -14,12 +15,25 @@ public class MainActivity extends Activity {
 
     EditText username;
     LoginController loginController;
+    Button newAccount;
 
+    public void move() {
+        newAccount = (Button) findViewById(R.id.newA_Button);
+        //Moves you to the search for requests screen.
+        newAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Nswitch = new Intent(MainActivity.this, NewAccountActivity.class);
+                startActivity(Nswitch);
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         username = (EditText) findViewById(R.id.username_Text);
+        move();
         loginController = new LoginController();
     }
 

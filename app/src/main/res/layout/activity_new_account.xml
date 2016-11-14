@@ -27,7 +27,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/confirm_Password_Text"
+        android:id="@+id/new_ConfirmP_Text"
         android:layout_below="@+id/new_Password_Text"
         android:text="Confirm Password"
         android:layout_alignParentStart="true"
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Account"
-        android:id="@+id/create_Account_Button"
+        android:id="@+id/newA_Account_Button"
         android:layout_above="@+id/newA_Cancel_Button"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/newA_Cancel_Button" />

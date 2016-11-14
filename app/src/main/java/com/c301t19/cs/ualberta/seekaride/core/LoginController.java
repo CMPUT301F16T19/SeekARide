@@ -26,11 +26,12 @@ public class LoginController {
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
                 ElasticsearchController.UserField.NAME, username);
         getUserTask.execute();
+        Profile profile;
         try {
-            Profile profile = getUserTask.get();
+            profile = getUserTask.get();
             if (profile == null) {
-                Profile newProfile = new Profile(username, "PHONE", "EMAIL");
-                ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(newProfile);
+                profile = new Profile(username, "PHONE", "EMAIL");
+                ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(profile);
                 addUserTask.execute();
             }
             Rider.instantiate(profile);

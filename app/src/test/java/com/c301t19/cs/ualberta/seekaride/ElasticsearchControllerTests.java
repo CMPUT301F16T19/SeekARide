@@ -11,7 +11,7 @@ import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 
 import java.util.ArrayList;
-
+/*
 public class ElasticsearchControllerTests extends ActivityInstrumentationTestCase2 {
 
     Profile riderProfile;
@@ -134,3 +134,4 @@ public class ElasticsearchControllerTests extends ActivityInstrumentationTestCas
 
     }
 }
+*/
