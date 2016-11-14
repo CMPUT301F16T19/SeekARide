@@ -27,6 +27,8 @@ public class Rider extends User {
     */
 
     /**
+     * Gets instance.
+     *
      * @return the instance of Rider.
      */
     public static Rider getInstance() {
@@ -36,6 +38,7 @@ public class Rider extends User {
     /**
      * Creates an instance of Rider using a user's Profile. Meant to be called during login.
      * Must be called before other Rider methods are used.
+     *
      * @param p The user's profile.
      */
     public static void instantiate(Profile p) {
@@ -45,7 +48,9 @@ public class Rider extends User {
     /**
      * Get one of the Rider's open Requests at the given index.
      * Issues: may need to change index parameter to the Request itself
+     *
      * @param index The request's position in openRequests.
+     * @return the request
      */
     public Request getRequest(int index) {
         return openRequests.get(index);
@@ -53,10 +58,11 @@ public class Rider extends User {
 
     /**
      * Makes a new Request and sends it to the database.
+     *
      * @param description User-entered description of the Request.
-     * @param startPoint User-selected starting Location.
+     * @param startPoint  User-selected starting Location.
      * @param destination User-selected ending Location.
-     * @param price User-entered price.
+     * @param price       User-entered price.
      * @return The Request just made.
      */
     public Request makeRequest(String description, Location startPoint, Location destination, double price) {
@@ -72,6 +78,7 @@ public class Rider extends User {
     /**
      * Remove one of the User's open Requests.
      * Issues: may need to change index parameter to the Request itself
+     *
      * @param index The request's position in openRequests.
      */
     public void deleteRequest(int index) {
@@ -80,13 +87,19 @@ public class Rider extends User {
 
     /**
      * Accept a Driver's offer.
-     * @param indexR
-     * @param indexD
+     *
+     * @param indexR the index r
+     * @param indexD the index d
      */
     public void acceptDriverOffer(int indexR, int indexD) {
         openRequests.get(indexR).riderAccept(indexD);
     }
 
+    /**
+     * Make payment.
+     *
+     * @param indexR the index r
+     */
     public void makePayment(int indexR) {
         openRequests.get(indexR).riderPay();
     }
@@ -118,6 +131,7 @@ public class Rider extends User {
 
     /**
      * Check if the Rider has any open Requests.
+     *
      * @return true if the Rider has open Requests.
      */
     public boolean hasRequests() {
@@ -131,6 +145,7 @@ public class Rider extends User {
     /**
      * Complete a request.
      * Issues: may need to change index parameter to the Request itself
+     *
      * @param index The request's position in openRequests.
      */
     public void completeRequest(int index) {
@@ -139,6 +154,7 @@ public class Rider extends User {
 
     /**
      * Get the list of open Requests.
+     *
      * @return ArrayList of open Requests.
      */
     public ArrayList<Request> getOpenRequests() {

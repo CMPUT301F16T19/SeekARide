@@ -20,7 +20,7 @@ import io.searchbox.core.SearchResult;
 
 /**
  * Allows asynchronous interaction with the Elasticsearch database.
- *
+ * <p/>
  * Issues: this class does a lot. It may need to be broken down later.
  */
 public class ElasticsearchController {
@@ -28,12 +28,41 @@ public class ElasticsearchController {
     /**
      * Indicates a field in a user's Profile for search tasks.
      */
-    public enum UserField { NAME, EMAIL, PHONE }
+    public enum UserField {
+        /**
+         * Name user field.
+         */
+        NAME, /**
+         * Email user field.
+         */
+        EMAIL, /**
+         * Phone user field.
+         */
+        PHONE }
 
     /**
      * Indicates a field in a Request for search tasks.
      */
-    public enum RequestField { DESCRIPTION, START, END, DATE, RIDERID, DRIVERS }
+    public enum RequestField {
+        /**
+         * Description request field.
+         */
+        DESCRIPTION, /**
+         * Start request field.
+         */
+        START, /**
+         * End request field.
+         */
+        END, /**
+         * Date request field.
+         */
+        DATE, /**
+         * Riderid request field.
+         */
+        RIDERID, /**
+         * Drivers request field.
+         */
+        DRIVERS }
 
     private static JestDroidClient client;
 
@@ -44,6 +73,11 @@ public class ElasticsearchController {
 
         private Profile user;
 
+        /**
+         * Instantiates a new Add user task.
+         *
+         * @param u the u
+         */
         public AddUserTask(Profile u) {
             super();
             user = u;
@@ -86,7 +120,7 @@ public class ElasticsearchController {
 
     /**
      * Retrieves a Profile from Elasticsearch.
-     *
+     * <p/>
      * Issues: Currently only allows you to search by username.
      */
     public static class GetUserTask extends AsyncTask<Void, Void, Profile> {
@@ -94,6 +128,12 @@ public class ElasticsearchController {
         private UserField userField;
         private String keyword;
 
+        /**
+         * Instantiates a new Get user task.
+         *
+         * @param uf the uf
+         * @param k  the k
+         */
         public GetUserTask(UserField uf, String k) {
             super();
             userField = uf;
@@ -133,12 +173,21 @@ public class ElasticsearchController {
         }
     }
 
-    // edit a User. pass in the field you want to edit and the new value. return true on success
+    /**
+     * The type Edit user task.
+     */
+// edit a User. pass in the field you want to edit and the new value. return true on success
     public static class EditUserTask extends AsyncTask<Void, Void, Boolean> {
 
         private UserField userField;
         private String newValue;
 
+        /**
+         * Instantiates a new Edit user task.
+         *
+         * @param uf the uf
+         * @param nv the nv
+         */
         public EditUserTask(UserField uf, String nv) {
             super();
             userField = uf;
@@ -158,6 +207,11 @@ public class ElasticsearchController {
 
         private Request request;
 
+        /**
+         * Instantiates a new Add request task.
+         *
+         * @param r the r
+         */
         public AddRequestTask(Request r) {
             super();
             request = r;
@@ -179,7 +233,7 @@ public class ElasticsearchController {
 
     /**
      * Retrieves an ArrayList of Requests from Elasticsearch.
-     *
+     * <p/>
      * Issues: Currently only allows you to search by the Rider's id.
      */
     public static class GetRequestsTask extends AsyncTask<Void, Void, ArrayList<Request>> {
@@ -187,6 +241,12 @@ public class ElasticsearchController {
         private RequestField requestField;
         private String keyword;
 
+        /**
+         * Instantiates a new Get requests task.
+         *
+         * @param rf the rf
+         * @param k  the k
+         */
         public GetRequestsTask(RequestField rf, String k) {
             super();
             requestField = rf;
@@ -219,11 +279,20 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * The type Search requests by location task.
+     */
     public static class SearchRequestsByLocationTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
         private Location location;
         private int radius;
 
+        /**
+         * Instantiates a new Search requests by location task.
+         *
+         * @param l the l
+         * @param r the r
+         */
         public SearchRequestsByLocationTask(Location l, int r) {
             super();
             location = l;
@@ -240,13 +309,18 @@ public class ElasticsearchController {
 
     /**
      * Retrieves an ArrayList of Requests from Elasticsearch.
-     *
+     * <p/>
      * Issues: Currently only allows you to search by keyword, which only targets a request's description.
      */
     public static class SearchRequestsByKeywordTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
         private String keywords;
 
+        /**
+         * Instantiates a new Search requests by keyword task.
+         *
+         * @param k the k
+         */
         public SearchRequestsByKeywordTask(String k) {
             super();
             keywords = k;
@@ -306,7 +380,10 @@ public class ElasticsearchController {
         }
     }*/
 
-    // IMPLEMENTATION UNCLEAR
+    /**
+     * The type Delete request task.
+     */
+// IMPLEMENTATION UNCLEAR
     public static class DeleteRequestTask extends AsyncTask<UserField, Void, User> {
 
         @Override

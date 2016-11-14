@@ -35,6 +35,8 @@ public class Driver extends User {
     }*/
 
     /**
+     * Gets instance.
+     *
      * @return the instance of Driver.
      */
     public static Driver getInstance() {
@@ -44,6 +46,7 @@ public class Driver extends User {
     /**
      * Creates an instance of Driver using a user's Profile. Meant to be called during login.
      * Must be called before other Driver methods are used.
+     *
      * @param p The user's profile.
      */
     public static void instantiate(Profile p) {
@@ -53,8 +56,9 @@ public class Driver extends User {
     /**
      * Searches the database for Requests and stores them in searchedRequests.
      * Issues: Still need to implement a search radius.
+     *
      * @param keywords The user-entered string of keywords.
-     * @param radius The user-entered search radius.
+     * @param radius   The user-entered search radius.
      */
     public void searchRequestsByKeyword(String keywords, String radius) {
         // search requests and store in searchedRequests
@@ -74,8 +78,9 @@ public class Driver extends User {
 
     /**
      * To be implemented.
-     * @param location
-     * @param radius
+     *
+     * @param location the location
+     * @param radius   the radius
      */
     public void searchRequestsByLocation(Location location, String radius) {
         // search requests and store in searchedRequests
@@ -83,6 +88,7 @@ public class Driver extends User {
 
     /**
      * Allows the Driver to accept a Request and add it to acceptedRequests.
+     *
      * @param request The Request to be accepted.
      */
     public void acceptRequest(Request request) {
@@ -94,6 +100,7 @@ public class Driver extends User {
     /**
      * Allows the Driver to decline a Request they previously accepted and remove it from acceptedRequests.
      * Issues: may need to change index parameter to the Request itself
+     *
      * @param index The request's position in acceptedRequests.
      */
     public void removeAcceptedRequest(int index) {
@@ -104,24 +111,34 @@ public class Driver extends User {
 
     /**
      * Get the list of accepted Requests.
+     *
      * @return ArrayList of accepted Requests.
      */
     public ArrayList<Request> getAcceptedRequests() {
         return acceptedRequests;
     }
 
+    /**
+     * Receive payment.
+     */
     public void receivePayment() {
         if(acceptedRequest.isPaid()) {
             acceptedRequest.driverReceivePayment();
         }
     }
 
+    /**
+     * Is confirmed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isConfirmed() {
         return acceptedRequest.isRiderConfirmed();
     }
 
     /**
      * Get the current list of search results.
+     *
      * @return ArrayList of searched Requests.
      */
     public ArrayList<Request> getSearchedRequests() {

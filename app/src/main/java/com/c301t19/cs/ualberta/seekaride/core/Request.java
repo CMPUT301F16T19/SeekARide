@@ -30,6 +30,16 @@ public class Request {
     private Profile driverProfile;
     private Profile riderProfile;
 
+    /**
+     * Instantiates a new Request.
+     *
+     * @param descrip      the descrip
+     * @param st           the st
+     * @param dest         the dest
+     * @param pr           the pr
+     * @param riderProfile the rider profile
+     * @param riderId      the rider id
+     */
     public Request(String descrip, Location st, Location dest,
                     double pr,Profile riderProfile, String riderId) {
         requestTime = new Date();
@@ -50,6 +60,11 @@ public class Request {
         this.riderId = riderId;
     }
 
+    /**
+     * Driver accepted.
+     *
+     * @param driverProfile the driver profile
+     */
     public void driverAccepted(Profile driverProfile) {
 
         acceptedDriverProfiles.add(driverProfile);
@@ -61,75 +76,159 @@ public class Request {
 //        acceptedDriverProfile.remove(driverName);
 //    }
 
+    /**
+     * Rider accepted.
+     *
+     * @param driverName the driver name
+     */
     public void riderAccepted(String driverName) {
         
     }
 
+    /**
+     * Is waiting for driver boolean.
+     *
+     * @return the boolean
+     */
     public boolean isWaitingForDriver(){return waitingForDriver;}
 
+    /**
+     * Gets request time.
+     *
+     * @return the request time
+     */
     public Date getRequestTime() {
         return requestTime;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets start.
+     *
+     * @return the start
+     */
     public Location getStart() {
         return start;
     }
 
+    /**
+     * Gets destination.
+     *
+     * @return the destination
+     */
     public Location getDestination() {
         return destination;
     }
 
+    /**
+     * Gets rider profile.
+     *
+     * @return the rider profile
+     */
     public Profile getRiderProfile() {
         return riderProfile;
     }
 
+    /**
+     * Gets accepted driver profiles.
+     *
+     * @return the accepted driver profiles
+     */
     public ArrayList<Profile> getAcceptedDriverProfiles() {
         return acceptedDriverProfiles;
     }
 
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
     public double getPrice() {
         return price;
     }
 
 
+    /**
+     * Complete.
+     */
     public void complete() {
         completion = true;
     }
 
 
+    /**
+     * Is completed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isCompleted() {
         return completion;
     }
 
+    /**
+     * Rider accept.
+     *
+     * @param index the index
+     */
     public void riderAccept(int index) {
         waitingForDriver = false;
         driverProfile = acceptedDriverProfiles.get(index);
     }
 
+    /**
+     * Gets driver profile.
+     *
+     * @return the driver profile
+     */
     public Profile getDriverProfile() {
         return driverProfile;
     }
 
+    /**
+     * Rider pay.
+     */
     public void riderPay() {
         riderPaid = true;
     }
 
+    /**
+     * Is paid boolean.
+     *
+     * @return the boolean
+     */
     public boolean isPaid(){
         return riderPaid;
     }
 
+    /**
+     * Is got payment boolean.
+     *
+     * @return the boolean
+     */
     public boolean isGotPayment(){
         return driverIsPaid;
     }
 
+    /**
+     * Driver receive payment.
+     */
     public void driverReceivePayment() {
         driverIsPaid = true;
     }
 
+    /**
+     * Is rider confirmed boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRiderConfirmed() {
         if (driverProfile == null){
             return false;
@@ -138,6 +237,11 @@ public class Request {
         }
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() { return id; }
 
     @Override
