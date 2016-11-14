@@ -35,7 +35,7 @@ public class AddRequestActivity extends Activity {
     private EditText description;
     private EditText sLocation;
     private EditText eLocation;
-    private TextView fare;
+    private EditText fare;
     private TextView recommendedFare;
     private Location startLoc;
     private Location endLoc;
@@ -49,7 +49,7 @@ public class AddRequestActivity extends Activity {
         description = (EditText) findViewById(R.id.add_Description_Text);
         sLocation = (EditText) findViewById(R.id.add_Slocation_Text);
         eLocation = (EditText) findViewById(R.id.add_Elocation_Text);
-        fare = (TextView) findViewById(R.id.add_Fare_Text);
+        fare = (EditText) findViewById(R.id.add_Fare_Text);
         recommendedFare = (TextView) findViewById(R.id.recommendedFareNumber);
 
         descriptText = description.getText().toString();
@@ -91,9 +91,27 @@ public class AddRequestActivity extends Activity {
                 Intent Cswitch = new Intent(AddRequestActivity.this, RiderActivity.class);
                 startActivity(Cswitch);
                 */
-                write();
-                Rider.getInstance().makeRequest(descriptText, new Location(""), new Location(""), 0);
-                finish();
+                if (startLoc == null) {
+                    Toast.makeText(getApplicationContext(), "Please fill in " +
+                            "start location",
+                            Toast.LENGTH_LONG).show();
+                }
+                if (endLoc == null) {
+                    Toast.makeText(getApplicationContext(), "Please fill in " +
+                                    "destination location",
+                            Toast.LENGTH_LONG).show();
+                }
+                if (fare.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please fill in " +
+                                    "request fare",
+                            Toast.LENGTH_LONG).show();
+                }
+                if ((startLoc != null) & (endLoc != null) &
+                        (fare.getText().toString().isEmpty() == false)) {
+                    write();
+                    Rider.getInstance().makeRequest(descriptText, startLoc, endLoc, 0);
+                    finish();
+                }
             }
         });
         //moves you back to the initial rider screen without creating a request.

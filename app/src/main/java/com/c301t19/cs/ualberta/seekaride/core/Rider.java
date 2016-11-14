@@ -36,7 +36,7 @@ public class Rider extends User {
         return openRequests.get(index);
     }
 
-    public Request makeRequest(String description, Location startPoint, Location destination, float price) {
+    public Request makeRequest(String description, Location startPoint, Location destination, double price) {
         // make a request and add it to openRequests
         // send request to Elasticsearch
         Request q = new Request(description, startPoint, destination,price,this.getProfile(),getProfile().getId());

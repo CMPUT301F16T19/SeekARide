@@ -54,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/add_Fare_Text"
+        android:hint="Request Fare"
         android:layout_below="@+id/add_RecFare_Text"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/add_RecFare_Text" />
