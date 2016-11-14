@@ -3,80 +3,37 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
-import com.c301t19.cs.ualberta.seekaride.core.Driver;
-import com.c301t19.cs.ualberta.seekaride.core.Request;
 
-public class DriverActivity extends Activity {
-
-    private Button search;
-    private ListView requests;
-    private RequestsAdapter adapter;
-    private Request selectedRequest;
-
-    public void move(){
-        search = (Button) findViewById(R.id.driver_Search_Button);
-        requests = (ListView) findViewById(R.id.rider_Requests);
-        //Moves you to the search for requests screen.
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Nswitch = new Intent(DriverActivity.this, SearchRequestsActivity.class);
-                startActivity(Nswitch);
-            }
-        });
-        //Choose a request from the list to see more details about it.
-        requests.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick (AdapterView<?> parent, View view, int position, long id){
-                selectedRequest = (Request) requests.getItemAtPosition(position);
-            }
-        });
-
-    }
+public class DriverActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
-        requests = (ListView) findViewById(R.id.rider_Requests);
-        adapter = new RequestsAdapter(this,
-                R.layout.request_list_item, Driver.getInstance().getAcceptedRequests(), getLayoutInflater());
-        Log.i("adapter", ((Boolean)(adapter==null)).toString());
-        Log.i("requests", ((Boolean)(requests==null)).toString());
-        requests.setAdapter(adapter);
-        move();
+
+        Button searchReq = (Button)findViewById(R.id.driver_Search_Button);
+        searchReq.setOnClickListener(this);
     }
 
     @Override
-    // dropdown menu
-    public boolean onCreateOptionsMenu(Menu m) {
-        getMenuInflater().inflate(R.menu.main, m);
-        return true;
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.driver_Search_Button:
+                Intent intent = new Intent(this, SearchRequestsActivity.class);
+                startActivityForResult(intent, 0);
+                break;
+            default:
+                break;
+        }
     }
 
-    // dropdown menu
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.mainMenuDriver:
-                return false;
-            case R.id.mainMenuRider:
-                startActivity(new Intent(this, RiderActivity.class));
-                return true;
-            case R.id.mainMenuProfile:
-                startActivity(new Intent(this, ViewProfileActivity.class));
-                return true;
-            default:
-                return false;
-            //return super.onOptionsItemSelected(item);
-        }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

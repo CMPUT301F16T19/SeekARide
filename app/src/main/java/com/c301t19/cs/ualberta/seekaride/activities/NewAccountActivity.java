@@ -7,66 +7,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
-public class NewAccountActivity extends Activity {
-    public Button createA;
-    public Button cancelA;
-    private TextView username;
-    private TextView password;
-    private TextView cPassword;
-    private TextView phoneNumber;
-    private TextView email;
-    private TextView car;
+public class NewAccountActivity extends Activity implements View.OnClickListener {
 
-    //sets up the text boxes and lets you fill them in.
-    public void write() {
-        username = (TextView) findViewById(R.id.edit_User_Text);
-        password = (TextView) findViewById(R.id.edit_Password_Text);
-        cPassword = (TextView) findViewById(R.id.edit_ConfirmP_Text);
-        phoneNumber = (TextView) findViewById(R.id.edit_Phone_Text);
-        email = (TextView) findViewById(R.id.edit_Email_Text);
-        car = (TextView) findViewById(R.id.edit_Car_Text);
+    private EditText userName;
+    private EditText passWord;
+    private EditText confirm;
+    private EditText phoneNum;
+    private EditText email;
+    private EditText carType;
 
-        //the cariables aren't actually passed anywhere yet.
-        String usernameText = username.getText().toString();
-        String passwordText = password.getText().toString();
-        String confirmPassword = cPassword.getText().toString();
-        String phoneNumberText = phoneNumber.getText().toString();
-        String emailText = email.getText().toString();
-        String carText = car.getText().toString();
-
-    }
-    public void move(){
-        createA = (Button) findViewById(R.id.newA_Button);
-        cancelA = (Button) findViewById(R.id.newA_Cancel_Button);
-
-        //Creates an account, moves you to the main screen
-        createA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Nswitch = new Intent(NewAccountActivity.this, MainActivity.class);
-                startActivity(Nswitch);
-            }
-        });
-        //moves you to the main screen without making an account.
-        cancelA.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent Cswitch = new Intent(NewAccountActivity.this, MainActivity.class);
-                startActivity(Cswitch);
-            }
-        });
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-        write();
-        move();
+
+        userName = (EditText)findViewById(R.id.new_Username_Text);
+        passWord = (EditText)findViewById(R.id.new_Password_Text);
+        confirm = (EditText)findViewById(R.id.confirm_Password_Text);
+        phoneNum = (EditText)findViewById(R.id.new_Phone_Text);
+        email = (EditText)findViewById(R.id.new_Email_Text);
+        carType = (EditText)findViewById(R.id.new_Car_Text);
+
+        Button newAccount = (Button)findViewById(R.id.create_Account_Button);
+        newAccount.setOnClickListener(this);
     }
 
     @Override
@@ -89,5 +56,31 @@ public class NewAccountActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.create_Account_Button:
+                Intent intent = new Intent();
+                if(passWord.getText()==confirm.getText()){
+                    String uid = userName.getText().toString();
+                    String password = passWord.getText().toString();
+                    String phone = phoneNum.getText().toString();
+                    String emaill = email.getText().toString();
+                    String car = carType.getText().toString();
+
+                    intent.putExtra("uid", uid);
+                    intent.putExtra("password", password);
+                    intent.putExtra("phone", phone);
+                    intent.putExtra("email", emaill);
+                    intent.putExtra("car", car);
+                    setResult(4, intent);
+                }
+                finish();
+            default:
+                break;
+
+        }
     }
 }

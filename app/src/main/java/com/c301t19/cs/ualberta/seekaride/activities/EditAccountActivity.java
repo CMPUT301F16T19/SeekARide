@@ -7,66 +7,35 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
-public class EditAccountActivity extends Activity {
-    public Button Save;
-    public Button Cancel;
-    private TextView username;
-    private TextView password;
-    private TextView cPassword;
-    private TextView phoneNumber;
-    private TextView email;
-    private TextView car;
+public class EditAccountActivity extends Activity implements View.OnClickListener {
 
-    //sets up the text boxes and lets you fill them in.
-    public void write() {
-        username = (TextView) findViewById(R.id.edit_User_Text);
-        password = (TextView) findViewById(R.id.edit_Password_Text);
-        cPassword = (TextView) findViewById(R.id.edit_ConfirmP_Text);
-        phoneNumber = (TextView) findViewById(R.id.edit_Phone_Text);
-        email = (TextView) findViewById(R.id.edit_Email_Text);
-        car = (TextView) findViewById(R.id.edit_Car_Text);
+    private EditText userName;
+    private EditText passWord;
+    private EditText confirm;
+    private EditText phoneNum;
+    private EditText email;
+    private EditText carType;
 
-        //the cariables aren't actually passed anywhere yet.
-        String usernameText = username.getText().toString();
-        String passwordText = password.getText().toString();
-        String confirmPassword = cPassword.getText().toString();
-        String phoneNumberText = phoneNumber.getText().toString();
-        String emailText = email.getText().toString();
-        String carText = car.getText().toString();
-
-    }
-    public void move(){
-        Save = (Button) findViewById(R.id.edit_Changes_Button);
-        Cancel = (Button) findViewById(R.id.edit_Cancel_Button);
-
-        //saves your changes and moves you back to the view profile screen.
-        Save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Sswitch = new Intent(EditAccountActivity.this, ViewProfileActivity.class);
-                startActivity(Sswitch);
-            }
-        });
-        //just moves you back to the view profile screen.
-        Cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent CSwitch = new Intent(EditAccountActivity.this, ViewProfileActivity.class);
-                startActivity(CSwitch);
-            }
-        });
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
-        write();
-        move();
 
+        userName = (EditText)findViewById(R.id.edit_User_Text);
+        passWord = (EditText)findViewById(R.id.edit_Password_Text);
+        confirm = (EditText)findViewById(R.id.edit_ConfirmP_Text);
+        phoneNum = (EditText)findViewById(R.id.view_Phone_Text);
+        email = (EditText)findViewById(R.id.view_Email_Text);
+        carType = (EditText)findViewById(R.id.view_Car_Text);
+
+        Button saveChange = (Button)findViewById(R.id.edit_Changes_Button);
+        saveChange.setOnClickListener(this);
+        Button cancel = (Button)findViewById(R.id.edit_Cancel_Button);
+        cancel.setOnClickListener(this);
     }
 
     @Override
@@ -89,5 +58,34 @@ public class EditAccountActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.edit_Cancel_Button:
+                finish();
+                break;
+            case R.id.edit_Changes_Button:
+                Intent intent = new Intent();
+                if(passWord.getText()==confirm.getText()){
+                    String uid = userName.getText().toString();
+                    String password = passWord.getText().toString();
+                    String phone = phoneNum.getText().toString();
+                    String emaill = email.getText().toString();
+                    String car = carType.getText().toString();
+
+                    intent.putExtra("uid", uid);
+                    intent.putExtra("password", password);
+                    intent.putExtra("phone", phone);
+                    intent.putExtra("email", emaill);
+                    intent.putExtra("car", car);
+                    setResult(6, intent);
+                }
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 }
