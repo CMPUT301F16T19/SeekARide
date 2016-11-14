@@ -23,6 +23,7 @@ public class SearchRequestsActivity extends Activity {
     private Button search;
     private EditText keywords;
     private EditText radius;
+    private EditText startLoc;
     private MapView map;
 
     private Location keyLoc;
@@ -35,11 +36,12 @@ public class SearchRequestsActivity extends Activity {
         keywords = (EditText) findViewById(R.id.search_Keywords_Text);
         radius = (EditText) findViewById(R.id.search_Radius_Text);
 
+        startLoc = (EditText) findViewById(R.id.starting_location);
         //we don't always need keywords, so what should we do to handle cases when it isn't used?
-        //keywordsText = keywords.getText().toString();
+        keywordsText = keywords.getText().toString();
         radiusText = radius.getText().toString();
 
-        keywords.setOnClickListener(new View.OnClickListener() {
+        startLoc.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),
                         ChooseLocationActivity.class);
@@ -85,6 +87,7 @@ public class SearchRequestsActivity extends Activity {
         mapController.setCenter(startPoint);
 
         getLocation();
+
     }
 
     @Override
@@ -107,7 +110,7 @@ public class SearchRequestsActivity extends Activity {
             keywords.setText("");
         }
         if (keyLoc != null) {
-            keywords.setText(keyLoc.getAddress());
+            startLoc.setText(keyLoc.getAddress());
             Marker locMarker = new Marker(map);
             locMarker.setPosition(keyLoc.getGeoLocation());
             locMarker.setTitle(keyLoc.getAddress());

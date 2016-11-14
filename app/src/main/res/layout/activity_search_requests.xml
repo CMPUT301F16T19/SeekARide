@@ -14,9 +14,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/search_Keywords_Text"
         android:layout_alignParentTop="true"
-        android:hint="Starting Location"
+        android:hint="Keywords"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_alignEnd="@+id/search_Keywords_Text"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/search_Keywords_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/starting_location"
+        android:hint="or Starting Location"
         android:clickable="true"
         android:focusableInTouchMode="false" />
 
@@ -42,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Map"
-        android:layout_below="@+id/search_Keywords_Text"
+        android:layout_below="@+id/starting_location"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/search_Radius_Text" />
 
