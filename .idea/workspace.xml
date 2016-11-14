@@ -56,13 +56,13 @@
       <file leaf-file-name="AddRequestActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/AddRequestActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.9592593">
-              <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.4722222">
+              <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
               <folding>
-                <element signature="e#3296#4634#0" expanded="true" />
-                <element signature="e#4633#4634#0" expanded="true" />
-                <element signature="e#4750#5060#0" expanded="true" />
-                <element signature="e#5059#5060#0" expanded="true" />
+                <element signature="e#3296#4743#0" expanded="true" />
+                <element signature="e#4742#4743#0" expanded="true" />
+                <element signature="e#4859#5169#0" expanded="true" />
+                <element signature="e#5168#5169#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2337,13 +2337,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/AddRequestActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.9592593">
-          <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.4722222">
+          <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
           <folding>
-            <element signature="e#3296#4634#0" expanded="true" />
-            <element signature="e#4633#4634#0" expanded="true" />
-            <element signature="e#4750#5060#0" expanded="true" />
-            <element signature="e#5059#5060#0" expanded="true" />
+            <element signature="e#3296#4743#0" expanded="true" />
+            <element signature="e#4742#4743#0" expanded="true" />
+            <element signature="e#4859#5169#0" expanded="true" />
+            <element signature="e#5168#5169#0" expanded="true" />
           </folding>
         </state>
       </provider>

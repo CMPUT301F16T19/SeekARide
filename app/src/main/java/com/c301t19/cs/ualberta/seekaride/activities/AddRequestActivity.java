@@ -109,7 +109,9 @@ public class AddRequestActivity extends Activity {
                 if ((startLoc != null) & (endLoc != null) &
                         (fare.getText().toString().isEmpty() == false)) {
                     write();
-                    Rider.getInstance().makeRequest(descriptText, startLoc, endLoc, 0);
+                    Rider.getInstance().makeRequest(descriptText, startLoc,
+                            endLoc, Double.parseDouble(
+                                    fare.getText().toString()));
                     finish();
                 }
             }
