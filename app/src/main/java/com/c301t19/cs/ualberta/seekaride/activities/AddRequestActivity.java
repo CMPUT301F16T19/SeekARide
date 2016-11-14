@@ -25,6 +25,7 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class AddRequestActivity extends Activity {
@@ -162,7 +163,6 @@ public class AddRequestActivity extends Activity {
             recommendedFare.setText(calculateFare(startLoc, endLoc));
             map.getOverlays().add(roadOverlay);
         }
-
         map.invalidate();
     }
 
@@ -172,7 +172,10 @@ public class AddRequestActivity extends Activity {
         float distanceInMeters = geo1.distanceTo(geo2);
         float distanceInKm = distanceInMeters/1000;
         double costPerKm = 1.48;
-        return String.valueOf(distanceInKm * costPerKm);
+        //http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
+        DecimalFormat dFormat = new DecimalFormat("#.##");
+        double cost = (double) distanceInKm * costPerKm;
+        return ("$" + dFormat.format(cost));
     }
 
     @Override
