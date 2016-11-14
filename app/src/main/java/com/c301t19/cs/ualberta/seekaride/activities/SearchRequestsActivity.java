@@ -8,11 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.Location;
+import com.google.gson.Gson;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 
 import io.searchbox.core.Search;
 
@@ -20,7 +23,9 @@ public class SearchRequestsActivity extends Activity {
     private Button search;
     private EditText keywords;
     private EditText radius;
+    private MapView map;
 
+    private Location keyLoc;
     private GeoPoint startPoint;
     String keywordsText;
     String radiusText;
@@ -31,8 +36,18 @@ public class SearchRequestsActivity extends Activity {
         radius = (EditText) findViewById(R.id.search_Radius_Text);
 
         //we don't always need keywords, so what should we do to handle cases when it isn't used?
-        keywordsText = keywords.getText().toString();
+        //keywordsText = keywords.getText().toString();
         radiusText = radius.getText().toString();
+
+        keywords.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),
+                        ChooseLocationActivity.class);
+                intent.putExtra("key", "keyword");
+                intent.putExtra("callingActivity", "drive");
+                startActivityForResult(intent, RESULT_OK);
+            }
+        });
     }
 
     public void move(){
@@ -58,7 +73,7 @@ public class SearchRequestsActivity extends Activity {
         write();
         move();
 
-        MapView map = (MapView) findViewById(R.id.Map);
+        map = (MapView) findViewById(R.id.Map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
@@ -69,5 +84,36 @@ public class SearchRequestsActivity extends Activity {
         mapController.setZoom(9);
         mapController.setCenter(startPoint);
 
+        getLocation();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        getLocation();
+    }
+
+    public void getLocation() {
+        Intent intent = getIntent();
+        Gson gson = new Gson();
+
+        map.getOverlays().clear();
+        if (intent.getStringExtra("keyword") != null) {
+            keyLoc = new Location("");
+            keyLoc = gson.fromJson(intent.getStringExtra("keyword"), keyLoc.getClass());
+        }
+        if (keyLoc == null) {
+            keywords.setText("");
+        }
+        if (keyLoc != null) {
+            keywords.setText(keyLoc.getAddress());
+            Marker locMarker = new Marker(map);
+            locMarker.setPosition(keyLoc.getGeoLocation());
+            locMarker.setTitle(keyLoc.getAddress());
+            locMarker.setIcon(getResources().getDrawable(R.drawable.person));
+            locMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+            map.getOverlays().add(locMarker);
+        }
     }
 }

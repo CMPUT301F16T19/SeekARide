@@ -136,7 +136,7 @@ public class AddRequestActivity extends Activity {
         // clean the map in case user changes location
         map.getOverlays().clear();
 
-        if(intent.getStringExtra("start") != null) {
+        if (intent.getStringExtra("start") != null) {
             startLoc = new Location("");
             startLoc = gson.fromJson(intent.getStringExtra("start"), startLoc.getClass());
         }
