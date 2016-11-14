@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Created by mc on 16/10/13.
+ * A Singleton controller class for Driver activities.
  */
 public class Driver extends User {
 
@@ -12,19 +12,13 @@ public class Driver extends User {
     private ArrayList<Request> acceptedRequests;
     private Request acceptedRequest;
 
-    // singleton
     private static Driver ourInstance = null;
-    public static Driver getInstance() {
-        return ourInstance;
-    }
+
     private Driver(Profile p) {
         super(p);
         searchedRequests = new ArrayList<Request>();
         acceptedRequests = new ArrayList<Request>();
         acceptedRequest = null;
-    }
-    public static void instantiate(Profile p) {
-        ourInstance = new Driver(p);
     }
 
     /*
@@ -40,6 +34,28 @@ public class Driver extends User {
         acceptedRequest = null;
     }*/
 
+    /**
+     * @return the instance of Driver.
+     */
+    public static Driver getInstance() {
+        return ourInstance;
+    }
+
+    /**
+     * Creates an instance of Driver using a user's Profile. Meant to be called during login.
+     * Must be called before other Driver methods are used.
+     * @param p The user's profile.
+     */
+    public static void instantiate(Profile p) {
+        ourInstance = new Driver(p);
+    }
+
+    /**
+     * Searches the database for Requests and stores them in searchedRequests.
+     * Issues: Still need to implement a search radius.
+     * @param keywords The user-entered string of keywords.
+     * @param radius The user-entered search radius.
+     */
     public void searchRequestsByKeyword(String keywords, String radius) {
         // search requests and store in searchedRequests
         // taken from http://stackoverflow.com/questions/4674850/converting-a-sentence-string-to-a-string-array-of-words-in-java
@@ -56,22 +72,40 @@ public class Driver extends User {
         }
     }
 
+    /**
+     * To be implemented.
+     * @param location
+     * @param radius
+     */
     public void searchRequestsByLocation(Location location, String radius) {
         // search requests and store in searchedRequests
     }
 
+    /**
+     * Allows the Driver to accept a Request and add it to acceptedRequests.
+     * @param request The Request to be accepted.
+     */
     public void acceptRequest(Request request) {
         // accept a request and add to acceptedRequests
         request.driverAccepted(getProfile());
         acceptedRequests.add(request);
     }
 
-    public void removeSearchedRequest(int index) {
-        // remove a request and remove from searchedRequests
-        searchedRequests.remove(index);
+    /**
+     * Allows the Driver to decline a Request they previously accepted and remove it from acceptedRequests.
+     * Issues: may need to change index parameter to the Request itself
+     * @param index The request's position in acceptedRequests.
+     */
+    public void removeAcceptedRequest(int index) {
+        // remove a request and remove from acceptedRequests
+        acceptedRequests.remove(index);
     }
 
 
+    /**
+     * Get the list of accepted Requests.
+     * @return ArrayList of accepted Requests.
+     */
     public ArrayList<Request> getAcceptedRequests() {
         return acceptedRequests;
     }
@@ -86,6 +120,10 @@ public class Driver extends User {
         return acceptedRequest.isRiderConfirmed();
     }
 
+    /**
+     * Get the current list of search results.
+     * @return ArrayList of searched Requests.
+     */
     public ArrayList<Request> getSearchedRequests() {
         return searchedRequests;
     }

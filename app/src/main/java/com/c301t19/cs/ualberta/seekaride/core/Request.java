@@ -6,7 +6,7 @@ import java.util.Date;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by mc on 16/10/13.
+ * Holds the data associated with a Request. Requests are stored in an external database (Elasticsearch).
  */
 public class Request {
 

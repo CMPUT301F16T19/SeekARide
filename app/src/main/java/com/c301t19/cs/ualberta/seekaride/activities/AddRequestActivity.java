@@ -56,8 +56,7 @@ public class AddRequestActivity extends Activity {
         String startText = sLocation.getText().toString();
         String endText = eLocation.getText().toString();
         String fareText = fare.getText().toString();
-        // I don't know how we're setting our recommended fares, so it's commented out.
-        //recommendedFare.setText();
+
 
         sLocation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

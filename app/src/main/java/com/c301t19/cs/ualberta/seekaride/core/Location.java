@@ -2,6 +2,11 @@ package com.c301t19.cs.ualberta.seekaride.core;
 
 import org.osmdroid.util.GeoPoint;
 
+/**
+ * Stores a Geolocation.
+ *
+ * Issues:
+ */
 public class Location {
 
     private String address;

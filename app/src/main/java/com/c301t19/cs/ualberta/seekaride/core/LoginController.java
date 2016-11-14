@@ -1,11 +1,23 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+/**
+ * Controller that handles login and account creation.
+ *
+ * Issues: may want to implement a more rigorous account creation/login process in the future.
+ */
 public class LoginController {
 
     public LoginController () {
 
     }
 
+    /**
+     * Logs the user in with their desired username. A new account is created if a user doesn't already exist
+     * with the given name. The name must be at least five characters long. Rider and Driver controller classes
+     * are instantiated with a Profile generated from the username.
+     * @param username The user's username.
+     * @return true if the login was successful.
+     */
     public boolean login(String username) {
         if (username.length() <  5)
         {

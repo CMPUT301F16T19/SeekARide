@@ -3,7 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.core;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by mc on 16/10/13.
+ * Holds the data associated with a user's profile. Profiles are stored in an external database (Elasticsearch).
  */
 public class Profile {
 

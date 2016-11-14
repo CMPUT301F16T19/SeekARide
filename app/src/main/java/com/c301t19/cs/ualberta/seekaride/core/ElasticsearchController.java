@@ -18,15 +18,28 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
+/**
+ * Allows asynchronous interaction with the Elasticsearch database.
+ *
+ * Issues: this class does a lot. It may need to be broken down later.
+ */
 public class ElasticsearchController {
 
-    // used to indicate search/edit targets
+    /**
+     * Indicates a field in a user's Profile for search tasks.
+     */
     public enum UserField { NAME, EMAIL, PHONE }
+
+    /**
+     * Indicates a field in a Request for search tasks.
+     */
     public enum RequestField { DESCRIPTION, START, END, DATE, RIDERID, DRIVERS }
 
     private static JestDroidClient client;
 
-    // add a User to elasticsearch. returns true on success
+    /**
+     * Adds a Profile to Elasticsearch.
+     */
     public static class AddUserTask extends AsyncTask<Void, Void, Boolean> {
 
         private Profile user;
@@ -71,7 +84,11 @@ public class ElasticsearchController {
         }
     }
 
-    // gets a Profile from elasticsearch. pass in the field you want to search by and the search string
+    /**
+     * Retrieves a Profile from Elasticsearch.
+     *
+     * Issues: Currently only allows you to search by username.
+     */
     public static class GetUserTask extends AsyncTask<Void, Void, Profile> {
 
         private UserField userField;
@@ -134,7 +151,9 @@ public class ElasticsearchController {
         }
     }
 
-    // add a Request to elasticsearch. return true on success
+    /**
+     * Add a Request to Elasticsearch.
+     */
     public static class AddRequestTask extends AsyncTask<Void, Void, Boolean> {
 
         private Request request;
@@ -158,9 +177,11 @@ public class ElasticsearchController {
         }
     }
 
-    // gets a Request from elasticsearch. meant to be used when you have a specific request
-    // you are looking for, rather than for searching over many requests. mostly likely will
-    // be used with a request ID
+    /**
+     * Retrieves an ArrayList of Requests from Elasticsearch.
+     *
+     * Issues: Currently only allows you to search by the Rider's id.
+     */
     public static class GetRequestsTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
         private RequestField requestField;
@@ -198,8 +219,6 @@ public class ElasticsearchController {
         }
     }
 
-    // searches for Requests from elasticsearch. pass in location and radius; get array of Results
-    // does not distinguish between start and end location; a class that uses this method should handle that on their own
     public static class SearchRequestsByLocationTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
         private Location location;
@@ -219,7 +238,11 @@ public class ElasticsearchController {
         }
     }
 
-    // searches for Requests from elasticsearch. pass in array of strings; get array of Results
+    /**
+     * Retrieves an ArrayList of Requests from Elasticsearch.
+     *
+     * Issues: Currently only allows you to search by keyword, which only targets a request's description.
+     */
     public static class SearchRequestsByKeywordTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
         private String keywords;
