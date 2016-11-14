@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/search_Keywords_Text"
         android:layout_alignParentTop="true"
-        android:text="Enter Keywords"
+        android:hint="Enter Keyword"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/search_Radius_Text"
         android:layout_above="@+id/search_Search_Button"
-        android:text="Search Radius"
+        android:hint="Search Radius"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/search_Search_Button" />
 

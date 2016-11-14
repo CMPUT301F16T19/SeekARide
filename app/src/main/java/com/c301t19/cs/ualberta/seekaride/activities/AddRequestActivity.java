@@ -139,9 +139,6 @@ public class AddRequestActivity extends Activity {
         if(intent.getStringExtra("start") != null) {
             startLoc = new Location("");
             startLoc = gson.fromJson(intent.getStringExtra("start"), startLoc.getClass());
-            //Toast.makeText(getApplicationContext(), startLoc.getAddress(),
-            //        Toast.LENGTH_LONG).show();
-
         }
         if (startLoc == null) {
             sLocation.setText("");
@@ -186,6 +183,7 @@ public class AddRequestActivity extends Activity {
         map.invalidate();
     }
 
+    // Should be moved to aa model class
     public String calculateFare(Location loc1, Location loc2) {
         GeoPoint geo1 = loc1.getGeoLocation();
         GeoPoint geo2 = loc2.getGeoLocation();

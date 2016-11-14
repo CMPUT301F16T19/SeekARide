@@ -9,6 +9,11 @@ import android.widget.EditText;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
+import org.osmdroid.api.IMapController;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+
 import io.searchbox.core.Search;
 
 public class SearchRequestsActivity extends Activity {
@@ -16,6 +21,7 @@ public class SearchRequestsActivity extends Activity {
     private EditText keywords;
     private EditText radius;
 
+    private GeoPoint startPoint;
     String keywordsText;
     String radiusText;
 
@@ -51,5 +57,17 @@ public class SearchRequestsActivity extends Activity {
         setContentView(R.layout.activity_search_requests);
         write();
         move();
+
+        MapView map = (MapView) findViewById(R.id.Map);
+        map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setBuiltInZoomControls(true);
+        map.setMultiTouchControls(true);
+
+        // SET TO CURRENT PHONE LOCATION
+        startPoint = new GeoPoint(53.52676, -113.52715);
+        IMapController mapController = map.getController();
+        mapController.setZoom(9);
+        mapController.setCenter(startPoint);
+
     }
 }

@@ -55,6 +55,7 @@
             android:name=".activities.RCompleteActivity"
             android:label="@string/title_activity_rcomplete" />
         <activity android:name=".activities.TestingActivity" />
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.ChooseLocationActivity"></activity>
     </application>
 

@@ -23,6 +23,8 @@ public class RiderActivity extends Activity {
     private Request selectedRequest;
     private RequestsAdapter adapter;
 
+    private Rider rider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

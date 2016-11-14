@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
         {
             return;
         }
-        Intent intent = new Intent(this, RiderActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 

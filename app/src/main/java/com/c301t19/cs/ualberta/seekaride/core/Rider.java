@@ -62,7 +62,7 @@ public class Rider extends User {
 
 
     public void updateOpenRequests() {
-        if (getProfile().getId() == null) {
+        if (getProfile() == null) {
             openRequests = new ArrayList<Request>();
             return;
         }
