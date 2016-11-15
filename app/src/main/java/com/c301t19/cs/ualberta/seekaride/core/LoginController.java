@@ -34,6 +34,9 @@ public class LoginController {
         try {
             profile = getUserTask.get();
             if (profile == null) {
+                /*
+                return false;
+                 */
                 profile = new Profile(username, "PHONE", "EMAIL");
                 ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(profile);
                 addUserTask.execute();
@@ -45,5 +48,17 @@ public class LoginController {
 
         }
         return true;
+    }
+
+    public void createNewAccount(Profile profile) {
+        ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(profile);
+        addUserTask.execute();
+    }
+
+    public void editAccount(Profile oldProfile, Profile newProfile) {
+        ElasticsearchController.DeleteUserTask deleteUserTask = new ElasticsearchController.DeleteUserTask(oldProfile);
+        ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(newProfile, newProfile.getId());
+        deleteUserTask.execute();
+        addUserTask.execute();
     }
 }

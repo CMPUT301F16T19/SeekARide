@@ -395,15 +395,4 @@ public class ElasticsearchController {
             client = (JestDroidClient) factory.getObject();
         }
     }
-
-    /* example usage:
-    ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
-                                                      UserField.NAME, "username");
-		getUserTask.execute();
-		try {
-			user = getUserTask.get();
-		}
-		catch (Exception e) {
-		}
-    */
 }
