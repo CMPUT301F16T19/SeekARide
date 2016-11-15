@@ -28,6 +28,13 @@ public class Profile {
         email = e;
     }
 
+    public Profile(Profile p) {
+        username = p.getUsername();
+        phoneNumber = p.getPhoneNumber();
+        email = p.getEmail();
+        id = p.getId();
+    }
+
     /**
      * Gets username.
      *

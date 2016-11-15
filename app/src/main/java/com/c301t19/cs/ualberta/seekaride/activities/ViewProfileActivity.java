@@ -12,9 +12,10 @@ import android.widget.TextView;
 import com.c301t19.cs.ualberta.seekaride.R;
 
 public class ViewProfileActivity extends Activity {
+
     public Button editP;
     public Button Back;
-    private TextView username;
+    //private TextView username;
     private TextView phoneNumber;
     private TextView email;
     private TextView car;

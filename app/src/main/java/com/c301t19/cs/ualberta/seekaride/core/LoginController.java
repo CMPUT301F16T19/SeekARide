@@ -60,5 +60,7 @@ public class LoginController {
         ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(newProfile, newProfile.getId());
         deleteUserTask.execute();
         addUserTask.execute();
+        Rider.instantiate(newProfile);
+        Driver.instantiate(newProfile);
     }
 }

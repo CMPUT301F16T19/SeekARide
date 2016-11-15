@@ -92,7 +92,7 @@ public class RiderActivity extends Activity {
                 startActivity(new Intent(this, DriverActivity.class));
                 return true;
             case R.id.mainMenuProfile:
-                startActivity(new Intent(this, ViewProfileActivity.class));
+                startActivity(new Intent(this, EditAccountActivity.class));
                 return true;
             default:
                 return false;
