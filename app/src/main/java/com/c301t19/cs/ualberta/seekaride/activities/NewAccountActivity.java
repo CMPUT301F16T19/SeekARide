@@ -7,37 +7,44 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 
 public class NewAccountActivity extends Activity {
+
     public Button createA;
     public Button cancelA;
-    private TextView username;
-    private TextView password;
-    private TextView cPassword;
-    private TextView phoneNumber;
-    private TextView email;
-    private TextView car;
+    private EditText username;
+    private EditText password;
+    private EditText cPassword;
+    private EditText phoneNumber;
+    private EditText email;
+    private EditText car;
+
+    String usernameText;
+    String passwordText;
+    String confirmPassword;
+    String phoneNumberText;
+    String emailText;
+    String carText;
 
     //sets up the text boxes and lets you fill them in.
     public void write() {
-        username = (TextView) findViewById(R.id.new_Username_Text);
-        password = (TextView) findViewById(R.id.new_Password_Text);
-        cPassword = (TextView) findViewById(R.id.new_ConfirmP_Text);
-        phoneNumber = (TextView) findViewById(R.id.new_Phone_Text);
-        email = (TextView) findViewById(R.id.new_Email_Text);
-        car = (TextView) findViewById(R.id.new_Car_Text);
+        username = (EditText) findViewById(R.id.new_Username_Text);
+        password = (EditText) findViewById(R.id.new_Password_Text);
+        cPassword = (EditText) findViewById(R.id.new_ConfirmP_Text);
+        phoneNumber = (EditText) findViewById(R.id.new_Phone_Text);
+        email = (EditText) findViewById(R.id.new_Email_Text);
+        car = (EditText) findViewById(R.id.new_Car_Text);
 
-        //the cariables aren't actually passed anywhere yet.
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
         String confirmPassword = cPassword.getText().toString();
         String phoneNumberText = phoneNumber.getText().toString();
         String emailText = email.getText().toString();
         String carText = car.getText().toString();
-
     }
     public void move(){
         createA = (Button) findViewById(R.id.newA_Account_Button);
@@ -55,8 +62,7 @@ public class NewAccountActivity extends Activity {
         cancelA.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent Cswitch = new Intent(NewAccountActivity.this, MainActivity.class);
-                startActivity(Cswitch);
+                finish();
             }
         });
 
@@ -67,27 +73,5 @@ public class NewAccountActivity extends Activity {
         setContentView(R.layout.activity_new_account);
         write();
         move();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_new_account, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
