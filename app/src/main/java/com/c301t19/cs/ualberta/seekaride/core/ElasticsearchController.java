@@ -268,7 +268,7 @@ public class ElasticsearchController {
                     query = "{\n" +
                             "    \"query\": {\n" +
                             "        \"match\" : {\n" +
-                            "            \"riderId\" : \"" + keyword + "\"\n" +
+                            "            \"id\" : \"" + keyword + "\"\n" +
                             "        }\n" +
                             "    }\n" +
                             "}";
@@ -277,12 +277,13 @@ public class ElasticsearchController {
                     query = "{\n" +
                             "    \"query\": {\n" +
                             "        \"match\" : {\n" +
-                            "            \"id\" : \"" + keyword + "\"\n" +
+                            "            \"riderId\" : \"" + keyword + "\"\n" +
                             "        }\n" +
                             "    }\n" +
                             "}";
                     break;
                 default:
+                    Log.i("dont", "plz no");
                     return null;
             }
             Search search = new Search.Builder(query)

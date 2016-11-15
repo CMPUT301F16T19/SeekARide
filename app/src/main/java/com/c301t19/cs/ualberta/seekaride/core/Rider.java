@@ -137,6 +137,7 @@ public class Rider extends User {
             }
             else {
                 openRequests = requests;
+                Log.i("oh god", ((Integer)(openRequests.size())).toString());
             }
         }
         catch (Exception e) {

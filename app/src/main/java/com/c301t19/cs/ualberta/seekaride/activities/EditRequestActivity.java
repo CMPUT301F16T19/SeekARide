@@ -59,6 +59,7 @@ public class EditRequestActivity extends Activity {
                 Request edited = new Request(request);
                 edited.setDescription(desciptText);
                 Rider.getInstance().editRequest(edited);
+                Rider.getInstance().updateOpenRequests();
                 finish();
             }
         });
@@ -68,6 +69,7 @@ public class EditRequestActivity extends Activity {
             public void onClick(View v) {
 
                 Rider.getInstance().deleteRequest(request);
+                Rider.getInstance().updateOpenRequests();
                 finish();
             }
         });
