@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -72,6 +73,7 @@ public class ElasticsearchController {
     public static class AddUserTask extends AsyncTask<Void, Void, Boolean> {
 
         private Profile user;
+        private String id;
 
         /**
          * Instantiates a new Add user task.
@@ -81,33 +83,27 @@ public class ElasticsearchController {
         public AddUserTask(Profile u) {
             super();
             user = u;
+            id = null;
+        }
+
+        public AddUserTask(Profile u, String i) {
+            super();
+            user = u;
+            id = i;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
-            /*
-            String username = user.getUsername();
-            String email = user.getEmail();
-            String phone = user.getPhoneNumber();
-            */
-
-            /*
-            Map<String, String> source = new LinkedHashMap<String,String>();
-            source.put("username", username);
-            source.put("email", email);
-            source.put("phone", phone);
-            Index index = new Index.Builder(source).index("t19seekaride").type("user").build();
-            */
-
-            Index index = new Index.Builder(user).index("t19seekaride").type("user").build();
-            /*
-            String source = "{\n" +
-                                "\"username\" : " + username + ",\n" +
-                                "\"email\" : " + email + ",\n" +
-                                "\"phone\" : " + phone + "\n" +
-                           "}";
-            Index index = new Index.Builder(source).index("t19seekaride").type("user").build();*/
+            Index index;
+            if (id == null)
+            {
+                index = new Index.Builder(user).index("t19seekaride").type("user").build();
+            }
+            else
+            {
+                index = new Index.Builder(user).index("t19seekaride").type("user").id(id).build();
+            }
             try {
                 client.execute(index);
             }
@@ -173,30 +169,26 @@ public class ElasticsearchController {
         }
     }
 
-    /**
-     * The type Edit user task.
-     */
-// edit a User. pass in the field you want to edit and the new value. return true on success
-    public static class EditUserTask extends AsyncTask<Void, Void, Boolean> {
+    public static class DeleteUserTask extends AsyncTask<Void, Void, Boolean> {
 
-        private UserField userField;
-        private String newValue;
+        private Profile user;
 
-        /**
-         * Instantiates a new Edit user task.
-         *
-         * @param uf the uf
-         * @param nv the nv
-         */
-        public EditUserTask(UserField uf, String nv) {
+        public DeleteUserTask(Profile u) {
             super();
-            userField = uf;
-            newValue = nv;
+            user = u;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return null;
+            verifySettings();
+            Delete delete  = new Delete.Builder(user.getId()).index("t19seekaride").type("user").build();
+            try {
+                client.execute(delete);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return Boolean.TRUE;
         }
     }
 
@@ -206,6 +198,7 @@ public class ElasticsearchController {
     public static class AddRequestTask extends AsyncTask<Void, Void, Boolean> {
 
         private Request request;
+        private String id;
 
         /**
          * Instantiates a new Add request task.
@@ -215,12 +208,25 @@ public class ElasticsearchController {
         public AddRequestTask(Request r) {
             super();
             request = r;
+            id = null;
+        }
+
+        public AddRequestTask(Request r, String i) {
+            super();
+            request = r;
+            id = i;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
-            Index index = new Index.Builder(request).index("t19seekaride").type("request").build();
+            Index index;
+            if (id == null) {
+                index = new Index.Builder(request).index("t19seekaride").type("request").build();
+            }
+            else {
+                index = new Index.Builder(request).index("t19seekaride").type("request").id(id).build();
+            }
             try {
                 client.execute(index);
             }
@@ -352,43 +358,29 @@ public class ElasticsearchController {
         }
     }
 
-    // simply overwrites a request with an updated request
-    // if security is desired, in Request class, protect methods like deleteRequest and setRider with a check like
-    // "if requestRider.name != currentUser.name: return"
-    // this way drivers will only be allowed to add/remove driver. make sure the driver they are adding or removing = currentDriver.name
-    /*public static class EditRequestTask extends AsyncTask<Void, Void, Boolean> {
+    /**
+     * The type Delete request task.
+     */
+    public static class DeleteRequestTask extends AsyncTask<Void, Void, Boolean> {
 
-        private RequestField requestField;
-        private Object editValue;
+        private Request request;
 
-        public EditRequestTask(RequestField rf, Object ev) {
-            requestField = rf;
-            editValue = ev;
+        public DeleteRequestTask(Request r) {
+            super();
+            request = r;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
-            Index index = new Index.Builder(request).index("t19seekaride").type("request").build();
+            Delete delete  = new Delete.Builder(request.getId()).index("t19seekaride").type("request").build();
             try {
-                client.execute(index);
+                client.execute(delete);
             }
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return Boolean.TRUE;
-        }
-    }*/
-
-    /**
-     * The type Delete request task.
-     */
-// IMPLEMENTATION UNCLEAR
-    public static class DeleteRequestTask extends AsyncTask<UserField, Void, User> {
-
-        @Override
-        protected User doInBackground(UserField... params) {
-            return null;
         }
     }
 
