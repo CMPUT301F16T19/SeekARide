@@ -97,6 +97,7 @@ public class Driver extends User {
         Request oldRequest = new Request(request);
         oldRequest.driverAccepted(getProfile());
         acceptedRequests.add(oldRequest);
+        getProfile().getAcceptedRequests().add(oldRequest.getId());
         String reqId = oldRequest.getId();
 
         ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
@@ -120,6 +121,7 @@ public class Driver extends User {
         Request oldRequest = new Request(request);
         oldRequest.driverDeclined(getProfile());
         acceptedRequests.remove(request);
+        getProfile().getAcceptedRequests().remove(request.getId());
         String reqId = oldRequest.getId();
 
         ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
@@ -170,14 +172,32 @@ public class Driver extends User {
             acceptedRequests = new ArrayList<Request>();
             return;
         }
-        ArrayList<String> requestIds = new ArrayList<String>();
+        /*ArrayList<String> requestIds = new ArrayList<String>();
         for (int i = 0; i < acceptedRequests.size(); i++) {
             requestIds.add(acceptedRequests.get(i).getId());
-        }
+        }*/
+
         ElasticsearchController.GetRequestsTask getRequestsTask;
         ArrayList<Request> reqs;
         acceptedRequests = new ArrayList<Request>();
-        Log.i("made it", "good");
+        getRequestsTask = new ElasticsearchController.GetRequestsTask(
+                ElasticsearchController.RequestField.DRIVERID, getProfile().getId());
+        getRequestsTask.execute();
+        try {
+            reqs = getRequestsTask.get();
+            if (reqs != null && !reqs.isEmpty()) {
+                acceptedRequests = reqs;
+            }
+        }
+        catch (Exception e) {
+
+        }
+
+        /*
+        ArrayList<String> requestIds = getProfile().getAcceptedRequests();
+        ElasticsearchController.GetRequestsTask getRequestsTask;
+        ArrayList<Request> reqs;
+        acceptedRequests = new ArrayList<Request>();
         for (int i = 0; i < requestIds.size(); i++) {
             getRequestsTask = new ElasticsearchController.GetRequestsTask(
                     ElasticsearchController.RequestField.ID, requestIds.get(i));
@@ -191,6 +211,6 @@ public class Driver extends User {
             catch (Exception e) {
 
             }
-        }
+        }*/
     }
 }

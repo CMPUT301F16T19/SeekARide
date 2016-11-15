@@ -63,7 +63,7 @@ public class ElasticsearchController {
         RIDERID, /**
          * Drivers request field.
          */
-        DRIVERS, ID }
+        DRIVERID, ID }
 
     private static JestDroidClient client;
 
@@ -278,6 +278,20 @@ public class ElasticsearchController {
                             "    \"query\": {\n" +
                             "        \"match\" : {\n" +
                             "            \"riderId\" : \"" + keyword + "\"\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}";
+                    break;
+                case DRIVERID:
+                    query = "{\n" +
+                            "    \"query\": {\n" +
+                            "        \"nested\" : {\n" +
+                            "            \"path\" : \"acceptedDriverProfiles\",\n" +
+                            "            \"query\": {\n" +
+                            "                \"match\" : {\n" +
+                            "                    \"id\" : \"" + keyword + "\"\n" +
+                            "                }\n" +
+                            "            }\n" +
                             "        }\n" +
                             "    }\n" +
                             "}";
