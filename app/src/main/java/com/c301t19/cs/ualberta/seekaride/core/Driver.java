@@ -1,5 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -175,6 +177,7 @@ public class Driver extends User {
         ElasticsearchController.GetRequestsTask getRequestsTask;
         ArrayList<Request> reqs;
         acceptedRequests = new ArrayList<Request>();
+        Log.i("made it", "good");
         for (int i = 0; i < requestIds.size(); i++) {
             getRequestsTask = new ElasticsearchController.GetRequestsTask(
                     ElasticsearchController.RequestField.ID, requestIds.get(i));
