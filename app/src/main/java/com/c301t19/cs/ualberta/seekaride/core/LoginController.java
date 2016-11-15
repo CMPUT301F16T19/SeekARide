@@ -1,5 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import android.widget.Toast;
+
 /**
  * Controller that handles login and account creation.
  * <p/>
@@ -34,15 +36,12 @@ public class LoginController {
         try {
             profile = getUserTask.get();
             if (profile == null) {
-                /*
                 return false;
-                 */
-                profile = new Profile(username, "PHONE", "EMAIL");
-                ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(profile);
-                addUserTask.execute();
             }
-            Rider.instantiate(profile);
-            Driver.instantiate(profile);
+            else {
+                Rider.instantiate(profile);
+                Driver.instantiate(profile);
+            }
         }
         catch (Exception e) {
 

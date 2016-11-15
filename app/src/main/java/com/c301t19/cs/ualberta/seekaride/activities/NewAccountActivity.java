@@ -9,10 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.LoginController;
+import com.c301t19.cs.ualberta.seekaride.core.Profile;
 
 public class NewAccountActivity extends Activity {
+
+    LoginController loginController;
 
     public Button createA;
     public Button cancelA;
@@ -39,12 +44,12 @@ public class NewAccountActivity extends Activity {
         email = (EditText) findViewById(R.id.new_Email_Text);
         car = (EditText) findViewById(R.id.new_Car_Text);
 
-        String usernameText = username.getText().toString();
-        String passwordText = password.getText().toString();
-        String confirmPassword = cPassword.getText().toString();
-        String phoneNumberText = phoneNumber.getText().toString();
-        String emailText = email.getText().toString();
-        String carText = car.getText().toString();
+        usernameText = username.getText().toString();
+        passwordText = password.getText().toString();
+        confirmPassword = cPassword.getText().toString();
+        phoneNumberText = phoneNumber.getText().toString();
+        emailText = email.getText().toString();
+        carText = car.getText().toString();
     }
     public void move(){
         createA = (Button) findViewById(R.id.newA_Account_Button);
@@ -54,8 +59,14 @@ public class NewAccountActivity extends Activity {
         createA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Nswitch = new Intent(NewAccountActivity.this, MainActivity.class);
-                startActivity(Nswitch);
+                write();
+                if (usernameText == null || usernameText.length() < 5) {
+                    Toast.makeText(getApplicationContext(), "Username must be at least 5 characters long.",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                loginController.createNewAccount(new Profile(usernameText, phoneNumberText, emailText));
+                finish();
             }
         });
         //moves you to the main screen without making an account.
@@ -71,6 +82,7 @@ public class NewAccountActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
+        loginController = new LoginController();
         write();
         move();
     }

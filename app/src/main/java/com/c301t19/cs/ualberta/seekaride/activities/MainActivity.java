@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.LoginController;
@@ -46,6 +47,8 @@ public class MainActivity extends Activity {
         String name = username.getText().toString();
         if (!loginController.login(name))
         {
+            Toast.makeText(getApplicationContext(), "Account does not exist.",
+                    Toast.LENGTH_LONG).show();
             return;
         }
         Intent intent = new Intent(this, RiderActivity.class);
