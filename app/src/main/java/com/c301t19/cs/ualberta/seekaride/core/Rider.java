@@ -82,9 +82,17 @@ public class Rider extends User {
      * @param index The request's position in openRequests.
      */
     public void deleteRequest(int index) {
-        openRequests.remove(index);
+
+        deleteRequest(openRequests.get(index));
+
     }
 
+    public void deleteRequest(Request request) {
+
+        openRequests.remove(request);
+        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+        deleteRequestTask.execute();
+    }
     /**
      * Accept a Driver's offer.
      *

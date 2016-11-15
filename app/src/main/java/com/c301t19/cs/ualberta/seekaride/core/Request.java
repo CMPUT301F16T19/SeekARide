@@ -60,6 +60,26 @@ public class Request {
         this.riderId = riderId;
     }
 
+    public Request(Request r) {
+        id = r.getId();
+        riderId = r.getRiderProfile().getId();
+
+        requestTime = r.getRequestTime();
+        description = r.getDescription();
+        start = r.getStart();
+        destination = r.getDestination();
+        acceptedDriverProfiles = r.getAcceptedDriverProfiles();
+        price = r.getPrice();
+
+        waitingForDriver = r.isWaitingForDriver();
+        completion = r.isCompleted();
+        riderPaid = r.isPaid();
+        driverIsPaid = r.isGotPayment();
+
+        driverProfile = r.getDriverProfile();
+        riderProfile = r.getRiderProfile();
+    }
+
     /**
      * Driver accepted.
      *
@@ -70,6 +90,13 @@ public class Request {
         acceptedDriverProfiles.add(driverProfile);
         //ElasticsearchController.EditRequestTask editRequestTask = new ElasticsearchController.EditRequestTask();
        // editRequestTask.execute();
+    }
+
+    public void driverDeclined(Profile driverProfile) {
+
+        acceptedDriverProfiles.remove(driverProfile);
+        //ElasticsearchController.EditRequestTask editRequestTask = new ElasticsearchController.EditRequestTask();
+        // editRequestTask.execute();
     }
 
 //    public void driverUnaccepted(Profile driverName) {

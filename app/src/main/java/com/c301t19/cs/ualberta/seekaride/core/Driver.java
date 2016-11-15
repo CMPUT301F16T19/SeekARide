@@ -92,8 +92,15 @@ public class Driver extends User {
      */
     public void acceptRequest(Request request) {
         // accept a request and add to acceptedRequests
-        request.driverAccepted(getProfile());
-        acceptedRequests.add(request);
+        Request oldRequest = new Request(request);
+        oldRequest.driverAccepted(getProfile());
+        acceptedRequests.add(oldRequest);
+        String reqId = oldRequest.getId();
+
+        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+        ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(oldRequest, reqId);
+        deleteRequestTask.execute();
+        addRequestTask.execute();
     }
 
     /**
@@ -104,7 +111,19 @@ public class Driver extends User {
      */
     public void removeAcceptedRequest(int index) {
         // remove a request and remove from acceptedRequests
-        acceptedRequests.remove(index);
+        removeAcceptedRequest(acceptedRequests.get(index));
+    }
+
+    public void removeAcceptedRequest(Request request) {
+        Request oldRequest = new Request(request);
+        oldRequest.driverDeclined(getProfile());
+        acceptedRequests.remove(request);
+        String reqId = oldRequest.getId();
+
+        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+        ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(oldRequest, reqId);
+        deleteRequestTask.execute();
+        addRequestTask.execute();
     }
 
 
@@ -142,5 +161,9 @@ public class Driver extends User {
      */
     public ArrayList<Request> getSearchedRequests() {
         return searchedRequests;
+    }
+
+    public void updateAcceptedRequests() {
+        
     }
 }
