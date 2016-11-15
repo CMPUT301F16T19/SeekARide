@@ -285,13 +285,8 @@ public class ElasticsearchController {
                 case DRIVERID:
                     query = "{\n" +
                             "    \"query\": {\n" +
-                            "        \"nested\" : {\n" +
-                            "            \"path\" : \"acceptedDriverProfiles\",\n" +
-                            "            \"query\": {\n" +
-                            "                \"match\" : {\n" +
-                            "                    \"id\" : \"" + keyword + "\"\n" +
-                            "                }\n" +
-                            "            }\n" +
+                            "        \"match\" : {\n" +
+                            "            \"acceptedDriverProfiles.id\" : \"" + keyword + "\"\n" +
                             "        }\n" +
                             "    }\n" +
                             "}";

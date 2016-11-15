@@ -15,9 +15,6 @@ public class Profile {
     @JestId
     private String id;
 
-    private ArrayList<String> openRequests;
-    private ArrayList<String> acceptedRequests;
-
     /**
      * Instantiates a new Profile.
      *
@@ -29,9 +26,6 @@ public class Profile {
         username = u;
         phoneNumber = p;
         email = e;
-
-        openRequests = new ArrayList<String>();
-        acceptedRequests = new ArrayList<String>();
     }
 
     /**
@@ -104,28 +98,5 @@ public class Profile {
             return true;
         }
         return false;
-    }
-
-
-    public ArrayList<String> getOpenRequests() {
-        if (openRequests == null) {
-            setOpenRequests(new ArrayList<String>());
-        }
-        return openRequests;
-    }
-
-    public void setOpenRequests(ArrayList<String> openRequests) {
-        this.openRequests = openRequests;
-    }
-
-    public ArrayList<String> getAcceptedRequests() {
-        if (acceptedRequests == null) {
-            setAcceptedRequests(new ArrayList<String>());
-        }
-        return acceptedRequests;
-    }
-
-    public void setAcceptedRequests(ArrayList<String> acceptedRequests) {
-        this.acceptedRequests = acceptedRequests;
     }
 }

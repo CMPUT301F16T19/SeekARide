@@ -97,7 +97,6 @@ public class Driver extends User {
         Request oldRequest = new Request(request);
         oldRequest.driverAccepted(getProfile());
         acceptedRequests.add(oldRequest);
-        getProfile().getAcceptedRequests().add(oldRequest.getId());
         String reqId = oldRequest.getId();
 
         ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
@@ -121,7 +120,6 @@ public class Driver extends User {
         Request oldRequest = new Request(request);
         oldRequest.driverDeclined(getProfile());
         acceptedRequests.remove(request);
-        getProfile().getAcceptedRequests().remove(request.getId());
         String reqId = oldRequest.getId();
 
         ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
