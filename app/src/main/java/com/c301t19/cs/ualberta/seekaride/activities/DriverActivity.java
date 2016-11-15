@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
+import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 public class DriverActivity extends Activity {
 
@@ -48,12 +49,28 @@ public class DriverActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
         requests = (ListView) findViewById(R.id.rider_Requests);
+        //adapter = new RequestsAdapter(this,
+        //        R.layout.request_list_item, Driver.getInstance().getAcceptedRequests(), getLayoutInflater());
+        //Log.i("adapter", ((Boolean)(adapter==null)).toString());
+        //Log.i("requests", ((Boolean)(requests==null)).toString());
+        //requests.setAdapter(adapter);
+        move();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // refresh data
+        Driver.getInstance().updateAcceptedRequests();
+        /*try {
+            TimeUnit.SECONDS.sleep(5);
+        }
+        catch (InterruptedException e) {
+
+        }*/
         adapter = new RequestsAdapter(this,
                 R.layout.request_list_item, Driver.getInstance().getAcceptedRequests(), getLayoutInflater());
-        Log.i("adapter", ((Boolean)(adapter==null)).toString());
-        Log.i("requests", ((Boolean)(requests==null)).toString());
         requests.setAdapter(adapter);
-        move();
     }
 
     @Override

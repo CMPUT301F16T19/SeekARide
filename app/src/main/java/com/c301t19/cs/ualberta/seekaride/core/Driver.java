@@ -164,6 +164,30 @@ public class Driver extends User {
     }
 
     public void updateAcceptedRequests() {
+        if (getProfile() == null) {
+            acceptedRequests = new ArrayList<Request>();
+            return;
+        }
+        ArrayList<String> requestIds = new ArrayList<String>();
+        for (int i = 0; i < acceptedRequests.size(); i++) {
+            requestIds.add(acceptedRequests.get(i).getId());
+        }
+        ElasticsearchController.GetRequestsTask getRequestsTask;
+        ArrayList<Request> reqs;
+        acceptedRequests = new ArrayList<Request>();
+        for (int i = 0; i < requestIds.size(); i++) {
+            getRequestsTask = new ElasticsearchController.GetRequestsTask(
+                    ElasticsearchController.RequestField.ID, requestIds.get(i));
+            getRequestsTask.execute();
+            try {
+                reqs = getRequestsTask.get();
+                if (reqs != null && !reqs.isEmpty()) {
+                    acceptedRequests.add(reqs.get(0));
+                }
+            }
+            catch (Exception e) {
 
+            }
+        }
     }
 }

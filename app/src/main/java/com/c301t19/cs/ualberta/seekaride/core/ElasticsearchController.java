@@ -63,7 +63,7 @@ public class ElasticsearchController {
         RIDERID, /**
          * Drivers request field.
          */
-        DRIVERS }
+        DRIVERS, ID }
 
     private static JestDroidClient client;
 
@@ -262,13 +262,29 @@ public class ElasticsearchController {
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
             verifySettings();
-            String query = "{\n" +
-                    "    \"query\": {\n" +
-                    "        \"match\" : {\n" +
-                    "            \"riderId\" : \"" + keyword + "\"\n" +
-                    "        }\n" +
-                    "    }\n" +
-                    "}";
+            String query;
+            switch (requestField) {
+                case ID:
+                    query = "{\n" +
+                            "    \"query\": {\n" +
+                            "        \"match\" : {\n" +
+                            "            \"riderId\" : \"" + keyword + "\"\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}";
+                    break;
+                case RIDERID:
+                    query = "{\n" +
+                            "    \"query\": {\n" +
+                            "        \"match\" : {\n" +
+                            "            \"id\" : \"" + keyword + "\"\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}";
+                    break;
+                default:
+                    return null;
+            }
             Search search = new Search.Builder(query)
                     .addIndex("t19seekaride")
                     .addType("request")
