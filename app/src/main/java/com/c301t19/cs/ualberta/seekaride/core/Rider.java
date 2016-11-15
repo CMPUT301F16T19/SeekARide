@@ -93,6 +93,13 @@ public class Rider extends User {
         ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
         deleteRequestTask.execute();
     }
+
+    public void editRequest(Request edited) {
+        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(edited.getId());
+        deleteRequestTask.execute();
+        ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(edited, edited.getId());
+        addRequestTask.execute();
+    }
     /**
      * Accept a Driver's offer.
      *

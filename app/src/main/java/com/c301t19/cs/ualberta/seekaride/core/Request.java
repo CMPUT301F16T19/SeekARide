@@ -281,4 +281,12 @@ public class Request {
         }
         return false;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

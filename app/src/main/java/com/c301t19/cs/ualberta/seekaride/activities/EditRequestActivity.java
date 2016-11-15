@@ -26,6 +26,9 @@ public class EditRequestActivity extends Activity {
     private TextView fare;
     private TextView recommendedFare;
 
+    String desciptText;
+    String fareText;
+
     //takes the filled in information sets variables to it.
     public void write() {
         description = (TextView) findViewById(R.id.edit_Description_Text);
@@ -36,10 +39,10 @@ public class EditRequestActivity extends Activity {
         fare = (TextView) findViewById(R.id.edit_Fare_Text);
         recommendedFare = (TextView) findViewById(R.id.edit_RecFare_Text);
 
-        String desciptText = description.getText().toString();
+        desciptText = description.getText().toString();
         //String startText = sLocation.getText().toString();
         //String endText = eLocation.getText().toString();
-        String fareText = fare.getText().toString();
+        fareText = fare.getText().toString();
         // I don't know how we're setting our recommended fares, so it's commented out.
         //recommendedFare.setText();
     }
@@ -52,6 +55,10 @@ public class EditRequestActivity extends Activity {
         editR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                write();
+                Request edited = new Request(request);
+                edited.setDescription(desciptText);
+                Rider.getInstance().editRequest(edited);
                 finish();
             }
         });
@@ -59,6 +66,8 @@ public class EditRequestActivity extends Activity {
         deleteR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Rider.getInstance().deleteRequest(request);
                 finish();
             }
         });

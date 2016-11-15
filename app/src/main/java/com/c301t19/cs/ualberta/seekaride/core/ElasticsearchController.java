@@ -364,16 +364,30 @@ public class ElasticsearchController {
     public static class DeleteRequestTask extends AsyncTask<Void, Void, Boolean> {
 
         private Request request;
+        private String id;
 
         public DeleteRequestTask(Request r) {
             super();
             request = r;
+            id = null;
+        }
+
+        public DeleteRequestTask(String i) {
+            super();
+            request = null;
+            id = i;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
-            Delete delete  = new Delete.Builder(request.getId()).index("t19seekaride").type("request").build();
+            Delete delete;
+            if (id == null) {
+                delete  = new Delete.Builder(request.getId()).index("t19seekaride").type("request").build();
+            }
+            else {
+                delete  = new Delete.Builder(id).index("t19seekaride").type("request").build();
+            }
             try {
                 client.execute(delete);
             }
