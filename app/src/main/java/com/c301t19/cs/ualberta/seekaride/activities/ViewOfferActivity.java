@@ -44,10 +44,8 @@ public class ViewOfferActivity extends Activity {
     //fills in the blank text views with the relavent information from the request.
     public void write(){
         description = (TextView) findViewById(R.id.view_Description_Text);
-        // someone fix this plz
         sLocation = (TextView) findViewById(R.id.view_Slocation_Text);
         eLocation = (TextView) findViewById(R.id.view_Elocation_Text);
-
         fare = (TextView) findViewById(R.id.view_Fare_Text);
         riderInfo = (TextView) findViewById(R.id.view_Info_Text);
 
@@ -93,13 +91,21 @@ public class ViewOfferActivity extends Activity {
     }
     public void move(){
         acceptO = (Button) findViewById(R.id.view_Accept_Button);
+        if (getIntent().getBooleanExtra("source", false)) {
+            acceptO.setText("Decline");
+        }
         Back = (Button) findViewById(R.id.view_Back_Button);
 
         //Should add the request to the list, and return you to Driver screen
         acceptO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Driver.getInstance().acceptRequest(request);
+                if (getIntent().getBooleanExtra("source", false)) {
+                    Driver.getInstance().removeAcceptedRequest(request);
+                }
+                else {
+                    Driver.getInstance().acceptRequest(request);
+                }
                 finish();
             }
         });
@@ -119,7 +125,12 @@ public class ViewOfferActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        request = Driver.getInstance().getSearchedRequests().get(getIntent().getIntExtra("requestId", -1));
+        if (getIntent().getBooleanExtra("source", false)) {
+            request = Driver.getInstance().getAcceptedRequests().get(getIntent().getIntExtra("requestId", -1));
+        }
+        else {
+            request = Driver.getInstance().getSearchedRequests().get(getIntent().getIntExtra("requestId", -1));
+        }
         write();
         move();
     }

@@ -48,6 +48,7 @@ public class SearchResultsActivity extends Activity {
                 }
                 Intent intent = new Intent(SearchResultsActivity.this, ViewOfferActivity.class);
                 intent.putExtra("requestId", requestIndex);
+                intent.putExtra("source", false);
                 startActivity(intent);
             }
         });

@@ -38,7 +38,16 @@ public class DriverActivity extends Activity {
         requests.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id){
-                selectedRequest = (Request) requests.getItemAtPosition(position);
+                //selectedRequest = (Request) requests.getItemAtPosition(position);
+                selectedRequest = (Request) adapter.getItem(position);
+                int requestIndex = Driver.getInstance().getAcceptedRequests().indexOf(selectedRequest);
+                if (requestIndex < 0) {
+                    return;
+                }
+                Intent intent = new Intent(DriverActivity.this, ViewOfferActivity.class);
+                intent.putExtra("requestId", requestIndex);
+                intent.putExtra("source", true);
+                startActivity(intent);
             }
         });
 
