@@ -65,8 +65,14 @@ public class NewAccountActivity extends Activity {
                             Toast.LENGTH_LONG).show();
                     return;
                 }
-                loginController.createNewAccount(new Profile(usernameText, phoneNumberText, emailText));
-                finish();
+                if (!loginController.createNewAccount(new Profile(usernameText, phoneNumberText, emailText))) {
+                    Toast.makeText(getApplicationContext(), "User already exists.",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else {
+                     finish();
+                }
             }
         });
         //moves you to the main screen without making an account.

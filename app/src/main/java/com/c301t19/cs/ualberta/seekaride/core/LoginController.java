@@ -49,9 +49,13 @@ public class LoginController {
         return true;
     }
 
-    public void createNewAccount(Profile profile) {
+    public boolean createNewAccount(Profile profile) {
+        if (checkUserExists(profile.getUsername())) {
+            return false;
+        }
         ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(profile);
         addUserTask.execute();
+        return true;
     }
 
     public void editAccount(Profile oldProfile, Profile newProfile) {
@@ -61,5 +65,25 @@ public class LoginController {
         addUserTask.execute();
         Rider.instantiate(newProfile);
         Driver.instantiate(newProfile);
+    }
+
+    private boolean checkUserExists(String username) {
+        ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
+                ElasticsearchController.UserField.NAME, username);
+        getUserTask.execute();
+        Profile profile;
+        try {
+            profile = getUserTask.get();
+            if (profile == null) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch (Exception e) {
+
+        }
+        return true;
     }
 }
