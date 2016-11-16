@@ -3,6 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,18 +55,21 @@ public class ViewProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-        String profileId = getIntent().getStringExtra("profileId");
+        String profileId = getIntent().getStringExtra("name");
+        Log.i("ProfileID", profileId);
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
-                ElasticsearchController.UserField.ID, profileId);
+                ElasticsearchController.UserField.NAME, profileId);
         getUserTask.execute();
         Profile profile;
         try {
             profile = getUserTask.get();
             if (profile == null) {
                 finish();
+                Log.i("Profile", "didnt get it");
             }
             else {
                 aProfile = profile;
+                Log.i("Profile", "got it");
             }
         }
         catch (Exception e) {

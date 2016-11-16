@@ -179,6 +179,7 @@ public class ElasticsearchController {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             if (profiles == null || profiles.size() < 1) {
+                Log.i("fail", "no profile");
                 return null;
             }
             else {

@@ -117,11 +117,13 @@ public class ViewOfferActivity extends Activity {
             }
         });
 
+        //profile ID search is not working, so will use username for now
         riderInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewOfferActivity.this, ViewProfileActivity.class);
                 intent.putExtra("profileId", request.getRiderProfile().getId());
+                intent.putExtra("name", request.getRiderProfile().getUsername());
                 startActivity(intent);
             }
         });
