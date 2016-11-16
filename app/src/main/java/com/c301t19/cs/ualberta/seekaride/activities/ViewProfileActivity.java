@@ -21,6 +21,7 @@ public class ViewProfileActivity extends Activity {
     private Profile aProfile;
 
     private Button Back;
+    private Button accept;
     private TextView username;
     private TextView phoneNumber;
     private TextView email;
@@ -49,12 +50,25 @@ public class ViewProfileActivity extends Activity {
                 finish();
             }
         });
+
+        // implement rider accept
+        accept.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                finish();
+            }
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
+        accept = (Button) findViewById(R.id.accept_Driver);
+        if (!getIntent().getBooleanExtra("showAcceptButton", false)) {
+            accept.setVisibility(View.GONE);
+        }
         String profileId = getIntent().getStringExtra("name");
         Log.i("ProfileID", profileId);
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(

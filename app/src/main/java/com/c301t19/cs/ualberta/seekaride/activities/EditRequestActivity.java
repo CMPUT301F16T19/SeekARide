@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
@@ -25,6 +26,9 @@ public class EditRequestActivity extends Activity {
     private TextView eLocation;
     private TextView fare;
     private TextView recommendedFare;
+
+    private DriversAdapter adapter;
+    private ListView driversList;
 
     String desciptText;
     String fareText;
@@ -90,7 +94,11 @@ public class EditRequestActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_request);
+        driversList = (ListView) findViewById(R.id.edit_Drivers_List);
         request = Rider.getInstance().getOpenRequests().get(getIntent().getIntExtra("requestId", -1));
+        adapter = new DriversAdapter(this,
+                R.layout.request_list_item, request.getAcceptedDriverProfiles(), getLayoutInflater());
+        driversList.setAdapter(adapter);
         move();
         write();
         load();

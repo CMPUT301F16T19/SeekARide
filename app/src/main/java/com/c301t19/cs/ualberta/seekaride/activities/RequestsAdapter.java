@@ -1,6 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
