@@ -22,6 +22,8 @@ public class Request {
     private ArrayList<Profile> acceptedDriverProfiles;
     private double price;
 
+    private boolean inProgress;
+
     private Boolean waitingForDriver;
     private Boolean completion;
     private Boolean riderPaid;
@@ -49,6 +51,7 @@ public class Request {
         //riderName = name;
         acceptedDriverProfiles = new ArrayList<Profile>();
         price = pr;
+        inProgress = false;
 
         waitingForDriver = true;
         this.riderProfile = riderProfile;
@@ -70,6 +73,7 @@ public class Request {
         destination = r.getDestination();
         acceptedDriverProfiles = r.getAcceptedDriverProfiles();
         price = r.getPrice();
+        inProgress = r.isInProgress();
 
         waitingForDriver = r.isWaitingForDriver();
         completion = r.isCompleted();
@@ -288,5 +292,14 @@ public class Request {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+
+    public boolean isInProgress() {
+        return inProgress;
+    }
+
+    public void setInProgress(boolean inProgress) {
+        this.inProgress = inProgress;
     }
 }

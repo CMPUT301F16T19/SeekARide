@@ -7,6 +7,7 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -453,5 +454,15 @@ public class ElasticsearchController {
             factory.setDroidClientConfig(config);
             client = (JestDroidClient) factory.getObject();
         }
+    }
+
+    private ArrayList<Request> filterRequestsInProgress(ArrayList<Request> requests) {
+        ArrayList<Request> result = new ArrayList<Request>();
+        for (int i = 0; i < requests.size(); i++) {
+            if (!requests.get(i).isInProgress()) {
+                result.add(requests.get(i));
+            }
+        }
+        return result;
     }
 }
