@@ -55,7 +55,11 @@ public class ViewProfileActivity extends Activity {
         accept.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                Intent intent = new Intent(ViewProfileActivity.this, RCompleteActivity.class);
+                intent.putExtra("isRider", true);
+                intent.putExtra("theirID", aProfile.getId());
+                startActivity(intent);
+                // somehow make the driver start the activity
                 finish();
             }
         });

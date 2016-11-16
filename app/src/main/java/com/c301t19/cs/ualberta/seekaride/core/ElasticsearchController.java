@@ -27,6 +27,9 @@ import io.searchbox.core.SearchResult;
  */
 public class ElasticsearchController {
 
+    public enum ReviewField {
+        USERID, ID
+    }
     /**
      * Indicates a field in a user's Profile for search tasks.
      */
@@ -441,6 +444,64 @@ public class ElasticsearchController {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return Boolean.TRUE;
+        }
+    }
+
+    public static class AddReviewTask extends AsyncTask<Void, Void, Boolean> {
+
+        private Review review;
+
+        public AddReviewTask(Review r) {
+            super();
+            review = r;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            verifySettings();
+            Index index = new Index.Builder(review).index("t19seekaride").type("review").build();
+            try {
+                client.execute(index);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return Boolean.TRUE;
+        }
+    }
+
+    public static class GetReviewsTask extends AsyncTask<Void, Void, ArrayList<Review>> {
+
+        private String userID;
+
+        public GetReviewsTask(String u) {
+            super();
+            userID = u;
+        }
+
+        @Override
+        protected ArrayList<Review> doInBackground(Void... params) {
+            verifySettings();
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"match\" : {\n" +
+                    "            \"userID\" : \"" + userID + "\"\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+            Search search = new Search.Builder(query)
+                    .addIndex("t19seekaride")
+                    .addType("review")
+                    .build();
+            List<Review> reviews = new ArrayList<Review>();
+            try {
+                SearchResult result = client.execute(search);
+                reviews = result.getSourceAsObjectList(Review.class);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return (ArrayList<Review>) reviews;
         }
     }
 

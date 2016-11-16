@@ -79,4 +79,9 @@ public class User {
         String phoneNumber = "idk";// should change to elastic search here
         return phoneNumber;
     }
+
+    public void leaveReview(Review review) {
+        ElasticsearchController.AddReviewTask addReviewTask = new ElasticsearchController.AddReviewTask(review);
+        addReviewTask.execute();
+    }
 }
