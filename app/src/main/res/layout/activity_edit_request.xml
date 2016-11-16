@@ -59,7 +59,7 @@
         android:id="@+id/edit_Cancel_Button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignEnd="@+id/edit_Delete_Button" />
 
     <Button
         android:layout_width="wrap_content"

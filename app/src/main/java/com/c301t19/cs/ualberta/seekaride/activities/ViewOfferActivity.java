@@ -116,6 +116,15 @@ public class ViewOfferActivity extends Activity {
                 finish();
             }
         });
+
+        riderInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewOfferActivity.this, ViewProfileActivity.class);
+                intent.putExtra("profileId", request.getRiderProfile().getId());
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

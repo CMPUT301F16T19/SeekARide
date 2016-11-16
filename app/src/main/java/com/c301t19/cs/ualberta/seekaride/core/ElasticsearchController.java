@@ -39,7 +39,7 @@ public class ElasticsearchController {
         EMAIL, /**
          * Phone user field.
          */
-        PHONE }
+        PHONE, ID }
 
     /**
      * Indicates a field in a Request for search tasks.
@@ -139,15 +139,33 @@ public class ElasticsearchController {
         @Override
         protected Profile doInBackground(Void... params) {
             verifySettings();
-            String query = "{\n" +
-                           "    \"query\": {\n" +
-                           "        \"filtered\" : {\n" +
-                           "            \"filter\" : {\n" +
-                           "                \"term\" : { \"username\" : \"" + keyword + "\" }\n" +
-                           "            }\n" +
-                           "        }\n" +
-                           "    }\n" +
-                           "}";
+            String query;
+            switch (userField) {
+                case NAME:
+                    query = "{\n" +
+                            "    \"query\": {\n" +
+                            "        \"filtered\" : {\n" +
+                            "            \"filter\" : {\n" +
+                            "                \"term\" : { \"username\" : \"" + keyword + "\" }\n" +
+                            "            }\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}";
+                    break;
+                case ID:
+                    query = "{\n" +
+                            "    \"query\": {\n" +
+                            "        \"filtered\" : {\n" +
+                            "            \"filter\" : {\n" +
+                            "                \"term\" : { \"id\" : \"" + keyword + "\" }\n" +
+                            "            }\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}";
+                    break;
+                default:
+                    return null;
+            }
             Search search = new Search.Builder(query)
                             .addIndex("t19seekaride")
                             .addType("user")
