@@ -16,8 +16,24 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
         // do something with the change in network connection
         switch (status) {
             case NetworkManager.TYPE_WIFI:
+                if (Rider.getInstance() == null) {
+                    return;
+                }
+                Rider.getInstance().executeRiderCommands();
+                if (Driver.getInstance() == null) {
+                    return;
+                }
+                Driver.getInstance().executeDriverCommands();
                 break;
             case NetworkManager.TYPE_MOBILE:
+                if (Rider.getInstance() == null) {
+                    return;
+                }
+                Rider.getInstance().executeRiderCommands();
+                if (Driver.getInstance() == null) {
+                    return;
+                }
+                Driver.getInstance().executeDriverCommands();
                 break;
             case NetworkManager.TYPE_NOT_CONNECTED:
                 break;

@@ -15,11 +15,14 @@ public class Driver extends User {
 
     private static Driver ourInstance = null;
 
+    private ArrayList<DriverCommand> driverCommands;
+
     private Driver(Profile p) {
         super(p);
         searchedRequests = new ArrayList<Request>();
         acceptedRequests = new ArrayList<Request>();
         acceptedRequest = null;
+        driverCommands = new ArrayList<DriverCommand>();
     }
 
     /*
@@ -163,6 +166,13 @@ public class Driver extends User {
      */
     public ArrayList<Request> getSearchedRequests() {
         return searchedRequests;
+    }
+
+    public void executeDriverCommands() {
+        for (int i = 0; i < driverCommands.size(); i++) {
+            driverCommands.get(i).execute();
+        }
+        driverCommands = new ArrayList<DriverCommand>();
     }
 
     public void updateAcceptedRequests() {

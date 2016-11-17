@@ -1,5 +1,6 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -14,9 +15,12 @@ public class Rider extends User {
 
     private static Rider ourInstance = null;
 
+    private ArrayList<RiderCommand> riderCommands;
+
     private Rider(Profile p) {
         super(p);
         openRequests = new ArrayList<Request>();
+        riderCommands = new ArrayList<RiderCommand>();
     }
 
     /*
@@ -175,5 +179,12 @@ public class Rider extends User {
      */
     public ArrayList<Request> getOpenRequests() {
         return openRequests;
+    }
+
+    public void executeRiderCommands() {
+        for (int i = 0; i < riderCommands.size(); i++) {
+            riderCommands.get(i).execute();
+        }
+        riderCommands = new ArrayList<RiderCommand>();
     }
 }
