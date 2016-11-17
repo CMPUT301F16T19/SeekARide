@@ -96,4 +96,20 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/edit_Cancel_Button"
         android:layout_alignEnd="@+id/edit_Cancel_Button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rating"
+        android:id="@+id/edit_Account_Rating"
+        android:layout_below="@+id/edit_Car_Text"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_Account_Reviews"
+        android:layout_below="@+id/edit_Account_Rating"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/edit_Changes_Button" />
 </RelativeLayout>

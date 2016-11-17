@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Review;
@@ -17,18 +18,22 @@ public class RCompleteActivity extends Activity {
 
     private Button confirmP;
     private EditText review;
+    private RatingBar ratingBar;
 
     String reviewText;
+    int rating;
 
     //handles getting the review, but doesn't save it anywhere.
     public void write(){
         review = (EditText) findViewById(R.id.complete_Review_Text);
 
         reviewText = review.getText().toString();
+        rating = ratingBar.getNumStars();
     }
 
     public void move(){
         confirmP = (Button) findViewById(R.id.complete_Confirm_Button);
+        ratingBar = (RatingBar) findViewById(R.id.complete_ratingBar);
         if (getIntent().getBooleanExtra("isRider", false)) {
             confirmP.setText("Pay Driver and Finish");
         }
@@ -40,7 +45,7 @@ public class RCompleteActivity extends Activity {
             @Override
             public void onClick(View v) {
                 write();
-                Review review = new Review(reviewText, 0, getIntent().getStringExtra("theirID"));
+                Review review = new Review(reviewText, rating, getIntent().getStringExtra("theirID"));
                 Rider.getInstance().leaveReview(review);
                 finish();
             }

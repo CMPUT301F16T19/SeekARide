@@ -25,7 +25,7 @@ public class TestingActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 setResult(RESULT_OK);
-                Profile profile = new Profile("TESTNAME", "TESTNUMBER", "TESTEMAIL");
+                Profile profile = new Profile("TESTNAME", "TESTNUMBER", "TESTEMAIL" ,"TESTCAR");
                 ElasticsearchController.AddUserTask aut = new ElasticsearchController.AddUserTask(profile);
                 aut.execute();
                 finish();

@@ -13,6 +13,7 @@ public class Profile {
     private String username;
     private String phoneNumber;
     private String email;
+    private String car;
     @JestId
     private String id;
 
@@ -23,10 +24,11 @@ public class Profile {
      * @param p the p
      * @param e the e
      */
-    public Profile(String u, String p, String e) {
+    public Profile(String u, String p, String e, String c) {
         username = u;
         phoneNumber = p;
         email = e;
+        car = c;
     }
 
     public Profile(Profile p) {
@@ -34,6 +36,18 @@ public class Profile {
         phoneNumber = p.getPhoneNumber();
         email = p.getEmail();
         id = p.getId();
+        car = p.getCar();
+    }
+
+    public String getCar() {
+        if (car == null) {
+            return "";
+        }
+        return car;
+    }
+
+    public void setCar(String car) {
+        this.car = car;
     }
 
     /**
@@ -118,7 +132,7 @@ public class Profile {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<Review>();
     }
 
     public double getRating() {

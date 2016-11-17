@@ -72,4 +72,23 @@
         android:layout_above="@+id/view_Profile_Back_Button"
         android:layout_alignEnd="@+id/view_Profile_Back_Button"
         android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view_Profile_ListView"
+        android:layout_below="@+id/view_Rating"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/accept_Driver" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rating"
+        android:id="@+id/view_Rating"
+        android:layout_below="@+id/edit_Car_Text"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

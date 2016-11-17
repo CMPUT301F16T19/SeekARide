@@ -65,7 +65,7 @@ public class NewAccountActivity extends Activity {
                             Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (!loginController.createNewAccount(new Profile(usernameText, phoneNumberText, emailText))) {
+                if (!loginController.createNewAccount(new Profile(usernameText, phoneNumberText, emailText, carText))) {
                     Toast.makeText(getApplicationContext(), "User already exists.",
                             Toast.LENGTH_LONG).show();
                     return;

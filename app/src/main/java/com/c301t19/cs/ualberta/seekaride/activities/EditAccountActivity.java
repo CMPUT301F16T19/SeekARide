@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
@@ -33,6 +34,10 @@ public class EditAccountActivity extends Activity {
     String emailText;
     String carText;
 
+    private TextView rating;
+    private ReviewsAdapter adapter;
+    private ListView reviewList;
+
     //sets up the text boxes and lets you fill them in.
     public void write() {
         username = (EditText) findViewById(R.id.edit_User_Text);
@@ -41,6 +46,7 @@ public class EditAccountActivity extends Activity {
         phoneNumber = (EditText) findViewById(R.id.edit_Phone_Text);
         email = (EditText) findViewById(R.id.edit_Email_Text);
         car = (EditText) findViewById(R.id.edit_Car_Text);
+        rating = (TextView) findViewById(R.id.edit_Account_Rating);
 
         usernameText = username.getText().toString();
         passwordText = password.getText().toString();
@@ -48,7 +54,7 @@ public class EditAccountActivity extends Activity {
         phoneNumberText = phoneNumber.getText().toString();
         emailText = email.getText().toString();
         carText = car.getText().toString();
-
+        rating.setText("Rating: " + ((Double)Rider.getInstance().getProfile().getRating()).toString());
     }
 
     public void move(){
@@ -83,6 +89,10 @@ public class EditAccountActivity extends Activity {
         setContentView(R.layout.activity_edit_account);
         write();
         move();
+        reviewList = (ListView) findViewById(R.id.edit_Account_Reviews);
+        adapter = new ReviewsAdapter(this,
+                R.layout.request_list_item, Rider.getInstance().getProfile().getReviews(), getLayoutInflater());
+        reviewList.setAdapter(adapter);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
@@ -25,7 +26,10 @@ public class ViewProfileActivity extends Activity {
     private TextView username;
     private TextView phoneNumber;
     private TextView email;
-    //private TextView car;
+    private TextView rating;
+    private ReviewsAdapter adapter;
+    private ListView reviewList;
+    private TextView car;
 
     //sets up the text boxes and lets you fill them in.
     public void write() {
@@ -33,11 +37,14 @@ public class ViewProfileActivity extends Activity {
         username = (TextView) findViewById(R.id.View_user_text);
         phoneNumber = (TextView) findViewById(R.id.edit_Phone_Text);
         email = (TextView) findViewById(R.id.edit_Email_Text);
-        //car = (TextView) findViewById(R.id.view_Car_Text);
+        rating = (TextView) findViewById(R.id.view_Rating);
+        car = (TextView) findViewById(R.id.edit_Car_Text);
 
         username.setText(aProfile.getUsername());
         phoneNumber.setText(aProfile.getPhoneNumber());
         email.setText(aProfile.getEmail());
+        car.setText(aProfile.getCar());
+        rating.setText("Rating: " + ((Double)aProfile.getRating()).toString());
     }
 
     public void move(){
@@ -95,6 +102,10 @@ public class ViewProfileActivity extends Activity {
         }
         move();
         write();
+        reviewList = (ListView) findViewById(R.id.view_Profile_ListView);
+        adapter = new ReviewsAdapter(this,
+                R.layout.request_list_item, aProfile.getReviews(), getLayoutInflater());
+        reviewList.setAdapter(adapter);
     }
 
     /*
