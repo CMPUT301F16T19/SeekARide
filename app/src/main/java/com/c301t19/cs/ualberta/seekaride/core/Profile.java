@@ -1,6 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import io.searchbox.annotations.JestId;
 
@@ -105,5 +106,30 @@ public class Profile {
             return true;
         }
         return false;
+    }
+
+    public ArrayList<Review> getReviews() {
+        ElasticsearchController.GetReviewsTask getReviewsTask = new ElasticsearchController.GetReviewsTask(id);
+        getReviewsTask.execute();
+        try {
+            return getReviewsTask.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public double getRating() {
+        ArrayList<Review> reviews = getReviews();
+        double res = 0;
+        if (reviews == null || reviews.isEmpty()) {
+            return res;
+        }
+        for (int i = 0; i < reviews.size(); i++) {
+            res = res + reviews.get(i).getRating();
+        }
+        return (res/reviews.size());
     }
 }
