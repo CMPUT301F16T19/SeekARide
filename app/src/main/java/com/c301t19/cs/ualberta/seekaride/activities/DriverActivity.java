@@ -3,7 +3,6 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.ListView;
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
-import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 public class DriverActivity extends Activity {
 
@@ -25,7 +23,7 @@ public class DriverActivity extends Activity {
 
     public void move(){
         search = (Button) findViewById(R.id.driver_Search_Button);
-        requests = (ListView) findViewById(R.id.rider_Requests);
+        requests = (ListView) findViewById(R.id.driver_Requests);
         //Moves you to the search for requests screen.
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +37,7 @@ public class DriverActivity extends Activity {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id){
                 //selectedRequest = (Request) requests.getItemAtPosition(position);
-                selectedRequest = (Request) adapter.getItem(position);
+                selectedRequest = adapter.getItem(position);
                 int requestIndex = Driver.getInstance().getAcceptedRequests().indexOf(selectedRequest);
                 if (requestIndex < 0) {
                     return;
@@ -57,7 +55,7 @@ public class DriverActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
-        requests = (ListView) findViewById(R.id.rider_Requests);
+        requests = (ListView) findViewById(R.id.driver_Requests);
         //adapter = new RequestsAdapter(this,
         //        R.layout.request_list_item, Driver.getInstance().getAcceptedRequests(), getLayoutInflater());
         //Log.i("adapter", ((Boolean)(adapter==null)).toString());

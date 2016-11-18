@@ -116,10 +116,8 @@ public class Profile {
         if (id == null) {
             return false;
         }
-        if (((Profile)(obj)).getId().equals(id)) {
-            return true;
-        }
-        return false;
+        //changed from if statement.
+        return ((Profile) (obj)).getId().equals(id);
     }
 
     public ArrayList<Review> getReviews() {

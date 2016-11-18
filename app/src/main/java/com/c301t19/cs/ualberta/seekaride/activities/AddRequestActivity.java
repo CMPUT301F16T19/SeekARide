@@ -106,8 +106,9 @@ public class AddRequestActivity extends Activity {
                                     "request fare",
                             Toast.LENGTH_LONG).show();
                 }
+                //changed to !fare.getTex().toString().isEmpty())) for cleaner code.
                 if ((startLoc != null) & (endLoc != null) &
-                        (fare.getText().toString().isEmpty() == false)) {
+                        (!fare.getText().toString().isEmpty())) {
                     write();
                     Rider.getInstance().makeRequest(descriptText, startLoc,
                             endLoc, Double.parseDouble(

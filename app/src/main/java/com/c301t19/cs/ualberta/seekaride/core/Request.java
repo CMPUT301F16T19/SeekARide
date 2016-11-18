@@ -280,10 +280,8 @@ public class Request {
         if (id == null) {
             return false;
         }
-        if (((Request)(obj)).getId().equals(id)) {
-            return true;
-        }
-        return false;
+        //removed if statement, replaced if with a return.
+        return ((Request) (obj)).getId().equals(id);
     }
 
     public void setDescription(String description) {
