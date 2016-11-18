@@ -7,6 +7,7 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
@@ -143,10 +145,9 @@ public class ElasticsearchController {
         @Override
         protected Profile doInBackground(Void... params) {
             verifySettings();
-            String query;
             switch (userField) {
                 case NAME:
-                    query = "{\n" +
+                    String query = "{\n" +
                             "    \"query\": {\n" +
                             "        \"filtered\" : {\n" +
                             "            \"filter\" : {\n" +
@@ -155,39 +156,36 @@ public class ElasticsearchController {
                             "        }\n" +
                             "    }\n" +
                             "}";
-                    break;
-                case ID:
-                    query = "{\n" +
-                            "    \"query\": {\n" +
-                            "        \"filtered\" : {\n" +
-                            "            \"filter\" : {\n" +
-                            "                \"term\" : { \"id\" : \"" + keyword + "\" }\n" +
-                            "            }\n" +
-                            "        }\n" +
-                            "    }\n" +
-                            "}";
-                    break;
-                default:
-                    return null;
-            }
-            Search search = new Search.Builder(query)
+                    Search search = new Search.Builder(query)
                             .addIndex("t19seekaride")
                             .addType("user")
                             .build();
-            List<Profile> profiles = null;
-            try {
-                SearchResult result = client.execute(search);
-                profiles = result.getSourceAsObjectList(Profile.class);
-            }
-            catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-            }
-            if (profiles == null || profiles.size() < 1) {
-                Log.i("fail", "no profile");
-                return null;
-            }
-            else {
-                return profiles.get(0);
+                    List<Profile> profiles = null;
+                    try {
+                        SearchResult result = client.execute(search);
+                        profiles = result.getSourceAsObjectList(Profile.class);
+                    }
+                    catch (Exception e) {
+                        Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                    }
+                    if (profiles == null || profiles.size() < 1) {
+                        Log.i("fail", "no profile");
+                        return null;
+                    }
+                    else {
+                        return profiles.get(0);
+                    }
+                case ID:
+                    Get get = new Get.Builder("t19seekaride", keyword).type("user").build();
+                    JestResult result = null;
+                    try {
+                        result = client.execute(get);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return result.getSourceAsObject(Profile.class);
+                default:
+                    return null;
             }
         }
     }
