@@ -8,12 +8,8 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
@@ -524,4 +520,5 @@ public class ElasticsearchController {
         }
         return result;
     }
+
 }

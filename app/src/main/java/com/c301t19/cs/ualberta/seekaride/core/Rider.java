@@ -1,6 +1,5 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -90,6 +89,13 @@ public class Rider extends User {
         deleteRequest(openRequests.get(index));
 
     }
+
+//    public void deleteAllRequest(){
+//        openRequests.clear();
+//        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteAllRequestTask();
+//        deleteRequestTask.execute();
+//    }
+
 
     public void deleteRequest(Request request) {
 

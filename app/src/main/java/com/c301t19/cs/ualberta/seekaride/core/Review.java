@@ -4,6 +4,18 @@ import io.searchbox.annotations.JestId;
 
 public class Review {
 
+    private String description;
+    private int rating;
+    private String userID;
+    @JestId
+    private String id;
+
+    public Review(String description, int rating, String userID) {
+        this.description = description;
+        this.rating = rating;
+        this.userID = userID;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -11,8 +23,6 @@ public class Review {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    private String description;
 
     public int getRating() {
         return rating;
@@ -22,8 +32,6 @@ public class Review {
         this.rating = rating;
     }
 
-    private int rating;
-
     public String getUserID() {
         return userID;
     }
@@ -32,18 +40,9 @@ public class Review {
         this.userID = userID;
     }
 
-    private String userID;
-
     public String getId() {
         return id;
     }
 
-    @JestId
-    private String id;
 
-    public Review(String description, int rating, String userID) {
-        this.description = description;
-        this.rating = rating;
-        this.userID = userID;
-    }
 }
