@@ -452,4 +452,55 @@ public class TestCases extends TestCase {
 
     }
 
+//    US 1.09.01 (added 2016-11-14)
+//    As a rider, I should see a description of the driver's vehicle.
+    public void testRequest25(){
+        Location startPoint = new Location("111st");
+        Location destination = new Location("112st");
+        float price = 998;
+        Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        Request testRequest = Rider.getInstance().getRequest(0);
+
+
+        Driver.getInstance().acceptRequest(testRequest);
+        assertFalse(Driver.getInstance().isConfirmed(0));
+        Rider.getInstance().acceptDriverOffer(0,0);
+        assertTrue(Driver.getInstance().isConfirmed(0));
+
+        Rider.getInstance().getRequest(0).getDriverProfile().getCar();
+    }
+//
+//    US 1.10.01 (added 2016-11-14)
+//    As a rider, I want to see some summary rating of the drivers who accepted my offers.
+    
+//
+//    US 1.11.01 (added 2016-11-14)
+//    As a rider, I want to rate a driver for his/her service (1-5).
+//
+//
+//    US 03.04.01 (added 2016-11-14)
+//
+//    As a driver, in my profile I can provide details about the vehicle I drive.
+//
+//    US 04.03.01 (added 2016-11-14)
+//    As a driver, I should be able filter request searches by price per KM and price.
+//
+//            US 04.04.01 (added 2016-11-14)
+//    As a driver, I should be able to see the addresses of the requests.
+//
+//            US 04.05.01 (added 2016-11-14)
+//
+//    As a driver, I should be able to search by address or nearby an address.
+//
+//
+//    Requirements cluster 1:
+//    US 1.09.01 (car details)
+//    US 03.04.01 (car details)
+//    US 04.03.01 (price search)
+//
+//    US 1.10.01 (ratings)
+//
+//    US 1.11.01 (ratings)
+
 }

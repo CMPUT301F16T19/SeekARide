@@ -31,6 +31,13 @@ public class Profile {
         car = c;
     }
 
+    public Profile(String u, String p, String e) {
+        username = u;
+        phoneNumber = p;
+        email = e;
+        car = null;
+    }
+
     public Profile(Profile p) {
         username = p.getUsername();
         phoneNumber = p.getPhoneNumber();
