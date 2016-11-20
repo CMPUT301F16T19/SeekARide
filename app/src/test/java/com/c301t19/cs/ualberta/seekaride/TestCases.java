@@ -4,6 +4,7 @@ import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
+import com.c301t19.cs.ualberta.seekaride.core.Review;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.c301t19.cs.ualberta.seekaride.core.User;
 
@@ -506,8 +507,13 @@ public class TestCases extends TestCase {
         //assertTrue(Driver.getInstance().isConfirmed(0));
 
         Rider.getInstance().completeRequest(0);
-        //Review review = new Review(descrip,rating,userid);
-        //Rider.getInstance().leaveReview(review);
+        String descrip = "not bad";
+        int rating = 4;
+        Review review = new Review(descrip,rating,Driver.getInstance().getProfile().getId());
+        Rider.getInstance().leaveReview(review);
+
+        ArrayList<Review> reviews= Driver.getInstance().getProfile().getReviews();
+        //assertTrue(reviews.contains(review));
 
     }
 
