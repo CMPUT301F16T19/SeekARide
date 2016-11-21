@@ -36,17 +36,27 @@ public class EditRequestActivity extends Activity {
     //takes the filled in information sets variables to it.
     public void write() {
         description = (TextView) findViewById(R.id.edit_Description_Text);
-        /* someone fix this plz
-        sLocation = (TextView) findViewById(R.id.edit_SLocation_Text);
-        eLocation = (TextView) findViewById(R.id.edit_ELocation_Text);
-        */
-        fare = (TextView) findViewById(R.id.edit_Fare_Text);
-        recommendedFare = (TextView) findViewById(R.id.edit_RecFare_Text);
 
-        desciptText = description.getText().toString();
+        sLocation = (TextView) findViewById(R.id.edit_Slocation_Text);
+        eLocation = (TextView) findViewById(R.id.edit_Elocation_Text);
+
+        fare = (TextView) findViewById(R.id.edit_Fare_Text);
+        recommendedFare = (TextView) findViewById(R.id.editRecommendedFareNumber);
+
+        description.setText(request.getDescription());
+        sLocation.setText(request.getStart().getAddress());
+        eLocation.setText(request.getDestination().getAddress());
+        fare.setText(String.valueOf("$" + String.valueOf(request.getPrice())));
+
+        // THIS NEEDS TO BE WORKED ON TO WRITE AFTER EDITING INDIVIDUAL PARAMS
+
+        recommendedFare.setText(request.getStart().calculateFare(
+                request.getDestination()));
+
+        //desciptText = description.getText().toString();
         //String startText = sLocation.getText().toString();
         //String endText = eLocation.getText().toString();
-        fareText = fare.getText().toString();
+        //fareText = fare.getText().toString();
         // I don't know how we're setting our recommended fares, so it's commented out.
         //recommendedFare.setText();
     }
@@ -90,6 +100,7 @@ public class EditRequestActivity extends Activity {
         description = (TextView) findViewById(R.id.edit_Description_Text);
         description.setText(request.getDescription());
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +112,7 @@ public class EditRequestActivity extends Activity {
         driversList.setAdapter(adapter);
         move();
         write();
-        load();
+        //load();
     }
 
     @Override

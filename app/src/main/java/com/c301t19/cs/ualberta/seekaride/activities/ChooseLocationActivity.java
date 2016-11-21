@@ -38,7 +38,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
     private Drawable poiIcon;
 
     private Location locToSend;
-    private String startOrEnd; // PULL FROM INTENT;
+    private String startOrEnd;
     private String callingActivity;
 
     MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
+import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.google.gson.Gson;
 
@@ -178,13 +179,15 @@ public class AddRequestActivity extends Activity {
             waypoints.add(endLoc.getGeoLocation());
             Road road = roadManager.getRoad(waypoints);
             Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
-            recommendedFare.setText(calculateFare(startLoc, endLoc));
+            //recommendedFare.setText(calculateFare(startLoc, endLoc));
+            recommendedFare.setText(startLoc.calculateFare(endLoc));
             map.getOverlays().add(roadOverlay);
         }
         map.invalidate();
     }
 
-    // Should be moved to aa model class
+    // has been moved to location
+    @Deprecated
     public String calculateFare(Location loc1, Location loc2) {
         GeoPoint geo1 = loc1.getGeoLocation();
         GeoPoint geo2 = loc2.getGeoLocation();
@@ -196,6 +199,7 @@ public class AddRequestActivity extends Activity {
         double cost = (double) distanceInKm * costPerKm;
         return ("$" + dFormat.format(cost));
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

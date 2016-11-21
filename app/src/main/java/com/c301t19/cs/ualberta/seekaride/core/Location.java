@@ -2,6 +2,8 @@ package com.c301t19.cs.ualberta.seekaride.core;
 
 import org.osmdroid.util.GeoPoint;
 
+import java.text.DecimalFormat;
+
 /**
  * Stores a Geolocation.
  * <p/>
@@ -56,5 +58,17 @@ public class Location {
      */
     public GeoPoint getGeoLocation() {
         return geoLocation;
+    }
+
+    public String calculateFare(Location loc2) {
+        GeoPoint geo1 = this.geoLocation;
+        GeoPoint geo2 = loc2.getGeoLocation();
+        float distanceInMeters = geo1.distanceTo(geo2);
+        float distanceInKm = distanceInMeters/1000;
+        double costPerKm = 1.48;
+        //http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
+        DecimalFormat dFormat = new DecimalFormat("#.##");
+        double cost = (double) distanceInKm * costPerKm;
+        return ("$" + dFormat.format(cost));
     }
 }
