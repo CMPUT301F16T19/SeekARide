@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -27,7 +29,9 @@ import org.osmdroid.views.overlay.FolderOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ChooseLocationActivity extends Activity implements MapEventsReceiver {
 
@@ -58,11 +62,21 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
             longTapMarker.remove(map);
         }
 
-        locToSend = new Location("Custom Location");
+        String locationName;
+        Address address;
+
+        Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+        try {
+            address = geoCoder.getFromLocation(p.getLatitude(), p.getLongitude(), 1).get(0);
+            locationName = address.getAddressLine(0);
+        } catch (IOException e) {
+            locationName = "Custom Location";
+        }
+        locToSend = new Location(locationName);
         locToSend.setGeoLocation(p);
 
         longTapMarker = new Marker(map);
-        longTapMarker.setTitle("Custom Location");
+        longTapMarker.setTitle(locationName);
         longTapMarker.setPosition(p);
         longTapMarker.setIcon(poiIcon);
         map.getOverlays().add(longTapMarker);

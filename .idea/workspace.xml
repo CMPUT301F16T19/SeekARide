@@ -105,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RiderActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RiderActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/RiderActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33497536">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -118,7 +118,7 @@
       <file leaf-file-name="EditRequestActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/EditRequestActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="42.724136">
+            <state vertical-scroll-proportion="-22.344828">
               <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
               <folding>
                 <element signature="e#4083#4941#0" expanded="true" />
@@ -132,11 +132,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChooseLocationActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ChooseLocationActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ChooseLocationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="176" column="74" selection-start-line="176" selection-start-column="74" selection-end-line="176" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.5862069">
+              <caret line="60" column="36" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -1860,7 +1860,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/ElasticsearchController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Rider.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/c301t19/cs/ualberta/seekaride/TestCases.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ChooseLocationActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Location.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/AddRequestActivity.java" />
@@ -1869,6 +1868,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/EditRequestActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_request.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_request.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ChooseLocationActivity.java" />
       </list>
     </option>
   </component>
@@ -2885,14 +2885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ChooseLocationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="176" column="74" selection-start-line="176" selection-start-column="74" selection-end-line="176" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Request.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2902,21 +2894,6 @@
             <element signature="e#6647#6648#0" expanded="true" />
             <element signature="e#6703#6704#0" expanded="true" />
             <element signature="e#6749#6750#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/EditRequestActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="42.724136">
-          <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
-          <folding>
-            <element signature="e#4083#4941#0" expanded="true" />
-            <element signature="e#4940#4941#0" expanded="true" />
-            <element signature="e#5059#5320#0" expanded="true" />
-            <element signature="e#5319#5320#0" expanded="true" />
-            <element signature="e#5408#5550#0" expanded="true" />
-            <element signature="e#5549#5550#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2966,8 +2943,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/RiderActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33497536">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/EditRequestActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.344828">
+          <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
+          <folding>
+            <element signature="e#4083#4941#0" expanded="true" />
+            <element signature="e#4940#4941#0" expanded="true" />
+            <element signature="e#5059#5320#0" expanded="true" />
+            <element signature="e#5319#5320#0" expanded="true" />
+            <element signature="e#5408#5550#0" expanded="true" />
+            <element signature="e#5549#5550#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ChooseLocationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5862069">
+          <caret line="60" column="36" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
           <folding />
         </state>
       </provider>
