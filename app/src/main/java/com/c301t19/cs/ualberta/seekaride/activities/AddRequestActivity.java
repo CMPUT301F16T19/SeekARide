@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
-import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.google.gson.Gson;
 
@@ -34,13 +32,13 @@ public class AddRequestActivity extends Activity {
 
     public Button createR;
     public Button Back;
-    private EditText description;
-    private EditText sLocation;
-    private EditText eLocation;
+    private EditText descriptionText;
+    private EditText startLocationText;
+    private EditText endLocationText;
     private EditText fare;
     private TextView recommendedFare;
-    private Location startLoc;
-    private Location endLoc;
+    private Location startLocation;
+    private Location endLocation;
     private GeoPoint startPoint;
     private MapView map;
 
@@ -48,19 +46,15 @@ public class AddRequestActivity extends Activity {
 
     //takes the filled in information sets variables to it.
     public void write() {
-        description = (EditText) findViewById(R.id.add_Description_Text);
-        sLocation = (EditText) findViewById(R.id.add_Slocation_Text);
-        eLocation = (EditText) findViewById(R.id.add_Elocation_Text);
+        descriptionText = (EditText) findViewById(R.id.add_Description_Text);
+        startLocationText = (EditText) findViewById(R.id.add_Slocation_Text);
+        endLocationText = (EditText) findViewById(R.id.add_Elocation_Text);
         fare = (EditText) findViewById(R.id.add_Fare_Text);
         recommendedFare = (TextView) findViewById(R.id.recommendedFareNumber);
 
-        descriptText = description.getText().toString();
-        String startText = sLocation.getText().toString();
-        String endText = eLocation.getText().toString();
-        String fareText = fare.getText().toString();
+        descriptText = descriptionText.getText().toString();
 
-
-        sLocation.setOnClickListener(new View.OnClickListener() {
+        startLocationText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),
                         ChooseLocationActivity.class);
@@ -70,7 +64,7 @@ public class AddRequestActivity extends Activity {
             }
         });
 
-        eLocation.setOnClickListener(new View.OnClickListener() {
+        endLocationText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),
                         ChooseLocationActivity.class);
@@ -92,12 +86,12 @@ public class AddRequestActivity extends Activity {
                 Intent Cswitch = new Intent(AddRequestActivity.this, RiderActivity.class);
                 startActivity(Cswitch);
                 */
-                if (startLoc == null) {
+                if (startLocation == null) {
                     Toast.makeText(getApplicationContext(), "Please fill in " +
                             "start location",
                             Toast.LENGTH_LONG).show();
                 }
-                if (endLoc == null) {
+                if (endLocation == null) {
                     Toast.makeText(getApplicationContext(), "Please fill in " +
                                     "destination location",
                             Toast.LENGTH_LONG).show();
@@ -108,11 +102,11 @@ public class AddRequestActivity extends Activity {
                             Toast.LENGTH_LONG).show();
                 }
                 //changed to !fare.getTex().toString().isEmpty())) for cleaner code.
-                if ((startLoc != null) & (endLoc != null) &
+                if ((startLocation != null) & (endLocation != null) &
                         (!fare.getText().toString().isEmpty())) {
                     write();
-                    Rider.getInstance().makeRequest(descriptText, startLoc,
-                            endLoc, Double.parseDouble(
+                    Rider.getInstance().makeRequest(descriptText, startLocation,
+                            endLocation, Double.parseDouble(
                                     fare.getText().toString()));
                     finish();
                 }
@@ -139,48 +133,47 @@ public class AddRequestActivity extends Activity {
         map.getOverlays().clear();
 
         if (intent.getStringExtra("start") != null) {
-            startLoc = new Location("");
-            startLoc = gson.fromJson(intent.getStringExtra("start"), startLoc.getClass());
+            startLocation = new Location("");
+            startLocation = gson.fromJson(intent.getStringExtra("start"), startLocation.getClass());
         }
-        if (startLoc == null) {
-            sLocation.setText("");
+        if (startLocation == null) {
+            startLocationText.setText("");
         }
-        if (startLoc != null) {
-            sLocation.setText(startLoc.getAddress());
+        if (startLocation != null) {
+            startLocationText.setText(startLocation.getAddress());
             Marker sMarker = new Marker(map);
-            sMarker.setPosition(startLoc.getGeoLocation());
-            sMarker.setTitle(startLoc.getAddress());
+            sMarker.setPosition(startLocation.getGeoLocation());
+            sMarker.setTitle(startLocation.getAddress());
             sMarker.setIcon(getResources().getDrawable(R.drawable.person));
             sMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             map.getOverlays().add(sMarker);
         }
 
         if (intent.getStringExtra("end") != null) {
-            endLoc = new Location("");
-            endLoc = gson.fromJson(intent.getStringExtra("end"), endLoc.getClass());
+            endLocation = new Location("");
+            endLocation = gson.fromJson(intent.getStringExtra("end"), endLocation.getClass());
         }
-        if (endLoc == null)  {
-            eLocation.setText("");
+        if (endLocation == null)  {
+            endLocationText.setText("");
         }
-        if (endLoc != null) {
-            eLocation.setText(endLoc.getAddress());
+        if (endLocation != null) {
+            endLocationText.setText(endLocation.getAddress());
             Marker eMarker = new Marker(map);
-            eMarker.setPosition(endLoc.getGeoLocation());
-            eMarker.setTitle(endLoc.getAddress());
+            eMarker.setPosition(endLocation.getGeoLocation());
+            eMarker.setTitle(endLocation.getAddress());
             eMarker.setIcon(getResources().getDrawable(R.drawable.marker_default));
             eMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             map.getOverlays().add(eMarker);
         }
 
-        if((startLoc != null) & (endLoc != null)) {
+        if((startLocation != null) & (endLocation != null)) {
             RoadManager roadManager = new OSRMRoadManager(this);
             ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
-            waypoints.add(startLoc.getGeoLocation());
-            waypoints.add(endLoc.getGeoLocation());
+            waypoints.add(startLocation.getGeoLocation());
+            waypoints.add(endLocation.getGeoLocation());
             Road road = roadManager.getRoad(waypoints);
             Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
-            //recommendedFare.setText(calculateFare(startLoc, endLoc));
-            recommendedFare.setText(startLoc.calculateFare(endLoc));
+            recommendedFare.setText(startLocation.calculateFare(endLocation));
             map.getOverlays().add(roadOverlay);
         }
         map.invalidate();

@@ -7,12 +7,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
+import com.google.gson.Gson;
+
+import org.osmdroid.bonuspack.routing.OSRMRoadManager;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Polyline;
+
+import java.util.ArrayList;
 
 public class EditRequestActivity extends Activity {
 
@@ -21,41 +34,67 @@ public class EditRequestActivity extends Activity {
     private Button editR;
     private Button deleteR;
     private Button Cancel;
-    private TextView description;
-    private TextView sLocation;
-    private TextView eLocation;
+    private EditText descriptionText;
+    private TextView startLocationText;
+    private TextView endLocationText;
     private TextView fare;
     private TextView recommendedFare;
+    private Location startLocation;
+    private Location endLocation;
+    private String fareString;
 
     private DriversAdapter adapter;
     private ListView driversList;
 
-    String desciptText;
+    private String desciptText;
     String fareText;
 
     //takes the filled in information sets variables to it.
     public void write() {
-        description = (TextView) findViewById(R.id.edit_Description_Text);
+        descriptionText = (EditText) findViewById(R.id.edit_Description_Text);
 
-        sLocation = (TextView) findViewById(R.id.edit_Slocation_Text);
-        eLocation = (TextView) findViewById(R.id.edit_Elocation_Text);
+        startLocation = request.getStart();
+        startLocationText = (TextView) findViewById(R.id.edit_Slocation_Text);
+        endLocation = request.getDestination();
+        endLocationText = (TextView) findViewById(R.id.edit_Elocation_Text);
 
-        fare = (TextView) findViewById(R.id.edit_Fare_Text);
+        fare = (EditText) findViewById(R.id.edit_Fare_Text);
+        fareString = String.valueOf(request.getPrice());
         recommendedFare = (TextView) findViewById(R.id.editRecommendedFareNumber);
 
-        description.setText(request.getDescription());
-        sLocation.setText(request.getStart().getAddress());
-        eLocation.setText(request.getDestination().getAddress());
-        fare.setText(String.valueOf("$" + String.valueOf(request.getPrice())));
+        descriptionText.setText(request.getDescription());
+        startLocationText.setText(request.getStart().getAddress());
+        endLocationText.setText(request.getDestination().getAddress());
+        fare.setText(fareString);
 
         // THIS NEEDS TO BE WORKED ON TO WRITE AFTER EDITING INDIVIDUAL PARAMS
 
         recommendedFare.setText(request.getStart().calculateFare(
                 request.getDestination()));
 
-        //desciptText = description.getText().toString();
-        //String startText = sLocation.getText().toString();
-        //String endText = eLocation.getText().toString();
+        startLocationText.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),
+                        ChooseLocationActivity.class);
+                intent.putExtra("key", "start");
+                intent.putExtra("callingActivity", "edit");
+                startActivityForResult(intent, RESULT_OK);
+            }
+        });
+
+        endLocationText.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),
+                        ChooseLocationActivity.class);
+                intent.putExtra("key", "end");
+                intent.putExtra("callingActivity", "edit");
+                startActivityForResult(intent, RESULT_OK);
+            }
+        });
+
+        //desciptText = descriptionText.getText().toString();
+        //String startText = startLocationText.getText().toString();
+        //String endText = endLocationText.getText().toString();
         //fareText = fare.getText().toString();
         // I don't know how we're setting our recommended fares, so it's commented out.
         //recommendedFare.setText();
@@ -69,9 +108,18 @@ public class EditRequestActivity extends Activity {
         editR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                write();
+                //write();
                 Request edited = new Request(request);
-                edited.setDescription(desciptText);
+                edited.setDescription(descriptionText.getText().toString());
+                edited.setStart(startLocation);
+                edited.setDestination(endLocation);
+                try {
+                    edited.setPrice(Double.parseDouble(fare.getText().toString()));
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), "invalid fare format",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Rider.getInstance().editRequest(edited);
                 Rider.getInstance().updateOpenRequests();
                 finish();
@@ -96,9 +144,10 @@ public class EditRequestActivity extends Activity {
         });
     }
 
+    @Deprecated
     public void load() {
-        description = (TextView) findViewById(R.id.edit_Description_Text);
-        description.setText(request.getDescription());
+        descriptionText = (EditText) findViewById(R.id.edit_Description_Text);
+        descriptionText.setText(request.getDescription());
     }
 
     @Override
@@ -112,6 +161,7 @@ public class EditRequestActivity extends Activity {
         driversList.setAdapter(adapter);
         move();
         write();
+        getLocations();
         //load();
     }
 
@@ -135,5 +185,36 @@ public class EditRequestActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getLocations() {
+        Intent intent = getIntent();
+        Gson gson = new Gson();
+
+        if (intent.getStringExtra("start") != null) {
+            startLocation = new Location("");
+            startLocation = gson.fromJson(intent.getStringExtra("start"), startLocation.getClass());
+            startLocationText.setText(startLocation.getAddress());
+        }
+        if (startLocation == null) {
+            startLocationText.setText("");
+        }
+
+        if (intent.getStringExtra("end") != null) {
+            endLocation = new Location("");
+            endLocation = gson.fromJson(intent.getStringExtra("end"), endLocation.getClass());
+            endLocationText.setText(endLocation.getAddress());
+        }
+        if (endLocation == null)  {
+            endLocationText.setText("");
+        }
+        recommendedFare.setText(startLocation.calculateFare(endLocation));
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        getLocations();
     }
 }

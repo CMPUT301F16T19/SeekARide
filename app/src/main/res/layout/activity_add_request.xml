@@ -38,7 +38,7 @@
         android:layout_alignEnd="@+id/add_Slocation_Text"
         android:hint="End Location"
         android:focusableInTouchMode="false"
-        android:clickable="true"/>
+        android:clickable="true" />
 
     <TextView
         android:layout_width="wrap_content"

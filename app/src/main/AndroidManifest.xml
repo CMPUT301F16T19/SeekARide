@@ -40,7 +40,7 @@
             android:name=".activities.EditAccountActivity"
             android:label="@string/title_activity_edit_account" />
         <activity
-            android:name=".activities.EditRequestActivity"
+            android:name=".activities.EditRequestActivity" android:launchMode="singleTask"
             android:label="@string/title_activity_edit_request" />
         <activity
             android:name=".AcceptRiderActivity"

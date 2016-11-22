@@ -16,7 +16,10 @@ public class Request {
 
     private Date requestTime;
     private String description;
+
     private Location start;
+
+
     private Location destination;
     //private String riderName;
     private ArrayList<Profile> acceptedDriverProfiles;
@@ -299,5 +302,13 @@ public class Request {
 
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
+    }
+
+    public void setStart(Location start) {
+        this.start = start;
+    }
+
+    public void setDestination(Location destination) {
+        this.destination = destination;
     }
 }
