@@ -148,6 +148,21 @@ public class Driver extends User {
         }
     }
 
+    public void receivePayment(Request request) {
+        if (request.didRiderPay()) {
+            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+            deleteRequestTask.execute();
+        }
+        else {
+            Request edited = new Request(request);
+            edited.driverReceivePay();
+            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+            ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(edited, edited.getId());
+            deleteRequestTask.execute();
+            addRequestTask.execute();
+        }
+    }
+
     /**
      * Is confirmed boolean.
      *

@@ -58,22 +58,12 @@ public class RCompleteActivity extends Activity {
                 if (isRider) {
                     Rider.getInstance().updateOpenRequests();
                     request = Rider.getInstance().getRequest(request.getId());
-                    if (request.didDriverReceivePay()) {
-                        // delete request
-                    }
-                    else {
-                        request.riderPay();
-                    }
+                    Rider.getInstance().makePayment(request);
                 }
                 else {
                     Driver.getInstance().updateAcceptedRequests();
                     request = Driver.getInstance().getRequest(request.getId());
-                    if (request.didRiderPay()) {
-                        // delete request
-                    }
-                    else {
-                        request.driverReceivePay();
-                    }
+                    Driver.getInstance().receivePayment(request);
                 }
 
                 finish();

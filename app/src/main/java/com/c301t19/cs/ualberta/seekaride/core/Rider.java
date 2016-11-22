@@ -135,7 +135,23 @@ public class Rider extends User {
      * @param indexR the index r
      */
     public void makePayment(int indexR) {
+
         openRequests.get(indexR).riderPay();
+    }
+
+    public void makePayment(Request request) {
+        if (request.didDriverReceivePay()) {
+            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+            deleteRequestTask.execute();
+        }
+        else {
+            Request edited = new Request(request);
+            edited.riderPay();
+            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+            ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(edited, edited.getId());
+            deleteRequestTask.execute();
+            addRequestTask.execute();
+        }
     }
 
     /**
