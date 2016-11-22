@@ -70,7 +70,8 @@ public class EditAccountActivity extends Activity {
                 newProfile.setEmail(emailText);
                 newProfile.setPhoneNumber(phoneNumberText);
                 newProfile.setUsername(usernameText);
-                new LoginController().editAccount(Rider.getInstance().getProfile(), newProfile);
+                newProfile.setCar(carText);
+                (new LoginController()).editAccount(Rider.getInstance().getProfile(), newProfile);
                 finish();
             }
         });

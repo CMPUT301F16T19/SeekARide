@@ -119,7 +119,6 @@ public class ElasticsearchController {
     /**
      * Retrieves a Profile from Elasticsearch.
      * <p/>
-     * Issues: Currently only allows you to search by username.
      */
     public static class GetUserTask extends AsyncTask<Void, Void, Profile> {
 
@@ -255,9 +254,7 @@ public class ElasticsearchController {
     }
 
     /**
-     * Retrieves an ArrayList of Requests from Elasticsearch.
-     * <p/>
-     * Issues: Currently only allows you to search by the Rider's id.
+     * Retrieves an ArrayList of Requests from Elasticsearch. Currently allows you to search by RiderID, DriverID, and RequestID
      */
     public static class GetRequestsTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
@@ -282,14 +279,16 @@ public class ElasticsearchController {
             String query;
             switch (requestField) {
                 case ID:
-                    query = "{\n" +
-                            "    \"query\": {\n" +
-                            "        \"match\" : {\n" +
-                            "            \"id\" : \"" + keyword + "\"\n" +
-                            "        }\n" +
-                            "    }\n" +
-                            "}";
-                    break;
+                    Get get = new Get.Builder("t19seekaride", keyword).type("request").build();
+                    JestResult result = null;
+                    try {
+                        result = client.execute(get);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    ArrayList<Request> res = new ArrayList<Request>();
+                    res.add(result.getSourceAsObject(Request.class));
+                    return res;
                 case RIDERID:
                     query = "{\n" +
                             "    \"query\": {\n" +

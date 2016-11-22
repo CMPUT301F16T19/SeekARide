@@ -96,10 +96,10 @@ public class ViewProfileActivity extends Activity {
         if (!getIntent().getBooleanExtra("showAcceptButton", false)) {
             accept.setVisibility(View.GONE);
         }
-        String profileId = getIntent().getStringExtra("name");
+        String profileId = getIntent().getStringExtra("profileId");
         Log.i("ProfileID", profileId);
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
-                ElasticsearchController.UserField.NAME, profileId);
+                ElasticsearchController.UserField.ID, profileId);
         getUserTask.execute();
         Profile profile;
         try {
