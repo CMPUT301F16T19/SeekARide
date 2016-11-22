@@ -70,6 +70,22 @@ public class ViewProfileActivity extends Activity {
                 finish();
             }
         });
+
+        phoneNumber.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Rider.getInstance().contactByPhone(phoneNumber.getText().toString());
+                finish();
+            }
+        });
+
+        email.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Rider.getInstance().contactByPhone(email.getText().toString());
+                finish();
+            }
+        });
     }
 
     @Override

@@ -11,11 +11,11 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
 
-        int status = NetworkManager.getConnectivityStatus(context);
+        NetworkManager.Connectivity status = NetworkManager.getConnectivityStatus(context);
 
         // do something with the change in network connection
         switch (status) {
-            case NetworkManager.TYPE_WIFI:
+            case WIFI:
                 if (Rider.getInstance() == null) {
                     return;
                 }
@@ -25,7 +25,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
                 }
                 Driver.getInstance().executeDriverCommands();
                 break;
-            case NetworkManager.TYPE_MOBILE:
+            case MOBILE:
                 if (Rider.getInstance() == null) {
                     return;
                 }
@@ -35,7 +35,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
                 }
                 Driver.getInstance().executeDriverCommands();
                 break;
-            case NetworkManager.TYPE_NOT_CONNECTED:
+            case NONE:
                 break;
             default:
                 break;

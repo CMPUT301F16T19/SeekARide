@@ -193,4 +193,8 @@ public class Rider extends User {
         }
         riderCommands = new ArrayList<RiderCommand>();
     }
+
+    public void pollForDriverAcceptances() {
+
+    }
 }

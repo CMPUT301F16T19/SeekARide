@@ -12,33 +12,34 @@ import java.net.URL;
 // http://stackoverflow.com/questions/18632823/how-to-monitor-network-status-in-android 2016-11-16, author Vipul Purohit
 public class NetworkManager {
 
-    public static final int TYPE_WIFI = 1;
+    public enum Connectivity { WIFI, MOBILE, NONE };
+    /*public static final int TYPE_WIFI = 1;
     public static final int TYPE_MOBILE = 2;
-    public static final int TYPE_NOT_CONNECTED = 0;
+    public static final int TYPE_NOT_CONNECTED = 0;*/
 
-    public static int getConnectivityStatus(Context context) {
+    public static Connectivity getConnectivityStatus(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (null != activeNetwork) {
             if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
-                return TYPE_WIFI;
+                return Connectivity.WIFI;
 
             if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
-                return TYPE_MOBILE;
+                return Connectivity.MOBILE;
         }
-        return TYPE_NOT_CONNECTED;
+        return Connectivity.NONE;
     }
 
     public static String getConnectivityStatusString(Context context) {
-        int conn = NetworkManager.getConnectivityStatus(context);
+        Connectivity conn = NetworkManager.getConnectivityStatus(context);
         String status = null;
-        if (conn == NetworkManager.TYPE_WIFI) {
+        if (conn == Connectivity.WIFI) {
             status = "Wifi enabled";
-        } else if (conn == NetworkManager.TYPE_MOBILE) {
+        } else if (conn == Connectivity.MOBILE) {
             status = "Mobile data enabled";
-        } else if (conn == NetworkManager.TYPE_NOT_CONNECTED) {
+        } else if (conn == Connectivity.NONE) {
             status = "Not connected to Internet";
         }
         return status;
