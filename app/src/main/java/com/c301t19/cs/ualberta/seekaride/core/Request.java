@@ -18,21 +18,19 @@ public class Request {
     private String description;
 
     private Location start;
-
-
     private Location destination;
     //private String riderName;
     private ArrayList<Profile> acceptedDriverProfiles;
     private double price;
 
-    private boolean inProgress;
-
-    private Boolean waitingForDriver;
-    private Boolean completion;
+    private Boolean waitingForRider;
+    private Profile acceptedDriverProfile;
     private Boolean riderPaid;
     private Boolean driverIsPaid;
 
-    private Profile driverProfile;
+    private boolean inProgress;
+    private Boolean completion;
+
     private Profile riderProfile;
 
     /**
@@ -56,12 +54,12 @@ public class Request {
         price = pr;
         inProgress = false;
 
-        waitingForDriver = true;
+        waitingForRider = true;
         this.riderProfile = riderProfile;
         completion = false;
         riderPaid = false;
         driverIsPaid = false;
-        driverProfile = null;
+        acceptedDriverProfile = null;
 
         this.riderId = riderId;
     }
@@ -78,12 +76,12 @@ public class Request {
         price = r.getPrice();
         inProgress = r.isInProgress();
 
-        waitingForDriver = r.isWaitingForDriver();
+        waitingForRider = r.getWaitingForRider();
         completion = r.isCompleted();
-        riderPaid = r.isPaid();
-        driverIsPaid = r.isGotPayment();
+        riderPaid = r.didRiderPay();
+        driverIsPaid = r.didDriverReceivePay();
 
-        driverProfile = r.getDriverProfile();
+        acceptedDriverProfile = r.getAcceptedDriverProfile();
         riderProfile = r.getRiderProfile();
     }
 
@@ -106,17 +104,13 @@ public class Request {
         // editRequestTask.execute();
     }
 
-//    public void driverUnaccepted(Profile driverName) {
-//        acceptedDriverProfile.remove(driverName);
-//    }
-
-    /**
-     * Rider accepted.
-     *
-     * @param driverName the driver name
-     */
-    public void riderAccepted(String driverName) {
-        
+    public boolean didDriverAccept(Profile driverProfile) {
+        if (acceptedDriverProfiles.contains(driverProfile)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -124,7 +118,7 @@ public class Request {
      *
      * @return the boolean
      */
-    public boolean isWaitingForDriver(){return waitingForDriver;}
+    public boolean getWaitingForRider(){return waitingForRider;}
 
     /**
      * Gets request time.
@@ -212,9 +206,20 @@ public class Request {
      *
      * @param index the index
      */
-    public void riderAccept(int index) {
-        waitingForDriver = false;
-        driverProfile = acceptedDriverProfiles.get(index);
+    public boolean riderAccept(int index) {
+        waitingForRider = false;
+        acceptedDriverProfile = acceptedDriverProfiles.get(index);
+        return true;
+    }
+
+    public boolean riderAccept(Profile driverProfile) {
+        if (!acceptedDriverProfiles.contains(driverProfile))
+        {
+            return false;
+        }
+        waitingForRider = false;
+        acceptedDriverProfile = driverProfile;
+        return true;
     }
 
     /**
@@ -222,8 +227,8 @@ public class Request {
      *
      * @return the driver profile
      */
-    public Profile getDriverProfile() {
-        return driverProfile;
+    public Profile getAcceptedDriverProfile() {
+        return acceptedDriverProfile;
     }
 
     /**
@@ -238,7 +243,7 @@ public class Request {
      *
      * @return the boolean
      */
-    public boolean isPaid(){
+    public boolean didRiderPay(){
         return riderPaid;
     }
 
@@ -247,14 +252,14 @@ public class Request {
      *
      * @return the boolean
      */
-    public boolean isGotPayment(){
+    public boolean didDriverReceivePay(){
         return driverIsPaid;
     }
 
     /**
      * Driver receive payment.
      */
-    public void driverReceivePayment() {
+    public void driverReceivePay() {
         driverIsPaid = true;
     }
 
@@ -264,7 +269,7 @@ public class Request {
      * @return the boolean
      */
     public boolean isRiderConfirmed() {
-        if (driverProfile == null){
+        if (acceptedDriverProfile == null){
             return false;
         }else{
             return true;

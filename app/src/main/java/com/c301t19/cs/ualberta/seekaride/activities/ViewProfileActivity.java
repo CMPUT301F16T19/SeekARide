@@ -15,6 +15,7 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
+import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 public class ViewProfileActivity extends Activity {
@@ -62,9 +63,19 @@ public class ViewProfileActivity extends Activity {
         accept.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
+                int requestIndex = getIntent().getIntExtra("requestIndex", -1);
+                Request edited = Rider.getInstance().getRequest(requestIndex);
+                if (!edited.riderAccept(aProfile)) {
+                    return;
+                }
+                Rider.getInstance().editRequest(edited);
+
                 Intent intent = new Intent(ViewProfileActivity.this, RCompleteActivity.class);
+                intent.putExtra("requestIndex", requestIndex);
                 intent.putExtra("isRider", true);
                 intent.putExtra("theirID", aProfile.getId());
+
                 startActivity(intent);
                 // somehow make the driver start the activity
                 finish();

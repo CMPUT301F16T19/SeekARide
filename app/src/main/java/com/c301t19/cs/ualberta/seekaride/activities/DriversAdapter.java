@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
+import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 import java.util.ArrayList;
 
@@ -44,9 +45,20 @@ public class DriversAdapter extends ArrayAdapter<Profile> {
 
                 final Context c = parent.getContext();
                 Intent intent = new Intent(c, ViewProfileActivity.class);
+
+                int requestIndex = -1;
+                ArrayList<Request> openRequests = Rider.getInstance().getOpenRequests();
+                for (int i = 0; i < openRequests.size(); i++) {
+                    if (openRequests.get(i).didDriverAccept(current)) {
+                        requestIndex = i;
+                        break;
+                    }
+                }
+
                 intent.putExtra("profileId", current.getId());
                 intent.putExtra("showAcceptButton", true);
                 intent.putExtra("name", current.getUsername());
+                intent.putExtra("requestIndex", requestIndex);
                 c.startActivity(intent);
             }
         });

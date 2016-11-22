@@ -42,10 +42,19 @@ public class DriverActivity extends Activity {
                 if (requestIndex < 0) {
                     return;
                 }
-                Intent intent = new Intent(DriverActivity.this, ViewOfferActivity.class);
-                intent.putExtra("requestId", requestIndex);
-                intent.putExtra("source", true);
-                startActivity(intent);
+                if (selectedRequest.getAcceptedDriverProfile() == Driver.getInstance().getProfile()) {
+                    Intent intent = new Intent(DriverActivity.this, RCompleteActivity.class);
+                    intent.putExtra("requestIndex", requestIndex);
+                    intent.putExtra("isRider", false);
+                    intent.putExtra("theirID", selectedRequest.getRiderProfile().getId());
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(DriverActivity.this, ViewOfferActivity.class);
+                    intent.putExtra("requestId", requestIndex);
+                    intent.putExtra("source", true);
+                    startActivity(intent);
+                }
             }
         });
 

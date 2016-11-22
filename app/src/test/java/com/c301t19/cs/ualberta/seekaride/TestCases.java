@@ -180,9 +180,9 @@ public class TestCases extends TestCase {
 
         // accept pikachu
         Rider.getInstance().acceptDriverOffer(0,0);
-        assertEquals(driverProfile.getUsername(),Rider.getInstance().getRequest(0).getDriverProfile().getUsername());
+        assertEquals(driverProfile.getUsername(),Rider.getInstance().getRequest(0).getAcceptedDriverProfile().getUsername());
         Rider.getInstance().acceptDriverOffer(0,1);
-        assertEquals(driverProfile2.getUsername(),Rider.getInstance().getRequest(0).getDriverProfile().getUsername());
+        assertEquals(driverProfile2.getUsername(),Rider.getInstance().getRequest(0).getAcceptedDriverProfile().getUsername());
     }
 
     //
@@ -283,7 +283,7 @@ public class TestCases extends TestCase {
         Rider.getInstance().getRequest(0).complete();
         Rider.getInstance().makePayment(0);
 
-        if(testRequest.isPaid()){
+        if(testRequest.didRiderPay()){
             Driver.getInstance().receivePayment(0);
         }
         //assertTrue(Driver.getInstance().getAcceptedRequests().get(0).isCompleted());
@@ -466,7 +466,7 @@ public class TestCases extends TestCase {
         Rider.getInstance().acceptDriverOffer(0,0);
         //assertTrue(Driver.getInstance().isConfirmed(0));
 
-        Rider.getInstance().getRequest(0).getDriverProfile().getCar();
+        Rider.getInstance().getRequest(0).getAcceptedDriverProfile().getCar();
     }
 
 //    US 1.10.01 (added 2016-11-14)
@@ -485,8 +485,8 @@ public class TestCases extends TestCase {
         Rider.getInstance().acceptDriverOffer(0,0);
         //assertTrue(Driver.getInstance().isConfirmed(0));
 
-        //Rider.getInstance().getRequest(0).getDriverProfile().getRating();
-        //Rider.getInstance().getRequest(0).getDriverProfile().getReviews();
+        //Rider.getInstance().getRequest(0).getAcceptedDriverProfile().getRating();
+        //Rider.getInstance().getRequest(0).getAcceptedDriverProfile().getReviews();
 
     }
 

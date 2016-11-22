@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
+import com.c301t19.cs.ualberta.seekaride.core.NetworkManager;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
@@ -28,6 +29,9 @@ import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
 
+/**
+ * Activity for Drivers to view and accept requests.
+ */
 public class ViewOfferActivity extends Activity {
 
     private Request request;
@@ -41,8 +45,10 @@ public class ViewOfferActivity extends Activity {
     private TextView fare;
     private TextView riderInfo;
 
+    private Boolean hasInternet;
+
     //fills in the blank text views with the relavent information from the request.
-    public void write(){
+    public void write() {
         description = (TextView) findViewById(R.id.view_Description_Text);
         sLocation = (TextView) findViewById(R.id.view_Slocation_Text);
         eLocation = (TextView) findViewById(R.id.view_Elocation_Text);
@@ -89,7 +95,8 @@ public class ViewOfferActivity extends Activity {
         Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
         map.getOverlays().add(roadOverlay);
     }
-    public void move(){
+
+    public void move() {
         acceptO = (Button) findViewById(R.id.view_Accept_Button);
         if (getIntent().getBooleanExtra("source", false)) {
             acceptO.setText("Decline");
@@ -102,17 +109,16 @@ public class ViewOfferActivity extends Activity {
             public void onClick(View v) {
                 if (getIntent().getBooleanExtra("source", false)) {
                     Driver.getInstance().removeAcceptedRequest(request);
-                }
-                else {
+                } else {
                     Driver.getInstance().acceptRequest(request);
                 }
                 finish();
             }
         });
         //returns you to the search results screen
-        Back.setOnClickListener(new View.OnClickListener(){
+        Back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 finish();
             }
         });
@@ -128,43 +134,30 @@ public class ViewOfferActivity extends Activity {
             }
         });
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_offer);
+
+        NetworkManager.Connectivity connectivity = NetworkManager.getConnectivityStatus(getApplicationContext());
+        if (connectivity == NetworkManager.Connectivity.MOBILE || connectivity == NetworkManager.Connectivity.WIFI) {
+            hasInternet = true;
+        }
+        else
+        {
+            hasInternet = false;
+        }
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         if (getIntent().getBooleanExtra("source", false)) {
             request = Driver.getInstance().getAcceptedRequests().get(getIntent().getIntExtra("requestId", -1));
-        }
-        else {
+        } else {
             request = Driver.getInstance().getSearchedRequests().get(getIntent().getIntExtra("requestId", -1));
         }
         write();
         move();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_offer, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

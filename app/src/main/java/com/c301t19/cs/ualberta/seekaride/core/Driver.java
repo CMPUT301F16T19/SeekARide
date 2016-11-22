@@ -1,7 +1,5 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -145,8 +143,8 @@ public class Driver extends User {
      * Receive payment.
      */
     public void receivePayment(int index) {
-        if(acceptedRequests.get(index).isPaid()) {
-            acceptedRequests.get(index).driverReceivePayment();
+        if(acceptedRequests.get(index).didRiderPay()) {
+            acceptedRequests.get(index).driverReceivePay();
         }
     }
 
@@ -200,9 +198,23 @@ public class Driver extends User {
         catch (Exception e) {
 
         }
+        pollForRiderAcceptances();
     }
 
-    public void pollForRiderAcceptances() {
+    private void pollForRiderAcceptances() {
+        for (int i = 0; i < acceptedRequests.size(); i++) {
+            if (!acceptedRequests.get(i).getWaitingForRider()) {
+                // send notification
+            }
+        }
+    }
 
+    public Request getRequest(String requestId) {
+        for (int i = 0; i < acceptedRequests.size(); i++) {
+            if (acceptedRequests.get(i).getId() == requestId) {
+                return acceptedRequests.get(i);
+            }
+        }
+        return null;
     }
 }

@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.core.Driver;
+import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
+import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Review;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
@@ -20,8 +23,12 @@ public class RCompleteActivity extends Activity {
     private EditText review;
     private RatingBar ratingBar;
 
-    String reviewText;
-    int rating;
+    private String reviewText;
+    private int rating;
+
+    private boolean isRider;
+    private int requestIndex;
+    private Request request;
 
     //handles getting the review, but doesn't save it anywhere.
     public void write(){
@@ -34,7 +41,7 @@ public class RCompleteActivity extends Activity {
     public void move(){
         confirmP = (Button) findViewById(R.id.complete_Confirm_Button);
         ratingBar = (RatingBar) findViewById(R.id.complete_ratingBar);
-        if (getIntent().getBooleanExtra("isRider", false)) {
+        if (isRider) {
             confirmP.setText("Pay Driver and Finish");
         }
         else {
@@ -47,6 +54,28 @@ public class RCompleteActivity extends Activity {
                 write();
                 Review review = new Review(reviewText, rating, getIntent().getStringExtra("theirID"));
                 Rider.getInstance().leaveReview(review);
+
+                if (isRider) {
+                    Rider.getInstance().updateOpenRequests();
+                    request = Rider.getInstance().getRequest(request.getId());
+                    if (request.didDriverReceivePay()) {
+                        // delete request
+                    }
+                    else {
+                        request.riderPay();
+                    }
+                }
+                else {
+                    Driver.getInstance().updateAcceptedRequests();
+                    request = Driver.getInstance().getRequest(request.getId());
+                    if (request.didRiderPay()) {
+                        // delete request
+                    }
+                    else {
+                        request.driverReceivePay();
+                    }
+                }
+
                 finish();
             }
         });
@@ -56,6 +85,14 @@ public class RCompleteActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rcomplete);
+        isRider = getIntent().getBooleanExtra("isRider", false);
+        requestIndex = getIntent().getIntExtra("requestIndex", -1);
+        if (isRider) {
+            request = Rider.getInstance().getOpenRequests().get(requestIndex);
+        }
+        else {
+            request = Driver.getInstance().getAcceptedRequests().get(requestIndex);
+        }
         move();
     }
 }

@@ -1,5 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import android.content.Context;
+
 /**
  * Base Controller class for a User. Inherited by Rider and Driver.
  */

@@ -59,6 +59,15 @@ public class Rider extends User {
         return openRequests.get(index);
     }
 
+    public Request getRequest(String requestId) {
+        for (int i = 0; i < openRequests.size(); i++) {
+            if (openRequests.get(i).getId() == requestId) {
+                return openRequests.get(i);
+            }
+        }
+        return null;
+    }
+
     /**
      * Makes a new Request and sends it to the database.
      *
@@ -153,6 +162,7 @@ public class Rider extends User {
         catch (Exception e) {
 
         }
+        pollForDriverAcceptances();
     }
 
     /**
@@ -194,7 +204,11 @@ public class Rider extends User {
         riderCommands = new ArrayList<RiderCommand>();
     }
 
-    public void pollForDriverAcceptances() {
-
+    private void pollForDriverAcceptances() {
+        for (int i = 0; i < openRequests.size(); i++) {
+            if (!openRequests.get(i).getAcceptedDriverProfiles().isEmpty()) {
+                // send notification
+            }
+        }
     }
 }
