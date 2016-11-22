@@ -95,4 +95,13 @@
         android:layout_below="@+id/add_Elocation_Text"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="$"
+        android:id="@+id/dollarSign2"
+        android:layout_alignTop="@+id/add_Fare_Text"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
