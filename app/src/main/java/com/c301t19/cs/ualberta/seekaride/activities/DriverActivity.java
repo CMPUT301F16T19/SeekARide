@@ -3,6 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +43,9 @@ public class DriverActivity extends Activity {
                 if (requestIndex < 0) {
                     return;
                 }
-                if (selectedRequest.getAcceptedDriverProfile() == Driver.getInstance().getProfile()) {
+                Log.i("request", selectedRequest.getAcceptedDriverProfile().getUsername());
+                Log.i("us", Driver.getInstance().getProfile().getUsername());
+                if (selectedRequest.getAcceptedDriverProfile().equals(Driver.getInstance().getProfile())) {
                     Intent intent = new Intent(DriverActivity.this, RCompleteActivity.class);
                     intent.putExtra("requestIndex", requestIndex);
                     intent.putExtra("isRider", false);

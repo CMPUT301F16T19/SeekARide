@@ -3,6 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,6 +64,7 @@ public class RCompleteActivity extends Activity {
                 else {
                     Driver.getInstance().updateAcceptedRequests();
                     request = Driver.getInstance().getRequest(request.getId());
+                    Log.i("null request", ((Boolean)(request==null)).toString());
                     Driver.getInstance().receivePayment(request);
                 }
 

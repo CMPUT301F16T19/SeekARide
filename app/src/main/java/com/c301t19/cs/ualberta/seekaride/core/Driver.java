@@ -226,7 +226,7 @@ public class Driver extends User {
 
     public Request getRequest(String requestId) {
         for (int i = 0; i < acceptedRequests.size(); i++) {
-            if (acceptedRequests.get(i).getId() == requestId) {
+            if (acceptedRequests.get(i).getId().equals(requestId)) {
                 return acceptedRequests.get(i);
             }
         }

@@ -127,8 +127,8 @@ public class ViewProfileActivity extends Activity {
         catch (Exception e) {
 
         }
-        move();
         write();
+        move();
         reviewList = (ListView) findViewById(R.id.view_Profile_ListView);
         adapter = new ReviewsAdapter(this,
                 R.layout.request_list_item, aProfile.getReviews(), getLayoutInflater());

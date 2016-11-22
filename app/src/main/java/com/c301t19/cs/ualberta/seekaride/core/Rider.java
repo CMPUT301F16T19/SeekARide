@@ -61,7 +61,7 @@ public class Rider extends User {
 
     public Request getRequest(String requestId) {
         for (int i = 0; i < openRequests.size(); i++) {
-            if (openRequests.get(i).getId() == requestId) {
+            if (openRequests.get(i).getId().equals(requestId)) {
                 return openRequests.get(i);
             }
         }
