@@ -53,7 +53,7 @@ public class ViewOfferActivity extends Activity {
         description.setText("Description: " + request.getDescription());
         sLocation.setText("From: " + request.getStart().getAddress());
         eLocation.setText("To: " + request.getDestination().getAddress());
-        fare.setText("Fare: " + ((Double) request.getPrice()).toString());
+        fare.setText("Fare: $" + ((Double) request.getPrice()).toString());
         riderInfo.setText("Rider: " + request.getRiderProfile().getUsername());
 
         MapView map = (MapView) findViewById(R.id.view_Offer_Map);
