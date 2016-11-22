@@ -66,6 +66,9 @@ public class EditAccountActivity extends Activity {
             @Override
             public void onClick(View v) {
                 write();
+                if (usernameText.length() < 5) {
+                    return;
+                }
                 Profile newProfile = new Profile(Rider.getInstance().getProfile());
                 newProfile.setEmail(emailText);
                 newProfile.setPhoneNumber(phoneNumberText);
