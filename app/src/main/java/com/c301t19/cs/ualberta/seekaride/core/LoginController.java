@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import com.c301t19.cs.ualberta.seekaride.activities.PollingService;
 import com.c301t19.cs.ualberta.seekaride.activities.PollServerBroadcastReceiver;
 
 import java.util.Calendar;
@@ -98,6 +99,8 @@ public class LoginController {
     }
 
     private void pollServer(Context context) {
+
+        context.stopService(new Intent(context, PollingService.class));
 
         Calendar updateTime = Calendar.getInstance();
         updateTime.setTimeZone(TimeZone.getDefault());

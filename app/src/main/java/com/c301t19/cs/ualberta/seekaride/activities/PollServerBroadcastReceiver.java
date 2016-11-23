@@ -12,7 +12,7 @@ public class PollServerBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent dailyUpdater = new Intent(context, MyService.class);
+        Intent dailyUpdater = new Intent(context, PollingService.class);
         context.startService(dailyUpdater);
         Log.i("AlarmReceiver", "Called context.startService from AlarmReceiver.onReceive");
     }

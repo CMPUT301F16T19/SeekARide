@@ -17,13 +17,13 @@ import com.c301t19.cs.ualberta.seekaride.core.Rider;
 /**
  * Created by Master Chief on 2016-11-23.
  */
-public class MyService extends IntentService {
-    public MyService() {
+public class PollingService extends IntentService {
+    public PollingService() {
         super("MyServiceName");
     }
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.i("MyService", "About to execute MyTask");
+        Log.i("PollingService", "About to execute MyTask");
         Rider.getInstance().updateOpenRequests();
         Driver.getInstance().updateAcceptedRequests();
         if (Rider.getInstance().driverHasAccepted()) {
@@ -32,7 +32,7 @@ public class MyService extends IntentService {
                             setContentTitle("Driver ready").setContentText("The Driver will pick you up shortly.");
             final int Anotificationid = 1;
             final NotificationManager Anotifymang =
-                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             Anotifymang.notify(Anotificationid, Abuilder.build());
         }
         if (Driver.getInstance().riderHasAccepted()) {
@@ -41,8 +41,10 @@ public class MyService extends IntentService {
                             setContentTitle("Rider ready").setContentText("The Rider is ready to be picked up.");
             final int Anotificationid = 1;
             final NotificationManager Anotifymang =
-                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             Anotifymang.notify(Anotificationid, Abuilder.build());
         }
+        Log.i("driver accepted", ((Boolean)Rider.getInstance().driverHasAccepted()).toString());
+        Log.i("rider accepted", ((Boolean)Driver.getInstance().riderHasAccepted()).toString());
     }
 }

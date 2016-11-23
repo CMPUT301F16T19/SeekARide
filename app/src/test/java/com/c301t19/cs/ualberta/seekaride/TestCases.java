@@ -1,6 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride;
 
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
+import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
@@ -13,40 +14,50 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by mc on 16/10/13.
  */
 public class TestCases extends TestCase {
+
     public TestCases(){
         super();
     }
-
 
     Profile userProfile;
     Profile driverProfile;
 
     @Override
     protected void setUp() {
-        userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
+        userProfile = new Profile("AAAAAA","9989989988","mqu@ualberta.ca");
         Rider.instantiate(userProfile);
-        driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com","very good car");
+        driverProfile = new Profile("BBBBBB","0010010010","pikachu@pokemon.com","very good car");
         Driver.instantiate(driverProfile);
     }
 
     //    Requests
-    //
     //    US 01.01.01
     //    As a rider, I want to request rides between two locations.
     @Test
-    public void testRequest1(){
+    public void testRequest1() {
 
         Location startPoint = new Location("111st");
         Location destination = new Location("112st");
         float price = 998;
-        Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        // add the reqeust in the elastic search
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        Request request = Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
+        ElasticsearchController.GetRequestsTask getRequestsTask = new ElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.RIDERID, userProfile.getId());
+        getRequestsTask.execute();
+        ArrayList<Request> requests = null;
+        try {
+            requests = getRequestsTask.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        assertTrue(requests.contains(request));
     }
 
     //    US 01.02.01
@@ -55,8 +66,9 @@ public class TestCases extends TestCase {
         Location startPoint = new Location("111st");
         Location destination = new Location("112st");
         float price = 998;
-        Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        Request request = Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
+        Rider.getInstance().updateOpenRequests();
+        assertTrue(Rider.getInstance().getOpenRequests().contains(request));
     }
 
     //            US 01.03.01
