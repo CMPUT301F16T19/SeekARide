@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
@@ -23,11 +24,15 @@ public class SearchResultsActivity extends Activity {
 
     private Button Back;
     private ListView results;
+    private EditText filterPrice;
+    private Button filterButton;
     private RequestsAdapter adapter;
     private Request selectedRequest;
 
     public void move(){
+        filterButton = (Button) findViewById(R.id.results_Filter_Price_Button);
         Back = (Button) findViewById(R.id.results_Back_Button);
+        filterPrice = (EditText) findViewById(R.id.results_Filter_Price_Text);
 
         //moves you back to the Driver screen without doing anything else.
         Back.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +57,19 @@ public class SearchResultsActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(filterPrice.getText().length() > 0)
+                {
+                    double price = Double.parseDouble(filterPrice.getText().toString());
+                    Driver.getInstance().filterRequestsByPrice(price);
+                    adapter.clear();
+                    adapter.addAll(Driver.getInstance().getSearchedRequests());
+                }
+            }
+        });
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,27 +87,5 @@ public class SearchResultsActivity extends Activity {
                 R.layout.request_list_item, Driver.getInstance().getSearchedRequests(), getLayoutInflater());
         results.setAdapter(adapter);
         move();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_results, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

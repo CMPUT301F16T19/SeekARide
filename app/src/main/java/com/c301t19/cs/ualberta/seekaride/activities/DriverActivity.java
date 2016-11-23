@@ -45,7 +45,7 @@ public class DriverActivity extends Activity {
                 }
                 //Log.i("request", selectedRequest.getAcceptedDriverProfile().getUsername());
                 //Log.i("us", Driver.getInstance().getProfile().getUsername());
-                if (selectedRequest.getAcceptedDriverProfile().equals(Driver.getInstance().getProfile())) {
+                if (selectedRequest.getAcceptedDriverProfile()!= null && selectedRequest.getAcceptedDriverProfile().equals(Driver.getInstance().getProfile())) {
                     Intent intent = new Intent(DriverActivity.this, RCompleteActivity.class);
                     intent.putExtra("requestIndex", requestIndex);
                     intent.putExtra("isRider", false);
@@ -90,6 +90,7 @@ public class DriverActivity extends Activity {
         adapter = new RequestsAdapter(this,
                 R.layout.request_list_item, Driver.getInstance().getAcceptedRequests(), getLayoutInflater());
         requests.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

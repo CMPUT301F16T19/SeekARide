@@ -232,4 +232,14 @@ public class Driver extends User {
         }
         return null;
     }
+
+    public void filterRequestsByPrice(double price) {
+        ArrayList<Request> newSearchedRequests = new ArrayList<Request>();
+        for (int i = 0; i < searchedRequests.size(); i++) {
+            if (searchedRequests.get(i).getPrice() >= price) {
+                newSearchedRequests.add(searchedRequests.get(i));
+            }
+        }
+        searchedRequests = newSearchedRequests;
+    }
 }

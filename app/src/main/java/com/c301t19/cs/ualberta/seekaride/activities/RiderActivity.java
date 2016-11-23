@@ -51,6 +51,7 @@ public class RiderActivity extends Activity {
         adapter = new RequestsAdapter(this,
                 R.layout.request_list_item, Rider.getInstance().getOpenRequests(), getLayoutInflater());
         requests.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     public void move(){

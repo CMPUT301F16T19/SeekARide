@@ -151,22 +151,16 @@ public class ViewOfferActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_offer);
 
-        NetworkManager.Connectivity connectivity = NetworkManager.getConnectivityStatus(getApplicationContext());
-        if (connectivity == NetworkManager.Connectivity.MOBILE || connectivity == NetworkManager.Connectivity.WIFI) {
-            hasInternet = true;
-        }
-        else
-        {
-            hasInternet = false;
-        }
-
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        if (getIntent().getBooleanExtra("source", false)) {
-            request = Driver.getInstance().getAcceptedRequests().get(getIntent().getIntExtra("requestId", -1));
-        } else {
-            request = Driver.getInstance().getSearchedRequests().get(getIntent().getIntExtra("requestId", -1));
+        if (getIntent() != null && request == null)
+        {
+            if (getIntent().getBooleanExtra("source", false)) {
+                request = Driver.getInstance().getAcceptedRequests().get(getIntent().getIntExtra("requestId", -1));
+            } else {
+                request = Driver.getInstance().getSearchedRequests().get(getIntent().getIntExtra("requestId", -1));
+            }
         }
         write();
         move();
