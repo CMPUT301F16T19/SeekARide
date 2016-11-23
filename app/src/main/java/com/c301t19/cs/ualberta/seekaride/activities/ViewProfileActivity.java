@@ -2,6 +2,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -88,7 +89,8 @@ public class ViewProfileActivity extends Activity {
                 //Rider.getInstance().contactByPhone(phoneNumber.getText().toString());
                 //Here's a different way to do that I think. No need to use another method.
                 //Found at 'www.tutorialspoint.com/android/android_phone_calls.htm'
-                Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
+                Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+                phoneIntent.setData(Uri.parse("tel:" + aProfile.getPhoneNumber()));
                 startActivity(phoneIntent);
                 finish();
             }
@@ -102,8 +104,10 @@ public class ViewProfileActivity extends Activity {
                 //found at stackoverflow.com/questions/2734749/opening-an-email-client-on-clicking-a-button
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
                 emailIntent.setType("plain/text");
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {email.toString()});
-                startActivity(emailIntent.createChooser(emailIntent, ""));
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {aProfile.getEmail()});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "SeekARide");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello " + aProfile.getUsername() + " !");
+                startActivity(Intent.createChooser(emailIntent, ""));
                 finish();
             }
         });

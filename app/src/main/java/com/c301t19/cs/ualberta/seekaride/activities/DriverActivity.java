@@ -43,8 +43,8 @@ public class DriverActivity extends Activity {
                 if (requestIndex < 0) {
                     return;
                 }
-                Log.i("request", selectedRequest.getAcceptedDriverProfile().getUsername());
-                Log.i("us", Driver.getInstance().getProfile().getUsername());
+                //Log.i("request", selectedRequest.getAcceptedDriverProfile().getUsername());
+                //Log.i("us", Driver.getInstance().getProfile().getUsername());
                 if (selectedRequest.getAcceptedDriverProfile().equals(Driver.getInstance().getProfile())) {
                     Intent intent = new Intent(DriverActivity.this, RCompleteActivity.class);
                     intent.putExtra("requestIndex", requestIndex);
