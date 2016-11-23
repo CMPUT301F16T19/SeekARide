@@ -85,7 +85,11 @@ public class ViewProfileActivity extends Activity {
         phoneNumber.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Rider.getInstance().contactByPhone(phoneNumber.getText().toString());
+                //Rider.getInstance().contactByPhone(phoneNumber.getText().toString());
+                //Here's a different way to do that I think. No need to use another method.
+                //Found at 'www.tutorialspoint.com/android/android_phone_calls.htm'
+                Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
+                startActivity(phoneIntent);
                 finish();
             }
         });
@@ -93,7 +97,13 @@ public class ViewProfileActivity extends Activity {
         email.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Rider.getInstance().contactByPhone(email.getText().toString());
+                //Rider.getInstance().contactByPhone(email.getText().toString());
+                //Same deal as above
+                //found at stackoverflow.com/questions/2734749/opening-an-email-client-on-clicking-a-button
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {email.toString()});
+                startActivity(emailIntent.createChooser(emailIntent, ""));
                 finish();
             }
         });

@@ -1,8 +1,10 @@
 package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,7 @@ public class AcceptDriverActivity extends Activity {
         fare = (TextView) findViewById(R.id.accept_Fare_Text);
         driverInfo = (TextView) findViewById(R.id.accept_Info_Text);
 
+
         //The commands to fill the text, just needs the proper variable in the brackets.
         /*
         description.setText();
@@ -43,11 +46,21 @@ public class AcceptDriverActivity extends Activity {
         acceptD = (Button) findViewById(R.id.accept_Accept_Button);
         editR = (Button) findViewById(R.id.accept_Edit_Button);
         deleteR = (Button) findViewById(R.id.accept_Delete_Button);
+        //builds the notification
+        final NotificationCompat.Builder Abuilder =
+                new NotificationCompat.Builder(this).setSmallIcon(R.drawable.test).
+                        setContentTitle("Rider ready").setContentText("The Rider is ready to be picked up.");
+        final int Anotificationid = 1;
+        final NotificationManager Anotifymang =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
         //Accepts the driver, and moves you back to the rider screen.
         acceptD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent Aswitch = new Intent(AcceptDriverActivity.this, RiderActivity.class);
+                //should send the notification.
+                Anotifymang.notify(Anotificationid, Abuilder.build());
                 startActivity(Aswitch);
             }
         });
