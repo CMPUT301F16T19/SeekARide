@@ -213,15 +213,15 @@ public class Driver extends User {
         catch (Exception e) {
 
         }
-        pollForRiderAcceptances();
     }
 
-    private void pollForRiderAcceptances() {
+    public boolean riderHasAccepted() {
         for (int i = 0; i < acceptedRequests.size(); i++) {
             if (!acceptedRequests.get(i).getWaitingForRider()) {
-                // send notification
+                return true;
             }
         }
+        return false;
     }
 
     public Request getRequest(String requestId) {

@@ -1,6 +1,14 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
-import android.widget.Toast;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+
+import com.c301t19.cs.ualberta.seekaride.activities.PollServerBroadcastReceiver;
+
+import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * Controller that handles login and account creation.
@@ -24,7 +32,7 @@ public class LoginController {
      * @param username The user's username.
      * @return true if the login was successful.
      */
-    public boolean login(String username) {
+    public boolean login(String username, Context context) {
         if (username.length() <  5)
         {
             return false;
@@ -41,6 +49,8 @@ public class LoginController {
             else {
                 Rider.instantiate(profile);
                 Driver.instantiate(profile);
+                // restart service when logging in
+                pollServer(context);
             }
         }
         catch (Exception e) {
@@ -85,5 +95,21 @@ public class LoginController {
 
         }
         return true;
+    }
+
+    private void pollServer(Context context) {
+
+        Calendar updateTime = Calendar.getInstance();
+        updateTime.setTimeZone(TimeZone.getDefault());
+        updateTime.set(Calendar.HOUR_OF_DAY, 12);
+        updateTime.set(Calendar.MINUTE, 30);
+        Intent intent = new Intent(context, PollServerBroadcastReceiver.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(), 1000*10, pendingIntent);
     }
 }

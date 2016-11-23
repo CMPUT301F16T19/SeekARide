@@ -178,7 +178,6 @@ public class Rider extends User {
         catch (Exception e) {
 
         }
-        pollForDriverAcceptances();
     }
 
     /**
@@ -220,11 +219,12 @@ public class Rider extends User {
         riderCommands = new ArrayList<RiderCommand>();
     }
 
-    private void pollForDriverAcceptances() {
+    public boolean driverHasAccepted() {
         for (int i = 0; i < openRequests.size(); i++) {
             if (!openRequests.get(i).getAcceptedDriverProfiles().isEmpty()) {
-                // send notification
+                return true;
             }
         }
+        return false;
     }
 }

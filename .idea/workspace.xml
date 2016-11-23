@@ -38,7 +38,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0945bfb9-b9b7-4652-b50b-fae28b1c31f6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MyService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/PollServerBroadcastReceiver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -49,16 +50,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/DriverActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/DriverActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/RiderActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/RiderActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/SearchResultsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/SearchResultsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewOfferActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewOfferActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewProfileActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewProfileActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Driver.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Driver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/ElasticsearchController.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/ElasticsearchController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_results.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_results.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/LoginController.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/LoginController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Rider.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Rider.java" />
     </list>
     <ignored path="SeekARide.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,47 +75,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ViewOfferActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewOfferActivity.java">
+      <file leaf-file-name="Driver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Driver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35279188">
-              <caret line="159" column="34" selection-start-line="159" selection-start-column="34" selection-end-line="159" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="217" column="35" selection-start-line="217" selection-start-column="35" selection-end-line="217" selection-end-column="35" />
+              <folding>
+                <element signature="e#8100#8109#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PollServerBroadcastReceiver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/PollServerBroadcastReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AcceptDriverActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/AcceptDriverActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewProfileActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewProfileActivity.java">
+      <file leaf-file-name="MyService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MyService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="138" column="13" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
-              <folding />
+              <caret line="30" column="87" selection-start-line="30" selection-start-column="87" selection-end-line="30" selection-end-column="87" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#636#637#0" expanded="true" />
+                <element signature="e#674#675#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchResultsActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/SearchResultsActivity.java">
+      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/DriverActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="13.571428">
+              <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -1875,15 +1898,21 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_new_account.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/AcceptDriverActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Driver.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_search_results.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/SearchResultsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/RiderActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/ElasticsearchController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/DriverActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewProfileActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewOfferActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MyStartServiceReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/RiderActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/LoginController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/PollServerBroadcastReceiver.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Driver.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Rider.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MyService.java" />
       </list>
     </option>
   </component>
@@ -2336,7 +2365,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27986348" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.91638225" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2378,14 +2407,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Driver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Rider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2639,22 +2660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/AcceptDriverActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71944445">
-          <caret line="60" column="87" selection-start-line="60" selection-start-column="87" selection-end-line="60" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Rider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.047222223">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Profile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33055556">
@@ -2714,14 +2719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/RiderActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8495575">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ChooseLocationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.5693216">
@@ -2746,9 +2743,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewOfferActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.1345177">
+          <caret line="159" column="34" selection-start-line="159" selection-start-column="34" selection-end-line="159" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewProfileActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.2969543">
           <caret line="138" column="13" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
           <folding />
         </state>
@@ -2756,55 +2761,107 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/SearchResultsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.8654822">
           <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/DriverActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04822335">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/RiderActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.8044806">
+          <caret line="106" column="5" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3320158">
+          <caret line="120" column="19" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Rider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.124506">
+          <caret line="224" column="28" selection-start-line="224" selection-start-column="28" selection-end-line="224" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9670659">
-          <caret line="19" column="84" selection-start-line="19" selection-start-column="84" selection-end-line="19" selection-end-column="84" />
-          <folding>
-            <element signature="e#1803#1839#0" expanded="true" />
-            <element signature="e#1946#1983#0" expanded="true" />
-            <element signature="e#2090#2127#0" expanded="true" />
-            <element signature="e#2266#2303#0" expanded="true" />
-            <element signature="e#2399#2436#0" expanded="true" />
-            <element signature="e#2544#2582#0" expanded="true" />
-            <element signature="e#2691#2730#0" expanded="true" />
-            <element signature="e#2835#2870#0" expanded="true" />
-            <element signature="e#2977#3014#0" expanded="true" />
-            <element signature="e#3113#3141#0" expanded="true" />
-            <element signature="e#3246#3280#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.28333333">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/DriverActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.0750989">
+          <caret line="45" column="38" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71666664">
-          <caret line="233" column="5" selection-start-line="233" selection-start-column="5" selection-end-line="233" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="217" column="35" selection-start-line="217" selection-start-column="35" selection-end-line="217" selection-end-column="35" />
           <folding>
-            <element signature="e#8126#8135#0" expanded="true" />
+            <element signature="e#8100#8109#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/ViewOfferActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/AcceptDriverActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35279188">
-          <caret line="159" column="34" selection-start-line="159" selection-start-column="34" selection-end-line="159" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="70" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/PollServerBroadcastReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/activities/MyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="87" selection-start-line="30" selection-start-column="87" selection-end-line="30" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#636#637#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/c301t19/cs/ualberta/seekaride/core/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="13.571428">
+          <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

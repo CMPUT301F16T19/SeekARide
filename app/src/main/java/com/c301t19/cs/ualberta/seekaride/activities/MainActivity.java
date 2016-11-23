@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
     public void onLoginClick(View v) {
         String name = username.getText().toString();
-        if (!loginController.login(name))
+        if (!loginController.login(name, getApplicationContext()))
         {
             Toast.makeText(getApplicationContext(), "Account does not exist.",
                     Toast.LENGTH_LONG).show();

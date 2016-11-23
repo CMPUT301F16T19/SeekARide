@@ -20,6 +20,8 @@
                 <!--<action android:name="android.net.wifi.WIFI_STATE_CHANGED" />-->
         <!--    </intent-filter>-->
         <!--</receiver>-->
+        <service android:name=".activities.MyService" ></service>
+        <receiver android:name=".activities.PollServerBroadcastReceiver" ></receiver>
         <activity android:name=".activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
