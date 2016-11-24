@@ -6,16 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
-import com.c301t19.cs.ualberta.seekaride.core.LoginController;
+import com.c301t19.cs.ualberta.seekaride.core.AccountController;
 
 public class MainActivity extends Activity {
 
     EditText username;
-    LoginController loginController;
+    AccountController accountController;
     Button newAccount;
 
     public void move() {
@@ -35,7 +34,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         username = (EditText) findViewById(R.id.username_Text);
         move();
-        loginController = new LoginController();
+        accountController = new AccountController();
     }
 
     public void onNewAccountClick(View v) {
@@ -45,7 +44,7 @@ public class MainActivity extends Activity {
 
     public void onLoginClick(View v) {
         String name = username.getText().toString();
-        if (!loginController.login(name, getApplicationContext()))
+        if (!accountController.login(name, getApplicationContext()))
         {
             Toast.makeText(getApplicationContext(), "Account does not exist.",
                     Toast.LENGTH_LONG).show();

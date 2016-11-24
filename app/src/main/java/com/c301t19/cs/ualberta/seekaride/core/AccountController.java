@@ -16,12 +16,12 @@ import java.util.TimeZone;
  * <p/>
  * Issues: may want to implement a more rigorous account creation/login process in the future.
  */
-public class LoginController {
+public class AccountController {
 
     /**
      * Instantiates a new Login controller.
      */
-    public LoginController () {
+    public AccountController() {
 
     }
 

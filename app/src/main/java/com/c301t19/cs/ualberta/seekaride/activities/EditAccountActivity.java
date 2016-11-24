@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
-import com.c301t19.cs.ualberta.seekaride.core.LoginController;
+import com.c301t19.cs.ualberta.seekaride.core.AccountController;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
@@ -20,14 +20,12 @@ public class EditAccountActivity extends Activity {
     public Button Save;
     public Button Cancel;
 
-    private EditText username;
     private EditText password;
     private EditText cPassword;
     private EditText phoneNumber;
     private EditText email;
     private EditText car;
 
-    String usernameText;
     String passwordText;
     String confirmPassword;
     String phoneNumberText;
@@ -40,7 +38,6 @@ public class EditAccountActivity extends Activity {
 
     //sets up the text boxes and lets you fill them in.
     public void write() {
-        username = (EditText) findViewById(R.id.edit_User_Text);
         password = (EditText) findViewById(R.id.edit_Password_Text);
         cPassword = (EditText) findViewById(R.id.edit_ConfirmP_Text);
         phoneNumber = (EditText) findViewById(R.id.edit_Phone_Text);
@@ -48,7 +45,6 @@ public class EditAccountActivity extends Activity {
         car = (EditText) findViewById(R.id.edit_Car_Text);
         rating = (TextView) findViewById(R.id.edit_Account_Rating);
 
-        usernameText = username.getText().toString();
         passwordText = password.getText().toString();
         confirmPassword = cPassword.getText().toString();
         phoneNumberText = phoneNumber.getText().toString();
@@ -69,9 +65,8 @@ public class EditAccountActivity extends Activity {
                 Profile newProfile = new Profile(Rider.getInstance().getProfile());
                 newProfile.setEmail(emailText);
                 newProfile.setPhoneNumber(phoneNumberText);
-                newProfile.setUsername(usernameText);
                 newProfile.setCar(carText);
-                (new LoginController()).editAccount(Rider.getInstance().getProfile(), newProfile);
+                (new AccountController()).editAccount(Rider.getInstance().getProfile(), newProfile);
                 finish();
             }
         });

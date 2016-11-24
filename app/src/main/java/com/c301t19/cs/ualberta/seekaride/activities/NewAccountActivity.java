@@ -1,23 +1,19 @@
 package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
-import com.c301t19.cs.ualberta.seekaride.core.LoginController;
+import com.c301t19.cs.ualberta.seekaride.core.AccountController;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 
 public class NewAccountActivity extends Activity {
 
-    LoginController loginController;
+    AccountController accountController;
 
     public Button createA;
     public Button cancelA;
@@ -65,7 +61,7 @@ public class NewAccountActivity extends Activity {
                             Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (!loginController.createNewAccount(new Profile(usernameText, phoneNumberText, emailText, carText))) {
+                if (!accountController.createNewAccount(new Profile(usernameText, phoneNumberText, emailText, carText))) {
                     Toast.makeText(getApplicationContext(), "User already exists.",
                             Toast.LENGTH_LONG).show();
                     //unnecessary return function.
@@ -88,7 +84,7 @@ public class NewAccountActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-        loginController = new LoginController();
+        accountController = new AccountController();
         write();
         move();
     }
