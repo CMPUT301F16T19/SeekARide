@@ -11,7 +11,11 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
 
-        NetworkManager.Connectivity status = NetworkManager.getConnectivityStatus(context);
+        if (NetworkManager.getInstance() == null) {
+            return;
+        }
+
+        NetworkManager.Connectivity status = NetworkManager.getInstance().getConnectivityStatus();
 
         // do something with the change in network connection
         switch (status) {
@@ -41,7 +45,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
                 break;
         }
 
-        String status2 = NetworkManager.getConnectivityStatusString(context);
+        String status2 = NetworkManager.getInstance().getConnectivityStatusString();
 
         Toast.makeText(context, status2, Toast.LENGTH_LONG).show();
     }

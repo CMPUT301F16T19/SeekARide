@@ -72,11 +72,16 @@ public class Rider extends User {
     public Request makeRequest(String description, Location startPoint, Location destination, double price) {
         // make a request and add it to openRequests
         // send request to Elasticsearch
-        Request q = new Request(description, startPoint, destination,price,this.getProfile(),getProfile().getId());
-        openRequests.add(q);
-        ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(q);
-        addRequestTask.execute();
-        return q;
+        if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            return null;
+        }
+        else {
+            Request q = new Request(description, startPoint, destination,price,this.getProfile(),getProfile().getId());
+            openRequests.add(q);
+            ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(q);
+            addRequestTask.execute();
+            return q;
+        }
     }
 
     /**
@@ -163,25 +168,28 @@ public class Rider extends User {
      * Retrieves the Rider's current list of open Requests from the database and updates openRequests.
      */
     public void updateOpenRequests() {
-        if (getProfile() == null) {
-            openRequests = new ArrayList<Request>();
+        if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            Log.i("internet", "NONE");
             return;
         }
-        ElasticsearchController.GetRequestsTask getRequestsTask = new ElasticsearchController.GetRequestsTask(
-                ElasticsearchController.RequestField.RIDERID, getProfile().getId());
-        getRequestsTask.execute();
-        try {
-            ArrayList<Request> requests = getRequestsTask.get();
-            if (requests == null) {
+        else {
+            if (getProfile() == null) {
                 openRequests = new ArrayList<Request>();
+                return;
             }
-            else {
-                openRequests = requests;
-                Log.i("oh god", ((Integer)(openRequests.size())).toString());
-            }
-        }
-        catch (Exception e) {
+            ElasticsearchController.GetRequestsTask getRequestsTask = new ElasticsearchController.GetRequestsTask(
+                    ElasticsearchController.RequestField.RIDERID, getProfile().getId());
+            getRequestsTask.execute();
+            try {
+                ArrayList<Request> requests = getRequestsTask.get();
+                if (requests == null) {
+                    openRequests = new ArrayList<Request>();
+                } else {
+                    openRequests = requests;
+                }
+            } catch (Exception e) {
 
+            }
         }
     }
 

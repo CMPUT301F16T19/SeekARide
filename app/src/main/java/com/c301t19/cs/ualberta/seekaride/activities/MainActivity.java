@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.AccountController;
+import com.c301t19.cs.ualberta.seekaride.core.NetworkManager;
 
 public class MainActivity extends Activity {
 
@@ -32,6 +33,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        NetworkManager.instantiate(getApplicationContext());
         username = (EditText) findViewById(R.id.username_Text);
         move();
         accountController = new AccountController();

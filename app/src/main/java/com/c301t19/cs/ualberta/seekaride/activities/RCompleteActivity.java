@@ -64,18 +64,19 @@ public class RCompleteActivity extends Activity {
                     Driver.getInstance().clearRequestInProgress();
                     Rider.getInstance().setReceivedNotification(false);
                     Driver.getInstance().setReceivedNotification(false);
-                    Log.i("WOW",((Boolean)(Driver.getInstance().getRequestInProgress() != null)).toString());
+                    Log.i("WOW",((Boolean)(Driver.getInstance().getRequestInProgress() == null)).toString());
                     startActivity(new Intent(RCompleteActivity.this, RiderActivity.class));
                 }
                 else {
                     Driver.getInstance().updateAcceptedRequests();
                     request = Driver.getInstance().getRequest(request.getId());
                     Driver.getInstance().receivePayment(request);
+                    Log.i("WOW1",((Boolean)(Driver.getInstance().getRequestInProgress() == null)).toString());
                     Rider.getInstance().clearRequestInProgress();
                     Driver.getInstance().clearRequestInProgress();
                     Rider.getInstance().setReceivedNotification(false);
                     Driver.getInstance().setReceivedNotification(false);
-                    Log.i("WOW",((Boolean)(Driver.getInstance().getRequestInProgress() != null)).toString());
+                    Log.i("WOW2",((Boolean)(Driver.getInstance().getRequestInProgress() == null)).toString());
                     startActivity(new Intent(RCompleteActivity.this, DriverActivity.class));
                 }
 

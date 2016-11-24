@@ -14,7 +14,20 @@ public class NetworkManager {
 
     public enum Connectivity { WIFI, MOBILE, NONE };
 
-    public static Connectivity getConnectivityStatus(Context context) {
+    private Context context;
+    private static NetworkManager instance = null;
+    private NetworkManager(Context context) {
+        this.context = context;
+    }
+
+    public static NetworkManager getInstance() {
+        return instance;
+    }
+    public static void instantiate(Context context) {
+        instance = new NetworkManager(context);
+    }
+
+    public Connectivity getConnectivityStatus() {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -29,8 +42,8 @@ public class NetworkManager {
         return Connectivity.NONE;
     }
 
-    public static String getConnectivityStatusString(Context context) {
-        Connectivity conn = NetworkManager.getConnectivityStatus(context);
+    public String getConnectivityStatusString() {
+        Connectivity conn = getConnectivityStatus();
         String status = null;
         if (conn == Connectivity.WIFI) {
             status = "Wifi enabled";
