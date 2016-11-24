@@ -13,9 +13,6 @@ import java.net.URL;
 public class NetworkManager {
 
     public enum Connectivity { WIFI, MOBILE, NONE };
-    /*public static final int TYPE_WIFI = 1;
-    public static final int TYPE_MOBILE = 2;
-    public static final int TYPE_NOT_CONNECTED = 0;*/
 
     public static Connectivity getConnectivityStatus(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context

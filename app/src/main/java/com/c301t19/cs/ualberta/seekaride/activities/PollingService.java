@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.c301t19.cs.ualberta.seekaride.R;
@@ -27,22 +28,34 @@ public class PollingService extends IntentService {
         Rider.getInstance().updateOpenRequests();
         Driver.getInstance().updateAcceptedRequests();
         if (Rider.getInstance().driverHasAccepted()) {
-            final NotificationCompat.Builder Abuilder =
+            final NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(this).setSmallIcon(R.drawable.test).
-                            setContentTitle("Driver ready").setContentText("The Driver will pick you up shortly.");
-            final int Anotificationid = 1;
-            final NotificationManager Anotifymang =
+                            setContentTitle("Driver ready").setContentText("A driver is ready to pick you up.");
+            Intent resultIntent = new Intent(this, RiderActivity.class);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addParentStack(RiderActivity.class);
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(resultPendingIntent);
+            final int notificationId = 1;
+            final NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            Anotifymang.notify(Anotificationid, Abuilder.build());
+            notificationManager.notify(notificationId, builder.build());
         }
         if (Driver.getInstance().riderHasAccepted()) {
-            final NotificationCompat.Builder Abuilder =
+            final NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(this).setSmallIcon(R.drawable.test).
-                            setContentTitle("Rider ready").setContentText("The Rider is ready to be picked up.");
-            final int Anotificationid = 1;
-            final NotificationManager Anotifymang =
+                            setContentTitle("Rider ready").setContentText("The rider is ready to be picked up.");
+            Intent resultIntent = new Intent(this, DriverActivity.class);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addParentStack(DriverActivity.class);
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(resultPendingIntent);
+            final int notificationId = 1;
+            final NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            Anotifymang.notify(Anotificationid, Abuilder.build());
+            notificationManager.notify(notificationId, builder.build());
         }
         Log.i("driver accepted", ((Boolean)Rider.getInstance().driverHasAccepted()).toString());
         Log.i("rider accepted", ((Boolean)Driver.getInstance().riderHasAccepted()).toString());
