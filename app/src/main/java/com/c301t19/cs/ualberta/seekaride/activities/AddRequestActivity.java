@@ -101,13 +101,20 @@ public class AddRequestActivity extends Activity {
                                     "request fare",
                             Toast.LENGTH_LONG).show();
                 }
+                double farePrice;
+                try {
+                    farePrice = Double.parseDouble(fare.getText().toString());
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), "invalid fare format",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
                 //changed to !fare.getTex().toString().isEmpty())) for cleaner code.
                 if ((startLocation != null) & (endLocation != null) &
                         (!fare.getText().toString().isEmpty())) {
                     write();
                     Rider.getInstance().makeRequest(descriptText, startLocation,
-                            endLocation, Double.parseDouble(
-                                    fare.getText().toString()));
+                            endLocation, farePrice);
                     finish();
                 }
             }
