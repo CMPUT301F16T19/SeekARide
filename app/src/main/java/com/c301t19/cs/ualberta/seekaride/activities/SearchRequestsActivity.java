@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
@@ -63,7 +64,22 @@ public class SearchRequestsActivity extends Activity {
             public void onClick(View v) {
                 write();
                 Intent Nswitch = new Intent(SearchRequestsActivity.this, SearchResultsActivity.class);
-                Nswitch.putExtra("keywords", keywordsText);
+                if (keyLoc != null) {
+                    try {
+                        Double.parseDouble(radiusText);
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(), "invalid radius format",
+                                Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    Gson gson = new Gson();
+                    String send;
+                    send = gson.toJson(keyLoc);
+                    Nswitch.putExtra("queryLocation", send);
+                }
+                else {
+                    Nswitch.putExtra("keywords", keywordsText);
+                }
                 Nswitch.putExtra("radius", radiusText);
                 startActivity(Nswitch);
             }

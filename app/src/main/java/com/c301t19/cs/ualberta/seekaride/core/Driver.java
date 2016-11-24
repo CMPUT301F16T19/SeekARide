@@ -71,8 +71,17 @@ public class Driver extends User {
      * @param location the location
      * @param radius   the radius
      */
-    public void searchRequestsByLocation(Location location, String radius) {
+    public void searchRequestsByLocation(Location location, double radius) {
         // search requests and store in searchedRequests
+        ElasticsearchController.SearchRequestsByLocationTask searchTask =
+                new ElasticsearchController.SearchRequestsByLocationTask(location, radius);
+        searchTask.execute();
+        try {
+            searchedRequests = searchTask.get();
+        }
+        catch (Exception e) {
+
+        }
     }
 
     /**

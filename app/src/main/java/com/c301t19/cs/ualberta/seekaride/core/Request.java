@@ -22,6 +22,8 @@ public class Request {
     //private String riderName;
     private ArrayList<Profile> acceptedDriverProfiles;
     private double price;
+    private double lat;
+    private double lon;
 
     private Boolean waitingForRider;
     private Profile acceptedDriverProfile;
@@ -53,6 +55,8 @@ public class Request {
         acceptedDriverProfiles = new ArrayList<Profile>();
         price = pr;
         inProgress = false;
+        lat = st.getGeoLocation().getLatitude();
+        lon = st.getGeoLocation().getLongitude();
 
         waitingForRider = true;
         this.riderProfile = riderProfile;

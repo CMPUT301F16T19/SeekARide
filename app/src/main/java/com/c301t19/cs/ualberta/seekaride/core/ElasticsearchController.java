@@ -346,7 +346,7 @@ public class ElasticsearchController {
     public static class SearchRequestsByLocationTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
         private Location location;
-        private int radius;
+        private double radius;
 
         /**
          * Instantiates a new Search requests by location task.
@@ -354,7 +354,7 @@ public class ElasticsearchController {
          * @param l the l
          * @param r the r
          */
-        public SearchRequestsByLocationTask(Location l, int r) {
+        public SearchRequestsByLocationTask(Location l, double r) {
             super();
             location = l;
             radius = r;
@@ -363,8 +363,32 @@ public class ElasticsearchController {
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
             verifySettings();
-
-            return null;
+            String radiusToString;
+            radiusToString = String.valueOf(radius);
+            String locationArray;
+            locationArray = "[" + String.valueOf(location.getGeoLocation().getLongitude())
+                    + "," + String.valueOf(location.getGeoLocation().getLatitude()) + "]";
+            String query = "{\n" +
+                    "    \"filter\": {\n" +
+                    "        \"geo_distance\" : {\n" +
+                    "            \"distance\" : \"" + radiusToString + "m\",\n" +
+                    "            \"location\" :" + "\"" + locationArray + "\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+            Search search = new Search.Builder(query)
+                    .addIndex(INDEX)
+                    .addType("request")
+                    .build();
+            List<Request> requests = new ArrayList<Request>();
+            try {
+                SearchResult result = client.execute(search);
+                requests = result.getSourceAsObjectList(Request.class);
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return (ArrayList<Request>) requests;
         }
     }
 

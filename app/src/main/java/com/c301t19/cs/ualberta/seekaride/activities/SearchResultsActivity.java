@@ -12,11 +12,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
+import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -81,8 +84,22 @@ public class SearchResultsActivity extends Activity {
 
         results = (ListView) findViewById(R.id.result_List);
         Intent intent = getIntent();
-        Driver.getInstance().searchRequestsByKeyword(intent.getStringExtra("keywords"),
-                intent.getStringExtra("radius"));
+        if (intent.getStringExtra("queryLocation") != null) {
+
+            Gson gson = new Gson();
+            Location queryLocation = new Location("");
+            queryLocation = gson.fromJson(intent.getStringExtra("queryLocation"), queryLocation.getClass());
+
+            Toast.makeText(getApplicationContext(), queryLocation.getAddress(),
+                    Toast.LENGTH_LONG).show();
+            // multiplied by 1000 to get meters
+            double radiusDouble = Double.parseDouble(intent.getStringExtra("radius")) * 1000;
+            Driver.getInstance().searchRequestsByLocation(queryLocation, radiusDouble);
+        }
+        else {
+            Driver.getInstance().searchRequestsByKeyword(intent.getStringExtra("keywords"),
+                    intent.getStringExtra("radius"));
+        }
         adapter = new RequestsAdapter(this,
                 R.layout.request_list_item, Driver.getInstance().getSearchedRequests(), getLayoutInflater());
         results.setAdapter(adapter);
