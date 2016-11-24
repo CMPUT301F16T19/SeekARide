@@ -140,9 +140,9 @@ public class Profile {
         return new ArrayList<Review>();
     }
 
-    public double getRating() {
+    public float getRating() {
         ArrayList<Review> reviews = getReviews();
-        double res = 0;
+        float res = 0;
         if (reviews == null || reviews.isEmpty()) {
             return res;
         }

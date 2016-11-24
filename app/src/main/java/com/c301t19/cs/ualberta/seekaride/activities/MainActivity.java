@@ -35,6 +35,13 @@ public class MainActivity extends Activity {
         username = (EditText) findViewById(R.id.username_Text);
         move();
         accountController = new AccountController();
+        stopService(new Intent(this, PollingService.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        stopService(new Intent(this, PollingService.class));
     }
 
     public void onNewAccountClick(View v) {

@@ -25,7 +25,7 @@ public class RCompleteActivity extends Activity {
     private RatingBar ratingBar;
 
     private String reviewText;
-    private int rating;
+    private float rating;
 
     private boolean isRider;
     private int requestIndex;
@@ -36,7 +36,7 @@ public class RCompleteActivity extends Activity {
         review = (EditText) findViewById(R.id.complete_Review_Text);
 
         reviewText = review.getText().toString();
-        rating = ratingBar.getNumStars();
+        rating = ratingBar.getRating();
     }
 
     public void move(){

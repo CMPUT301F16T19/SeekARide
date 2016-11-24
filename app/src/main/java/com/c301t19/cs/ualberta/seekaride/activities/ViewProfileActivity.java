@@ -46,7 +46,7 @@ public class ViewProfileActivity extends Activity {
         phoneNumber.setText(aProfile.getPhoneNumber());
         email.setText(aProfile.getEmail());
         car.setText(aProfile.getCar());
-        rating.setText("Rating: " + ((Double)aProfile.getRating()).toString());
+        rating.setText("Rating: " + ((Float)aProfile.getRating()).toString());
     }
 
     public void move(){

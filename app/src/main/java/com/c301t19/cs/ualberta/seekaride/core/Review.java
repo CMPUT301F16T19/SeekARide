@@ -5,12 +5,12 @@ import io.searchbox.annotations.JestId;
 public class Review {
 
     private String description;
-    private int rating;
+    private float rating;
     private String userID;
     @JestId
     private String id;
 
-    public Review(String description, int rating, String userID) {
+    public Review(String description, float rating, String userID) {
         this.description = description;
         this.rating = rating;
         this.userID = userID;
@@ -24,11 +24,11 @@ public class Review {
         this.description = description;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

@@ -25,6 +25,8 @@ import io.searchbox.core.SearchResult;
  */
 public class ElasticsearchController {
 
+    public static final String INDEX = "t19seekaride2";
+
     public enum ReviewField {
         USERID, ID
     }
@@ -100,11 +102,11 @@ public class ElasticsearchController {
             Index index;
             if (id == null)
             {
-                index = new Index.Builder(user).index("t19seekaride2").type("user").build();
+                index = new Index.Builder(user).index(INDEX).type("user").build();
             }
             else
             {
-                index = new Index.Builder(user).index("t19seekaride2").type("user").id(id).build();
+                index = new Index.Builder(user).index(INDEX).type("user").id(id).build();
             }
             try {
                 client.execute(index);
@@ -159,7 +161,7 @@ public class ElasticsearchController {
                             "    }\n" +
                             "}";
                     Search search = new Search.Builder(query)
-                            .addIndex("t19seekaride2")
+                            .addIndex(INDEX)
                             .addType("user")
                             .build();
                     List<Profile> profiles = null;
@@ -183,7 +185,7 @@ public class ElasticsearchController {
                         return null;
                     }
                 case ID:
-                    Get get = new Get.Builder("t19seekaride2", keyword).type("user").build();
+                    Get get = new Get.Builder(INDEX, keyword).type("user").build();
                     JestResult result = null;
                     try {
                         result = client.execute(get);
@@ -209,7 +211,7 @@ public class ElasticsearchController {
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
-            Delete delete  = new Delete.Builder(user.getId()).index("t19seekaride2").type("user").build();
+            Delete delete  = new Delete.Builder(user.getId()).index(INDEX).type("user").build();
             try {
                 client.execute(delete);
             }
@@ -250,10 +252,10 @@ public class ElasticsearchController {
             verifySettings();
             Index index;
             if (id == null) {
-                index = new Index.Builder(request).index("t19seekaride2").type("request").build();
+                index = new Index.Builder(request).index(INDEX).type("request").build();
             }
             else {
-                index = new Index.Builder(request).index("t19seekaride2").type("request").id(id).build();
+                index = new Index.Builder(request).index(INDEX).type("request").id(id).build();
             }
             try {
                 client.execute(index);
@@ -291,7 +293,7 @@ public class ElasticsearchController {
             String query;
             switch (requestField) {
                 case ID:
-                    Get get = new Get.Builder("t19seekaride2", keyword).type("request").build();
+                    Get get = new Get.Builder(INDEX, keyword).type("request").build();
                     JestResult result = null;
                     try {
                         result = client.execute(get);
@@ -323,7 +325,7 @@ public class ElasticsearchController {
                     return null;
             }
             Search search = new Search.Builder(query)
-                    .addIndex("t19seekaride2")
+                    .addIndex(INDEX)
                     .addType("request")
                     .build();
             List<Request> requests = new ArrayList<Request>();
@@ -396,7 +398,7 @@ public class ElasticsearchController {
                     "    }\n" +
                     "}";
             Search search = new Search.Builder(query)
-                    .addIndex("t19seekaride2")
+                    .addIndex(INDEX)
                     .addType("request")
                     .build();
             List<Request> requests = new ArrayList<Request>();
@@ -436,10 +438,10 @@ public class ElasticsearchController {
             verifySettings();
             Delete delete;
             if (id == null) {
-                delete  = new Delete.Builder(request.getId()).index("t19seekaride2").type("request").build();
+                delete  = new Delete.Builder(request.getId()).index(INDEX).type("request").build();
             }
             else {
-                delete  = new Delete.Builder(id).index("t19seekaride2").type("request").build();
+                delete  = new Delete.Builder(id).index(INDEX).type("request").build();
             }
             try {
                 client.execute(delete);
@@ -463,7 +465,7 @@ public class ElasticsearchController {
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
-            Index index = new Index.Builder(review).index("t19seekaride2").type("review").build();
+            Index index = new Index.Builder(review).index(INDEX).type("review").build();
             try {
                 client.execute(index);
             }
@@ -494,7 +496,7 @@ public class ElasticsearchController {
                     "    }\n" +
                     "}";
             Search search = new Search.Builder(query)
-                    .addIndex("t19seekaride2")
+                    .addIndex(INDEX)
                     .addType("review")
                     .build();
             List<Review> reviews = new ArrayList<Review>();

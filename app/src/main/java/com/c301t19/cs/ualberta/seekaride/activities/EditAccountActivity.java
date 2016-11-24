@@ -50,7 +50,7 @@ public class EditAccountActivity extends Activity {
         phoneNumberText = phoneNumber.getText().toString();
         emailText = email.getText().toString();
         carText = car.getText().toString();
-        rating.setText("Rating: " + ((Double)Rider.getInstance().getProfile().getRating()).toString());
+        rating.setText("Rating: " + ((Float)Rider.getInstance().getProfile().getRating()).toString());
     }
 
     public void move(){
