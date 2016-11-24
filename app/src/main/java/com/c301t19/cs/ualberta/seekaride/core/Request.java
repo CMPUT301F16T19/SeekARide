@@ -305,6 +305,7 @@ public class Request {
         return inProgress;
     }
 
+    @Deprecated
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }

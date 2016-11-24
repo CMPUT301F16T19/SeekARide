@@ -23,19 +23,6 @@ public class Driver extends User {
         driverCommands = new ArrayList<DriverCommand>();
     }
 
-    /*
-    public Driver(Profile profile) {
-        super(profile);
-        this.searchedRequests = new ArrayList<Request>();
-        acceptedRequest = null;
-    }
-
-    public Driver(Profile profile, ArrayList<Request> searchedRequests) {
-        super(profile);
-        this.searchedRequests = searchedRequests;
-        acceptedRequest = null;
-    }*/
-
     /**
      * Gets instance.
      *
@@ -112,6 +99,7 @@ public class Driver extends User {
      *
      * @param index The request's position in acceptedRequests.
      */
+    @Deprecated
     public void removeAcceptedRequest(int index) {
         // remove a request and remove from acceptedRequests
         removeAcceptedRequest(acceptedRequests.get(index));
@@ -142,6 +130,7 @@ public class Driver extends User {
     /**
      * Receive payment.
      */
+    @Deprecated
     public void receivePayment(int index) {
         if(acceptedRequests.get(index).didRiderPay()) {
             acceptedRequests.get(index).driverReceivePay();
@@ -168,6 +157,7 @@ public class Driver extends User {
      *
      * @return the boolean
      */
+    @Deprecated
     public boolean isConfirmed(int index) {
         return acceptedRequests.get(index).isRiderConfirmed();
     }

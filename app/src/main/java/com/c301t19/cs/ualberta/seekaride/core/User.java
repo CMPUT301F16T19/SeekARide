@@ -36,6 +36,7 @@ public class User {
      *
      * @param phone Phone number of the user to contact.
      */
+    @Deprecated
     public void contactByPhone(String phone) {
 
     }
@@ -46,6 +47,7 @@ public class User {
      *
      * @param email Email address of the user to contact.
      */
+    @Deprecated
     public void contactByEmail(String email) {
 
     }
@@ -58,6 +60,7 @@ public class User {
      * @param end   End Location.
      * @return Suggested pricing.
      */
+    @Deprecated
     public float getRecommendedPrice(Location start, Location end) {
         return 0;
     }
@@ -77,6 +80,7 @@ public class User {
      * @param username the username
      * @return the string
      */
+    @Deprecated
     public String searchPhone(String username) {
         String phoneNumber = "idk";// should change to elastic search here
         return phoneNumber;

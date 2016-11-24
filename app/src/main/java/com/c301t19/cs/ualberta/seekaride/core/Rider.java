@@ -22,13 +22,6 @@ public class Rider extends User {
         riderCommands = new ArrayList<RiderCommand>();
     }
 
-    /*
-    public Rider (Profile userProfile) {
-        super(userProfile );
-        openRequests = new ArrayList<Request>();
-    }
-    */
-
     /**
      * Gets instance.
      *
@@ -93,18 +86,12 @@ public class Rider extends User {
      *
      * @param index The request's position in openRequests.
      */
+    @Deprecated
     public void deleteRequest(int index) {
 
         deleteRequest(openRequests.get(index));
 
     }
-
-//    public void deleteAllRequest(){
-//        openRequests.clear();
-//        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteAllRequestTask();
-//        deleteRequestTask.execute();
-//    }
-
 
     public void deleteRequest(Request request) {
 
@@ -125,6 +112,7 @@ public class Rider extends User {
      * @param indexR the index r
      * @param indexD the index d
      */
+    @Deprecated
     public void acceptDriverOffer(int indexR, int indexD) {
         openRequests.get(indexR).riderAccept(indexD);
     }
@@ -134,6 +122,7 @@ public class Rider extends User {
      *
      * @param indexR the index r
      */
+    @Deprecated
     public void makePayment(int indexR) {
 
         openRequests.get(indexR).riderPay();
@@ -185,6 +174,7 @@ public class Rider extends User {
      *
      * @return true if the Rider has open Requests.
      */
+    @Deprecated
     public boolean hasRequests() {
         if (openRequests.isEmpty()){
             return false;
@@ -199,6 +189,7 @@ public class Rider extends User {
      *
      * @param index The request's position in openRequests.
      */
+    @Deprecated
     public void completeRequest(int index) {
         openRequests.get(index).complete();
     }
@@ -226,9 +217,5 @@ public class Rider extends User {
             }
         }
         return false;
-    }
-
-    public int getIndexOfRequest(Request request) {
-        return openRequests.indexOf(request);
     }
 }
