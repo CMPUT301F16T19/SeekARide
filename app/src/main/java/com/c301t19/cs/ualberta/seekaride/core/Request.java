@@ -1,5 +1,8 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import org.osmdroid.util.GeoPoint;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,8 +25,8 @@ public class Request {
     //private String riderName;
     private ArrayList<Profile> acceptedDriverProfiles;
     private double price;
-    private double lat;
-    private double lon;
+    private String location;
+    //private GeoPoint location;
 
     private Boolean waitingForRider;
     private Profile acceptedDriverProfile;
@@ -55,8 +58,11 @@ public class Request {
         acceptedDriverProfiles = new ArrayList<Profile>();
         price = pr;
         inProgress = false;
-        lat = st.getGeoLocation().getLatitude();
-        lon = st.getGeoLocation().getLongitude();
+        double lat = st.getGeoLocation().getLatitude();
+        double lon = st.getGeoLocation().getLongitude();
+        location = String.valueOf(lon) + "," + String.valueOf(lat);
+        //location = start.getGeoLocation();
+
 
         waitingForRider = true;
         this.riderProfile = riderProfile;
