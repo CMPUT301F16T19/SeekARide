@@ -227,4 +227,8 @@ public class Rider extends User {
         }
         return false;
     }
+
+    public int getIndexOfRequest(Request request) {
+        return openRequests.indexOf(request);
+    }
 }

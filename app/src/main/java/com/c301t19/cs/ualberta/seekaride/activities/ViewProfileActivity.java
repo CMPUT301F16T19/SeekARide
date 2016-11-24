@@ -34,6 +34,8 @@ public class ViewProfileActivity extends Activity {
     private ListView reviewList;
     private TextView car;
 
+    private Request request;
+
     //sets up the text boxes and lets you fill them in.
     public void write() {
 
@@ -70,12 +72,20 @@ public class ViewProfileActivity extends Activity {
             @Override
             public void onClick(View v){
 
+                /*
                 int requestIndex = getIntent().getIntExtra("requestIndex", -1);
                 Request edited = Rider.getInstance().getRequest(requestIndex);
                 if (!edited.riderAccept(aProfile)) {
                     return;
                 }
                 Rider.getInstance().editRequest(edited);
+                */
+
+                if (!request.riderAccept(aProfile)) {
+                    return;
+                }
+                int requestIndex = Rider.getInstance().getOpenRequests().indexOf(request);
+                Rider.getInstance().editRequest(request);
 
                 Intent intent = new Intent(ViewProfileActivity.this, RCompleteActivity.class);
                 intent.putExtra("requestIndex", requestIndex);
@@ -122,10 +132,17 @@ public class ViewProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
+
+        int requestIndex = getIntent().getIntExtra("requestIndex", -1);
+        if (requestIndex >= 0) {
+            request = Rider.getInstance().getRequest(requestIndex);
+        }
+
         accept = (Button) findViewById(R.id.accept_Driver);
         if (!getIntent().getBooleanExtra("showAcceptButton", false)) {
             accept.setVisibility(View.GONE);
         }
+
         String profileId = getIntent().getStringExtra("profileId");
         Log.i("ProfileID", profileId);
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
@@ -146,6 +163,7 @@ public class ViewProfileActivity extends Activity {
         catch (Exception e) {
 
         }
+
         write();
         move();
         reviewList = (ListView) findViewById(R.id.view_Profile_ListView);
