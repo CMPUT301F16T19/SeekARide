@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 public class Rider extends User {
 
-    //Request currentRequest;
     private ArrayList<Request> openRequests;
 
     private static Rider ourInstance = null;
@@ -115,6 +114,23 @@ public class Rider extends User {
     @Deprecated
     public void acceptDriverOffer(int indexR, int indexD) {
         openRequests.get(indexR).riderAccept(indexD);
+    }
+
+    public boolean acceptDriverOffer(Request request, Profile driverProfile) {
+        if (Driver.getInstance().getRequestInProgress() != null) {
+            Log.i("request in progress", "can't accept two requests at once");
+            return false;
+        }
+        if (getRequestInProgress() != null) {
+            Log.i("request in progress", "can't accept two requests at once");
+            return false;
+        }
+        if (!request.riderAccept(driverProfile)) {
+            return false;
+        }
+        Rider.getInstance().editRequest(request);
+        setRequestInProgress(request);
+        return true;
     }
 
     /**

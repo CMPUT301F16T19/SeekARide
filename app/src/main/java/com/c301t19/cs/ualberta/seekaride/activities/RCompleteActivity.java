@@ -28,7 +28,7 @@ public class RCompleteActivity extends Activity {
     private float rating;
 
     private boolean isRider;
-    private int requestIndex;
+    //private int requestIndex;
     private Request request;
 
     //handles getting the review, but doesn't save it anywhere.
@@ -60,13 +60,22 @@ public class RCompleteActivity extends Activity {
                     Rider.getInstance().updateOpenRequests();
                     request = Rider.getInstance().getRequest(request.getId());
                     Rider.getInstance().makePayment(request);
+                    Rider.getInstance().clearRequestInProgress();
+                    Driver.getInstance().clearRequestInProgress();
+                    Rider.getInstance().setReceivedNotification(false);
+                    Driver.getInstance().setReceivedNotification(false);
+                    Log.i("WOW",((Boolean)(Driver.getInstance().getRequestInProgress() != null)).toString());
                     startActivity(new Intent(RCompleteActivity.this, RiderActivity.class));
                 }
                 else {
                     Driver.getInstance().updateAcceptedRequests();
                     request = Driver.getInstance().getRequest(request.getId());
-                    Log.i("null request", ((Boolean)(request==null)).toString());
                     Driver.getInstance().receivePayment(request);
+                    Rider.getInstance().clearRequestInProgress();
+                    Driver.getInstance().clearRequestInProgress();
+                    Rider.getInstance().setReceivedNotification(false);
+                    Driver.getInstance().setReceivedNotification(false);
+                    Log.i("WOW",((Boolean)(Driver.getInstance().getRequestInProgress() != null)).toString());
                     startActivity(new Intent(RCompleteActivity.this, DriverActivity.class));
                 }
 
@@ -80,12 +89,14 @@ public class RCompleteActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rcomplete);
         isRider = getIntent().getBooleanExtra("isRider", false);
-        requestIndex = getIntent().getIntExtra("requestIndex", -1);
+        //requestIndex = getIntent().getIntExtra("requestIndex", -1);
         if (isRider) {
-            request = Rider.getInstance().getOpenRequests().get(requestIndex);
+            //request = Rider.getInstance().getOpenRequests().get(requestIndex);
+            request = Rider.getInstance().getRequestInProgress();
         }
         else {
-            request = Driver.getInstance().getAcceptedRequests().get(requestIndex);
+            //request = Driver.getInstance().getAcceptedRequests().get(requestIndex);
+            request = Driver.getInstance().getRequestInProgress();
         }
         move();
     }

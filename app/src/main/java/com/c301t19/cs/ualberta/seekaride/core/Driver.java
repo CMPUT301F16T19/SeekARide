@@ -1,5 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +11,6 @@ public class Driver extends User {
 
     private ArrayList<Request> searchedRequests; //never update it, after we accept a request, until the request ends
     private ArrayList<Request> acceptedRequests;
-    private Request acceptedRequest;
 
     private static Driver ourInstance = null;
 
@@ -19,7 +20,6 @@ public class Driver extends User {
         super(p);
         searchedRequests = new ArrayList<Request>();
         acceptedRequests = new ArrayList<Request>();
-        acceptedRequest = null;
         driverCommands = new ArrayList<DriverCommand>();
     }
 
@@ -189,6 +189,7 @@ public class Driver extends User {
 
     public void updateAcceptedRequests() {
         if (getProfile() == null) {
+            Log.i("profile", "is null");
             acceptedRequests = new ArrayList<Request>();
             return;
         }
@@ -212,15 +213,33 @@ public class Driver extends User {
         catch (Exception e) {
 
         }
+
+        Request acceptedRequest = riderHasAccepted();
+        if (acceptedRequest != null && acceptedRequest.getAcceptedDriverProfile()!=null && acceptedRequest.getAcceptedDriverProfile().equals(getProfile())) {
+            setRequestInProgress(acceptedRequest);
+            Request current;
+            while (!acceptedRequests.isEmpty())
+            {
+                current = acceptedRequests.get(0);
+                if (current.equals(acceptedRequest)) {
+                    acceptedRequests.remove(current);
+                }
+                else {
+                    removeAcceptedRequest(current);
+                }
+            }
+            acceptedRequests = new ArrayList<Request>();
+            acceptedRequests.add(acceptedRequest);
+        }
     }
 
-    public boolean riderHasAccepted() {
+    public Request riderHasAccepted() {
         for (int i = 0; i < acceptedRequests.size(); i++) {
             if (!acceptedRequests.get(i).getWaitingForRider()) {
-                return true;
+                return acceptedRequests.get(i);
             }
         }
-        return false;
+        return null;
     }
 
     public Request getRequest(String requestId) {
@@ -229,6 +248,7 @@ public class Driver extends User {
                 return acceptedRequests.get(i);
             }
         }
+        Log.i("NULL" ,"REQUEST");
         return null;
     }
 

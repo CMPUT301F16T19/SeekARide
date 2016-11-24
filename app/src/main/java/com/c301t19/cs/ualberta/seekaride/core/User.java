@@ -7,6 +7,10 @@ import android.content.Context;
  */
 public class User {
 
+    private Request requestInProgress;
+
+    private boolean receivedNotification;
+
     /**
      * The Profile.
      */
@@ -18,7 +22,10 @@ public class User {
      * @param profile the profile
      */
     public User(Profile profile) {
+
         this.profile = profile;
+        requestInProgress = null;
+        receivedNotification = false;
     }
 
     /**
@@ -90,4 +97,25 @@ public class User {
         ElasticsearchController.AddReviewTask addReviewTask = new ElasticsearchController.AddReviewTask(review);
         addReviewTask.execute();
     }
+
+    public Request getRequestInProgress() {
+        return requestInProgress;
+    }
+
+    public void setRequestInProgress(Request requestInProgres) {
+        requestInProgress = requestInProgres;
+    }
+
+    public void clearRequestInProgress() {
+        requestInProgress = null;
+    }
+
+    public boolean hasReceivedNotification() {
+        return receivedNotification;
+    }
+
+    public void setReceivedNotification(boolean receivedNotification) {
+        this.receivedNotification = receivedNotification;
+    }
+
 }

@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
@@ -117,6 +119,11 @@ public class ViewOfferActivity extends Activity {
         acceptO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Driver.getInstance().getRequestInProgress() != null) {
+                    Toast.makeText(getApplicationContext(), "Could not accept request. Perhaps a request is already in progress.",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (getIntent().getBooleanExtra("source", false)) {
                     Driver.getInstance().removeAcceptedRequest(request);
                 } else {

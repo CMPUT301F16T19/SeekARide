@@ -18,7 +18,6 @@ public class PollServerBroadcastReceiver extends BroadcastReceiver {
         }
         Intent dailyUpdater = new Intent(context, PollingService.class);
         context.startService(dailyUpdater);
-        Log.i("AlarmReceiver", "Called context.startService from AlarmReceiver.onReceive");
     }
 }
 

@@ -229,6 +229,8 @@ public class Request {
         }
         waitingForRider = false;
         acceptedDriverProfile = driverProfile;
+        acceptedDriverProfiles = new ArrayList<Profile>();
+        acceptedDriverProfiles.add(driverProfile);
         return true;
     }
 

@@ -25,7 +25,7 @@ public class PollingService extends IntentService {
         Log.i("PollingService", "About to execute MyTask");
         Rider.getInstance().updateOpenRequests();
         Driver.getInstance().updateAcceptedRequests();
-        if (Rider.getInstance().driverHasAccepted()) {
+        if (Rider.getInstance().driverHasAccepted() && !Rider.getInstance().hasReceivedNotification()) {
             final NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(this).setSmallIcon(R.drawable.test).
                             setContentTitle("Driver ready").setContentText("A driver is ready to pick you up.");
@@ -39,8 +39,10 @@ public class PollingService extends IntentService {
             final NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(notificationId, builder.build());
+            Rider.getInstance().setReceivedNotification(true);
+            Log.i("send notification", "rider");
         }
-        if (Driver.getInstance().riderHasAccepted()) {
+        if (Driver.getInstance().riderHasAccepted() != null && !Driver.getInstance().hasReceivedNotification()) {
             final NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(this).setSmallIcon(R.drawable.test).
                             setContentTitle("Rider ready").setContentText("The rider is ready to be picked up.");
@@ -54,8 +56,10 @@ public class PollingService extends IntentService {
             final NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(notificationId, builder.build());
+            Driver.getInstance().setReceivedNotification(true);
+            Log.i("send notification", "driver");
         }
         Log.i("driver accepted", ((Boolean)Rider.getInstance().driverHasAccepted()).toString());
-        Log.i("rider accepted", ((Boolean)Driver.getInstance().riderHasAccepted()).toString());
+        Log.i("rider accepted", ((Boolean)(Driver.getInstance().riderHasAccepted()!=null)).toString());
     }
 }

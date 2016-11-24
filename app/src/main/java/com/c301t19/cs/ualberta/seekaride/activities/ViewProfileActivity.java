@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
@@ -72,23 +73,19 @@ public class ViewProfileActivity extends Activity {
             @Override
             public void onClick(View v){
 
-                /*
-                int requestIndex = getIntent().getIntExtra("requestIndex", -1);
-                Request edited = Rider.getInstance().getRequest(requestIndex);
-                if (!edited.riderAccept(aProfile)) {
-                    return;
-                }
-                Rider.getInstance().editRequest(edited);
-                */
-
-                if (!request.riderAccept(aProfile)) {
+                /*if (!request.riderAccept(aProfile)) {
                     return;
                 }
                 int requestIndex = Rider.getInstance().getOpenRequests().indexOf(request);
-                Rider.getInstance().editRequest(request);
+                Rider.getInstance().editRequest(request);*/
+                if (!Rider.getInstance().acceptDriverOffer(request, aProfile)) {
+                    Toast.makeText(getApplicationContext(), "Could not accept driver. Perhaps a request is already in progress.",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 Intent intent = new Intent(ViewProfileActivity.this, RCompleteActivity.class);
-                intent.putExtra("requestIndex", requestIndex);
+                //intent.putExtra("requestIndex", requestIndex);
                 intent.putExtra("isRider", true);
                 intent.putExtra("theirID", aProfile.getId());
 

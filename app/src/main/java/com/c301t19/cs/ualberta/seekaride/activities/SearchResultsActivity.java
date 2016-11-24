@@ -117,7 +117,8 @@ public class SearchResultsActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.mainMenuRider:
-                return false;
+                startActivity(new Intent(this, RiderActivity.class));
+                return true;
             case R.id.mainMenuDriver:
                 startActivity(new Intent(this, DriverActivity.class));
                 return true;

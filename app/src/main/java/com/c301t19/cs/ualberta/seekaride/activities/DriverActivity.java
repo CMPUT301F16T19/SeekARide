@@ -44,8 +44,9 @@ public class DriverActivity extends Activity {
                     return;
                 }
                 if (selectedRequest.getAcceptedDriverProfile()!= null && selectedRequest.getAcceptedDriverProfile().equals(Driver.getInstance().getProfile())) {
+                    Driver.getInstance().setRequestInProgress(selectedRequest);
                     Intent intent = new Intent(DriverActivity.this, RCompleteActivity.class);
-                    intent.putExtra("requestIndex", requestIndex);
+                    //intent.putExtra("requestIndex", requestIndex);
                     intent.putExtra("isRider", false);
                     intent.putExtra("theirID", selectedRequest.getRiderProfile().getId());
                     startActivity(intent);
