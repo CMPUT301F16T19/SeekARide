@@ -174,7 +174,13 @@ public class ElasticsearchController {
                         return null;
                     }
                     else {
-                        return profiles.get(0);
+                        for (int i = 0; i < profiles.size(); i++) {
+                            if (profiles.get(i).getUsername().equals(keyword)) {
+                                return profiles.get(i);
+                            }
+                        }
+                        Log.i("fail", "mega fail");
+                        return null;
                     }
                 case ID:
                     Get get = new Get.Builder("t19seekaride2", keyword).type("user").build();
