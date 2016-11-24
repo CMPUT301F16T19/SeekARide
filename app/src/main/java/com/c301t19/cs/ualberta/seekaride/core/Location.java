@@ -15,6 +15,9 @@ public class Location {
 
     private GeoPoint geoLocation;
 
+    //private double lat;
+    //private double lon;
+
     /**
      * Instantiates a new Location.
      *
@@ -49,6 +52,8 @@ public class Location {
      */
     public void setGeoLocation(GeoPoint geoLocation) {
         this.geoLocation = geoLocation;
+        //lat = geoLocation.getLatitude();
+        //lon = geoLocation.getLongitude();
     }
 
     /**

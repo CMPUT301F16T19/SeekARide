@@ -90,10 +90,10 @@ public class SearchResultsActivity extends Activity {
             Location queryLocation = new Location("");
             queryLocation = gson.fromJson(intent.getStringExtra("queryLocation"), queryLocation.getClass());
 
-            Toast.makeText(getApplicationContext(), queryLocation.getAddress(),
-                    Toast.LENGTH_LONG).show();
             // multiplied by 1000 to get meters
             double radiusDouble = Double.parseDouble(intent.getStringExtra("radius")) * 1000;
+            //Toast.makeText(getApplicationContext(), String.valueOf(radiusDouble),
+            //        Toast.LENGTH_LONG).show();
             Driver.getInstance().searchRequestsByLocation(queryLocation, radiusDouble);
         }
         else {
