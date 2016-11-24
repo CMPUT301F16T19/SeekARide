@@ -409,7 +409,8 @@ public class ElasticsearchController {
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-            return (ArrayList<Request>) requests;
+            ArrayList<Request> filteredRequests = filterRequestsInProgress((ArrayList<Request>) requests);
+            return filteredRequests;
         }
     }
 
@@ -523,10 +524,10 @@ public class ElasticsearchController {
         }
     }
 
-    private ArrayList<Request> filterRequestsInProgress(ArrayList<Request> requests) {
+    private static ArrayList<Request> filterRequestsInProgress(ArrayList<Request> requests) {
         ArrayList<Request> result = new ArrayList<Request>();
         for (int i = 0; i < requests.size(); i++) {
-            if (!requests.get(i).isInProgress()) {
+            if (requests.get(i).getWaitingForRider()) {
                 result.add(requests.get(i));
             }
         }
