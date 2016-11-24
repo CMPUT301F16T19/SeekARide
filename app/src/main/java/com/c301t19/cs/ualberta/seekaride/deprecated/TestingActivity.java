@@ -1,4 +1,4 @@
-package com.c301t19.cs.ualberta.seekaride.activities;
+package com.c301t19.cs.ualberta.seekaride.deprecated;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;

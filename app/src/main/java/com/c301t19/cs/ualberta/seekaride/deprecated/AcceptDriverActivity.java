@@ -1,4 +1,4 @@
-package com.c301t19.cs.ualberta.seekaride.activities;
+package com.c301t19.cs.ualberta.seekaride.deprecated;
 
 import android.app.Activity;
 import android.app.NotificationManager;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.activities.EditRequestActivity;
+import com.c301t19.cs.ualberta.seekaride.activities.RiderActivity;
 
 public class AcceptDriverActivity extends Activity {
     private Button acceptD;

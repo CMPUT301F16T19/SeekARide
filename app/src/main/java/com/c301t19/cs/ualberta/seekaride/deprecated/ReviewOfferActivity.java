@@ -1,4 +1,4 @@
-package com.c301t19.cs.ualberta.seekaride.activities;
+package com.c301t19.cs.ualberta.seekaride.deprecated;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.activities.DriverActivity;
 
 public class ReviewOfferActivity extends Activity {
     private Button cOffer;

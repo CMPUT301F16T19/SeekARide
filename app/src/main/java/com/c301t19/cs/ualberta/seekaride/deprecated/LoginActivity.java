@@ -1,8 +1,7 @@
-package com.c301t19.cs.ualberta.seekaride.activities;
+package com.c301t19.cs.ualberta.seekaride.deprecated;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.activities.DriverActivity;
+import com.c301t19.cs.ualberta.seekaride.activities.RiderActivity;
+import com.c301t19.cs.ualberta.seekaride.activities.ViewProfileActivity;
 
 public class LoginActivity extends Activity {
 
