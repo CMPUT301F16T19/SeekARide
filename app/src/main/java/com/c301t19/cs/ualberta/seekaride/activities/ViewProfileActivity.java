@@ -2,6 +2,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,11 +43,15 @@ public class ViewProfileActivity extends Activity {
         rating = (TextView) findViewById(R.id.view_Rating);
         car = (TextView) findViewById(R.id.edit_Car_Text);
 
-        username.setText(aProfile.getUsername());
-        phoneNumber.setText(aProfile.getPhoneNumber());
-        email.setText(aProfile.getEmail());
-        car.setText(aProfile.getCar());
-        rating.setText("Rating: " + ((Float)aProfile.getRating()).toString());
+        username.setText("Username: " + aProfile.getUsername());
+        phoneNumber.setText("Phone: " + aProfile.getPhoneNumber());
+        email.setText("Email: " + aProfile.getEmail());
+        car.setText("Car: " + aProfile.getCar());
+        rating.setText("Average rating: " + ((Float)aProfile.getRating()).toString());
+
+        // http://stackoverflow.com/questions/5645789/how-to-set-underline-text-on-textview 2016-11-23, 8:39 PM, author toxa_xa
+        phoneNumber.setPaintFlags(phoneNumber.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        email.setPaintFlags(email.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
     public void move(){

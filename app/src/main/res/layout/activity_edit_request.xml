@@ -40,8 +40,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Recommended Fare"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Recommended Fare:"
         android:id="@+id/edit_RecFare_Text"
         android:layout_below="@+id/edit_Elocation_Text"
         android:layout_alignParentStart="true"
@@ -62,40 +62,36 @@
         android:text="Cancel"
         android:id="@+id/edit_Cancel_Button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/edit_Delete_Button" />
+        android:layout_toEndOf="@+id/edit_Delete_Button" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete Request"
         android:id="@+id/edit_Delete_Button"
-        android:layout_above="@+id/edit_Cancel_Button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/edit_Edit_Button" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Request"
         android:id="@+id/edit_Edit_Button"
-        android:layout_above="@+id/edit_Delete_Button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edit_Drivers_List"
-        android:layout_below="@+id/edit_Fare_Text"
-        android:layout_above="@+id/edit_Edit_Button"
+        android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/edit_Cancel_Button" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="$0.00"
         android:id="@+id/editRecommendedFareNumber"
         android:layout_below="@+id/edit_Elocation_Text"
@@ -109,5 +105,14 @@
         android:id="@+id/dollarSign1"
         android:layout_alignTop="@+id/edit_Fare_Text"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Select a driver to accept their offer:"
+        android:id="@+id/textView"
+        android:layout_below="@+id/edit_Fare_Text"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

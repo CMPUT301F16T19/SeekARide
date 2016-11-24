@@ -60,12 +60,14 @@ public class RCompleteActivity extends Activity {
                     Rider.getInstance().updateOpenRequests();
                     request = Rider.getInstance().getRequest(request.getId());
                     Rider.getInstance().makePayment(request);
+                    startActivity(new Intent(RCompleteActivity.this, RiderActivity.class));
                 }
                 else {
                     Driver.getInstance().updateAcceptedRequests();
                     request = Driver.getInstance().getRequest(request.getId());
                     Log.i("null request", ((Boolean)(request==null)).toString());
                     Driver.getInstance().receivePayment(request);
+                    startActivity(new Intent(RCompleteActivity.this, DriverActivity.class));
                 }
 
                 finish();

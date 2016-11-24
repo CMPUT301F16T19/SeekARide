@@ -104,13 +104,13 @@ public class ViewOfferActivity extends Activity {
             acceptO.setText("Decline");
         }
         Back = (Button) findViewById(R.id.view_Back_Button);
-        //builds the notification
+        /*builds the notification
         final NotificationCompat.Builder Abuilder =
                 new NotificationCompat.Builder(this).setSmallIcon(R.drawable.test).
                         setContentTitle("Rider ready").setContentText("The Rider is ready to be picked up.");
         final int Anotificationid = 1;
         final NotificationManager Anotifymang =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);*/
 
 
         //Should add the request to the list, and return you to Driver screen
@@ -122,7 +122,7 @@ public class ViewOfferActivity extends Activity {
                 } else {
                     Driver.getInstance().acceptRequest(request);
                 }
-                Anotifymang.notify(Anotificationid, Abuilder.build());
+                //Anotifymang.notify(Anotificationid, Abuilder.build());
                 finish();
             }
         });

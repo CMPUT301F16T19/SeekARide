@@ -68,7 +68,7 @@
             android:name="com.c301t19.cs.ualberta.seekaride.AcceptRiderActivity"
             android:label="@string/title_activity_accept_rider" />
         <activity
-            android:name="com.c301t19.cs.ualberta.seekaride.activities.AcceptDriverActivity"
+            android:name="com.c301t19.cs.ualberta.seekaride.deprecated.AcceptDriverActivity"
             android:label="@string/title_activity_accept_driver" />
         <activity
             android:name="com.c301t19.cs.ualberta.seekaride.activities.SearchResultsActivity"
@@ -77,7 +77,7 @@
             android:name="com.c301t19.cs.ualberta.seekaride.activities.ViewOfferActivity"
             android:label="@string/title_activity_view_offer" />
         <activity
-            android:name="com.c301t19.cs.ualberta.seekaride.activities.ReviewOfferActivity"
+            android:name="com.c301t19.cs.ualberta.seekaride.deprecated.ReviewOfferActivity"
             android:label="@string/title_activity_review_offer" />
         <activity
             android:name="com.c301t19.cs.ualberta.seekaride.activities.MapActivity"
@@ -85,10 +85,10 @@
         <activity
             android:name="com.c301t19.cs.ualberta.seekaride.activities.RCompleteActivity"
             android:label="@string/title_activity_rcomplete" />
-        <activity android:name="com.c301t19.cs.ualberta.seekaride.activities.TestingActivity" />
+        <activity android:name="com.c301t19.cs.ualberta.seekaride.deprecated.TestingActivity" />
         <activity android:name="com.c301t19.cs.ualberta.seekaride.activities.ChooseLocationsActivity" />
         <activity
-            android:name="com.c301t19.cs.ualberta.seekaride.activities.LoginActivity"
+            android:name="com.c301t19.cs.ualberta.seekaride.deprecated.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
     </application>

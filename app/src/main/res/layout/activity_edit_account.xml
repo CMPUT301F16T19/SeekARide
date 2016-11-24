@@ -94,7 +94,8 @@
         android:text="Rating"
         android:id="@+id/edit_Account_Rating"
         android:layout_below="@+id/edit_Car_Text"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
         android:layout_width="wrap_content"

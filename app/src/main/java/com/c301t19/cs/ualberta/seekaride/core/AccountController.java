@@ -98,6 +98,7 @@ public class AccountController {
         return true;
     }
 
+    // http://simpleandroidtutorials.blogspot.ca/2012/06/periodically-update-data-from-server-in.html 2016-11-12, 3:02 PM, author Nirali
     private void pollServer(Context context) {
 
         context.stopService(new Intent(context, PollingService.class));

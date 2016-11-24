@@ -60,10 +60,4 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, RiderActivity.class);
         startActivity(intent);
     }
-
-    //remove before final build
-    public void testScreenButton(View v) {
-        Intent intent = new Intent(this, AddRequestActivity.class);
-        startActivity(intent);
-    }
 }

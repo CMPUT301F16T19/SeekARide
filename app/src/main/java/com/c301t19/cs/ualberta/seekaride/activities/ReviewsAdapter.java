@@ -37,6 +37,8 @@ public class ReviewsAdapter extends ArrayAdapter<Review> {
 
         TextView driverName = (TextView)convertView.findViewById(R.id.requestDescription);
         driverName.setText(current.getDescription());
+        TextView rating = (TextView)convertView.findViewById(R.id.requestTime);
+        rating.setText("Rated " + ((Float)current.getRating()).toString());
 
         return convertView;
     }

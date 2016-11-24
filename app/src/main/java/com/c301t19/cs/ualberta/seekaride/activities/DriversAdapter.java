@@ -38,6 +38,7 @@ public class DriversAdapter extends ArrayAdapter<Profile> {
 
         TextView driverName = (TextView)convertView.findViewById(R.id.requestDescription);
         driverName.setText(current.getUsername());
+        (convertView.findViewById(R.id.requestTime)).setVisibility(View.GONE);
 
         driverName.setOnClickListener(new View.OnClickListener() {
             @Override

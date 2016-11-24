@@ -11,17 +11,21 @@ import android.widget.TextView;
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class RequestsAdapter extends ArrayAdapter<Request> {
 
     ArrayList<Request> requests;
     LayoutInflater inflater;
+    Context context;
 
     public RequestsAdapter(Context context, int resource, ArrayList<Request> objects, LayoutInflater li) {
         super(context, resource, objects);
         requests = objects;
         inflater = li;
+        this.context = context;
     }
 
     // code modified from https://code.tutsplus.com/tutorials/android-from-scratch-understanding-adapters-and-adapter-views--cms-26646 Oct 1, 2016
@@ -36,6 +40,9 @@ public class RequestsAdapter extends ArrayAdapter<Request> {
 
         TextView requestDescription = (TextView)convertView.findViewById(R.id.requestDescription);
         requestDescription.setText(current.getDescription());
+        requestDescription.setTextAppearance(context, android.R.style.TextAppearance_Large);
+        TextView requestTime = (TextView)convertView.findViewById(R.id.requestTime);
+        requestTime.setText(current.getRequestTime().toString());
 
         return convertView;
     }

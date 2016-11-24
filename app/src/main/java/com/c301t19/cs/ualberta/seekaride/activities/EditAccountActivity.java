@@ -25,6 +25,7 @@ public class EditAccountActivity extends Activity {
     private EditText phoneNumber;
     private EditText email;
     private EditText car;
+    private TextView username;
 
     String passwordText;
     String confirmPassword;
@@ -44,18 +45,24 @@ public class EditAccountActivity extends Activity {
         email = (EditText) findViewById(R.id.edit_Email_Text);
         car = (EditText) findViewById(R.id.edit_Car_Text);
         rating = (TextView) findViewById(R.id.edit_Account_Rating);
+        username = (TextView) findViewById(R.id.edit_User_Text);
 
         passwordText = password.getText().toString();
         confirmPassword = cPassword.getText().toString();
         phoneNumberText = phoneNumber.getText().toString();
         emailText = email.getText().toString();
         carText = car.getText().toString();
-        rating.setText("Rating: " + ((Float)Rider.getInstance().getProfile().getRating()).toString());
+        rating.setText("Average rating: " + ((Float)Rider.getInstance().getProfile().getRating()).toString());
+        username.setText(Rider.getInstance().getProfile().getUsername());
     }
 
     public void move(){
         Save = (Button) findViewById(R.id.edit_Changes_Button);
         Cancel = (Button) findViewById(R.id.edit_Cancel_Button);
+
+        phoneNumber.setText(Rider.getInstance().getProfile().getPhoneNumber());
+        email.setText(Rider.getInstance().getProfile().getEmail());
+        car.setText(Rider.getInstance().getProfile().getCar());
 
         //saves your changes and moves you back to the view profile screen.
         Save.setOnClickListener(new View.OnClickListener() {

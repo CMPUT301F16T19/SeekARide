@@ -88,4 +88,28 @@ public class SearchResultsActivity extends Activity {
         results.setAdapter(adapter);
         move();
     }
+
+    @Override
+    // dropdown menu
+    public boolean onCreateOptionsMenu(Menu m) {
+        getMenuInflater().inflate(R.menu.main, m);
+        return true;
+    }
+
+    // dropdown menu
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mainMenuRider:
+                return false;
+            case R.id.mainMenuDriver:
+                startActivity(new Intent(this, DriverActivity.class));
+                return true;
+            case R.id.mainMenuProfile:
+                startActivity(new Intent(this, EditAccountActivity.class));
+                return true;
+            default:
+                return false;
+            //return super.onOptionsItemSelected(item);
+        }
+    }
 }

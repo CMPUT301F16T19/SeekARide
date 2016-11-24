@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Request Complete"
+        android:text="Request In Progress"
         android:id="@+id/complete_Complete_Text"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -18,25 +18,23 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm Payment"
+        android:text="Complete Request and Confirm Payment"
         android:id="@+id/complete_Confirm_Button"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/complete_Review_Text"
         android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/complete_Review_Text"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:text="Review rider/driver"
-        android:layout_below="@+id/complete_ratingBar" />
+        android:layout_above="@+id/complete_ratingBar"
+        android:layout_centerHorizontal="true" />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/complete_ratingBar"
-        android:layout_below="@+id/complete_Confirm_Button"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

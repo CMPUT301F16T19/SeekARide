@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.c301t19.cs.ualberta.seekaride.R;
+import com.c301t19.cs.ualberta.seekaride.deprecated.LoginActivity;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
