@@ -81,13 +81,20 @@ public class MockDriver extends Driver {
      */
     @Override
     public void acceptRequest(Request request) {
+        if (MockNetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            Log.i("internet", "NONE");
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(request);
+            MockDriverCommand command = new MockDriverCommand(DriverCommand.CommandType.ACCEPT_REQUEST, params);
+            driverCommands.add(command);
+        }
+        else {
             Request oldRequest = new Request(request);
             oldRequest.driverAccepted(getProfile());
             acceptedRequests.add(oldRequest);
-            String reqId = oldRequest.getId();
-
             MockElasticsearchController.DeleteRequestTask(request);
             MockElasticsearchController.AddRequestTask(oldRequest);
+        }
     }
     /**
      * Allows the Driver to decline a Request they previously accepted and remove it from acceptedRequests.

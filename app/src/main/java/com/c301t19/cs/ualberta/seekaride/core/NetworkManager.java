@@ -19,6 +19,7 @@ public class NetworkManager {
     private NetworkManager(Context context) {
         this.context = context;
     }
+    protected NetworkManager() {}
 
     public static NetworkManager getInstance() {
         return instance;

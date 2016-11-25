@@ -55,29 +55,55 @@ public class MockRider extends Rider {
      * @return The Request just made.
      */
     public MockRequest makeRequest(String description, Location startPoint, Location destination, double price, String requestId) {
-            MockRequest q = new MockRequest(description, startPoint, destination,price,this.getProfile(),getProfile().getId(), requestId);
+        if (MockNetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(description);
+            params.add(startPoint);
+            params.add(destination);
+            params.add(price);
+            MockRiderCommand command = new MockRiderCommand(RiderCommand.CommandType.MAKE_REQUEST, params);
+            riderCommands.add(command);
+            return null;
+        }
+        else {
+            MockRequest q = new MockRequest(description, startPoint, destination, price, this.getProfile(), getProfile().getId(), requestId);
             openRequests.add(q);
             MockElasticsearchController.AddRequestTask(q);
             return q;
+        }
     }
 
     @Override
     public void deleteRequest(Request request) {
+        if (MockNetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(request);
+            MockRiderCommand command = new MockRiderCommand(RiderCommand.CommandType.DELETE_REQUEST, params);
+            riderCommands.add(command);
+        }
+        else {
             openRequests.remove(request);
             MockElasticsearchController.DeleteRequestTask(request);
+        }
     }
 
     @Override
     public void editRequest(Request edited) {
-           MockElasticsearchController.DeleteRequestTask(edited);
+        if (MockNetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(edited);
+            MockRiderCommand command = new MockRiderCommand(RiderCommand.CommandType.EDIT_REQUEST, params);
+            riderCommands.add(command);
+        }
+        else {
+            MockElasticsearchController.DeleteRequestTask(edited);
             MockElasticsearchController.AddRequestTask(edited);
+        }
 
     }
 
     /**
      * Make payment.
-     *
-     * @param indexR the index r
      */
     @Override
     public void makePayment(Request request) {
