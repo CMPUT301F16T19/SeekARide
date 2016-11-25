@@ -1,5 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -15,7 +17,7 @@ public class Profile {
     private String email;
     private String car;
     @JestId
-    private String id;
+    protected String id;
 
     /**
      * Instantiates a new Profile.
@@ -31,6 +33,7 @@ public class Profile {
         car = c;
     }
 
+    @Deprecated
     public Profile(String u, String p, String e) {
         username = u;
         phoneNumber = p;
@@ -89,7 +92,24 @@ public class Profile {
      *
      * @return the id
      */
-    public String getId() { return id; }
+    public String getId() {
+
+        if (id == null) {
+            Log.i("ID", "was null");
+            ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(ElasticsearchController.UserField.NAME, username);
+            getUserTask.execute();
+            try {
+                String result = getUserTask.get().getId();
+                return result;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return id;
+    }
 
     /**
      * Sets username.

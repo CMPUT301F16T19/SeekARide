@@ -368,8 +368,8 @@ public class ElasticsearchController {
             String radiusToString;
             radiusToString = String.valueOf(radius);
             String locationArray;
-            locationArray = "[" + String.valueOf(location.getGeoLocation().getLongitude())
-                    + "," + String.valueOf(location.getGeoLocation().getLatitude()) + "]";
+            locationArray = "[ " + String.valueOf(location.getGeoLocation().getLongitude())
+                    + ", " + String.valueOf(location.getGeoLocation().getLatitude()) + " ]";
             String query = "{\n" +
                     "    \"filter\": {\n" +
                     "        \"geo_distance\" : {\n" +

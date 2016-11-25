@@ -9,14 +9,14 @@ import java.util.ArrayList;
  */
 public class Driver extends User {
 
-    private ArrayList<Request> searchedRequests; //never update it, after we accept a request, until the request ends
-    private ArrayList<Request> acceptedRequests;
+    protected ArrayList<Request> searchedRequests; //never update it, after we accept a request, until the request ends
+    protected ArrayList<Request> acceptedRequests;
 
     private static Driver ourInstance = null;
 
-    private ArrayList<DriverCommand> driverCommands;
+    protected ArrayList<DriverCommand> driverCommands;
 
-    private Driver(Profile p) {
+    protected Driver(Profile p) {
         super(p);
         searchedRequests = new ArrayList<Request>();
         acceptedRequests = new ArrayList<Request>();

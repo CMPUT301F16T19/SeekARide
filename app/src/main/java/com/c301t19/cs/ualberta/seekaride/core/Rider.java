@@ -15,7 +15,7 @@ public class Rider extends User {
 
     private ArrayList<RiderCommand> riderCommands;
 
-    private Rider(Profile p) {
+    protected Rider(Profile p) {
         super(p);
         openRequests = new ArrayList<Request>();
         riderCommands = new ArrayList<RiderCommand>();
@@ -88,6 +88,7 @@ public class Rider extends User {
             openRequests.add(q);
             ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(q);
             addRequestTask.execute();
+
             return q;
         }
     }

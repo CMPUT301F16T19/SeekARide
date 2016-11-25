@@ -14,7 +14,8 @@ import io.searchbox.annotations.JestId;
 public class Request {
 
     @JestId
-    private String id;
+    protected String id;
+    @Deprecated
     private String riderId;
 
     private Date requestTime;
@@ -25,6 +26,7 @@ public class Request {
     //private String riderName;
     private ArrayList<Profile> acceptedDriverProfiles;
     private double price;
+    @Deprecated
     private String location;
     //private GeoPoint location;
 

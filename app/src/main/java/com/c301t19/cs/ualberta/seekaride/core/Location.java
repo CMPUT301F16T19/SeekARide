@@ -13,7 +13,7 @@ public class Location {
 
     private String address;
 
-    private GeoPoint geoLocation;
+    protected GeoPoint geoLocation;
 
     //private double lat;
     //private double lon;

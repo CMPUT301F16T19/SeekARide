@@ -6,8 +6,8 @@ public class RiderCommand {
 
     public enum CommandType {MAKE_REQUEST, DELETE_REQUEST, EDIT_REQUEST, MAKE_PAYMENT, }
 
-    private CommandType commandType;
-    private ArrayList<Object> params;
+    protected CommandType commandType;
+    protected ArrayList<Object> params;
 
     public RiderCommand(CommandType commandType, ArrayList<Object> params) {
         this.commandType = commandType;

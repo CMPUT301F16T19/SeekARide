@@ -8,7 +8,7 @@ public class Review {
     private float rating;
     private String userID;
     @JestId
-    private String id;
+    protected String id;
 
     public Review(String description, float rating, String userID) {
         this.description = description;
