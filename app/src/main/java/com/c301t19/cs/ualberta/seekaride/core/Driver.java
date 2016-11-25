@@ -269,4 +269,7 @@ public class Driver extends User {
         }
         searchedRequests = newSearchedRequests;
     }
+
+    public void filterRequestsByPricePerKm(double price) {
+    }
 }

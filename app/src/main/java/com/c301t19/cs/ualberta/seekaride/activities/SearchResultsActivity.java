@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,33 +11,31 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
-import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.google.gson.Gson;
-
-import java.util.List;
 
 public class SearchResultsActivity extends Activity {
 
-    private Button Back;
+    private Button back;
     private ListView results;
     private EditText filterPrice;
     private Button filterButton;
+    private Button filterKMButton;
     private RequestsAdapter adapter;
     private Request selectedRequest;
 
     public void move(){
         filterButton = (Button) findViewById(R.id.results_Filter_Price_Button);
-        Back = (Button) findViewById(R.id.results_Back_Button);
+        filterKMButton = (Button) findViewById(R.id.results_Filter_PriceKM_Button);
+        back = (Button) findViewById(R.id.results_Back_Button);
         filterPrice = (EditText) findViewById(R.id.results_Filter_Price_Text);
 
         //moves you back to the Driver screen without doing anything else.
-        Back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent Nswitch = new Intent(SearchResultsActivity.this, DriverActivity.class);
@@ -68,6 +65,19 @@ public class SearchResultsActivity extends Activity {
                 {
                     double price = Double.parseDouble(filterPrice.getText().toString());
                     Driver.getInstance().filterRequestsByPrice(price);
+                    adapter.clear();
+                    adapter.addAll(Driver.getInstance().getSearchedRequests());
+                }
+            }
+        });
+
+        filterKMButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(filterPrice.getText().length() > 0)
+                {
+                    double price = Double.parseDouble(filterPrice.getText().toString());
+                    Driver.getInstance().filterRequestsByPricePerKm(price);
                     adapter.clear();
                     adapter.addAll(Driver.getInstance().getSearchedRequests());
                 }

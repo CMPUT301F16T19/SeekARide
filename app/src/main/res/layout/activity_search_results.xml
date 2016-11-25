@@ -40,13 +40,25 @@
         android:ems="10"
         android:id="@+id/results_Filter_Price_Text"
         android:layout_above="@+id/results_Back_Button"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/results_Filter_PriceKM_Button"
+        android:layout_below="@+id/result_List" />
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Filter by price"
         android:id="@+id/results_Filter_Price_Button"
         android:layout_above="@+id/results_Back_Button"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter by price/km"
+        android:id="@+id/results_Filter_PriceKM_Button"
+        android:layout_alignEnd="@+id/results_R_Text"
+        android:layout_below="@+id/result_List" />
 </RelativeLayout>

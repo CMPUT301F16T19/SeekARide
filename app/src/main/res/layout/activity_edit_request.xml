@@ -57,6 +57,7 @@
         android:layout_alignEnd="@+id/edit_RecFare_Text" />
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
@@ -65,6 +66,7 @@
         android:layout_toEndOf="@+id/edit_Delete_Button" />
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete Request"
@@ -73,6 +75,7 @@
         android:layout_toEndOf="@+id/edit_Edit_Button" />
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Request"
