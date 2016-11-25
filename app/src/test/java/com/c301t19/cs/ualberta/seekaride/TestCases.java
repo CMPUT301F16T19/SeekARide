@@ -1,5 +1,6 @@
 package com.c301t19.cs.ualberta.seekaride;
 
+import com.c301t19.cs.ualberta.seekaride.core.AccountController;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
@@ -8,6 +9,7 @@ import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Review;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.c301t19.cs.ualberta.seekaride.core.User;
+import com.c301t19.cs.ualberta.seekaride.mocking.MockProfile;
 
 import junit.framework.TestCase;
 
@@ -15,7 +17,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by mc on 16/10/13.
@@ -31,9 +32,11 @@ public class TestCases extends TestCase {
 
     @Override
     protected void setUp() {
-        userProfile = new Profile("AAAAAA","9989989988","mqu@ualberta.ca");
+
+
+        userProfile = new MockProfile("pikachu","9989989988","mqu@ualberta.ca", "car", "asdasd");
+        driverProfile = new MockProfile("pikachu2","0010010010","pikachu@pokemon.com","very good car", "asdasd2");
         Rider.instantiate(userProfile);
-        driverProfile = new Profile("BBBBBB","0010010010","pikachu@pokemon.com","very good car");
         Driver.instantiate(driverProfile);
     }
 
@@ -229,6 +232,8 @@ public class TestCases extends TestCase {
         // when create it, we have to check is that unique or not by elastic search
         Profile userProfile = new Profile("mc","9989989988","mqu@ualberta.ca");
         User user = new User(userProfile);
+        AccountController accountController = new AccountController();
+        accountController.createNewAccount(userProfile);
 
         assertEquals(Rider.getInstance().getProfile().getUsername(),userProfile.getUsername());
     }
@@ -265,7 +270,7 @@ public class TestCases extends TestCase {
     //    As a driver, I want to browse and search for open requests by geo-location.
     public void testRequest13(){
 
-        Driver.getInstance().searchRequestsByLocation(new Location("111st"),"50m");
+        Driver.getInstance().searchRequestsByLocation(new Location("111st"),56789);
     }
 
     //
