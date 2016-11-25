@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class RiderCommand {
 
-    public enum CommandType {MAKE_REQUEST, DELETE_REQUEST, EDIT_REQUEST, UPDATE_OPEN_REQUESTS }
+    public enum CommandType {MAKE_REQUEST, DELETE_REQUEST, EDIT_REQUEST, MAKE_PAYMENT, UPDATE_OPEN_REQUESTS }
 
     private CommandType commandType;
     private ArrayList<Object> params;
@@ -25,6 +25,9 @@ public class RiderCommand {
                 break;
             case EDIT_REQUEST:
                 Rider.getInstance().editRequest((Request)params.get(0));
+                break;
+            case MAKE_PAYMENT:
+                Rider.getInstance().makePayment((Request)params.get(0));
                 break;
             case UPDATE_OPEN_REQUESTS:
                 Rider.getInstance().updateOpenRequests();

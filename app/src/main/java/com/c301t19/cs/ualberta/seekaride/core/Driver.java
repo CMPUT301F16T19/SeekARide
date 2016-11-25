@@ -91,17 +91,25 @@ public class Driver extends User {
      */
     public void acceptRequest(Request request) {
         // accept a request and add to acceptedRequests
-        Request oldRequest = new Request(request);
-        oldRequest.driverAccepted(getProfile());
-        acceptedRequests.add(oldRequest);
-        String reqId = oldRequest.getId();
+        if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            Log.i("internet", "NONE");
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(request);
+            DriverCommand command = new DriverCommand(DriverCommand.CommandType.ACCEPT_REQUEST, params);
+            driverCommands.add(command);
 
-        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
-        ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(oldRequest, reqId);
-        deleteRequestTask.execute();
-        addRequestTask.execute();
+        } else {
+            Request oldRequest = new Request(request);
+            oldRequest.driverAccepted(getProfile());
+            acceptedRequests.add(oldRequest);
+            String reqId = oldRequest.getId();
+
+            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+            ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(oldRequest, reqId);
+            deleteRequestTask.execute();
+            addRequestTask.execute();
+        }
     }
-
     /**
      * Allows the Driver to decline a Request they previously accepted and remove it from acceptedRequests.
      * Issues: may need to change index parameter to the Request itself

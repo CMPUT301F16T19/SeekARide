@@ -73,6 +73,14 @@ public class Rider extends User {
         // make a request and add it to openRequests
         // send request to Elasticsearch
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            Log.i("internet", "NONE");
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(description);
+            params.add(startPoint);
+            params.add(destination);
+            params.add(price);
+            RiderCommand command = new RiderCommand(RiderCommand.CommandType.MAKE_REQUEST, params);
+            riderCommands.add(command);
             return null;
         }
         else {
@@ -98,17 +106,32 @@ public class Rider extends User {
     }
 
     public void deleteRequest(Request request) {
-
-        openRequests.remove(request);
-        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
-        deleteRequestTask.execute();
+        if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            Log.i("internet", "NONE");
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(request);
+            RiderCommand command = new RiderCommand(RiderCommand.CommandType.DELETE_REQUEST, params);
+            riderCommands.add(command);
+        }else {
+            openRequests.remove(request);
+            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+            deleteRequestTask.execute();
+        }
     }
 
     public void editRequest(Request edited) {
-        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(edited.getId());
-        deleteRequestTask.execute();
-        ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(edited, edited.getId());
-        addRequestTask.execute();
+        if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            Log.i("internet", "NONE");
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(edited);
+            RiderCommand command = new RiderCommand(RiderCommand.CommandType.EDIT_REQUEST, params);
+            riderCommands.add(command);
+        }else {
+            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(edited.getId());
+            deleteRequestTask.execute();
+            ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(edited, edited.getId());
+            addRequestTask.execute();
+        }
     }
     /**
      * Accept a Driver's offer.
@@ -150,17 +173,24 @@ public class Rider extends User {
     }
 
     public void makePayment(Request request) {
-        if (request.didDriverReceivePay()) {
-            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
-            deleteRequestTask.execute();
-        }
-        else {
-            Request edited = new Request(request);
-            edited.riderPay();
-            ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
-            ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(edited, edited.getId());
-            deleteRequestTask.execute();
-            addRequestTask.execute();
+        if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
+            Log.i("internet", "NONE");
+            ArrayList<Object> params = new ArrayList<Object>();
+            params.add(request);
+            RiderCommand command = new RiderCommand(RiderCommand.CommandType.MAKE_PAYMENT, params);
+            riderCommands.add(command);
+        }else {
+            if (request.didDriverReceivePay()) {
+                ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+                deleteRequestTask.execute();
+            } else {
+                Request edited = new Request(request);
+                edited.riderPay();
+                ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
+                ElasticsearchController.AddRequestTask addRequestTask = new ElasticsearchController.AddRequestTask(edited, edited.getId());
+                deleteRequestTask.execute();
+                addRequestTask.execute();
+            }
         }
     }
 
@@ -168,6 +198,7 @@ public class Rider extends User {
      * Retrieves the Rider's current list of open Requests from the database and updates openRequests.
      */
     public void updateOpenRequests() {
+        //This if statement does nothing by design.
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
             Log.i("internet", "NONE");
             return;

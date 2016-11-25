@@ -100,6 +100,9 @@ public class ViewOfferActivity extends Activity {
         map.getOverlays().add(roadOverlay);
     }
 
+    /**
+     *
+     */
     public void move() {
         acceptO = (Button) findViewById(R.id.view_Accept_Button);
         if (getIntent().getBooleanExtra("source", false)) {
