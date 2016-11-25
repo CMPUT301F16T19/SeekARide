@@ -12,14 +12,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
-        <!--<receiver -->
-        <!--    android:name="core.NetworkChangeReceiver"-->
-        <!--    android:label="NetworkChangeReceiver" >-->
-        <!--    <intent-filter>-->
-        <!--        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
-                <!--<action android:name="android.net.wifi.WIFI_STATE_CHANGED" />-->
-        <!--    </intent-filter>-->
-        <!--</receiver>-->
+        <receiver
+            android:name=".core.NetworkChangeReceiver"
+            android:label="NetworkChangeReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
         <service android:name=".activities.PollingService" ></service>
         <receiver android:name=".activities.PollServerBroadcastReceiver" ></receiver>
         <activity android:name=".activities.MainActivity" >
