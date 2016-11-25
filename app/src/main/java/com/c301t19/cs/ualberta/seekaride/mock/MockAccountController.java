@@ -28,31 +28,46 @@ public class MockAccountController extends AccountController {
 
     }
 
-    /**
-     * Logs the user in with their desired username. A new account is created if a user doesn't already exist
-     * with the given name. The name must be at least five characters long. Rider and Driver controller classes
-     * are instantiated with a Profile generated from the username.
-     *
-     * @param username The user's username.
-     * @return true if the login was successful.
-     */
-    public boolean login(Profile profile) {
-        if (profile.getUsername().length() <  5)
+    @Override
+    protected boolean checkUserExists(String username) {
+        Profile profile = MockElasticsearchController.GetUserTask(ElasticsearchController.UserField.NAME, username);
+            if (profile == null) {
+                return false;
+            }
+            else {
+                return true;
+            }
+    }
+
+    public boolean login(String username) {
+        if (username.length() <  5)
         {
             return false;
         }
-        MockRider.instantiate(profile);
-        MockDriver.instantiate(profile);
-        return true;
-    }
+        Profile profile = MockElasticsearchController.GetUserTask(ElasticsearchController.UserField.NAME, username);
+            if (profile == null) {
+                return false;
+            }
+            else {
+                MockRider.instantiate(profile);
+                MockDriver.instantiate(profile);
+                return true;
+            }
+        }
 
     @Override
     public boolean createNewAccount(Profile profile) {
+        if (checkUserExists(profile.getUsername())) {
+            return false;
+        }
+        MockElasticsearchController.AddUserTask(profile);
         return true;
     }
 
     @Override
     public void editAccount(Profile oldProfile, Profile newProfile) {
+        MockElasticsearchController.DeleteUserTask(oldProfile);
+        MockElasticsearchController.AddUserTask(newProfile);
         MockRider.instantiate(newProfile);
         MockDriver.instantiate(newProfile);
     }

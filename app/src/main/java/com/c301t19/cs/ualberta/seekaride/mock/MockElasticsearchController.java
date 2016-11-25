@@ -28,14 +28,14 @@ import io.searchbox.core.SearchResult;
  */
 public class MockElasticsearchController extends ElasticsearchController {
 
-    private static ArrayList<MockRequest> requests;
-    private static ArrayList<MockProfile> profiles;
-    private static ArrayList<MockReview> reviews;
+    private static ArrayList<Request> requests;
+    private static ArrayList<Profile> profiles;
+    private static ArrayList<Review> reviews;
 
     /**
      * Adds a Profile to Elasticsearch.
      */
-    public static boolean AddUserTask(MockProfile profile) {
+    public static boolean AddUserTask(Profile profile) {
         profiles.add(profile);
         return Boolean.TRUE;
     }
@@ -65,7 +65,7 @@ public class MockElasticsearchController extends ElasticsearchController {
             }
     }
 
-    public static boolean DeleteUserTask(MockProfile profile) {
+    public static boolean DeleteUserTask(Profile profile) {
         profiles.remove(profile);
         return Boolean.TRUE;
     }
@@ -73,7 +73,13 @@ public class MockElasticsearchController extends ElasticsearchController {
     /**
      * Add a Request to Elasticsearch.
      */
-    public static boolean AddRequestTask (MockRequest request) {
+    public static boolean AddRequestTask (Request request) {
+        /*for (int i = 0; i < requests.size(); i++) {
+            if (request.getId().equals(requests.get(i).getId())) {
+                requests.remove(requests.get(i));
+                break;
+            }
+        }*/
         requests.add(request);
         return true;
     }
@@ -81,8 +87,8 @@ public class MockElasticsearchController extends ElasticsearchController {
     /**
      * Retrieves an ArrayList of Requests from Elasticsearch. Currently allows you to search by RiderID, DriverID, and RequestID
      */
-    public static ArrayList<MockRequest> GetRequestsTask(RequestField requestField, String keyword){
-        ArrayList<MockRequest> result = new ArrayList<MockRequest>();
+    public static ArrayList<Request> GetRequestsTask(RequestField requestField, String keyword){
+        ArrayList<Request> result = new ArrayList<Request>();
             switch (requestField) {
                 case ID:
                     for (int i = 0; i < requests.size(); i++) {
@@ -99,7 +105,7 @@ public class MockElasticsearchController extends ElasticsearchController {
                     }
                     return result;
                 case DRIVERID:
-                    ArrayList<Profile> drivers = new ArrayList<Profile>();
+                    ArrayList<Profile> drivers;
                     for (int i = 0; i < requests.size(); i++) {
                         drivers = requests.get(i).getAcceptedDriverProfiles();
                         for (int j = 0; j < drivers.size(); j++) {
@@ -117,8 +123,8 @@ public class MockElasticsearchController extends ElasticsearchController {
     /**
      * The type Search requests by location task.
      */
-    public static ArrayList<MockRequest> SearchRequestsByLocationTask(MockLocation location, double radius) {
-        ArrayList<MockRequest> result = new ArrayList<MockRequest>();
+    public static ArrayList<Request> SearchRequestsByLocationTask(Location location, double radius) {
+        ArrayList<Request> result = new ArrayList<Request>();
         result = filterRequestsInProgress(result);
         return result;
     }
@@ -128,8 +134,8 @@ public class MockElasticsearchController extends ElasticsearchController {
      * <p/>
      * Issues: Currently only allows you to search by keyword, which only targets a request's description.
      */
-    public static ArrayList<MockRequest> SearchRequestsByKeywordTask(String keywords) {
-        ArrayList<MockRequest> result = new ArrayList<MockRequest>();
+    public static ArrayList<Request> SearchRequestsByKeywordTask(String keywords) {
+        ArrayList<Request> result = new ArrayList<Request>();
         for (int i = 0; i < requests.size(); i++) {
             if (requests.get(i).getDescription().equals(keywords)) {
                 result.add(requests.get(i));
@@ -142,32 +148,22 @@ public class MockElasticsearchController extends ElasticsearchController {
     /**
      * The type Delete request task.
      */
-    public static boolean DeleteRequestTask(MockRequest request) {
+    public static boolean DeleteRequestTask(Request request) {
         requests.remove(request);
         return true;
     }
 
-    public static boolean AddReviewTask (MockReview review) {
+    public static boolean AddReviewTask (Review review) {
 
         reviews.add(review);
         return true;
     }
 
-    public static ArrayList<MockReview> GetReviewsTask (String userID) {
-        ArrayList<MockReview> result = new ArrayList<MockReview>();
+    public static ArrayList<Review> GetReviewsTask (String userID) {
+        ArrayList<Review> result = new ArrayList<Review>();
         for (int i = 0; i < reviews.size(); i++) {
             if (reviews.get(i).getUserID().equals(userID)) {
                 result.add(reviews.get(i));
-            }
-        }
-        return result;
-    }
-
-    private static ArrayList<MockRequest> filterRequestsInProgress(ArrayList<MockRequest> requests) {
-        ArrayList<MockRequest> result = new ArrayList<MockRequest>();
-        for (int i = 0; i < requests.size(); i++) {
-            if (requests.get(i).getWaitingForRider()) {
-                result.add(requests.get(i));
             }
         }
         return result;

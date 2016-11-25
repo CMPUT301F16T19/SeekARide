@@ -41,12 +41,7 @@ public class MockProfile extends Profile{
 
     @Override
     public ArrayList<Review> getReviews() {
-        return new ArrayList<Review>();
-    }
-
-    @Override
-    public float getRating() {
-        return 0;
+        return MockElasticsearchController.GetReviewsTask(id);
     }
 }
 

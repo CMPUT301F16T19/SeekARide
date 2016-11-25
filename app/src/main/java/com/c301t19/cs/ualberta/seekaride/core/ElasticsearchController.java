@@ -552,7 +552,7 @@ public class ElasticsearchController {
         }
     }
 
-    private static ArrayList<Request> filterRequestsInProgress(ArrayList<Request> requests) {
+    protected static ArrayList<Request> filterRequestsInProgress(ArrayList<Request> requests) {
         ArrayList<Request> result = new ArrayList<Request>();
         for (int i = 0; i < requests.size(); i++) {
             if (requests.get(i).getWaitingForRider()) {

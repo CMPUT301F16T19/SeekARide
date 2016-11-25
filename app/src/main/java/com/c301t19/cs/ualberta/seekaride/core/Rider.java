@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 public class Rider extends User {
 
-    private ArrayList<Request> openRequests;
+    protected ArrayList<Request> openRequests;
 
     private static Rider ourInstance = null;
 
-    private ArrayList<RiderCommand> riderCommands;
+    protected ArrayList<RiderCommand> riderCommands;
 
     protected Rider(Profile p) {
         super(p);

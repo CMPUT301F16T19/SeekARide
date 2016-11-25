@@ -78,7 +78,7 @@ public class AccountController {
         Driver.instantiate(newProfile);
     }
 
-    private boolean checkUserExists(String username) {
+    protected boolean checkUserExists(String username) {
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
                 ElasticsearchController.UserField.NAME, username);
         getUserTask.execute();
