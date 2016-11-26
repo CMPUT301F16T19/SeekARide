@@ -43,4 +43,5 @@ dependencies {
     }
     compile 'com.android.support:appcompat-v7:18.0.0'
     compile files('libs/jest-droid-2.0.1-SNAPSHOT.jar')
+    compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
 }
