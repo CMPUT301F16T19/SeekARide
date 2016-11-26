@@ -365,16 +365,31 @@ public class ElasticsearchController {
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
             verifySettings();
-            String radiusToString;
-            radiusToString = String.valueOf(radius);
-            String locationArray;
-            locationArray = "[ " + String.valueOf(location.getGeoLocation().getLongitude())
-                    + ", " + String.valueOf(location.getGeoLocation().getLatitude()) + " ]";
+
+            // GeoPoint querying did not work, so here is a calculated version
+
+            // 111km per degree lat or lon
+            double radiusToDegree = radius / 111;
+            String lowerLat = String.valueOf(location.getGeoLocation().getLatitude()
+                                                - radiusToDegree);
+            String upperLat = String.valueOf(location.getGeoLocation().getLatitude()
+                                                + radiusToDegree);
+            String lowerLon = String.valueOf(location.getGeoLocation().getLongitude()
+                                                - radiusToDegree);
+            String upperLon = String.valueOf(location.getGeoLocation().getLongitude()
+                                                + radiusToDegree);
+
             String query = "{\n" +
-                    "    \"filter\": {\n" +
-                    "        \"geo_distance\" : {\n" +
-                    "            \"distance\" : \"" + radiusToString + "m\",\n" +
-                    "            \"location\" :" + locationArray + "\n" +
+                    "    \"query\": {\n" +
+                    "        \"range\" : {\n" +
+                    "            \"lat\" : {" +  "\n" +
+                    "               \"gte\" :" + lowerLat + ",\n" +
+                    "               \"lte\" :" + upperLat + "\n" +
+                    "            }\n" +
+                    "            \"lon\" : {" +  "\n" +
+                    "               \"gte\" :" + lowerLon + ",\n" +
+                    "               \"lte\" :" + upperLon + "\n" +
+                    "            }\n" +
                     "        }\n" +
                     "    }\n" +
                     "}";

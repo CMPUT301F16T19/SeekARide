@@ -28,9 +28,8 @@ public class Request {
     private double price;
 
     private double pricePerKm;
-    @Deprecated
-    private String location;
-    //private GeoPoint location;
+    private double lat;
+    private double lon;
 
     private Boolean waitingForRider;
     private Profile acceptedDriverProfile;
@@ -63,10 +62,8 @@ public class Request {
         price = pr;
         pricePerKm = pr / st.calculateDistanceInKm(dest);
         inProgress = false;
-        double lat = st.getGeoLocation().getLatitude();
-        double lon = st.getGeoLocation().getLongitude();
-        location = String.valueOf(lon) + "," + String.valueOf(lat);
-        //location = start.getGeoLocation();
+        lat = st.getGeoLocation().getLatitude();
+        lon = st.getGeoLocation().getLongitude();
 
 
         waitingForRider = true;
@@ -89,7 +86,10 @@ public class Request {
         destination = r.getDestination();
         acceptedDriverProfiles = r.getAcceptedDriverProfiles();
         price = r.getPrice();
+        pricePerKm = r.getPricePerKm();
         inProgress = r.isInProgress();
+        lat = r.getLat();
+        lon = r.getLon();
 
         waitingForRider = r.getWaitingForRider();
         completion = r.isCompleted();
@@ -169,6 +169,22 @@ public class Request {
      */
     public Location getDestination() {
         return destination;
+    }
+
+    /**
+     * Gets latitude of start location for elastic search
+     * @return latitude of start location
+     */
+    public double getLat() {
+        return lat;
+    }
+
+    /**
+     * Gets longitude of start location for elastic search
+     * @return longitude of start location
+     */
+    public double getLon() {
+        return lon;
     }
 
     /**

@@ -18,7 +18,7 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.location.NominatimPOIProvider;
 import org.osmdroid.bonuspack.location.POI;
@@ -31,11 +31,6 @@ import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringWriter;
-import org.apache.commons.io.IOUtils;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 
