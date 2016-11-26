@@ -271,5 +271,12 @@ public class Driver extends User {
     }
 
     public void filterRequestsByPricePerKm(double price) {
+        ArrayList<Request> newSearchedRequests = new ArrayList<Request>();
+        for (int i = 0; i < searchedRequests.size(); i++) {
+            if (searchedRequests.get(i).getPricePerKm() >= price) {
+                newSearchedRequests.add(searchedRequests.get(i));
+            }
+        }
+        searchedRequests = newSearchedRequests;
     }
 }

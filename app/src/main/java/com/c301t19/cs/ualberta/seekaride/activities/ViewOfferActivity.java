@@ -3,6 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
@@ -65,6 +66,7 @@ public class ViewOfferActivity extends Activity {
         eLocation.setText("To: " + request.getDestination().getAddress());
         fare.setText("Fare: $" + ((Double) request.getPrice()).toString());
         riderInfo.setText("Rider: " + request.getRiderProfile().getUsername());
+        riderInfo.setPaintFlags(riderInfo.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         MapView map = (MapView) findViewById(R.id.view_Offer_Map);
         map.setTileSource(TileSourceFactory.MAPNIK);

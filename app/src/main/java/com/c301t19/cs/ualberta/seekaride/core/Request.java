@@ -26,6 +26,8 @@ public class Request {
     //private String riderName;
     private ArrayList<Profile> acceptedDriverProfiles;
     private double price;
+
+    private double pricePerKm;
     @Deprecated
     private String location;
     //private GeoPoint location;
@@ -59,6 +61,7 @@ public class Request {
         //riderName = name;
         acceptedDriverProfiles = new ArrayList<Profile>();
         price = pr;
+        pricePerKm = pr / st.calculateDistanceInKm(dest);
         inProgress = false;
         double lat = st.getGeoLocation().getLatitude();
         double lon = st.getGeoLocation().getLongitude();
@@ -195,6 +198,14 @@ public class Request {
         return price;
     }
 
+    /**
+     * Gets price per km
+     *
+     * @return price per km
+     */
+    public double getPricePerKm() {
+        return pricePerKm;
+    }
 
     /**
      * Complete.
