@@ -18,6 +18,8 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.google.gson.Gson;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.location.NominatimPOIProvider;
 import org.osmdroid.bonuspack.location.POI;
@@ -30,6 +32,8 @@ import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -194,5 +198,21 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                 }
             }
         });
+    }
+
+    public void specificSearch(String keywords) {
+        // very basic sanitization, nominatim does not take words "street" or "ave"
+        String query = keywords.toLowerCase().replace("street", "")
+                .replace("st", "").replace("avenue", "").replace("ave", "").replace(" ", "+");
+        HttpGet get = new HttpGet("http://nominatim.openstreetmap.org/search" + "?q=" + query +
+        "&format=json");
+        URL url = new URL("http://nominatim.openstreetmap.org/search" + "?q=" + query +
+                "&format=json");
+        InputStream is = url.openStream();
+        try {
+
+        } finally {
+            is.close();
+        }
     }
 }
