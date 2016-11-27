@@ -16,8 +16,9 @@ public class MockLocation extends Location {
      *
      * @param a the a
      */
-    public MockLocation(String a) {
+    public MockLocation(String a, double lat, double lon) {
         super(a);
+        setGeoLocation(lat,lon);
     }
 
     /**

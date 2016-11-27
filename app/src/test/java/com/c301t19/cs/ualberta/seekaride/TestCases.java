@@ -3,11 +3,13 @@ package com.c301t19.cs.ualberta.seekaride;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
+import com.c301t19.cs.ualberta.seekaride.core.NetworkManager;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Review;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.c301t19.cs.ualberta.seekaride.core.User;
+import com.c301t19.cs.ualberta.seekaride.mock.*;
 
 import junit.framework.TestCase;
 
@@ -15,7 +17,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by mc on 16/10/13.
@@ -26,15 +27,17 @@ public class TestCases extends TestCase {
         super();
     }
 
-    Profile userProfile;
-    Profile driverProfile;
+    MockProfile riderProfile;
+    MockProfile driverProfile;
 
     @Override
     protected void setUp() {
-        userProfile = new Profile("AAAAAA","9989989988","mqu@ualberta.ca");
-        Rider.instantiate(userProfile);
-        driverProfile = new Profile("BBBBBB","0010010010","pikachu@pokemon.com","very good car");
-        Driver.instantiate(driverProfile);
+        riderProfile = new MockProfile("AAAAAA","9989989988","mqu@ualberta.ca", "car", "id1");
+        MockRider.instantiate(riderProfile);
+        driverProfile = new MockProfile("BBBBBB","0010010010","pikachu@pokemon.com","very good car", "id2");
+        MockDriver.instantiate(driverProfile);
+        MockNetworkManager.instantiate(NetworkManager.Connectivity.MOBILE);
+        MockElasticsearchController.instantiate();
     }
 
     //    Requests
@@ -43,20 +46,11 @@ public class TestCases extends TestCase {
     @Test
     public void testRequest1() {
 
-        Location startPoint = new Location("111st");
-        Location destination = new Location("112st");
+        MockLocation startPoint = new MockLocation("111st", 100, 100);
+        MockLocation destination = new MockLocation("112st", 200, 200);
         float price = 998;
-        Request request = Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        ElasticsearchController.GetRequestsTask getRequestsTask = new ElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.RIDERID, userProfile.getId());
-        getRequestsTask.execute();
-        ArrayList<Request> requests = null;
-        try {
-            requests = getRequestsTask.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
+        ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
     }
 
@@ -78,7 +72,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
 
         Request testRequest = Rider.getInstance().getRequest(0);
         Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
@@ -106,7 +100,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         // use rider.getCurrentRequests() get the request and find it in the elastic search and remove it, then delete it in t
         Rider.getInstance().deleteRequest(0);
 
@@ -121,7 +115,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
 
 
         Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
@@ -142,7 +136,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = Rider.getInstance().getRecommendedPrice(startPoint,destination);
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
 
     }
 
@@ -155,7 +149,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
 
         Request testRequest = Rider.getInstance().getRequest(0);
 
@@ -180,7 +174,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
         Profile driverProfile = new Profile("pikachu","0010010010","pikachu@pokemon.com");
@@ -208,7 +202,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -265,7 +259,7 @@ public class TestCases extends TestCase {
     //    As a driver, I want to browse and search for open requests by geo-location.
     public void testRequest13(){
 
-        Driver.getInstance().searchRequestsByLocation(new Location("111st"),"50m");
+        Driver.getInstance().searchRequestsByLocation(new Location("111st"),50);
     }
 
     //
@@ -285,7 +279,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -309,7 +303,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
     }
@@ -322,7 +316,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -340,7 +334,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -362,7 +356,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -398,7 +392,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -420,7 +414,7 @@ public class TestCases extends TestCase {
 
         // should check it connects or not here
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
     }
 
     //
@@ -434,7 +428,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
 
     }
 
@@ -448,7 +442,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -469,7 +463,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -488,7 +482,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 
@@ -509,7 +503,7 @@ public class TestCases extends TestCase {
         Location destination = new Location("112st");
         float price = 998;
         Rider.getInstance().makeRequest("lol trip", startPoint, destination, price);
-        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(),userProfile.getUsername());
+        assertEquals(Rider.getInstance().getRequest(0).getRiderProfile().getUsername(), riderProfile.getUsername());
         Request testRequest = Rider.getInstance().getRequest(0);
 
 

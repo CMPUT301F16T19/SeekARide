@@ -32,6 +32,12 @@ public class MockElasticsearchController extends ElasticsearchController {
     private static ArrayList<Profile> profiles;
     private static ArrayList<Review> reviews;
 
+    public static void instantiate() {
+        requests = new ArrayList<Request>();
+        profiles = new ArrayList<Profile>();
+        reviews = new ArrayList<Review>();
+    }
+
     /**
      * Adds a Profile to Elasticsearch.
      */
