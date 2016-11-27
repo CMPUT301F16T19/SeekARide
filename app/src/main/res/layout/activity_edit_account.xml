@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edit_Password_Text"
-        android:text="Password"
+        android:hint="New Password"
         android:layout_below="@+id/edit_User_Text"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/edit_User_Text" />
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edit_ConfirmP_Text"
-        android:text="Confirm Password"
+        android:hint="Confirm New Password"
         android:layout_below="@+id/edit_Password_Text"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/edit_Password_Text" />
@@ -103,5 +103,6 @@
         android:id="@+id/edit_Account_Reviews"
         android:layout_below="@+id/edit_Account_Rating"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/edit_Changes_Button" />
+        android:layout_above="@+id/edit_Changes_Button"
+        android:isScrollContainer="false" />
 </RelativeLayout>

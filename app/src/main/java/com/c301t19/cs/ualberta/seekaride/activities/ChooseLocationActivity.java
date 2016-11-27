@@ -1,9 +1,7 @@
 package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -16,8 +14,8 @@ import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
-import com.google.gson.Gson;
 
+import com.google.gson.Gson;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.location.NominatimPOIProvider;
@@ -41,17 +39,18 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
     private ArrayList<POI> pois;
     private Marker longTapMarker;
     private Drawable poiIcon;
-
     private Location locToSend;
     private String startOrEnd;
     private String callingActivity;
 
     MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, this);
 
+    // Does Nothing
     @Override public boolean singleTapConfirmedHelper(GeoPoint p) {
         return true;
     }
 
+    // Long Press on the map will pick the pressed location
     @Override public boolean longPressHelper(GeoPoint p) {
         final MapView map = (MapView) findViewById(R.id.chooseMap);
         if (pois != null) {
@@ -66,6 +65,8 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
         String locationName;
         Address address;
 
+        // GeoPoint to address code from
+        // http://stackoverflow.com/questions/11197070/geopoint-to-address
         Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         try {
             address = geoCoder.getFromLocation(p.getLatitude(), p.getLongitude(), 1).get(0);
@@ -179,7 +180,6 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
         });
 
         Button selectButton = (Button) findViewById(R.id.locationSelectButton);
-
         selectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (locToSend != null) {
@@ -187,6 +187,10 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                     String send;
                     send = gson.toJson(locToSend);
                     Intent intent;
+
+                    // Communication between activites from
+                    // http://www.helloandroid.com/tutorials/communicating-between-running-activities
+                    // http://stackoverflow.com/questions/4967799/how-to-know-the-calling-activity-in-android
                     if (callingActivity.equals("add")) {
                         intent = new Intent(getApplicationContext(), AddRequestActivity.class);
                     }
@@ -198,8 +202,8 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                     }
                     else {
                         intent = new Intent(getApplicationContext(), MainActivity.class);
-                        Toast.makeText(getApplicationContext(), "ChooseLocationActivity intents bugged",
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                "ChooseLocationActivity intents bugged", Toast.LENGTH_LONG).show();
                     }
                     intent.putExtra(startOrEnd, /*gson.toString()*/ send);
                     startActivity(intent);

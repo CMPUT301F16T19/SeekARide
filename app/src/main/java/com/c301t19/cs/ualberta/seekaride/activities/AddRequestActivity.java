@@ -54,6 +54,8 @@ public class AddRequestActivity extends Activity {
 
         descriptText = descriptionText.getText().toString();
 
+        // EditText as button from
+        // http://stackoverflow.com/questions/19765491/android-edittext-field-like-button
         startLocationText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),
@@ -86,6 +88,9 @@ public class AddRequestActivity extends Activity {
                 Intent Cswitch = new Intent(AddRequestActivity.this, RiderActivity.class);
                 startActivity(Cswitch);
                 */
+
+                // Making toasts from
+                // http://stackoverflow.com/questions/3500197/how-to-display-toast-in-android
                 if (startLocation == null) {
                     Toast.makeText(getApplicationContext(), "Please fill in " +
                             "start location",

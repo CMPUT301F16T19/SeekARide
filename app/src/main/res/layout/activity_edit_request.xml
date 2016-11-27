@@ -89,7 +89,8 @@
         android:id="@+id/edit_Drivers_List"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/edit_Cancel_Button" />
+        android:layout_above="@+id/edit_Cancel_Button"
+        android:isScrollContainer="false" />
 
     <TextView
         android:layout_width="wrap_content"

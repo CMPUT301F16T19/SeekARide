@@ -51,7 +51,7 @@
         android:text="Filter by price"
         android:id="@+id/results_Filter_Price_Button"
         android:layout_above="@+id/results_Back_Button"
-        android:layout_alignParentEnd="true" />
+        android:layout_toEndOf="@+id/results_Filter_PriceKM_Button" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -60,5 +60,5 @@
         android:text="Filter by price/km"
         android:id="@+id/results_Filter_PriceKM_Button"
         android:layout_alignEnd="@+id/results_R_Text"
-        android:layout_below="@+id/result_List" />
+        android:layout_above="@+id/results_Back_Button" />
 </RelativeLayout>

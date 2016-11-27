@@ -70,6 +70,8 @@ public class SearchRequestsActivity extends Activity {
                                 Toast.LENGTH_LONG).show();
                         return;
                     }
+                    // Converting string to double from
+                    // http://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java
                     try {
                         Double.parseDouble(radiusText);
                     } catch (NumberFormatException e) {

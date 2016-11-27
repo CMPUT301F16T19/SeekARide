@@ -46,9 +46,6 @@ public class EditRequestActivity extends Activity {
     private DriversAdapter adapter;
     private ListView driversList;
 
-    private String desciptText;
-    String fareText;
-
     //takes the filled in information sets variables to it.
     public void write() {
         descriptionText = (EditText) findViewById(R.id.edit_Description_Text);
@@ -66,8 +63,6 @@ public class EditRequestActivity extends Activity {
         startLocationText.setText(request.getStart().getAddress());
         endLocationText.setText(request.getDestination().getAddress());
         fare.setText(fareString);
-
-        // THIS NEEDS TO BE WORKED ON TO WRITE AFTER EDITING INDIVIDUAL PARAMS
 
         recommendedFare.setText(request.getStart().calculateFare(
                 request.getDestination()));

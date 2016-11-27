@@ -379,6 +379,9 @@ public class ElasticsearchController {
             String upperLon = String.valueOf(location.getGeoLocation().getLongitude()
                                                 + radiusToDegree);
 
+            // Elasticsearch made it really "easy" to form this query
+            // https://www.elastic.co/guide/en/elasticsearch/guide/current/bool-query.html
+            // https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-range-query.html
             String query = "{\n" +
                     "    \"query\": {\n" +
                     "        \"bool\" : {\n" +
