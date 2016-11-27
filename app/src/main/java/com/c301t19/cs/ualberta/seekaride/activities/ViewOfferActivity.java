@@ -40,7 +40,6 @@ import java.util.ArrayList;
 public class ViewOfferActivity extends Activity {
 
     private Request request;
-    private GeoPoint startPoint;
 
     private Button acceptO;
     private Button Back;
@@ -72,26 +71,26 @@ public class ViewOfferActivity extends Activity {
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
-        startPoint = new GeoPoint(53.52676, -113.52715);
         IMapController mapController = map.getController();
-        mapController.setZoom(9);
-        mapController.setCenter(startPoint);
+        mapController.setZoom(10);
 
         Location start = request.getStart();
-        Marker sMarker = new Marker(map);
-        sMarker.setPosition(start.getGeoLocation());
-        sMarker.setTitle(start.getAddress());
-        sMarker.setIcon(getResources().getDrawable(R.drawable.person));
-        sMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        map.getOverlays().add(sMarker);
+        Marker startMarker = new Marker(map);
+        startMarker.setPosition(start.getGeoLocation());
+        startMarker.setTitle(start.getAddress());
+        startMarker.setIcon(getResources().getDrawable(R.drawable.person));
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        map.getOverlays().add(startMarker);
+
+        mapController.setCenter(start.getGeoLocation());
 
         Location end = request.getDestination();
-        Marker eMarker = new Marker(map);
-        eMarker.setPosition(end.getGeoLocation());
-        eMarker.setTitle(end.getAddress());
-        eMarker.setIcon(getResources().getDrawable(R.drawable.marker_default));
-        eMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        map.getOverlays().add(eMarker);
+        Marker endMarker = new Marker(map);
+        endMarker.setPosition(end.getGeoLocation());
+        endMarker.setTitle(end.getAddress());
+        endMarker.setIcon(getResources().getDrawable(R.drawable.marker_default));
+        endMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        map.getOverlays().add(endMarker);
 
         RoadManager roadManager = new OSRMRoadManager(this);
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();

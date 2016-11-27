@@ -223,7 +223,7 @@ public class AddRequestActivity extends Activity {
         map.setMultiTouchControls(true);
         startPoint = new GeoPoint(53.52676, -113.52715);
         IMapController mapController = map.getController();
-        mapController.setZoom(9);
+        mapController.setZoom(10);
         mapController.setCenter(startPoint);
 
         getLocations();
