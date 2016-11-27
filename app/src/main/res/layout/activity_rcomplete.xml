@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/complete_Review_Text"
-        android:hint="Review rider/driver"
+        android:hint="Write a Review Here"
         android:layout_above="@+id/complete_ratingBar"
         android:layout_centerHorizontal="true" />
 
