@@ -366,7 +366,7 @@ public class ElasticsearchController {
         protected ArrayList<Request> doInBackground(Void... params) {
             verifySettings();
 
-            // GeoPoint querying did not work, so here is a calculated version
+            // GeoPoint querying did not work, so here is my calculated version
 
             // 111km per degree lat or lon
             double radiusToDegree = radius / 111;
@@ -381,18 +381,26 @@ public class ElasticsearchController {
 
             String query = "{\n" +
                     "    \"query\": {\n" +
-                    "        \"range\" : {\n" +
-                    "            \"lat\" : {" +  "\n" +
-                    "               \"gte\" :" + lowerLat + ",\n" +
-                    "               \"lte\" :" + upperLat + "\n" +
-                    "            }\n" +
-                    "            \"lon\" : {" +  "\n" +
-                    "               \"gte\" :" + lowerLon + ",\n" +
-                    "               \"lte\" :" + upperLon + "\n" +
-                    "            }\n" +
+                    "        \"bool\" : {\n" +
+                    "           \"must\" : {\n" +
+                    "               \"range\" : {\n" +
+                    "                   \"lat\" : {\n" +
+                    "                       \"gte\" :" + lowerLat + ",\n" +
+                    "                       \"lte\" :" + upperLat + "\n" +
+                    "                   }\n" +
+                    "               }},\n" +
+                    "           \"must\" : {\n" +
+                    "               \"range\" : {\n" +
+                    "                   \"lon\" : {\n" +
+                    "                       \"gte\" :" + lowerLon + ",\n" +
+                    "                       \"lte\" :" + upperLon + "\n" +
+                    "                   }\n" +
+                    "               }\n" +
+                    "           }\n" +
                     "        }\n" +
                     "    }\n" +
                     "}";
+
             Search search = new Search.Builder(query)
                     .addIndex(INDEX)
                     .addType("request")
