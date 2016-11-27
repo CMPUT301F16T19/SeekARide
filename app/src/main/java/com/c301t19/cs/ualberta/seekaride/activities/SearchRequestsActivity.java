@@ -65,10 +65,15 @@ public class SearchRequestsActivity extends Activity {
                 write();
                 Intent Nswitch = new Intent(SearchRequestsActivity.this, SearchResultsActivity.class);
                 if (keyLoc != null) {
+                    if (radiusText.equals("")) {
+                        Toast.makeText(getApplicationContext(), "Please enter radius",
+                                Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     try {
                         Double.parseDouble(radiusText);
                     } catch (NumberFormatException e) {
-                        Toast.makeText(getApplicationContext(), "invalid radius format",
+                        Toast.makeText(getApplicationContext(), "Invalid radius format",
                                 Toast.LENGTH_LONG).show();
                         return;
                     }
