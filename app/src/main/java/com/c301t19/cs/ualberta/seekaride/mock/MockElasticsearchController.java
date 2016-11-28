@@ -131,6 +131,12 @@ public class MockElasticsearchController extends ElasticsearchController {
      */
     public static ArrayList<Request> SearchRequestsByLocationTask(Location location, double radius) {
         ArrayList<Request> result = new ArrayList<Request>();
+        for (int i = 0; i < requests.size(); i++) {
+            if (requests.get(i).getLon() == location.getGeoLocation().getLongitude() &&
+                    requests.get(i).getLat() == location.getGeoLocation().getLatitude()) {
+                result.add(requests.get(i));
+            }
+        }
         result = filterRequestsInProgress(result);
         return result;
     }

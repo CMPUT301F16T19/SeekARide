@@ -253,15 +253,30 @@ public class TestCases extends TestCase {
     //    As a driver, I want to browse and search for open requests by geo-location.
     public void testRequest13(){
 
-        MockDriver.getInstance().searchRequestsByLocation(new Location("111st"),50);
+        MockLocation startPoint = new MockLocation("111st",100,100);
+        MockLocation destination = new MockLocation("112st",200,200);
+        float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
+        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
+        ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
+        assertTrue(requests.contains(request));
+
+        MockDriver.getInstance().searchRequestsByLocation(startPoint,50);
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
     }
 
     //
     //            US 04.02.01
     //    As a driver, I want to browse and search for open requests by keyword.
     public void testRequest14(){
-        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        MockLocation startPoint = new MockLocation("111st",100,100);
+        MockLocation destination = new MockLocation("112st",200,200);
+        float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
+        ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
+        assertTrue(requests.contains(request));
 
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
     }
 
     //
@@ -272,21 +287,24 @@ public class TestCases extends TestCase {
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
-        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
         ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
 
-        request.driverAccepted(driverProfile);
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().acceptRequest(MockDriver.getInstance().getSearchedRequests().get(0));
+        assertTrue(MockDriver.getInstance().getAcceptedRequests().contains(request));
         
-        MockRider.getInstance().acceptDriverOffer(0,0);
+        MockRider.getInstance().acceptDriverOffer(request, MockDriver.getInstance().getProfile());
+        assertTrue(request.getAcceptedDriverProfile()==MockDriver.getInstance().getProfile());
         MockRider.getInstance().getRequest(0).complete();
-        MockRider.getInstance().makePayment(0);
-        MockDriver.getInstance().acceptRequest(request);
+        MockRider.getInstance().makePayment(request);
 
-        if(request.didRiderPay()){
-            MockDriver.getInstance().receivePayment(0);
-        }
-        assertTrue(MockDriver.getInstance().getAcceptedRequests().get(0).isCompleted());
+        MockDriver.getInstance().updateAcceptedRequests();
+        MockDriver.getInstance().receivePayment(MockDriver.getInstance().getAcceptedRequests().get(0));
+        requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
+        assertFalse(requests.contains(request));
     }
 
     //
@@ -296,11 +314,14 @@ public class TestCases extends TestCase {
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
-        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
         ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
         // requests is the request list for driver to look at
-
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().acceptRequest(MockDriver.getInstance().getSearchedRequests().get(0));
+        assertTrue(MockDriver.getInstance().getAcceptedRequests().contains(request));
     }
 
     //
@@ -310,15 +331,26 @@ public class TestCases extends TestCase {
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
-        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
         ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
 
-        request.driverAccepted(driverProfile);
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().acceptRequest(MockDriver.getInstance().getSearchedRequests().get(0));
+        assertTrue(MockDriver.getInstance().getAcceptedRequests().contains(request));
+
+        assertTrue(MockDriver.getInstance().riderHasAccepted()==null);
+
+        MockRider.getInstance().acceptDriverOffer(request,MockDriver.getInstance().getProfile());
+
+        MockDriver.getInstance().updateAcceptedRequests();
+        assertTrue(MockDriver.getInstance().riderHasAccepted()==request);
+        //request.driverAccepted(driverProfile);
         
         // accept pikachu
-        MockRider.getInstance().acceptDriverOffer(0,0);
-        assertEquals(driverProfile.getUsername(),MockRider.getInstance().getRequest(0).getAcceptedDriverProfile().getUsername());
+        //MockRider.getInstance().acceptDriverOffer(0,0);
+        //assertEquals(driverProfile.getUsername(),MockRider.getInstance().getRequest(0).getAcceptedDriverProfile().getUsername());
         
     }
 
@@ -329,16 +361,22 @@ public class TestCases extends TestCase {
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
-        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
         ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
 
-        request.driverAccepted(driverProfile);
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().acceptRequest(MockDriver.getInstance().getSearchedRequests().get(0));
+        assertTrue(MockDriver.getInstance().getAcceptedRequests().contains(request));
 
-        // accept pikachu
-        MockRider.getInstance().acceptDriverOffer(0,0);
-        assertEquals(driverProfile.getUsername(),MockRider.getInstance().getRequest(0).getAcceptedDriverProfile().getUsername());
-        MockDriver.getInstance().hasReceivedNotification();
+        assertTrue(MockDriver.getInstance().riderHasAccepted()==null);
+
+        MockRider.getInstance().acceptDriverOffer(request,MockDriver.getInstance().getProfile());
+
+        MockDriver.getInstance().updateAcceptedRequests();
+        assertTrue(MockDriver.getInstance().riderHasAccepted()==request);
+        assertTrue(MockDriver.getInstance().hasReceivedNotification());
 
     }
 
@@ -352,6 +390,21 @@ public class TestCases extends TestCase {
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
+        ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
+        assertTrue(requests.contains(request));
+
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().acceptRequest(MockDriver.getInstance().getSearchedRequests().get(0));
+        assertTrue(MockDriver.getInstance().getAcceptedRequests().contains(request));
+
+        MockNetworkManager.getInstance().setConnectivityStatus(NetworkManager.Connectivity.NONE);
+        assertTrue(MockDriver.getInstance().getAcceptedRequests().contains(request));
+        /*
+        MockLocation startPoint = new MockLocation("111st",100,100);
+        MockLocation destination = new MockLocation("112st",200,200);
+        float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
         MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
         ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
@@ -359,7 +412,7 @@ public class TestCases extends TestCase {
         request.driverAccepted(driverProfile);
         MockDriver.getInstance().acceptRequest(request);
         assertFalse(MockDriver.getInstance().isConfirmed(0));
-
+        */
     }
 
     //
@@ -370,18 +423,31 @@ public class TestCases extends TestCase {
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
-        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
-        
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
         ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
 
+        MockNetworkManager.getInstance().setConnectivityStatus(NetworkManager.Connectivity.NONE);
+        requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
+        assertTrue(requests.contains(request));
     }
 
     //
     //            US 08.03.01
     //    As a rider, I want to make requests that will be sent once I get connectivity again.
     public void testRequest21(){
-
+        MockNetworkManager.getInstance().setConnectivityStatus(NetworkManager.Connectivity.NONE);
+        MockLocation startPoint = new MockLocation("111st",100,100);
+        MockLocation destination = new MockLocation("112st",200,200);
+        float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
+        MockRequest request = new MockRequest("university", startPoint, destination, price, MockRider.getInstance().getProfile(),
+                MockRider.getInstance().getProfile().getId(), "id111");
+        MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
+        MockNetworkManager.getInstance().setConnectivityStatus(NetworkManager.Connectivity.WIFI);
+        MockRider.getInstance().executeRiderCommands();
+        ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
+        assertTrue(requests.contains(request));
+        /*
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
@@ -391,7 +457,7 @@ public class TestCases extends TestCase {
 
         MockDriver.getInstance().acceptRequest(request);
         assertFalse(MockDriver.getInstance().isConfirmed(0));
-
+    */
 
     }
 
@@ -403,14 +469,18 @@ public class TestCases extends TestCase {
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
-        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
-        
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
         ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
 
-        MockDriver.getInstance().acceptRequest(request);
-        
-        assertFalse(MockDriver.getInstance().isConfirmed(0));
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockNetworkManager.getInstance().setConnectivityStatus(NetworkManager.Connectivity.NONE);
+        MockDriver.getInstance().acceptRequest(MockDriver.getInstance().getSearchedRequests().get(0));
+        MockNetworkManager.getInstance().setConnectivityStatus(NetworkManager.Connectivity.WIFI);
+        MockDriver.getInstance().executeDriverCommands();
+        MockDriver.getInstance().updateAcceptedRequests();
+        assertTrue(MockDriver.getInstance().getAcceptedRequests().contains(request));
     }
 
     //
@@ -533,13 +603,31 @@ public class TestCases extends TestCase {
         MockLocation startPoint = new MockLocation("111st",100,100);
         MockLocation destination = new MockLocation("112st",200,200);
         float price = MockRider.getInstance().getRecommendedPrice(startPoint,destination);
-        MockRequest request = MockRider.getInstance().makeRequest("lol trip", startPoint, destination, price, "id111");
+        MockRequest request = MockRider.getInstance().makeRequest("university", startPoint, destination, price, "id111");
         ArrayList<Request> requests = MockElasticsearchController.GetRequestsTask(ElasticsearchController.RequestField.ID, "id111");
         assertTrue(requests.contains(request));
 
-        request.driverAccepted(driverProfile);
-        MockDriver.getInstance().getSearchedRequests();
-        request.getPricePerKm();
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().filterRequestsByPrice(price+1);
+        assertFalse(MockDriver.getInstance().getSearchedRequests().contains(request));
+
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().filterRequestsByPrice(price-1);
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+
+        double price2 = request.getPricePerKm();
+
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().filterRequestsByPrice(price2+1);
+        assertFalse(MockDriver.getInstance().getSearchedRequests().contains(request));
+
+        MockDriver.getInstance().searchRequestsByKeyword("university","50m");
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
+        MockDriver.getInstance().filterRequestsByPrice(price2-1);
+        assertTrue(MockDriver.getInstance().getSearchedRequests().contains(request));
 
     }
 

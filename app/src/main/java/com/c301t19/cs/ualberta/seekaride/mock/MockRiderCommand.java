@@ -21,7 +21,7 @@ public class MockRiderCommand extends RiderCommand {
         switch (commandType) {
             case MAKE_REQUEST:
                 MockRider.getInstance().makeRequest((String)params.get(0), (Location)params.get(1),
-                        (Location)params.get(2), (Double)params.get(3));
+                        (Location)params.get(2), (Double)params.get(3), (String)params.get(4));
                 break;
             case DELETE_REQUEST:
                 MockRider.getInstance().deleteRequest((Request)params.get(0));

@@ -292,6 +292,7 @@ public class Request {
      */
     public void riderPay() {
         riderPaid = true;
+        driverIsPaid = true;
     }
 
     /**
@@ -316,6 +317,7 @@ public class Request {
      * Driver receive payment.
      */
     public void driverReceivePay() {
+        riderPaid = true;
         driverIsPaid = true;
     }
 

@@ -153,5 +153,9 @@ public class MockDriver extends Driver {
             acceptedRequests = new ArrayList<Request>();
             acceptedRequests.add(acceptedRequest);
         }
+
+        if (acceptedRequest!=null) {
+            setReceivedNotification(true);
+        }
     }
 }

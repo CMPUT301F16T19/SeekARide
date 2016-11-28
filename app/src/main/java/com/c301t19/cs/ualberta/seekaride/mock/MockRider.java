@@ -1,8 +1,12 @@
 package com.c301t19.cs.ualberta.seekaride.mock;
 
+import android.util.Log;
+
+import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.NetworkManager;
+import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Review;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
@@ -56,6 +60,7 @@ public class MockRider extends Rider {
             params.add(startPoint);
             params.add(destination);
             params.add(price);
+            params.add(requestId);
             MockRiderCommand command = new MockRiderCommand(RiderCommand.CommandType.MAKE_REQUEST, params);
             riderCommands.add(command);
             return null;
@@ -155,5 +160,23 @@ public class MockRider extends Rider {
     @Override
     public void leaveReview(Review review) {
         MockElasticsearchController.AddReviewTask(review);
+    }
+
+    @Override
+    public boolean acceptDriverOffer(Request request, Profile driverProfile) {
+        if (MockDriver.getInstance().getRequestInProgress() != null) {
+            Log.i("request in progress", "can't accept two requests at once");
+            return false;
+        }
+        if (getRequestInProgress() != null) {
+            Log.i("request in progress", "can't accept two requests at once");
+            return false;
+        }
+        if (!request.riderAccept(driverProfile)) {
+            return false;
+        }
+        MockRider.getInstance().editRequest(request);
+        setRequestInProgress(request);
+        return true;
     }
 }
