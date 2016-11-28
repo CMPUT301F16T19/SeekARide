@@ -96,11 +96,17 @@ public class MockDriver extends Driver {
             MockElasticsearchController.AddRequestTask(oldRequest);
         }
     }
+    public void receivePayment(int index) {
+        if(acceptedRequests.get(index).didRiderPay()) {
+            acceptedRequests.get(index).driverReceivePay();
+        }
+    }
+
     /**
      * Allows the Driver to decline a Request they previously accepted and remove it from acceptedRequests.
      * Issues: may need to change index parameter to the Request itself
      *
-     * @param index The request's position in acceptedRequests.
+     * @param request The request's position in acceptedRequests.
      */
     @Override
     public void removeAcceptedRequest(Request request) {

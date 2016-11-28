@@ -82,7 +82,7 @@ public class ElasticsearchController {
         /**
          * Instantiates a new Add userProfile task.
          *
-         * @param profile 
+         * @param profile
          */
         public AddUserTask(Profile profile) {
             super();

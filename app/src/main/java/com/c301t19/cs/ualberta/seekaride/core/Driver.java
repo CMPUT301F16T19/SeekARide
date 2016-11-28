@@ -110,13 +110,11 @@ public class Driver extends User {
             addRequestTask.execute();
         }
     }
+
     /**
      * Allows the Driver to decline a Request they previously accepted and remove it from acceptedRequests.
-     * Issues: may need to change index parameter to the Request itself
-     *
      * @param index The request's position in acceptedRequests.
      */
-    @Deprecated
     public void removeAcceptedRequest(int index) {
         // remove a request and remove from acceptedRequests
         removeAcceptedRequest(acceptedRequests.get(index));
@@ -144,16 +142,11 @@ public class Driver extends User {
         return acceptedRequests;
     }
 
-    /**
-     * Receive payment.
-     */
-    @Deprecated
-    public void receivePayment(int index) {
-        if(acceptedRequests.get(index).didRiderPay()) {
-            acceptedRequests.get(index).driverReceivePay();
-        }
-    }
 
+    /**
+     * receive Payment
+     * @param request
+     */
     public void receivePayment(Request request) {
         if (request.didRiderPay()) {
             ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask(request);
@@ -195,6 +188,9 @@ public class Driver extends User {
         driverCommands = new ArrayList<DriverCommand>();
     }
 
+    /**
+     * update AcceptedRequests
+     */
     public void updateAcceptedRequests() {
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
             Log.i("internet", "NONE");
@@ -246,6 +242,10 @@ public class Driver extends User {
         }
     }
 
+    /**
+     * riderHas Accepted
+     * @return request
+     */
     public Request riderHasAccepted() {
         for (int i = 0; i < acceptedRequests.size(); i++) {
             if (!acceptedRequests.get(i).getWaitingForRider()) {
@@ -255,6 +255,11 @@ public class Driver extends User {
         return null;
     }
 
+    /**
+     * get Request
+     * @param requestId
+     * @return request
+     */
     public Request getRequest(String requestId) {
         for (int i = 0; i < acceptedRequests.size(); i++) {
             if (acceptedRequests.get(i).getId().equals(requestId)) {
@@ -265,6 +270,10 @@ public class Driver extends User {
         return null;
     }
 
+    /**
+     * filter Requests ByPrice
+     * @param price
+     */
     public void filterRequestsByPrice(double price) {
         ArrayList<Request> newSearchedRequests = new ArrayList<Request>();
         for (int i = 0; i < searchedRequests.size(); i++) {
@@ -275,6 +284,10 @@ public class Driver extends User {
         searchedRequests = newSearchedRequests;
     }
 
+    /**
+     * filter Requests By PricePerKm
+     * @param price
+     */
     public void filterRequestsByPricePerKm(double price) {
         ArrayList<Request> newSearchedRequests = new ArrayList<Request>();
         for (int i = 0; i < searchedRequests.size(); i++) {

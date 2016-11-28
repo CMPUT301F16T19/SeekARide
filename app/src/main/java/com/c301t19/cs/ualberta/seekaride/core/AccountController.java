@@ -13,8 +13,6 @@ import java.util.TimeZone;
 
 /**
  * Controller that handles login and account creation.
- * <p/>
- * Issues: may want to implement a more rigorous account creation/login process in the future.
  */
 public class AccountController {
 
@@ -60,6 +58,11 @@ public class AccountController {
         return true;
     }
 
+    /**
+     * create New Account
+     * @param profile
+     * @return boolean (success or not)
+     */
     public boolean createNewAccount(Profile profile) {
         if (checkUserExists(profile.getUsername())) {
             return false;
@@ -69,6 +72,11 @@ public class AccountController {
         return true;
     }
 
+    /**
+     * edit Account
+     * @param oldProfile
+     * @param newProfile
+     */
     public void editAccount(Profile oldProfile, Profile newProfile) {
         ElasticsearchController.DeleteUserTask deleteUserTask = new ElasticsearchController.DeleteUserTask(oldProfile);
         ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask(newProfile, newProfile.getId());
@@ -78,6 +86,11 @@ public class AccountController {
         Driver.instantiate(newProfile);
     }
 
+    /**
+     * check User Exists
+     * @param username
+     * @return boolean
+     */
     protected boolean checkUserExists(String username) {
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
                 ElasticsearchController.UserField.NAME, username);
@@ -98,6 +111,10 @@ public class AccountController {
         return true;
     }
 
+    /**
+     * poll Server
+     * @param context
+     */
     // http://simpleandroidtutorials.blogspot.ca/2012/06/periodically-update-data-from-server-in.html 2016-11-12, 3:02 PM, author Nirali
     private void pollServer(Context context) {
 
