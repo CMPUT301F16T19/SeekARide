@@ -16,9 +16,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
-/**
- *  What does this do?
- */
+@Deprecated
 public class MapActivity extends Activity {
     public Button Finish;
     public Button cancelB;

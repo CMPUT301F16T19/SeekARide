@@ -14,6 +14,9 @@ import com.c301t19.cs.ualberta.seekaride.core.Review;
 
 import java.util.ArrayList;
 
+/**
+ * Extends ArrayAdapter to display a user's reviews.
+ */
 public class ReviewsAdapter extends ArrayAdapter<Review> {
 
     ArrayList<Review> reviews;

@@ -10,9 +10,7 @@ import java.util.ArrayList;
 public class Rider extends User {
 
     protected ArrayList<Request> openRequests;
-
     private static Rider ourInstance = null;
-
     protected ArrayList<RiderCommand> riderCommands;
 
     protected Rider(Profile p) {
@@ -42,7 +40,6 @@ public class Rider extends User {
 
     /**
      * Get one of the Rider's open Requests at the given index.
-     * Issues: may need to change index parameter to the Request itself
      *
      * @param index The request's position in openRequests.
      * @return the request
@@ -95,7 +92,7 @@ public class Rider extends User {
 
 
     /**
-     * delete the request by passing it
+     * Delete a request.
      * @param request
      */
     public void deleteRequest(Request request) {
@@ -113,8 +110,8 @@ public class Rider extends User {
     }
 
     /**
-     * change the request to new request
-     * @param edited
+     * Edit a request by passing the edited version to this function.
+     * @param edited The edited request.
      */
     public void editRequest(Request edited) {
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
@@ -132,10 +129,10 @@ public class Rider extends User {
     }
 
     /**
-     * accept Driver Offer by passing request and driver profile
-     * @param request
-     * @param driverProfile
-     * @return a boolean
+     * Accepts a driver's offer.
+     * @param request The request to be accepted.
+     * @param driverProfile The profile of the driver to accept.
+     * @return true if successful
      */
     public boolean acceptDriverOffer(Request request, Profile driverProfile) {
         if (Driver.getInstance().getRequestInProgress() != null) {
@@ -155,9 +152,9 @@ public class Rider extends User {
     }
 
     /**
-     * pay for the request and upload to elastic search
+     * Complete a request by paying the driver.
      * @see ElasticsearchController
-     * @param request
+     * @param request The request to be completed.
      */
     public void makePayment(Request request) {
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
@@ -234,6 +231,9 @@ public class Rider extends User {
         return openRequests;
     }
 
+    /**
+     * Executes all commands stored in riderCommands.
+     */
     public void executeRiderCommands() {
         for (int i = 0; i < riderCommands.size(); i++) {
             riderCommands.get(i).execute();
@@ -242,8 +242,8 @@ public class Rider extends User {
     }
 
     /**
-     * if there is no driver in the Accepted list, it will return false
-     * @return boolean
+     * Checks if a driver has accepted any of the rider's open requests.
+     * @return true if an open request has been accepted
      */
     public boolean driverHasAccepted() {
         for (int i = 0; i < openRequests.size(); i++) {

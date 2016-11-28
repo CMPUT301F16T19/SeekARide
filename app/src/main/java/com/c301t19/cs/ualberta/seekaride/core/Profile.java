@@ -22,10 +22,10 @@ public class Profile {
     /**
      * Instantiates a new Profile.
      *
-     * @param username
-     * @param phoneNumber
-     * @param email
-     * @param car
+     * @param username  User's desired username
+     * @param phoneNumber User's phone number
+     * @param email User's email address
+     * @param car User's description of their car
      */
     public Profile(String username, String phoneNumber, String email, String car) {
         this.username = username;
@@ -49,7 +49,7 @@ public class Profile {
     }
 
     /**
-     * constructor
+     * Copy constructor
      * @param newProfile
      */
     public Profile(Profile newProfile) {
@@ -61,8 +61,8 @@ public class Profile {
     }
 
     /**
-     * get car
-     * @return car
+     * Get car
+     * @return String description of the user's car
      */
     public String getCar() {
         if (car == null) {
@@ -71,6 +71,10 @@ public class Profile {
         return car;
     }
 
+    /**
+     * Set a description of the user's car
+     * @param car String description
+     */
     public void setCar(String car) {
         this.car = car;
     }
@@ -147,7 +151,7 @@ public class Profile {
     /**
      * Sets email.
      *
-     * @param email the e
+     * @param email the email
      */
     public void setEmail(String email) {
         this.email = email;
@@ -168,7 +172,7 @@ public class Profile {
     }
 
     /**
-     * get the list of reviews
+     * Get the list of this user's reviews
      */
     public ArrayList<Review> getReviews() {
         ElasticsearchController.GetReviewsTask getReviewsTask = new ElasticsearchController.GetReviewsTask(id);
@@ -184,7 +188,7 @@ public class Profile {
     }
 
     /**
-     * get the average rating
+     * Get the average rating for this user based on their reviews
      * @return rating
      */
     public float getRating() {

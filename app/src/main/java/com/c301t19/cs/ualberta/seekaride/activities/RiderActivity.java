@@ -21,6 +21,9 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Main screen for Riders, which shows the requests they currently have open.
+ */
 public class RiderActivity extends Activity {
 
     private Button addRequest;
@@ -54,6 +57,9 @@ public class RiderActivity extends Activity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Set up buttons
+     */
     public void move(){
         addRequest = (Button) findViewById(R.id.request_Ride_Button);
         requests = (ListView) findViewById(R.id.current_Requests);

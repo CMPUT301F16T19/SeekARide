@@ -10,14 +10,14 @@ public class User {
     private boolean receivedNotification;
 
     /**
-     * The Profile.
+     * The User's Profile.
      */
     protected Profile profile;
 
     /**
      * Instantiates a new User.
      *
-     * @param profile the profile
+     * @param profile a Profile to instantiate the User with
      */
     public User(Profile profile) {
 
@@ -29,7 +29,7 @@ public class User {
     /**
      * Gets profile.
      *
-     * @return the profile
+     * @return the User's Profile
      */
     public Profile getProfile() {
         return profile;
@@ -39,7 +39,7 @@ public class User {
     /**
      * Sets profile.
      *
-     * @param newProfile the new profile
+     * @param newProfile the new Profile to give the user
      */
     public void setProfile(Profile newProfile) {
         this.profile = newProfile;
@@ -47,9 +47,9 @@ public class User {
 
 
     /**
-     * add the review to elastic search
+     * Add a review to Elasticsearch
      * @see ElasticsearchController
-     * @param review
+     * @param review a Review to add to Elasticsearch
      */
     public void leaveReview(Review review) {
         ElasticsearchController.AddReviewTask addReviewTask = new ElasticsearchController.AddReviewTask(review);
@@ -57,38 +57,39 @@ public class User {
     }
 
     /**
-     * get the state of requestInProgress
-     * @return a boolean
+     * Get the current request in progress, if it exists.
+     * @return the request in progress. Null if no request is in progress
      */
     public Request getRequestInProgress() {
         return requestInProgress;
     }
 
     /**
-     * change the state of requestInProgress
-     * @param requestInProgress
+     * Begin a request when Rider and Driver have both accepted.
+     * @param requestInProgress The request to start.
      */
     public void setRequestInProgress(Request requestInProgress) {
         this.requestInProgress = requestInProgress;
     }
 
     /**
-     * set the requestInProgress to null
+     * Sets the requestInProgress to null. To be called when a request is completed.
      */
     public void clearRequestInProgress() {
         requestInProgress = null;
     }
 
     /**
-     * get the state of notification
-     * @return a boolean
+     * Returns true if the user has already been notified recently of an accepted request.
+     * @return true if the user has already been notified recently of an accepted request.
      */
     public boolean hasReceivedNotification() {
         return receivedNotification;
     }
 
     /**
-     * change the state of notification
+     * Set to true once the user receives a notification of an accepted request.
+     * Set to false once the request is complete and the user can start a new request.
      * @param receivedNotification
      */
     public void setReceivedNotification(boolean receivedNotification) {

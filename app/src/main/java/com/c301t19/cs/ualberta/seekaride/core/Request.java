@@ -41,26 +41,26 @@ public class Request {
     /**
      * Instantiates a new Request.
      *
-     * @param descrip      the descrip
-     * @param st           the st
-     * @param dest         the dest
-     * @param pr           the pr
-     * @param riderProfile the rider profile
-     * @param riderId      the rider id
+     * @param description     a description of the request
+     * @param start           the start Location
+     * @param destination     the destination Location
+     * @param price           the price
+     * @param riderProfile    the rider's profile
+     * @param riderId         the rider's id
      */
-    public Request(String descrip, Location st, Location dest,
-                    double pr,Profile riderProfile, String riderId) {
+    public Request(String description, Location start, Location destination,
+                    double price,Profile riderProfile, String riderId) {
         requestTime = new Date();
-        description = descrip;
-        start = st;
-        destination = dest;
+        this.description = description;
+        this.start = start;
+        this.destination = destination;
         //riderName = name;
         acceptedDriverProfiles = new ArrayList<Profile>();
-        price = pr;
-        pricePerKm = pr / st.calculateDistanceInKm(dest);
+        this.price = price;
+        pricePerKm = price / start.calculateDistanceInKm(destination);
         inProgress = false;
-        lat = st.getGeoLocation().getLatitude();
-        lon = st.getGeoLocation().getLongitude();
+        lat = start.getGeoLocation().getLatitude();
+        lon = start.getGeoLocation().getLongitude();
 
 
         waitingForRider = true;
@@ -74,37 +74,37 @@ public class Request {
     }
 
     /**
-     * copy constructor of request
-     * @param r
+     * Copy constructor of request
+     * @param request Request to be copied
      */
-    public Request(Request r) {
-        id = r.getId();
-        riderId = r.getRiderProfile().getId();
+    public Request(Request request) {
+        id = request.getId();
+        riderId = request.getRiderProfile().getId();
 
-        requestTime = r.getRequestTime();
-        description = r.getDescription();
-        start = r.getStart();
-        destination = r.getDestination();
-        acceptedDriverProfiles = r.getAcceptedDriverProfiles();
-        price = r.getPrice();
-        pricePerKm = r.getPricePerKm();
-        inProgress = r.isInProgress();
-        lat = r.getLat();
-        lon = r.getLon();
+        requestTime = request.getRequestTime();
+        description = request.getDescription();
+        start = request.getStart();
+        destination = request.getDestination();
+        acceptedDriverProfiles = request.getAcceptedDriverProfiles();
+        price = request.getPrice();
+        pricePerKm = request.getPricePerKm();
+        inProgress = request.isInProgress();
+        lat = request.getLat();
+        lon = request.getLon();
 
-        waitingForRider = r.getWaitingForRider();
-        completion = r.isCompleted();
-        riderPaid = r.didRiderPay();
-        driverIsPaid = r.didDriverReceivePay();
+        waitingForRider = request.getWaitingForRider();
+        completion = request.isCompleted();
+        riderPaid = request.didRiderPay();
+        driverIsPaid = request.didDriverReceivePay();
 
-        acceptedDriverProfile = r.getAcceptedDriverProfile();
-        riderProfile = r.getRiderProfile();
+        acceptedDriverProfile = request.getAcceptedDriverProfile();
+        riderProfile = request.getRiderProfile();
     }
 
     /**
-     * Driver accepted.
+     * Call when a driver accepts a request.
      *
-     * @param driverProfile the driver profile
+     * @param driverProfile the profile of the driver to be accepted.
      */
     public void driverAccepted(Profile driverProfile) {
 
@@ -114,8 +114,8 @@ public class Request {
     }
 
     /**
-     * Driver decline
-     * @param driverProfile
+     * Call when a driver declines a request.
+     * @param driverProfile the profile of the declining driver.
      */
     public void driverDeclined(Profile driverProfile) {
 
@@ -125,9 +125,9 @@ public class Request {
     }
 
     /**
-     * to see is there any Driver Accepted
-     * @param driverProfile
-     * @return boolean
+     * See if a driver has accepted the request
+     * @param driverProfile The profile of the driver in question
+     * @return true if this driver has accepted
      */
     public boolean didDriverAccept(Profile driverProfile) {
         if (acceptedDriverProfiles.contains(driverProfile)) {
@@ -139,16 +139,16 @@ public class Request {
     }
 
     /**
-     * Is waiting for driver boolean.
+     * Returns true if drivers are waiting for the rider to accept an offer.
      *
-     * @return the boolean
+     * @return true if drivers are waiting for the rider to accept an offer.
      */
     public boolean getWaitingForRider(){return waitingForRider;}
 
     /**
      * Gets request time.
      *
-     * @return the request time
+     * @return the request Date
      */
     public Date getRequestTime() {
         return requestTime;
@@ -164,18 +164,18 @@ public class Request {
     }
 
     /**
-     * Gets start.
+     * Get the start Location
      *
-     * @return the start
+     * @return start Location
      */
     public Location getStart() {
         return start;
     }
 
     /**
-     * Gets destination.
+     * Get the destination.
      *
-     * @return the destination
+     * @return destination Location
      */
     public Location getDestination() {
         return destination;
@@ -198,7 +198,7 @@ public class Request {
     }
 
     /**
-     * Gets rider profile.
+     * Gets the profile of the rider who made the request.
      *
      * @return the rider profile
      */
@@ -207,7 +207,7 @@ public class Request {
     }
 
     /**
-     * Gets accepted driver profiles.
+     * Get a list of drivers who have accepted this request.
      *
      * @return the accepted driver profiles
      */
@@ -216,7 +216,7 @@ public class Request {
     }
 
     /**
-     * Gets price.
+     * Gets the price of the request.
      *
      * @return the price
      */
@@ -225,7 +225,7 @@ public class Request {
     }
 
     /**
-     * Gets price per km
+     * Gets price per km of the request
      *
      * @return price per km
      */
@@ -234,7 +234,7 @@ public class Request {
     }
 
     /**
-     * Complete.
+     * Completes the request.
      */
     public void complete() {
         completion = true;
@@ -242,9 +242,9 @@ public class Request {
 
 
     /**
-     * Is completed boolean.
+     * Checks if the request is complete.
      *
-     * @return the boolean
+     * @return true if the request is complete
      */
     public boolean isCompleted() {
         return completion;
@@ -255,6 +255,7 @@ public class Request {
      *
      * @param index the index
      */
+    @Deprecated
     public boolean riderAccept(int index) {
         waitingForRider = false;
         acceptedDriverProfile = acceptedDriverProfiles.get(index);
@@ -262,9 +263,9 @@ public class Request {
     }
 
     /**
-     * rider Accept or not
-     * @param driverProfile
-     * @return boolean
+     * Allows the rider accept one of the driver's offers.
+     * @param driverProfile the profile of the driver to be accepted
+     * @return boolean true if the acceptance was successful. false if the driver has not accepted this request.
      */
     public boolean riderAccept(Profile driverProfile) {
         if (!acceptedDriverProfiles.contains(driverProfile))
@@ -279,7 +280,7 @@ public class Request {
     }
 
     /**
-     * Gets driver profile.
+     * Gets the profile of the driver chosen by the rider.
      *
      * @return the driver profile
      */
@@ -288,7 +289,7 @@ public class Request {
     }
 
     /**
-     * Rider pay.
+     * The rider pays to complete the request.
      */
     public void riderPay() {
         riderPaid = true;
@@ -296,25 +297,25 @@ public class Request {
     }
 
     /**
-     * Is paid boolean.
+     * Check if the rider has paid.
      *
-     * @return the boolean
+     * @return true if the rider has paid
      */
     public boolean didRiderPay(){
         return riderPaid;
     }
 
     /**
-     * Is got payment boolean.
+     * Check if the driver has received their pay
      *
-     * @return the boolean
+     * @return true if the driver has received their pay
      */
     public boolean didDriverReceivePay(){
         return driverIsPaid;
     }
 
     /**
-     * Driver receive payment.
+     * The driver receives their pay to complete the request.
      */
     public void driverReceivePay() {
         riderPaid = true;
@@ -322,9 +323,9 @@ public class Request {
     }
 
     /**
-     * Is rider confirmed boolean.
+     * Check if the rider has accepted a driver's offer.
      *
-     * @return the boolean
+     * @return true if the rider has accepted a driver's offer.
      */
     public boolean isRiderConfirmed() {
         if (acceptedDriverProfile == null){
@@ -335,7 +336,7 @@ public class Request {
     }
 
     /**
-     * Gets id.
+     * Gets the unique ID of the request.
      *
      * @return the id
      */
@@ -356,24 +357,24 @@ public class Request {
     }
 
     /**
-     * set the description
-     * @param description
+     * Set the description
+     * @param description User-entered description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * set the price
-     * @param price
+     * Set the price
+     * @param price Price offered by rider
      */
     public void setPrice(double price) {
         this.price = price;
     }
 
     /**
-     * to see the state of inProgress
-     * @return boolean
+     * See if the request is in progress
+     * @return true if the request is in progress
      */
     public boolean isInProgress() {
         return inProgress;
@@ -389,16 +390,16 @@ public class Request {
     }
 
     /**
-     * set start location
-     * @param start
+     * Set start location
+     * @param start Location
      */
     public void setStart(Location start) {
         this.start = start;
     }
 
     /**
-     * set Destination
-     * @param destination
+     * Set Destination
+     * @param destination Location
      */
     public void setDestination(Location destination) {
         this.destination = destination;

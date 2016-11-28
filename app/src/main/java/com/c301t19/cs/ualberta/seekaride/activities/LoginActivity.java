@@ -12,12 +12,18 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.AccountController;
 import com.c301t19.cs.ualberta.seekaride.core.NetworkManager;
 
+/**
+ * Launcher activity that allows users to login in.
+ */
 public class LoginActivity extends Activity {
 
     EditText username;
     AccountController accountController;
     Button newAccount;
 
+    /**
+     * Set up buttons
+     */
     public void move() {
         newAccount = (Button) findViewById(R.id.newA_Button);
         //Moves you to the search for requests screen.

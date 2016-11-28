@@ -20,8 +20,6 @@ import io.searchbox.core.SearchResult;
 
 /**
  * Allows asynchronous interaction with the Elasticsearch database.
- * <p/>
- * Issues: this class does a lot. It may need to be broken down later.
  */
 public class ElasticsearchController {
 
@@ -31,24 +29,18 @@ public class ElasticsearchController {
      * Indicates a field in a userProfile's Profile for search tasks.
      */
     public enum UserField {
-        /**
-         * Name userProfile field.
-         */
         NAME, ID }
 
     /**
      * Indicates a field in a Request for search tasks.
      */
     public enum RequestField {
-        RIDERID, /**
-         * Drivers request field.
-         */
-        DRIVERID, ID }
+        RIDERID, DRIVERID, ID }
 
     private static JestDroidClient client;
 
     /**
-     * Adds a Profile to Elasticsearch.
+     * Adds a Profile to Elasticsearch. Returns true if successful.
      */
     public static class AddUserTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -56,9 +48,7 @@ public class ElasticsearchController {
         private String id;
 
         /**
-         * Instantiates a new Add userProfile task.
-         *
-         * @param profile
+         * @param profile The profile to add.
          */
         public AddUserTask(Profile profile) {
             super();
@@ -67,9 +57,8 @@ public class ElasticsearchController {
         }
 
         /**
-         *
-         * @param profile
-         * @param id
+         * @param profile The profile to add.
+         * @param id Allows a user with a specific id to be added. Used for editing accounts.
          */
         public AddUserTask(Profile profile, String id) {
             super();
@@ -100,8 +89,7 @@ public class ElasticsearchController {
     }
 
     /**
-     * Retrieves a Profile from Elasticsearch.
-     * <p/>
+     * Retrieves a Profile from Elasticsearch, given either an id or username.
      */
     public static class GetUserTask extends AsyncTask<Void, Void, Profile> {
 
@@ -109,10 +97,8 @@ public class ElasticsearchController {
         private String keyword;
 
         /**
-         * Instantiates a new Get userProfile task.
-         *
-         * @param userField
-         * @param keyword
+         * @param userField The field to search by (id or name)
+         * @param keyword The id or username
          */
         public GetUserTask(UserField userField, String keyword) {
             super();
@@ -172,26 +158,20 @@ public class ElasticsearchController {
     }
 
     /**
-     * Delete UserTask
+     * Deletes a user from Elasticsearch. Returns true if successful.
      */
     public static class DeleteUserTask extends AsyncTask<Void, Void, Boolean> {
 
         private Profile user;
 
         /**
-         * Delete UserTask
-         * @param profile
+         * @param profile User profile to delete.
          */
         public DeleteUserTask(Profile profile) {
             super();
             user = profile;
         }
 
-        /**
-         * doInBackground
-         * @param params
-         * @return boolean
-         */
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
@@ -207,7 +187,7 @@ public class ElasticsearchController {
     }
 
     /**
-     * Add a Request to Elasticsearch.
+     * Add a Request to Elasticsearch. Returns true if successful.
      */
     public static class AddRequestTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -215,9 +195,7 @@ public class ElasticsearchController {
         private String id;
 
         /**
-         * Instantiates a new Add request task.
-         *
-         * @param request
+         * @param request The request to be added.
          */
         public AddRequestTask(Request request) {
             super();
@@ -226,9 +204,8 @@ public class ElasticsearchController {
         }
 
         /**
-         * AddRequestTask
-         * @param request
-         * @param id
+         * @param request The request to be added.
+         * @param id Allows a request to be added with a specific id. Used to edit a request.
          */
         public AddRequestTask(Request request, String id) {
             super();
@@ -257,7 +234,10 @@ public class ElasticsearchController {
     }
 
     /**
-     * Retrieves an ArrayList of Requests from Elasticsearch. Currently allows you to search by RiderID, DriverID, and RequestID
+     * Retrieves an ArrayList of Requests from Elasticsearch. Allows you to search by RiderID, DriverID, and RequestID.
+     * Used to get specific requests. If searching based on fuzzy queries, use a Search task instead
+     * @see SearchRequestsByKeywordTask
+     * @see SearchRequestsByLocationTask
      */
     public static class GetRequestsTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
@@ -265,10 +245,8 @@ public class ElasticsearchController {
         private String keyword;
 
         /**
-         * Instantiates a new Get requests task.
-         *
-         * @param requestField
-         * @param keyword
+         * @param requestField The request field to be searched by (rider id, driver id, or request id)
+         * @param keyword The search term
          */
         public GetRequestsTask(RequestField requestField, String keyword) {
             super();
@@ -330,7 +308,8 @@ public class ElasticsearchController {
     }
 
     /**
-     * The type Search requests by location task.
+     * Gets a list of Requests based on a Location query.
+     * @see SearchRequestsByKeywordTask
      */
     public static class SearchRequestsByLocationTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
@@ -338,10 +317,8 @@ public class ElasticsearchController {
         private double radius;
 
         /**
-         * Instantiates a new Search requests by location task.
-         *
-         * @param location the l
-         * @param radius the r
+         * @param location the location
+         * @param radius the search radius
          */
         public SearchRequestsByLocationTask(Location location, double radius) {
             super();
@@ -410,29 +387,21 @@ public class ElasticsearchController {
     }
 
     /**
-     * Retrieves an ArrayList of Requests from Elasticsearch.
-     * <p/>
-     * Issues: Currently only allows you to search by keyword, which only targets a request's description.
+     * Gets a list of Requests based on a description query.
+     * @see SearchRequestsByLocationTask
      */
     public static class SearchRequestsByKeywordTask extends AsyncTask<Void, Void, ArrayList<Request>> {
 
         private String keywords;
 
         /**
-         * Instantiates a new Search requests by keyword task.
-         *
-         * @param keyword
+         * @param keyword Search term
          */
         public SearchRequestsByKeywordTask(String keyword) {
             super();
             this.keywords = keyword;
         }
 
-        /**
-         * doInBackground
-         * @param params
-         * @return filteredRequests
-         */
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
             verifySettings();
@@ -461,7 +430,7 @@ public class ElasticsearchController {
     }
 
     /**
-     * The type Delete request task.
+     * Delete a request. Requests can be deleted by passing them in directly or their id. Returns true if successful.
      */
     public static class DeleteRequestTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -469,8 +438,7 @@ public class ElasticsearchController {
         private String id;
 
         /**
-         * Delete RequestTask by request
-         * @param request
+         * @param request The request to be deleted.
          */
         public DeleteRequestTask(Request request) {
             super();
@@ -479,8 +447,7 @@ public class ElasticsearchController {
         }
 
         /**
-         * Delete RequestTask by string
-         * @param id
+         * @param id The id of the request to be deleted
          */
         public DeleteRequestTask(String id) {
             super();
@@ -488,11 +455,6 @@ public class ElasticsearchController {
             this.id = id;
         }
 
-        /**
-         * doInBackground
-         * @param params
-         * @return boolean
-         */
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
@@ -514,26 +476,20 @@ public class ElasticsearchController {
     }
 
     /**
-     * AddReviewTask
+     * Adds a review. Returns true if successful.
      */
     public static class AddReviewTask extends AsyncTask<Void, Void, Boolean> {
 
         private Review review;
 
         /**
-         * Add ReviewTask
-         * @param review
+         * @param review The review to be added.
          */
         public AddReviewTask(Review review) {
             super();
             this.review = review;
         }
 
-        /**
-         * doInBackground
-         * @param params
-         * @return boolean
-         */
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
@@ -549,26 +505,20 @@ public class ElasticsearchController {
     }
 
     /**
-     * GetReviewsTask
+     * Gets a list of reviews for a given user.
      */
     public static class GetReviewsTask extends AsyncTask<Void, Void, ArrayList<Review>> {
 
         private String userID;
 
         /**
-         * Get ReviewsTask
-         * @param userID
+         * @param userID id of the user to get reviews for
          */
         public GetReviewsTask(String userID) {
             super();
             this.userID = userID;
         }
 
-        /**
-         * doInBackground
-         * @param params
-         * @return list of reviews
-         */
         @Override
         protected ArrayList<Review> doInBackground(Void... params) {
             verifySettings();
@@ -595,9 +545,6 @@ public class ElasticsearchController {
         }
     }
 
-    /**
-     * verify the Settings
-     */
     private static void verifySettings() {
         // if the client hasn't been initialized then we should make it!
         if (client == null) {
@@ -610,11 +557,6 @@ public class ElasticsearchController {
         }
     }
 
-    /**
-     * filter the Requests InProgress
-     * @param requests
-     * @return result
-     */
     protected static ArrayList<Request> filterRequestsInProgress(ArrayList<Request> requests) {
         ArrayList<Request> result = new ArrayList<Request>();
         for (int i = 0; i < requests.size(); i++) {

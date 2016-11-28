@@ -37,7 +37,7 @@ public class Location {
     /**
      * Sets address.
      *
-     * @param address the a
+     * @param address the address
      */
     public void setAddress(String address) {
         this.address = address;
@@ -64,9 +64,9 @@ public class Location {
     }
 
     /**
-     * calculate the Fare
-     * @param location
-     * @return string
+     * Calculate a recommended price for the distance between this location and another.
+     * @param location the target Location
+     * @return recommended price
      */
     public String calculateFare(Location location) {
         double distanceInKm = this.calculateDistanceInKm(location);
@@ -78,9 +78,9 @@ public class Location {
     }
 
     /**
-     *
-     * @param location
-     * @return distanceInKm(double)
+     * Calculate distance between this Location and another.
+     * @param location the target location
+     * @return distance between the locations
      */
     public double calculateDistanceInKm(Location location) {
         GeoPoint geo1 = this.geoLocation;

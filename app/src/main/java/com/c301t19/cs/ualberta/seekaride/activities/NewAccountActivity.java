@@ -11,6 +11,9 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.AccountController;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 
+/**
+ * Activity to create a new account.
+ */
 public class NewAccountActivity extends Activity {
 
     AccountController accountController;
@@ -32,6 +35,10 @@ public class NewAccountActivity extends Activity {
     String carText;
 
     //sets up the text boxes and lets you fill them in.
+
+    /**
+     * Get user input.
+     */
     public void write() {
         username = (EditText) findViewById(R.id.new_Username_Text);
         password = (EditText) findViewById(R.id.new_Password_Text);
@@ -47,6 +54,10 @@ public class NewAccountActivity extends Activity {
         emailText = email.getText().toString();
         carText = car.getText().toString();
     }
+
+    /**
+     * Set up buttons
+     */
     public void move(){
         createA = (Button) findViewById(R.id.newA_Account_Button);
         cancelA = (Button) findViewById(R.id.newA_Cancel_Button);

@@ -3,7 +3,7 @@ package com.c301t19.cs.ualberta.seekaride.core;
 import io.searchbox.annotations.JestId;
 
 /**
- * Review class contains the info for rating and description
+ * Represents a user's review of another user.
  */
 public class Review {
 
@@ -15,10 +15,10 @@ public class Review {
     protected String id;
 
     /**
-     * constructor
-     * @param description
-     * @param rating
-     * @param userID
+     * Constructor
+     * @param description The main review text.
+     * @param rating A numerical rating from 1-5.
+     * @param userID The ID of the user to be reviewed.
      */
     public Review(String description, float rating, String userID) {
         this.description = description;
@@ -27,56 +27,56 @@ public class Review {
     }
 
     /**
-     * get the description
-     * @return string of description
+     * Get the description
+     * @return User-defined review text
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * set the description
-     * @param description
+     * Set the description
+     * @param description User-defined review text
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * get the rating
-     * @return float of rating
+     * Get the rating
+     * @return User-defined rating
      */
     public float getRating() {
         return rating;
     }
 
     /**
-     * set rating
-     * @param rating
+     * Set rating
+     * @param rating User-defined rating from 1-5
      */
     public void setRating(float rating) {
         this.rating = rating;
     }
 
     /**
-     * get the user ID
-     * @return userID
+     * Get the user ID
+     * @return Id of the user being reviewed
      */
     public String getUserID() {
         return userID;
     }
 
     /**
-     * set userID
-     * @param userID
+     * Set userID
+     * @param userIDId of the user being reviewed
      */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
     /**
-     * get the id
-     * @return id
+     * Get the review Id
+     * @return id Unique identifier for the review
      */
     public String getId() {
         return id;

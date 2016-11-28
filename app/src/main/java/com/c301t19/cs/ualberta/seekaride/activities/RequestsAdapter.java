@@ -15,6 +15,9 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+/**
+ * Extends ArrayAdapter to display a list of requests
+ */
 public class RequestsAdapter extends ArrayAdapter<Request> {
 
     ArrayList<Request> requests;

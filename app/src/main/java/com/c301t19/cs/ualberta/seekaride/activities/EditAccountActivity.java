@@ -16,6 +16,9 @@ import com.c301t19.cs.ualberta.seekaride.core.AccountController;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
+/**
+ * Activity to let a user change their account info
+ */
 public class EditAccountActivity extends Activity {
     public Button Save;
     public Button Cancel;
@@ -38,6 +41,10 @@ public class EditAccountActivity extends Activity {
     private ListView reviewList;
 
     //sets up the text boxes and lets you fill them in.
+
+    /**
+     * Get user input.
+     */
     public void write() {
         password = (EditText) findViewById(R.id.edit_Password_Text);
         cPassword = (EditText) findViewById(R.id.edit_ConfirmP_Text);
@@ -56,6 +63,9 @@ public class EditAccountActivity extends Activity {
         username.setText(Rider.getInstance().getProfile().getUsername());
     }
 
+    /**
+     * Set up buttons
+     */
     public void move(){
         Save = (Button) findViewById(R.id.edit_Changes_Button);
         Cancel = (Button) findViewById(R.id.edit_Cancel_Button);

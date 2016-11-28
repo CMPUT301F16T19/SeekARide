@@ -3,19 +3,23 @@ package com.c301t19.cs.ualberta.seekaride.core;
 import java.util.ArrayList;
 
 /**
- * Rider's command patten
+ * Command pattern for Rider tasks. These can be stored while the Rider is offline,
+ * then executed on reconnection.
  */
 public class RiderCommand {
 
+    /**
+     * Enum corresponding to various Rider tasks.
+     */
     public enum CommandType {MAKE_REQUEST, DELETE_REQUEST, EDIT_REQUEST, MAKE_PAYMENT, }
 
     protected CommandType commandType;
     protected ArrayList<Object> params;
 
     /**
-     * constructor of RiderCommand
-     * @param commandType
-     * @param params
+     * Create a command by passing a command type and the associated parameters.
+     * @param commandType Indicates the Rider function associated with the command.
+     * @param params Parameters associated with the function.
      */
     public RiderCommand(CommandType commandType, ArrayList<Object> params) {
         this.commandType = commandType;
@@ -23,7 +27,7 @@ public class RiderCommand {
     }
 
     /**
-     * use to execute the command
+     * Executes the command.
      */
     public void execute() {
         switch (commandType) {

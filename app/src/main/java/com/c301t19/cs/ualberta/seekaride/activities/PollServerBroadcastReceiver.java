@@ -9,6 +9,11 @@ import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 // http://simpleandroidtutorials.blogspot.ca/2012/06/periodically-update-data-from-server-in.html 2016-11-12, 3:02 PM, author Nirali
+
+/**
+ * A broadcast receiver that periodically makes calls to PollingService.
+ * @see PollingService
+ */
 public class PollServerBroadcastReceiver extends BroadcastReceiver {
 
     @Override

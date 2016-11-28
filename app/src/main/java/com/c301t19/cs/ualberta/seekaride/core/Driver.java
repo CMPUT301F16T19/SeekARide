@@ -44,8 +44,6 @@ public class Driver extends User {
 
     /**
      * Searches the database for Requests and stores them in searchedRequests.
-     * Issues: Still need to implement a search radius.
-     *
      * @param keywords The user-entered string of keywords.
      * @param radius   The user-entered search radius.
      */
@@ -66,9 +64,8 @@ public class Driver extends User {
     }
 
     /**
-     * To be implemented.
-     *
-     * @param location the location
+     * Searches the database for Requests and stores them in searchedRequests.
+     * @param location the search Location
      * @param radius   the radius
      */
     public void searchRequestsByLocation(Location location, double radius) {
@@ -86,7 +83,6 @@ public class Driver extends User {
 
     /**
      * Allows the Driver to accept a Request and add it to acceptedRequests.
-     *
      * @param request The Request to be accepted.
      */
     public void acceptRequest(Request request) {
@@ -111,15 +107,16 @@ public class Driver extends User {
         }
     }
 
-    /**
-     * Allows the Driver to decline a Request they previously accepted and remove it from acceptedRequests.
-     * @param index The request's position in acceptedRequests.
-     */
+    @Deprecated
     public void removeAcceptedRequest(int index) {
         // remove a request and remove from acceptedRequests
         removeAcceptedRequest(acceptedRequests.get(index));
     }
 
+    /**
+     * Allows the Driver to decline a Request they previously accepted and remove it from acceptedRequests.
+     * @param request the Request to be removed
+     */
     public void removeAcceptedRequest(Request request) {
         Request oldRequest = new Request(request);
         oldRequest.driverDeclined(getProfile());
@@ -135,7 +132,6 @@ public class Driver extends User {
 
     /**
      * Get the list of accepted Requests.
-     *
      * @return ArrayList of accepted Requests.
      */
     public ArrayList<Request> getAcceptedRequests() {
@@ -144,8 +140,8 @@ public class Driver extends User {
 
 
     /**
-     * receive Payment
-     * @param request
+     * Allows the driver to complete a request and receive payment.
+     * @param request The request to be completed
      */
     public void receivePayment(Request request) {
         if (request.didRiderPay()) {
@@ -174,7 +170,6 @@ public class Driver extends User {
 
     /**
      * Get the current list of search results.
-     *
      * @return ArrayList of searched Requests.
      */
     public ArrayList<Request> getSearchedRequests() {
@@ -189,7 +184,9 @@ public class Driver extends User {
     }
 
     /**
-     * update AcceptedRequests
+     * Updates the list of accepted requests from the server. Also checks to see if a rider has accepted this
+     * driver on any of their requests. If so, acceptedRequest will be set to the accepted request and the request
+     * can be started.
      */
     public void updateAcceptedRequests() {
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
@@ -243,12 +240,14 @@ public class Driver extends User {
     }
 
     /**
-     * riderHas Accepted
-     * @return request
+     * Check if a rider has accepted any of the driver's offers.
+     * @return the Request that the rider has accepted, or null if none.
      */
     public Request riderHasAccepted() {
         for (int i = 0; i < acceptedRequests.size(); i++) {
-            if (!acceptedRequests.get(i).getWaitingForRider()) {
+            if (!acceptedRequests.get(i).getWaitingForRider()&&
+                    acceptedRequests.get(i).getAcceptedDriverProfile()!=null &&
+                    acceptedRequests.get(i).getAcceptedDriverProfile().equals(getProfile()) ) {
                 return acceptedRequests.get(i);
             }
         }
@@ -256,9 +255,9 @@ public class Driver extends User {
     }
 
     /**
-     * get Request
-     * @param requestId
-     * @return request
+     * Get a Request in acceptedRequests with a given id. Null if it doesn't exist
+     * @param requestId id of the request
+     * @return a Request with the given id, or null if nonexistent
      */
     public Request getRequest(String requestId) {
         for (int i = 0; i < acceptedRequests.size(); i++) {
@@ -271,8 +270,8 @@ public class Driver extends User {
     }
 
     /**
-     * filter Requests ByPrice
-     * @param price
+     * Removes from searchedRequests requests that don't meet a threshold price
+     * @param price The minimum price to filter by
      */
     public void filterRequestsByPrice(double price) {
         ArrayList<Request> newSearchedRequests = new ArrayList<Request>();
@@ -285,8 +284,8 @@ public class Driver extends User {
     }
 
     /**
-     * filter Requests By PricePerKm
-     * @param price
+     * Removes from searchedRequests requests that don't meet a threshold price per km travelled
+     * @param price The minimum price to filter by
      */
     public void filterRequestsByPricePerKm(double price) {
         ArrayList<Request> newSearchedRequests = new ArrayList<Request>();

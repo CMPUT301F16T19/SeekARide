@@ -18,6 +18,9 @@ import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
+/**
+ * Activity that lets users view each other's profiles. Users can contact each other via phone and email.
+ */
 public class ViewProfileActivity extends Activity {
 
     private Profile aProfile;
@@ -35,6 +38,10 @@ public class ViewProfileActivity extends Activity {
     private Request request;
 
     //sets up the text boxes and lets you fill them in.
+
+    /**
+     * Set text.
+     */
     public void write() {
 
         username = (TextView) findViewById(R.id.View_user_text);
@@ -54,6 +61,9 @@ public class ViewProfileActivity extends Activity {
         email.setPaintFlags(email.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
+    /**
+     * Set buttons.
+     */
     public void move(){
         Back = (Button) findViewById(R.id.view_Profile_Back_Button);
 

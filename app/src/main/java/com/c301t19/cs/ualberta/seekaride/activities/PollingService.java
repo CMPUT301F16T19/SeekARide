@@ -16,6 +16,11 @@ import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 // http://simpleandroidtutorials.blogspot.ca/2012/06/periodically-update-data-from-server-in.html 2016-11-12, 3:02 PM, author Nirali
+
+/**
+ * Periodically polls the server to update Rider and Driver's openRequests and acceptedRequests. Sends notifications
+ * if a Rider or Driver has accepted one of their open/accepted requests.
+ */
 public class PollingService extends IntentService {
     public PollingService() {
         super("MyServiceName");

@@ -5,47 +5,43 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * manage the network
+ * Singleton class that describes the current state of the internet connection.
  */
 // http://stackoverflow.com/questions/18632823/how-to-monitor-network-status-in-android 2016-11-16, author Vipul Purohit
 public class NetworkManager {
 
+    /**
+     * enumeration describing possible connectivity values
+     */
     public enum Connectivity { WIFI, MOBILE, NONE };
 
     private Context context;
     private static NetworkManager instance = null;
 
-    /**
-     * constructor
-     * @param context
-     */
     private NetworkManager(Context context) {
         this.context = context;
     }
-
-    /**
-     * constructor
-     */
     protected NetworkManager() {}
 
     /**
-     * get instance
-     * @return
+     * Get the instance of NetworkManager
+     * @return instance
      */
     public static NetworkManager getInstance() {
         return instance;
     }
 
     /**
-     * instantiate
-     * @param context
+     * Instantiates the NetworkManager. Must be called before any other methods are called. Should be called first thing
+     * when the app launches to immediately begin monitoring the network connection
+     * @param context Android's application context.
      */
     public static void instantiate(Context context) {
         instance = new NetworkManager(context);
     }
 
     /**
-     * get Connectivity Status
+     * Get the current connectivity
      * @return ConnectivityStatus
      */
     public Connectivity getConnectivityStatus() {
@@ -65,7 +61,7 @@ public class NetworkManager {
 
     /**
      * get Connectivity Status
-     * @return Connectivity Status with string
+     * @return String description of connectivity
      */
     public String getConnectivityStatusString() {
         Connectivity conn = getConnectivityStatus();

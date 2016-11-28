@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * Controller that handles login and account creation.
+ * Controller that handles login and account creation. Not reliant upon Rider/Driver being instantiated.
  */
 public class AccountController {
 
@@ -24,10 +24,9 @@ public class AccountController {
     }
 
     /**
-     * Logs the user in with their desired username. A new account is created if a user doesn't already exist
-     * with the given name. The name must be at least five characters long. Rider and Driver controller classes
-     * are instantiated with a Profile generated from the username.
-     *
+     * Logs the user in with their desired username. The name must be at least five characters long.
+     * Rider and Driver controller classes are instantiated with a Profile generated from the username.
+     * Also begins to poll the server to update Rider's openRequests and Driver's acceptedRequests.
      * @param username The user's username.
      * @return true if the login was successful.
      */
@@ -59,9 +58,9 @@ public class AccountController {
     }
 
     /**
-     * create New Account
-     * @param profile
-     * @return boolean (success or not)
+     * Creates a new account if the username is unique.
+     * @param profile The profile of the new account.
+     * @return true if successful. false if the username is not unique
      */
     public boolean createNewAccount(Profile profile) {
         if (checkUserExists(profile.getUsername())) {
@@ -73,9 +72,9 @@ public class AccountController {
     }
 
     /**
-     * edit Account
-     * @param oldProfile
-     * @param newProfile
+     * Edits an account.
+     * @param oldProfile Profile before editing.
+     * @param newProfile Profile after editing.
      */
     public void editAccount(Profile oldProfile, Profile newProfile) {
         ElasticsearchController.DeleteUserTask deleteUserTask = new ElasticsearchController.DeleteUserTask(oldProfile);
@@ -86,11 +85,6 @@ public class AccountController {
         Driver.instantiate(newProfile);
     }
 
-    /**
-     * check User Exists
-     * @param username
-     * @return boolean
-     */
     protected boolean checkUserExists(String username) {
         ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask(
                 ElasticsearchController.UserField.NAME, username);
@@ -111,10 +105,6 @@ public class AccountController {
         return true;
     }
 
-    /**
-     * poll Server
-     * @param context
-     */
     // http://simpleandroidtutorials.blogspot.ca/2012/06/periodically-update-data-from-server-in.html 2016-11-12, 3:02 PM, author Nirali
     private void pollServer(Context context) {
 

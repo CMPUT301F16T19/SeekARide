@@ -14,6 +14,9 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 
+/**
+ * Main activity for Drivers. Displays their list of accepted requests.
+ */
 public class DriverActivity extends Activity {
 
     private Button search;
@@ -21,6 +24,9 @@ public class DriverActivity extends Activity {
     private RequestsAdapter adapter;
     private Request selectedRequest;
 
+    /**
+     * Set up buttons
+     */
     public void move(){
         search = (Button) findViewById(R.id.driver_Search_Button);
         requests = (ListView) findViewById(R.id.driver_Requests);

@@ -15,6 +15,9 @@ import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 import java.util.ArrayList;
 
+/**
+ * Extends ArrayAdapter to display a list of driver profiles.
+ */
 public class DriversAdapter extends ArrayAdapter<Profile> {
 
     ArrayList<Profile> drivers;
