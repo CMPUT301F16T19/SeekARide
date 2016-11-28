@@ -7,8 +7,6 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-import org.osmdroid.util.GeoPoint;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,17 +31,17 @@ public class ElasticsearchController {
         USERID, ID
     }
     /**
-     * Indicates a field in a user's Profile for search tasks.
+     * Indicates a field in a userProfile's Profile for search tasks.
      */
     public enum UserField {
         /**
-         * Name user field.
+         * Name userProfile field.
          */
         NAME, /**
-         * Email user field.
+         * Email userProfile field.
          */
         EMAIL, /**
-         * Phone user field.
+         * Phone userProfile field.
          */
         PHONE, ID }
 
@@ -78,24 +76,29 @@ public class ElasticsearchController {
      */
     public static class AddUserTask extends AsyncTask<Void, Void, Boolean> {
 
-        private Profile user;
+        private Profile userProfile;
         private String id;
 
         /**
-         * Instantiates a new Add user task.
+         * Instantiates a new Add userProfile task.
          *
-         * @param u the u
+         * @param profile 
          */
-        public AddUserTask(Profile u) {
+        public AddUserTask(Profile profile) {
             super();
-            user = u;
+            userProfile = profile;
             id = null;
         }
 
-        public AddUserTask(Profile u, String i) {
+        /**
+         *
+         * @param profile
+         * @param id
+         */
+        public AddUserTask(Profile profile, String id) {
             super();
-            user = u;
-            id = i;
+            userProfile = profile;
+            this.id = id;
         }
 
         @Override
@@ -104,11 +107,11 @@ public class ElasticsearchController {
             Index index;
             if (id == null)
             {
-                index = new Index.Builder(user).index(INDEX).type("user").build();
+                index = new Index.Builder(userProfile).index(INDEX).type("userProfile").build();
             }
             else
             {
-                index = new Index.Builder(user).index(INDEX).type("user").id(id).build();
+                index = new Index.Builder(userProfile).index(INDEX).type("userProfile").id(id).build();
             }
             try {
                 client.execute(index);
@@ -130,15 +133,15 @@ public class ElasticsearchController {
         private String keyword;
 
         /**
-         * Instantiates a new Get user task.
+         * Instantiates a new Get userProfile task.
          *
-         * @param uf the uf
-         * @param k  the k
+         * @param userField
+         * @param keyword
          */
-        public GetUserTask(UserField uf, String k) {
+        public GetUserTask(UserField userField, String keyword) {
             super();
-            userField = uf;
-            keyword = k;
+            this.userField = userField;
+            this.keyword = keyword;
         }
 
         @Override
@@ -164,7 +167,7 @@ public class ElasticsearchController {
                             "}";
                     Search search = new Search.Builder(query)
                             .addIndex(INDEX)
-                            .addType("user")
+                            .addType("userProfile")
                             .build();
                     List<Profile> profiles = null;
                     try {
@@ -187,7 +190,7 @@ public class ElasticsearchController {
                         return null;
                     }
                 case ID:
-                    Get get = new Get.Builder(INDEX, keyword).type("user").build();
+                    Get get = new Get.Builder(INDEX, keyword).type("userProfile").build();
                     JestResult result = null;
                     try {
                         result = client.execute(get);
@@ -201,19 +204,31 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * Delete UserTask
+     */
     public static class DeleteUserTask extends AsyncTask<Void, Void, Boolean> {
 
         private Profile user;
 
-        public DeleteUserTask(Profile u) {
+        /**
+         * Delete UserTask
+         * @param profile
+         */
+        public DeleteUserTask(Profile profile) {
             super();
-            user = u;
+            user = profile;
         }
 
+        /**
+         * doInBackground
+         * @param params
+         * @return boolean
+         */
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
-            Delete delete  = new Delete.Builder(user.getId()).index(INDEX).type("user").build();
+            Delete delete  = new Delete.Builder(user.getId()).index(INDEX).type("userProfile").build();
             try {
                 client.execute(delete);
             }
@@ -235,18 +250,23 @@ public class ElasticsearchController {
         /**
          * Instantiates a new Add request task.
          *
-         * @param r the r
+         * @param request
          */
-        public AddRequestTask(Request r) {
+        public AddRequestTask(Request request) {
             super();
-            request = r;
+            this.request = request;
             id = null;
         }
 
-        public AddRequestTask(Request r, String i) {
+        /**
+         * AddRequestTask
+         * @param request
+         * @param id
+         */
+        public AddRequestTask(Request request, String id) {
             super();
-            request = r;
-            id = i;
+            this.request = request;
+            this.id = id;
         }
 
         @Override
@@ -280,13 +300,13 @@ public class ElasticsearchController {
         /**
          * Instantiates a new Get requests task.
          *
-         * @param rf the rf
-         * @param k  the k
+         * @param requestField
+         * @param keyword
          */
-        public GetRequestsTask(RequestField rf, String k) {
+        public GetRequestsTask(RequestField requestField, String keyword) {
             super();
-            requestField = rf;
-            keyword = k;
+            this.requestField = requestField;
+            this.keyword = keyword;
         }
 
         @Override
@@ -434,13 +454,18 @@ public class ElasticsearchController {
         /**
          * Instantiates a new Search requests by keyword task.
          *
-         * @param k the k
+         * @param keyword
          */
-        public SearchRequestsByKeywordTask(String k) {
+        public SearchRequestsByKeywordTask(String keyword) {
             super();
-            keywords = k;
+            this.keywords = keyword;
         }
 
+        /**
+         * doInBackground
+         * @param params
+         * @return filteredRequests
+         */
         @Override
         protected ArrayList<Request> doInBackground(Void... params) {
             verifySettings();
@@ -476,18 +501,31 @@ public class ElasticsearchController {
         private Request request;
         private String id;
 
-        public DeleteRequestTask(Request r) {
+        /**
+         * Delete RequestTask by request
+         * @param request
+         */
+        public DeleteRequestTask(Request request) {
             super();
-            request = r;
+            this.request = request;
             id = null;
         }
 
-        public DeleteRequestTask(String i) {
+        /**
+         * Delete RequestTask by string
+         * @param id
+         */
+        public DeleteRequestTask(String id) {
             super();
             request = null;
-            id = i;
+            this.id = id;
         }
 
+        /**
+         * doInBackground
+         * @param params
+         * @return boolean
+         */
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
@@ -508,15 +546,27 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * AddReviewTask
+     */
     public static class AddReviewTask extends AsyncTask<Void, Void, Boolean> {
 
         private Review review;
 
-        public AddReviewTask(Review r) {
+        /**
+         * Add ReviewTask
+         * @param review
+         */
+        public AddReviewTask(Review review) {
             super();
-            review = r;
+            this.review = review;
         }
 
+        /**
+         * doInBackground
+         * @param params
+         * @return boolean
+         */
         @Override
         protected Boolean doInBackground(Void... params) {
             verifySettings();
@@ -531,15 +581,27 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * GetReviewsTask
+     */
     public static class GetReviewsTask extends AsyncTask<Void, Void, ArrayList<Review>> {
 
         private String userID;
 
-        public GetReviewsTask(String u) {
+        /**
+         * Get ReviewsTask
+         * @param userID
+         */
+        public GetReviewsTask(String userID) {
             super();
-            userID = u;
+            this.userID = userID;
         }
 
+        /**
+         * doInBackground
+         * @param params
+         * @return list of reviews
+         */
         @Override
         protected ArrayList<Review> doInBackground(Void... params) {
             verifySettings();
@@ -566,6 +628,9 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * verify the Settings
+     */
     private static void verifySettings() {
         // if the client hasn't been initialized then we should make it!
         if (client == null) {
@@ -578,6 +643,11 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * filter the Requests InProgress
+     * @param requests
+     * @return result
+     */
     protected static ArrayList<Request> filterRequestsInProgress(ArrayList<Request> requests) {
         ArrayList<Request> result = new ArrayList<Request>();
         for (int i = 0; i < requests.size(); i++) {

@@ -6,8 +6,6 @@ import java.text.DecimalFormat;
 
 /**
  * Stores a Geolocation.
- * <p/>
- * Issues:
  */
 public class Location {
 
@@ -65,6 +63,11 @@ public class Location {
         return geoLocation;
     }
 
+    /**
+     * calculate the Fare
+     * @param loc2
+     * @return string
+     */
     public String calculateFare(Location loc2) {
         double distanceInKm = this.calculateDistanceInKm(loc2);
         double costPerKm = 1.48;
@@ -74,6 +77,11 @@ public class Location {
         return ("$" + dFormat.format(cost));
     }
 
+    /**
+     *
+     * @param loc2
+     * @return distanceInKm(double)
+     */
     public double calculateDistanceInKm(Location loc2) {
         GeoPoint geo1 = this.geoLocation;
         GeoPoint geo2 = loc2.getGeoLocation();
