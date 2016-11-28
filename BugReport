@@ -1,0 +1,20 @@
+
+These are the bugs found when running the app on my laptop. Things might be different on other machine.
+
+Bug report:
+
+	1. There are 2 notifications appear when a Rider creating a request and leaving the Request Fare
+	blank, while there is only 1 notification when he/she editing an existing request and changing the
+	fare to blank. Are these 2 notifications both necessary?
+
+	2. In profile editing, user is able to input his mobile number as none number. Similarly, in Driver's
+	request accepting page, Driver is able to input a negative number for radius.
+
+	3. In Driver's search, whether I input a price that is more or less than the original price, the filter
+	clears the search result list.
+
+	4. A user use as Driver can accept the request made by himself as a Rider. Is this a problem?
+
+	5. When a request is accepted on both sides and it is deleted by the Rider, the request does not disappear
+	immediately but remains unable to enter until the page is refreshed so that the request disappears.
+
