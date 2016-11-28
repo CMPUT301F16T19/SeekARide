@@ -23,15 +23,11 @@ public class EditAccountActivity extends Activity {
     public Button Save;
     public Button Cancel;
 
-    private EditText password;
-    private EditText cPassword;
     private EditText phoneNumber;
     private EditText email;
     private EditText car;
     private TextView username;
 
-    String passwordText;
-    String confirmPassword;
     String phoneNumberText;
     String emailText;
     String carText;
@@ -46,16 +42,12 @@ public class EditAccountActivity extends Activity {
      * Get user input.
      */
     public void write() {
-        password = (EditText) findViewById(R.id.edit_Password_Text);
-        cPassword = (EditText) findViewById(R.id.edit_ConfirmP_Text);
         phoneNumber = (EditText) findViewById(R.id.edit_Phone_Text);
         email = (EditText) findViewById(R.id.edit_Email_Text);
         car = (EditText) findViewById(R.id.edit_Car_Text);
         rating = (TextView) findViewById(R.id.edit_Account_Rating);
         username = (TextView) findViewById(R.id.edit_User_Text);
 
-        passwordText = password.getText().toString();
-        confirmPassword = cPassword.getText().toString();
         phoneNumberText = phoneNumber.getText().toString();
         emailText = email.getText().toString();
         carText = car.getText().toString();

@@ -21,15 +21,11 @@ public class NewAccountActivity extends Activity {
     public Button createA;
     public Button cancelA;
     private EditText username;
-    private EditText password;
-    private EditText cPassword;
     private EditText phoneNumber;
     private EditText email;
     private EditText car;
 
     String usernameText;
-    String passwordText;
-    String confirmPassword;
     String phoneNumberText;
     String emailText;
     String carText;
@@ -41,15 +37,11 @@ public class NewAccountActivity extends Activity {
      */
     public void write() {
         username = (EditText) findViewById(R.id.new_Username_Text);
-        password = (EditText) findViewById(R.id.new_Password_Text);
-        cPassword = (EditText) findViewById(R.id.new_ConfirmP_Text);
         phoneNumber = (EditText) findViewById(R.id.new_Phone_Text);
         email = (EditText) findViewById(R.id.new_Email_Text);
         car = (EditText) findViewById(R.id.new_Car_Text);
 
         usernameText = username.getText().toString();
-        passwordText = password.getText().toString();
-        confirmPassword = cPassword.getText().toString();
         phoneNumberText = phoneNumber.getText().toString();
         emailText = email.getText().toString();
         carText = car.getText().toString();
