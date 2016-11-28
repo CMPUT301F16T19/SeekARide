@@ -1,7 +1,5 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
-import android.content.Context;
-
 /**
  * Base Controller class for a User. Inherited by Rider and Driver.
  */
@@ -37,40 +35,6 @@ public class User {
         return profile;
     }
 
-    /**
-     * Contacts another user by phone.
-     * Issues: unimplemented
-     *
-     * @param phone Phone number of the user to contact.
-     */
-    @Deprecated
-    public void contactByPhone(String phone) {
-
-    }
-
-    /**
-     * Contacts another user by email.
-     * Issues: unimplemented
-     *
-     * @param email Email address of the user to contact.
-     */
-    @Deprecated
-    public void contactByEmail(String email) {
-
-    }
-
-    /**
-     * Given a start and end Location, suggests an offering price.
-     * Issues: unimplemented
-     *
-     * @param start Start Location.
-     * @param end   End Location.
-     * @return Suggested pricing.
-     */
-    @Deprecated
-    public float getRecommendedPrice(Location start, Location end) {
-        return 0;
-    }
 
     /**
      * Sets profile.
@@ -81,39 +45,52 @@ public class User {
         this.profile = newProfile;
     }
 
-    /**
-     * Search phone string.
-     *
-     * @param username the username
-     * @return the string
-     */
-    @Deprecated
-    public String searchPhone(String username) {
-        String phoneNumber = "idk";// should change to elastic search here
-        return phoneNumber;
-    }
 
+    /**
+     * add the review to elastic search
+     * @see ElasticsearchController
+     * @param review
+     */
     public void leaveReview(Review review) {
         ElasticsearchController.AddReviewTask addReviewTask = new ElasticsearchController.AddReviewTask(review);
         addReviewTask.execute();
     }
 
+    /**
+     * get the state of requestInProgress
+     * @return a boolean
+     */
     public Request getRequestInProgress() {
         return requestInProgress;
     }
 
-    public void setRequestInProgress(Request requestInProgres) {
-        requestInProgress = requestInProgres;
+    /**
+     * change the state of requestInProgress
+     * @param requestInProgress
+     */
+    public void setRequestInProgress(Request requestInProgress) {
+        this.requestInProgress = requestInProgress;
     }
 
+    /**
+     * set the requestInProgress to null
+     */
     public void clearRequestInProgress() {
         requestInProgress = null;
     }
 
+    /**
+     * get the state of notification
+     * @return a boolean
+     */
     public boolean hasReceivedNotification() {
         return receivedNotification;
     }
 
+    /**
+     * change the state of notification
+     * @param receivedNotification
+     */
     public void setReceivedNotification(boolean receivedNotification) {
         this.receivedNotification = receivedNotification;
     }

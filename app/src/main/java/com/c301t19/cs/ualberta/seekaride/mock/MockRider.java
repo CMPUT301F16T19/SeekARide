@@ -1,17 +1,12 @@
 package com.c301t19.cs.ualberta.seekaride.mock;
 
-import android.util.Log;
-
-import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.NetworkManager;
-import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Review;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.c301t19.cs.ualberta.seekaride.core.RiderCommand;
-import com.c301t19.cs.ualberta.seekaride.core.User;
 
 import java.util.ArrayList;
 
@@ -87,6 +82,35 @@ public class MockRider extends Rider {
         }
     }
 
+    public float getRecommendedPrice(Location start, Location end) {
+        return 0;
+    }
+
+    public void contactByPhone(String phone) {
+
+    }
+
+    public void completeRequest(int index) {
+        openRequests.get(index).complete();
+    }
+
+    public void makePayment(int indexR) {
+
+        openRequests.get(indexR).riderPay();
+    }
+
+    public void acceptDriverOffer(int indexR, int indexD) {
+        openRequests.get(indexR).riderAccept(indexD);
+    }
+
+    public void deleteRequest(int index) {
+
+        deleteRequest(openRequests.get(index));
+
+    }
+    public void contactByEmail(String email) {
+
+    }
     @Override
     public void editRequest(Request edited) {
         if (MockNetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {

@@ -2,6 +2,9 @@ package com.c301t19.cs.ualberta.seekaride.core;
 
 import java.util.ArrayList;
 
+/**
+ * Rider's command patten
+ */
 public class RiderCommand {
 
     public enum CommandType {MAKE_REQUEST, DELETE_REQUEST, EDIT_REQUEST, MAKE_PAYMENT, }
@@ -9,11 +12,19 @@ public class RiderCommand {
     protected CommandType commandType;
     protected ArrayList<Object> params;
 
+    /**
+     * constructor of RiderCommand
+     * @param commandType
+     * @param params
+     */
     public RiderCommand(CommandType commandType, ArrayList<Object> params) {
         this.commandType = commandType;
         this.params = params;
     }
 
+    /**
+     * use to execute the command
+     */
     public void execute() {
         switch (commandType) {
             case MAKE_REQUEST:

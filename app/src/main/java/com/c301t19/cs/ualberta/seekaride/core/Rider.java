@@ -93,18 +93,6 @@ public class Rider extends User {
         }
     }
 
-    /**
-     * Remove one of the User's open Requests.
-     * Issues: may need to change index parameter to the Request itself
-     *
-     * @param index The request's position in openRequests.
-     */
-    @Deprecated
-    public void deleteRequest(int index) {
-
-        deleteRequest(openRequests.get(index));
-
-    }
 
     public void deleteRequest(Request request) {
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
@@ -134,17 +122,13 @@ public class Rider extends User {
             addRequestTask.execute();
         }
     }
-    /**
-     * Accept a Driver's offer.
-     *
-     * @param indexR the index r
-     * @param indexD the index d
-     */
-    @Deprecated
-    public void acceptDriverOffer(int indexR, int indexD) {
-        openRequests.get(indexR).riderAccept(indexD);
-    }
 
+    /**
+     *
+     * @param request
+     * @param driverProfile
+     * @return a boolean
+     */
     public boolean acceptDriverOffer(Request request, Profile driverProfile) {
         if (Driver.getInstance().getRequestInProgress() != null) {
             Log.i("request in progress", "can't accept two requests at once");
@@ -163,16 +147,10 @@ public class Rider extends User {
     }
 
     /**
-     * Make payment.
-     *
-     * @param indexR the index r
+     * pay for the request and upload to elastic search
+     * @see ElasticsearchController
+     * @param request
      */
-    @Deprecated
-    public void makePayment(int indexR) {
-
-        openRequests.get(indexR).riderPay();
-    }
-
     public void makePayment(Request request) {
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
             Log.i("internet", "NONE");
@@ -240,17 +218,6 @@ public class Rider extends User {
     }
 
     /**
-     * Complete a request.
-     * Issues: may need to change index parameter to the Request itself
-     *
-     * @param index The request's position in openRequests.
-     */
-    @Deprecated
-    public void completeRequest(int index) {
-        openRequests.get(index).complete();
-    }
-
-    /**
      * Get the list of open Requests.
      *
      * @return ArrayList of open Requests.
@@ -266,6 +233,10 @@ public class Rider extends User {
         riderCommands = new ArrayList<RiderCommand>();
     }
 
+    /**
+     * if there is no driver in the Accepted list, it will return false
+     * @return boolean
+     */
     public boolean driverHasAccepted() {
         for (int i = 0; i < openRequests.size(); i++) {
             if (!openRequests.get(i).getAcceptedDriverProfiles().isEmpty()) {
