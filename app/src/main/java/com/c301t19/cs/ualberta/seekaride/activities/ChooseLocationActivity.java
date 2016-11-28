@@ -32,6 +32,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
+
+/**
+ *  Activity responsible for all location searching and setting. Any activity
+ *  thata requires a location to be inputted uses this activity.
+ */
 public class ChooseLocationActivity extends Activity implements MapEventsReceiver {
 
     private EditText location;
@@ -39,7 +44,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
     private ArrayList<POI> pois;
     private Marker longTapMarker;
     private Drawable poiIcon;
-    private Location locToSend;
+    private Location locationToSend;
     private String startOrEnd;
     private String callingActivity;
 
@@ -74,8 +79,9 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
         } catch (IOException e) {
             locationName = "Custom Location";
         }
-        locToSend = new Location(locationName);
-        locToSend.setGeoLocation(p);
+
+        locationToSend = new Location(locationName);
+        locationToSend.setGeoLocation(p);
 
         longTapMarker = new Marker(map);
         longTapMarker.setTitle(locationName);
@@ -93,29 +99,29 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_locations);
 
-        //
+        // Required for non asynchronous map functionality
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         poiIcon = getResources().getDrawable(R.drawable.marker_default);
         pois = new ArrayList<POI>();
 
+        // Initialize map
         final MapView map = (MapView) findViewById(R.id.chooseMap);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
         map.getOverlays().add(0, mapEventsOverlay);
-
-        Intent intention = getIntent();
-        startOrEnd =  intention.getStringExtra("key");
-        callingActivity = intention.getStringExtra("callingActivity");
-
-
-        // SET TO CURRENT PHONE LOCATION
         startPoint = new GeoPoint(53.52676, -113.52715);
         IMapController mapController = map.getController();
         mapController.setZoom(10);
         mapController.setCenter(startPoint);
+
+        // Check which activity called this one, and check what it wants back
+        Intent intention = getIntent();
+        startOrEnd =  intention.getStringExtra("key");
+        callingActivity = intention.getStringExtra("callingActivity");
+
 
         Button searchButton = (Button) findViewById(R.id.locationSearchButton);
         location = (EditText) findViewById(R.id.chooseLocationText);
@@ -130,6 +136,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                         map.getOverlays().add(0, mapEventsOverlay);
                     }
 
+                    // check if keyword is entered
                     pois = poiProvider.getPOICloseTo(startPoint,
                             location.getText().toString(), 50, 0.2);
 
@@ -144,6 +151,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                         pois = poiProvider.getThem(url);
                     }
 
+                    // if neither gets any results, toast no results found
                     if (pois.size() == 0) {
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 "No Results Found", Toast.LENGTH_LONG);
@@ -153,7 +161,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                     FolderOverlay poiMarkers = new FolderOverlay(ChooseLocationActivity.this);
                     map.getOverlays().add(poiMarkers);
 
-
+                    // Draw all the pois returned by the search
                     for (POI poi:pois){
                         Marker poiMarker = new Marker(map);
                         final String title = poi.mDescription;
@@ -168,8 +176,9 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                             public boolean onMarkerClick(Marker item, MapView map) {
                                 item.showInfoWindow();
 
-                                locToSend = new Location(title);
-                                locToSend.setGeoLocation(loc);
+                                // Set the location to send if clicked
+                                locationToSend = new Location(title);
+                                locationToSend.setGeoLocation(loc);
                                 return true;
                             }
                         });
@@ -179,13 +188,14 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
             }
         });
 
+        // Returns and sends location selected to the activity that called this one
         Button selectButton = (Button) findViewById(R.id.locationSelectButton);
         selectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if (locToSend != null) {
+                if (locationToSend != null) {
                     Gson gson = new Gson();
                     String send;
-                    send = gson.toJson(locToSend);
+                    send = gson.toJson(locationToSend);
                     Intent intent;
 
                     // Communication between activites from

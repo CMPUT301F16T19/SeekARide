@@ -6,8 +6,6 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c301t19.cs.ualberta.seekaride.R;
-import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
 import com.c301t19.cs.ualberta.seekaride.core.Profile;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
@@ -84,7 +81,7 @@ public class ViewProfileActivity extends Activity {
                     return;
                 }
 
-                Intent intent = new Intent(ViewProfileActivity.this, RCompleteActivity.class);
+                Intent intent = new Intent(ViewProfileActivity.this, RequestCompleteActivity.class);
                 //intent.putExtra("requestIndex", requestIndex);
                 intent.putExtra("isRider", true);
                 intent.putExtra("theirID", aProfile.getId());

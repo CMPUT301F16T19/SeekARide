@@ -64,7 +64,7 @@
             android:name=".activities.MapActivity"
             android:label="@string/title_activity_map" />
         <activity
-            android:name=".activities.RCompleteActivity"
+            android:name=".activities.RequestCompleteActivity"
             android:label="@string/title_activity_rcomplete" />
         <activity android:name=".deprecated.TestingActivity" />
         <activity android:name=".deprecated.LoginActivity" />

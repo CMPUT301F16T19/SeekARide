@@ -83,7 +83,7 @@
             android:name="com.c301t19.cs.ualberta.seekaride.activities.MapActivity"
             android:label="@string/title_activity_map" />
         <activity
-            android:name="com.c301t19.cs.ualberta.seekaride.activities.RCompleteActivity"
+            android:name="com.c301t19.cs.ualberta.seekaride.activities.RequestCompleteActivity"
             android:label="@string/title_activity_rcomplete" />
         <activity android:name="com.c301t19.cs.ualberta.seekaride.deprecated.TestingActivity" />
         <activity android:name="com.c301t19.cs.ualberta.seekaride.activities.ChooseLocationsActivity" />

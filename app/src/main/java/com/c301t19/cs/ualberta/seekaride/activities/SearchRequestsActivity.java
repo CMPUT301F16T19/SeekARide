@@ -20,31 +20,33 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
-import io.searchbox.core.Search;
-
+/**
+ *  Activity for a driver to search for requests
+ */
 public class SearchRequestsActivity extends Activity {
     private Button search;
     private EditText keywords;
     private EditText radius;
-    private EditText startLoc;
+    private EditText startLocation;
     private MapView map;
-
-    private Location keyLoc;
+    private Location keyLocation;
     private GeoPoint startPoint;
-    String keywordsText;
-    String radiusText;
+    private String keywordsText;
+    private String radiusText;
 
-    //gets the keywords used and the radius inputted.
+    /**
+     *  gets the keywords used and the radius inputted.
+     */
     public void write(){
         keywords = (EditText) findViewById(R.id.search_Keywords_Text);
         radius = (EditText) findViewById(R.id.search_Radius_Text);
 
-        startLoc = (EditText) findViewById(R.id.starting_location);
+        startLocation = (EditText) findViewById(R.id.starting_location);
         //we don't always need keywords, so what should we do to handle cases when it isn't used?
         keywordsText = keywords.getText().toString();
         radiusText = radius.getText().toString();
 
-        startLoc.setOnClickListener(new View.OnClickListener() {
+        startLocation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),
                         ChooseLocationActivity.class);
@@ -55,6 +57,9 @@ public class SearchRequestsActivity extends Activity {
         });
     }
 
+    /**
+     *  Responsible for moving to SearchResultsActivity if the driver presses the search button
+     */
     public void move(){
         search = (Button) findViewById(R.id.search_Search_Button);
 
@@ -64,7 +69,7 @@ public class SearchRequestsActivity extends Activity {
             public void onClick(View v) {
                 write();
                 Intent Nswitch = new Intent(SearchRequestsActivity.this, SearchResultsActivity.class);
-                if (keyLoc != null) {
+                if (keyLocation != null) {
                     if (radiusText.equals("")) {
                         Toast.makeText(getApplicationContext(), "Please enter radius",
                                 Toast.LENGTH_LONG).show();
@@ -81,7 +86,7 @@ public class SearchRequestsActivity extends Activity {
                     }
                     Gson gson = new Gson();
                     String send;
-                    send = gson.toJson(keyLoc);
+                    send = gson.toJson(keyLocation);
                     Nswitch.putExtra("queryLocation", send);
                 }
                 else {
@@ -100,19 +105,17 @@ public class SearchRequestsActivity extends Activity {
         write();
         move();
 
+        // Initialize map
         map = (MapView) findViewById(R.id.Map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
-
-        // SET TO CURRENT PHONE LOCATION
         startPoint = new GeoPoint(53.52676, -113.52715);
         IMapController mapController = map.getController();
         mapController.setZoom(10);
         mapController.setCenter(startPoint);
 
         getLocation();
-
     }
 
     @Override
@@ -122,23 +125,26 @@ public class SearchRequestsActivity extends Activity {
         getLocation();
     }
 
+    /**
+     *  Gets location from ChooseLocationActivity, prints it, and puts it on the map
+     */
     public void getLocation() {
         Intent intent = getIntent();
         Gson gson = new Gson();
 
         map.getOverlays().clear();
         if (intent.getStringExtra("keyword") != null) {
-            keyLoc = new Location("");
-            keyLoc = gson.fromJson(intent.getStringExtra("keyword"), keyLoc.getClass());
+            keyLocation = new Location("");
+            keyLocation = gson.fromJson(intent.getStringExtra("keyword"), keyLocation.getClass());
         }
-        if (keyLoc == null) {
+        if (keyLocation == null) {
             keywords.setText("");
         }
-        if (keyLoc != null) {
-            startLoc.setText(keyLoc.getAddress());
+        if (keyLocation != null) {
+            startLocation.setText(keyLocation.getAddress());
             Marker locMarker = new Marker(map);
-            locMarker.setPosition(keyLoc.getGeoLocation());
-            locMarker.setTitle(keyLoc.getAddress());
+            locMarker.setPosition(keyLocation.getGeoLocation());
+            locMarker.setTitle(keyLocation.getAddress());
             locMarker.setIcon(getResources().getDrawable(R.drawable.person));
             locMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             map.getOverlays().add(locMarker);

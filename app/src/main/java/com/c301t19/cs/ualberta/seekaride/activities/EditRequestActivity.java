@@ -3,8 +3,6 @@ package com.c301t19.cs.ualberta.seekaride.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,22 +16,16 @@ import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Rider;
 import com.google.gson.Gson;
 
-import org.osmdroid.bonuspack.routing.OSRMRoadManager;
-import org.osmdroid.bonuspack.routing.Road;
-import org.osmdroid.bonuspack.routing.RoadManager;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.Polyline;
-
-import java.util.ArrayList;
-
+/**
+ *  Activity for a rider to edit a request they already made
+ */
 public class EditRequestActivity extends Activity {
 
     Request request;
 
-    private Button editR;
-    private Button deleteR;
-    private Button Cancel;
+    private Button editRequestButton;
+    private Button deleteRequestButton;
+    private Button cancelButton;
     private EditText descriptionText;
     private TextView startLocationText;
     private TextView endLocationText;
@@ -46,7 +38,9 @@ public class EditRequestActivity extends Activity {
     private DriversAdapter adapter;
     private ListView driversList;
 
-    //takes the filled in information sets variables to it.
+    /**
+     *  takes the filled in information sets variables to it.
+     */
     public void write() {
         descriptionText = (EditText) findViewById(R.id.edit_Description_Text);
 
@@ -86,21 +80,17 @@ public class EditRequestActivity extends Activity {
                 startActivityForResult(intent, RESULT_OK);
             }
         });
-
-        //desciptText = descriptionText.getText().toString();
-        //String startText = startLocationText.getText().toString();
-        //String endText = endLocationText.getText().toString();
-        //fareText = fare.getText().toString();
-        // I don't know how we're setting our recommended fares, so it's commented out.
-        //recommendedFare.setText();
     }
 
+    /**
+     *  Responsible for moving back to rider activity one the rider has done what they wanted
+     */
     public void move() {
-        editR = (Button) findViewById(R.id.edit_Edit_Button);
-        deleteR = (Button) findViewById(R.id.edit_Delete_Button);
-        Cancel = (Button) findViewById(R.id.edit_Cancel_Button);
+        editRequestButton = (Button) findViewById(R.id.edit_Edit_Button);
+        deleteRequestButton = (Button) findViewById(R.id.edit_Delete_Button);
+        cancelButton = (Button) findViewById(R.id.edit_Cancel_Button);
         //edits the request and moves you back to the rider screen.
-        editR.setOnClickListener(new View.OnClickListener() {
+        editRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //write();
@@ -121,7 +111,7 @@ public class EditRequestActivity extends Activity {
             }
         });
         //deletes the request entirely, and moves you back to the rider screen.
-        deleteR.setOnClickListener(new View.OnClickListener() {
+        deleteRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -131,18 +121,12 @@ public class EditRequestActivity extends Activity {
             }
         });
         //just moves you back to the rider screen.
-        Cancel.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-    }
-
-    @Deprecated
-    public void load() {
-        descriptionText = (EditText) findViewById(R.id.edit_Description_Text);
-        descriptionText.setText(request.getDescription());
     }
 
     @Override
@@ -160,6 +144,9 @@ public class EditRequestActivity extends Activity {
         //load();
     }
 
+    /**
+     *  Gets locations from ChooseLocationActivity and prints them to their edittext
+     */
     public void getLocations() {
         Intent intent = getIntent();
         Gson gson = new Gson();

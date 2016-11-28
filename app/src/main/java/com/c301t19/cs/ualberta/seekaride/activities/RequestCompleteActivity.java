@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +12,6 @@ import android.widget.RatingBar;
 
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
-import com.c301t19.cs.ualberta.seekaride.core.ElasticsearchController;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.c301t19.cs.ualberta.seekaride.core.Review;
@@ -32,20 +29,23 @@ import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
 
-public class RCompleteActivity extends Activity {
+/**
+ *  Activity for the rider and driver which is displayed while the request is in progress.
+ *  In this activity, rider and driver can confirm payment and leave a review of one another
+ */
+public class RequestCompleteActivity extends Activity {
 
-    private Button confirmP;
+    private Button confirmPaymentButton;
     private EditText review;
     private RatingBar ratingBar;
-
     private String reviewText;
     private float rating;
-
     private boolean isRider;
-    //private int requestIndex;
     private Request request;
 
-    //handles getting the review, but doesn't save it anywhere.
+    /**
+     * handles getting the review, but doesn't save it anywhere.
+     */
     public void write(){
         review = (EditText) findViewById(R.id.complete_Review_Text);
 
@@ -53,17 +53,20 @@ public class RCompleteActivity extends Activity {
         rating = ratingBar.getRating();
     }
 
+    /**
+     *  Responsible for moving back to login screen when request is compelte
+     */
     public void move(){
-        confirmP = (Button) findViewById(R.id.complete_Confirm_Button);
+        confirmPaymentButton = (Button) findViewById(R.id.complete_Confirm_Button);
         ratingBar = (RatingBar) findViewById(R.id.complete_ratingBar);
         if (isRider) {
-            confirmP.setText("Pay Driver and Finish");
+            confirmPaymentButton.setText("Pay Driver and Finish");
         }
         else {
-            confirmP.setText("Receive Payment and Finish");
+            confirmPaymentButton.setText("Receive Payment and Finish");
         }
         //moves you to the login screen, after saving your review.
-        confirmP.setOnClickListener(new View.OnClickListener() {
+        confirmPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 write();
@@ -79,7 +82,7 @@ public class RCompleteActivity extends Activity {
                     Rider.getInstance().setReceivedNotification(false);
                     Driver.getInstance().setReceivedNotification(false);
                     Log.i("WOW",((Boolean)(Driver.getInstance().getRequestInProgress() == null)).toString());
-                    startActivity(new Intent(RCompleteActivity.this, RiderActivity.class));
+                    startActivity(new Intent(RequestCompleteActivity.this, RiderActivity.class));
                 }
                 else {
                     Driver.getInstance().updateAcceptedRequests();
@@ -91,7 +94,7 @@ public class RCompleteActivity extends Activity {
                     Rider.getInstance().setReceivedNotification(false);
                     Driver.getInstance().setReceivedNotification(false);
                     Log.i("WOW2",((Boolean)(Driver.getInstance().getRequestInProgress() == null)).toString());
-                    startActivity(new Intent(RCompleteActivity.this, DriverActivity.class));
+                    startActivity(new Intent(RequestCompleteActivity.this, DriverActivity.class));
                 }
 
                 finish();
@@ -117,6 +120,7 @@ public class RCompleteActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        // Initialize map
         final MapView map = (MapView) findViewById(R.id.rCompleteMap);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
@@ -124,6 +128,7 @@ public class RCompleteActivity extends Activity {
         IMapController mapController = map.getController();
         mapController.setZoom(11);
 
+        // Draw start marker
         Location start = request.getStart();
         Marker startMarker = new Marker(map);
         startMarker.setPosition(start.getGeoLocation());
@@ -131,9 +136,9 @@ public class RCompleteActivity extends Activity {
         startMarker.setIcon(getResources().getDrawable(R.drawable.person));
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         map.getOverlays().add(startMarker);
-
         mapController.setCenter(start.getGeoLocation());
 
+        // Draw destination marker
         Location end = request.getDestination();
         Marker endMarker = new Marker(map);
         endMarker.setPosition(end.getGeoLocation());
@@ -142,6 +147,7 @@ public class RCompleteActivity extends Activity {
         endMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         map.getOverlays().add(endMarker);
 
+        // Draw the route between start and destination
         RoadManager roadManager = new OSRMRoadManager(this);
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
         waypoints.add(start.getGeoLocation());

@@ -124,7 +124,7 @@ ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\Andr
 		ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\AndroidManifest.xml:53:13-55
 	android:name
 		ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\AndroidManifest.xml:52:13-51
-activity#com.c301t19.cs.ualberta.seekaride.activities.RCompleteActivity
+activity#com.c301t19.cs.ualberta.seekaride.activities.RequestCompleteActivity
 ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\AndroidManifest.xml:54:9-56:64
 	android:label
 		ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\AndroidManifest.xml:56:13-61

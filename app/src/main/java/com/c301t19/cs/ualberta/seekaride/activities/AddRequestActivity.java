@@ -28,6 +28,9 @@ import org.osmdroid.views.overlay.Polyline;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ *  Activity for a rider to create requests
+ */
 public class AddRequestActivity extends Activity {
 
     public Button createR;
@@ -44,7 +47,9 @@ public class AddRequestActivity extends Activity {
 
     String descriptText;
 
-    //takes the filled in information sets variables to it.
+    /**
+     * Takes the filled in information sets variables to it.
+     */
     public void write() {
         descriptionText = (EditText) findViewById(R.id.add_Description_Text);
         startLocationText = (EditText) findViewById(R.id.add_Slocation_Text);
@@ -77,18 +82,17 @@ public class AddRequestActivity extends Activity {
         });
     }
 
+    /**
+     *  Responsible for moving back to rider activity one a request is made
+     */
     public void move(){
         createR = (Button) findViewById(R.id.add_Create_Button);
         Back = (Button) findViewById(R.id.add_Back_Button);
+
         //creates the request and moves you back to the initial rider screen
         createR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                Intent Cswitch = new Intent(AddRequestActivity.this, RiderActivity.class);
-                startActivity(Cswitch);
-                */
-
                 // Making toasts from
                 // http://stackoverflow.com/questions/3500197/how-to-display-toast-in-android
                 if (startLocation == null) {
@@ -137,6 +141,9 @@ public class AddRequestActivity extends Activity {
         });
     }
 
+    /**
+     *  Gets locations from ChooseLocationActivity, prints them, and puts them on the map
+     */
     public void getLocations() {
         Intent intent = getIntent();
         Gson gson = new Gson();
@@ -178,6 +185,7 @@ public class AddRequestActivity extends Activity {
             map.getOverlays().add(eMarker);
         }
 
+        // If both locations specified, draw the route
         if((startLocation != null) & (endLocation != null)) {
             RoadManager roadManager = new OSRMRoadManager(this);
             ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
@@ -190,21 +198,6 @@ public class AddRequestActivity extends Activity {
         }
         map.invalidate();
     }
-
-    // has been moved to location
-    @Deprecated
-    public String calculateFare(Location loc1, Location loc2) {
-        GeoPoint geo1 = loc1.getGeoLocation();
-        GeoPoint geo2 = loc2.getGeoLocation();
-        float distanceInMeters = geo1.distanceTo(geo2);
-        float distanceInKm = distanceInMeters/1000;
-        double costPerKm = 1.48;
-        //http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
-        DecimalFormat dFormat = new DecimalFormat("#.##");
-        double cost = (double) distanceInKm * costPerKm;
-        return ("$" + dFormat.format(cost));
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

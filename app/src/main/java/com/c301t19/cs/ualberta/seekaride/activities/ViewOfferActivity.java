@@ -1,15 +1,10 @@
 package com.c301t19.cs.ualberta.seekaride.activities;
 
 import android.app.Activity;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,9 +13,7 @@ import android.widget.Toast;
 import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.Driver;
 import com.c301t19.cs.ualberta.seekaride.core.Location;
-import com.c301t19.cs.ualberta.seekaride.core.NetworkManager;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
-import com.c301t19.cs.ualberta.seekaride.core.Rider;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
@@ -40,33 +33,33 @@ import java.util.ArrayList;
 public class ViewOfferActivity extends Activity {
 
     private Request request;
-
-    private Button acceptO;
-    private Button Back;
+    private Button acceptOfferButton;
+    private Button backButton;
     private TextView description;
-    private TextView sLocation;
-    private TextView eLocation;
+    private TextView startLocationText;
+    private TextView destinationText;
     private TextView fare;
     private TextView riderInfo;
-
     private Boolean hasInternet;
 
-    //fills in the blank text views with the relavent information from the request.
+    /**
+     * fills in the blank text views with the relavent information from the request.
+     */
     public void write() {
         description = (TextView) findViewById(R.id.view_Description_Text);
-        sLocation = (TextView) findViewById(R.id.view_Slocation_Text);
-        eLocation = (TextView) findViewById(R.id.view_Elocation_Text);
+        startLocationText = (TextView) findViewById(R.id.view_Slocation_Text);
+        destinationText = (TextView) findViewById(R.id.view_Elocation_Text);
         fare = (TextView) findViewById(R.id.view_Fare_Text);
         riderInfo = (TextView) findViewById(R.id.view_Info_Text);
 
-        //The commands to fill the text, just needs the proper variable in the brackets
         description.setText("Description: " + request.getDescription());
-        sLocation.setText("From: " + request.getStart().getAddress());
-        eLocation.setText("To: " + request.getDestination().getAddress());
+        startLocationText.setText("From: " + request.getStart().getAddress());
+        destinationText.setText("To: " + request.getDestination().getAddress());
         fare.setText("Fare: $" + ((Double) request.getPrice()).toString());
         riderInfo.setText("Rider: " + request.getRiderProfile().getUsername());
         riderInfo.setPaintFlags(riderInfo.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
+        // Initialize map
         MapView map = (MapView) findViewById(R.id.view_Offer_Map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
@@ -74,6 +67,7 @@ public class ViewOfferActivity extends Activity {
         IMapController mapController = map.getController();
         mapController.setZoom(10);
 
+        // Draw start location marker
         Location start = request.getStart();
         Marker startMarker = new Marker(map);
         startMarker.setPosition(start.getGeoLocation());
@@ -81,9 +75,9 @@ public class ViewOfferActivity extends Activity {
         startMarker.setIcon(getResources().getDrawable(R.drawable.person));
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         map.getOverlays().add(startMarker);
-
         mapController.setCenter(start.getGeoLocation());
 
+        // Draw destination marker
         Location end = request.getDestination();
         Marker endMarker = new Marker(map);
         endMarker.setPosition(end.getGeoLocation());
@@ -92,6 +86,7 @@ public class ViewOfferActivity extends Activity {
         endMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         map.getOverlays().add(endMarker);
 
+        // Draw the route in between start and destination
         RoadManager roadManager = new OSRMRoadManager(this);
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
         waypoints.add(start.getGeoLocation());
@@ -102,14 +97,14 @@ public class ViewOfferActivity extends Activity {
     }
 
     /**
-     *
+     * Responsible for moving to different activities
      */
     public void move() {
-        acceptO = (Button) findViewById(R.id.view_Accept_Button);
+        acceptOfferButton = (Button) findViewById(R.id.view_Accept_Button);
         if (getIntent().getBooleanExtra("source", false)) {
-            acceptO.setText("Decline");
+            acceptOfferButton.setText("Decline");
         }
-        Back = (Button) findViewById(R.id.view_Back_Button);
+        backButton = (Button) findViewById(R.id.view_Back_Button);
         /*builds the notification
         final NotificationCompat.Builder Abuilder =
                 new NotificationCompat.Builder(this).setSmallIcon(R.drawable.test).
@@ -120,7 +115,7 @@ public class ViewOfferActivity extends Activity {
 
 
         //Should add the request to the list, and return you to Driver screen
-        acceptO.setOnClickListener(new View.OnClickListener() {
+        acceptOfferButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Driver.getInstance().getRequestInProgress() != null) {
@@ -138,7 +133,7 @@ public class ViewOfferActivity extends Activity {
             }
         });
         //returns you to the search results screen
-        Back.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

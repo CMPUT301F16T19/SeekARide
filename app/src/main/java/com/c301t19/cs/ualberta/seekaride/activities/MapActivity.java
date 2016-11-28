@@ -16,6 +16,9 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
+/**
+ *  What does this do?
+ */
 public class MapActivity extends Activity {
     public Button Finish;
     public Button cancelB;
@@ -28,7 +31,7 @@ public class MapActivity extends Activity {
         Finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Fswitch = new Intent(MapActivity.this, RCompleteActivity.class);
+                Intent Fswitch = new Intent(MapActivity.this, RequestCompleteActivity.class);
                 startActivity(Fswitch);
             }
         });
@@ -45,16 +48,18 @@ public class MapActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initialize map
         setContentView(R.layout.activity_map);
         MapView map = (MapView) findViewById(R.id.map_Map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
-
         GeoPoint startPoint = new GeoPoint(53.52676, -113.52715);
         IMapController mapController = map.getController();
         mapController.setZoom(10);
         mapController.setCenter(startPoint);
+
         move();
     }
 

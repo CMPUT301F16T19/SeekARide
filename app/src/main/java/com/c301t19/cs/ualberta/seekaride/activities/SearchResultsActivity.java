@@ -18,19 +18,28 @@ import com.c301t19.cs.ualberta.seekaride.core.Location;
 import com.c301t19.cs.ualberta.seekaride.core.Request;
 import com.google.gson.Gson;
 
+/**
+ *  Activity that takes parameters from SearchRequestsActivity, searches for requests
+ *  with those parameters, and then prints them to a list that can be filtered by price
+ *  and price per km
+ */
 public class SearchResultsActivity extends Activity {
 
     private Button back;
     private ListView results;
     private EditText filterPrice;
-    private Button filterButton;
-    private Button filterKMButton;
+    private Button filterPriceButton;
+    private Button filterPriceByKMButton;
     private RequestsAdapter adapter;
     private Request selectedRequest;
 
+    /**
+     *  Moves to ViewOfferActivity if the driver selects a request from the list, or back to
+     *  the SearchRequestsActivity if the user presses back
+     */
     public void move(){
-        filterButton = (Button) findViewById(R.id.results_Filter_Price_Button);
-        filterKMButton = (Button) findViewById(R.id.results_Filter_PriceKM_Button);
+        filterPriceButton = (Button) findViewById(R.id.results_Filter_Price_Button);
+        filterPriceByKMButton = (Button) findViewById(R.id.results_Filter_PriceKM_Button);
         back = (Button) findViewById(R.id.results_Back_Button);
         filterPrice = (EditText) findViewById(R.id.results_Filter_Price_Text);
 
@@ -42,6 +51,7 @@ public class SearchResultsActivity extends Activity {
                 startActivity(Nswitch);
             }
         });
+
         //Choose a request from the list to see more details about it.
         results.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,7 +68,7 @@ public class SearchResultsActivity extends Activity {
             }
         });
 
-        filterButton.setOnClickListener(new View.OnClickListener() {
+        filterPriceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(filterPrice.getText().length() > 0)
@@ -71,7 +81,7 @@ public class SearchResultsActivity extends Activity {
             }
         });
 
-        filterKMButton.setOnClickListener(new View.OnClickListener() {
+        filterPriceByKMButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(filterPrice.getText().length() > 0)
@@ -84,6 +94,7 @@ public class SearchResultsActivity extends Activity {
             }
         });
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,23 +104,21 @@ public class SearchResultsActivity extends Activity {
         StrictMode.setThreadPolicy(policy);
 
         results = (ListView) findViewById(R.id.result_List);
+
+        // Queries for either location+radius or keyword based on what was passed in
         Intent intent = getIntent();
         if (intent.getStringExtra("queryLocation") != null) {
-
             Gson gson = new Gson();
             Location queryLocation = new Location("");
             queryLocation = gson.fromJson(intent.getStringExtra("queryLocation"), queryLocation.getClass());
-
-            // multiplied by 1000 to get meters
             double radiusDouble = Double.parseDouble(intent.getStringExtra("radius"));
-            //Toast.makeText(getApplicationContext(), String.valueOf(radiusDouble),
-            //        Toast.LENGTH_LONG).show();
             Driver.getInstance().searchRequestsByLocation(queryLocation, radiusDouble);
         }
         else {
             Driver.getInstance().searchRequestsByKeyword(intent.getStringExtra("keywords"),
                     intent.getStringExtra("radius"));
         }
+
         adapter = new RequestsAdapter(this,
                 R.layout.request_list_item, Driver.getInstance().getSearchedRequests(), getLayoutInflater());
         results.setAdapter(adapter);
