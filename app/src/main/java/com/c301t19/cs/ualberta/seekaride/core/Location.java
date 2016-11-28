@@ -37,10 +37,10 @@ public class Location {
     /**
      * Sets address.
      *
-     * @param a the a
+     * @param address the a
      */
-    public void setAddress(String a) {
-        address = a;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     /**
@@ -65,11 +65,11 @@ public class Location {
 
     /**
      * calculate the Fare
-     * @param loc2
+     * @param location
      * @return string
      */
-    public String calculateFare(Location loc2) {
-        double distanceInKm = this.calculateDistanceInKm(loc2);
+    public String calculateFare(Location location) {
+        double distanceInKm = this.calculateDistanceInKm(location);
         double costPerKm = 1.48;
         //http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
         DecimalFormat dFormat = new DecimalFormat("#.##");
@@ -79,12 +79,12 @@ public class Location {
 
     /**
      *
-     * @param loc2
+     * @param location
      * @return distanceInKm(double)
      */
-    public double calculateDistanceInKm(Location loc2) {
+    public double calculateDistanceInKm(Location location) {
         GeoPoint geo1 = this.geoLocation;
-        GeoPoint geo2 = loc2.getGeoLocation();
+        GeoPoint geo2 = location.getGeoLocation();
         float distanceInMeters = geo1.distanceTo(geo2);
         float distanceInKm = distanceInMeters / 1000;
         return (double) distanceInKm;

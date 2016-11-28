@@ -27,9 +27,6 @@ public class ElasticsearchController {
 
     public static final String INDEX = "t19seekaride2";
 
-    public enum ReviewField {
-        USERID, ID
-    }
     /**
      * Indicates a field in a userProfile's Profile for search tasks.
      */
@@ -37,33 +34,12 @@ public class ElasticsearchController {
         /**
          * Name userProfile field.
          */
-        NAME, /**
-         * Email userProfile field.
-         */
-        EMAIL, /**
-         * Phone userProfile field.
-         */
-        PHONE, ID }
+        NAME, ID }
 
     /**
      * Indicates a field in a Request for search tasks.
      */
     public enum RequestField {
-        /**
-         * Description request field.
-         */
-        DESCRIPTION, /**
-         * Start request field.
-         */
-        START, /**
-         * End request field.
-         */
-        END, /**
-         * Date request field.
-         */
-        DATE, /**
-         * Riderid request field.
-         */
         RIDERID, /**
          * Drivers request field.
          */
@@ -149,15 +125,6 @@ public class ElasticsearchController {
             verifySettings();
             switch (userField) {
                 case NAME:
-                    /*String query = "{\n" +
-                            "    \"query\": {\n" +
-                            "        \"filtered\" : {\n" +
-                            "            \"filter\" : {\n" +
-                            "                \"term\" : { \"username\" : \"" + keyword + "\" }\n" +
-                            "            }\n" +
-                            "        }\n" +
-                            "    }\n" +
-                            "}";*/
                     String query = "{\n" +
                             "    \"query\": {\n" +
                             "        \"match\" : {\n" +
@@ -373,13 +340,13 @@ public class ElasticsearchController {
         /**
          * Instantiates a new Search requests by location task.
          *
-         * @param l the l
-         * @param r the r
+         * @param location the l
+         * @param radius the r
          */
-        public SearchRequestsByLocationTask(Location l, double r) {
+        public SearchRequestsByLocationTask(Location location, double radius) {
             super();
-            location = l;
-            radius = r;
+            this.location = location;
+            this.radius = radius;
         }
 
         @Override

@@ -12,7 +12,7 @@ import com.c301t19.cs.ualberta.seekaride.R;
 import com.c301t19.cs.ualberta.seekaride.core.AccountController;
 import com.c301t19.cs.ualberta.seekaride.core.NetworkManager;
 
-public class MainActivity extends Activity {
+public class LoginActivity extends Activity {
 
     EditText username;
     AccountController accountController;
@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
         newAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Nswitch = new Intent(MainActivity.this, NewAccountActivity.class);
+                Intent Nswitch = new Intent(LoginActivity.this, NewAccountActivity.class);
                 startActivity(Nswitch);
             }
         });

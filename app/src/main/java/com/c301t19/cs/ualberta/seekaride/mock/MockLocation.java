@@ -31,9 +31,9 @@ public class MockLocation extends Location {
     }
 
     @Override
-    public String calculateFare(Location loc2) {
+    public String calculateFare(Location location) {
         GeoPoint geo1 = this.geoLocation;
-        GeoPoint geo2 = loc2.getGeoLocation();
+        GeoPoint geo2 = location.getGeoLocation();
         float distanceInMeters = geo1.distanceTo(geo2);
         float distanceInKm = distanceInMeters/1000;
         double costPerKm = 1.48;

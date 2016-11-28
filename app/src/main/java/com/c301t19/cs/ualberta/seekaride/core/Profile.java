@@ -147,10 +147,10 @@ public class Profile {
     /**
      * Sets email.
      *
-     * @param e the e
+     * @param email the e
      */
-    public void setEmail(String e) {
-        email = e;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

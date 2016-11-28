@@ -211,7 +211,7 @@ public class ChooseLocationActivity extends Activity implements MapEventsReceive
                         intent = new Intent(getApplicationContext(), SearchRequestsActivity.class);
                     }
                     else {
-                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent = new Intent(getApplicationContext(), LoginActivity.class);
                         Toast.makeText(getApplicationContext(),
                                 "ChooseLocationActivity intents bugged", Toast.LENGTH_LONG).show();
                     }

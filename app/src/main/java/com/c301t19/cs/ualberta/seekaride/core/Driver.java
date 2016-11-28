@@ -16,8 +16,8 @@ public class Driver extends User {
 
     protected ArrayList<DriverCommand> driverCommands;
 
-    protected Driver(Profile p) {
-        super(p);
+    protected Driver(Profile profile) {
+        super(profile);
         searchedRequests = new ArrayList<Request>();
         acceptedRequests = new ArrayList<Request>();
         driverCommands = new ArrayList<DriverCommand>();
@@ -36,10 +36,10 @@ public class Driver extends User {
      * Creates an instance of Driver using a user's Profile. Meant to be called during login.
      * Must be called before other Driver methods are used.
      *
-     * @param p The user's profile.
+     * @param profile The user's profile.
      */
-    public static void instantiate(Profile p) {
-        ourInstance = new Driver(p);
+    public static void instantiate(Profile profile) {
+        ourInstance = new Driver(profile);
     }
 
     /**

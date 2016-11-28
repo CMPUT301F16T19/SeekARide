@@ -22,7 +22,7 @@
         </receiver>
         <service android:name=".activities.PollingService" ></service>
         <receiver android:name=".activities.PollServerBroadcastReceiver" ></receiver>
-        <activity android:name=".activities.MainActivity" >
+        <activity android:name=".activities.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

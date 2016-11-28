@@ -34,7 +34,7 @@ MERGED from [com.android.support:support-v4:23.1.1] C:\Users\Master Chief\Docume
 		ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\AndroidManifest.xml:9:9-43
 	android:theme
 		ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\AndroidManifest.xml:12:9-67
-activity#com.c301t19.cs.ualberta.seekaride.activities.MainActivity
+activity#com.c301t19.cs.ualberta.seekaride.activities.LoginActivity
 ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\AndroidManifest.xml:13:9-19:20
 	android:name
 		ADDED from C:\Users\Master Chief\Documents\SeekARide\SeekARide\app\src\main\AndroidManifest.xml:13:19-58

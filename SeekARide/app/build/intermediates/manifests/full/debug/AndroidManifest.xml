@@ -41,7 +41,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
-        <activity android:name="com.c301t19.cs.ualberta.seekaride.activities.MainActivity" >
+        <activity android:name="com.c301t19.cs.ualberta.seekaride.activities.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

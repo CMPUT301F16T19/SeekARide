@@ -28,13 +28,13 @@ public class Request {
     private double lat;
     private double lon;
 
-    private Boolean waitingForRider;
+    private boolean waitingForRider;
     private Profile acceptedDriverProfile;
-    private Boolean riderPaid;
-    private Boolean driverIsPaid;
+    private boolean riderPaid;
+    private boolean driverIsPaid;
 
     private boolean inProgress;
-    private Boolean completion;
+    private boolean completion;
 
     private Profile riderProfile;
 
