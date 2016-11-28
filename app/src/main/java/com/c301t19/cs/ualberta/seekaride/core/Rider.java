@@ -94,6 +94,10 @@ public class Rider extends User {
     }
 
 
+    /**
+     * delete the request by passing it
+     * @param request
+     */
     public void deleteRequest(Request request) {
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
             Log.i("internet", "NONE");
@@ -108,6 +112,10 @@ public class Rider extends User {
         }
     }
 
+    /**
+     * change the request to new request
+     * @param edited
+     */
     public void editRequest(Request edited) {
         if (NetworkManager.getInstance().getConnectivityStatus() == NetworkManager.Connectivity.NONE) {
             Log.i("internet", "NONE");
@@ -124,7 +132,7 @@ public class Rider extends User {
     }
 
     /**
-     *
+     * accept Driver Offer by passing request and driver profile
      * @param request
      * @param driverProfile
      * @return a boolean
