@@ -22,33 +22,48 @@ public class Profile {
     /**
      * Instantiates a new Profile.
      *
-     * @param u the u
-     * @param p the p
-     * @param e the e
+     * @param username
+     * @param phoneNumber
+     * @param email
+     * @param car
      */
-    public Profile(String u, String p, String e, String c) {
-        username = u;
-        phoneNumber = p;
-        email = e;
-        car = c;
+    public Profile(String username, String phoneNumber, String email, String car) {
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.car = car;
     }
 
+    /**
+     * constructor
+     * @param username
+     * @param phoneNumber
+     * @param email
+     */
     @Deprecated
-    public Profile(String u, String p, String e) {
-        username = u;
-        phoneNumber = p;
-        email = e;
-        car = null;
+    public Profile(String username, String phoneNumber, String email) {
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.car = null;
     }
 
-    public Profile(Profile p) {
-        username = p.getUsername();
-        phoneNumber = p.getPhoneNumber();
-        email = p.getEmail();
-        id = p.getId();
-        car = p.getCar();
+    /**
+     * constructor
+     * @param newProfile
+     */
+    public Profile(Profile newProfile) {
+        this.username = newProfile.getUsername();
+        this.phoneNumber = newProfile.getPhoneNumber();
+        this.email = newProfile.getEmail();
+        this.id = newProfile.getId();
+        this.car = newProfile.getCar();
     }
 
+    /**
+     * get car
+     * @return car
+     */
     public String getCar() {
         if (car == null) {
             return "";
@@ -138,6 +153,11 @@ public class Profile {
         email = e;
     }
 
+    /**
+     * compare 2 object
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (id == null) {
@@ -147,6 +167,9 @@ public class Profile {
         return ((Profile) (obj)).getId().equals(id);
     }
 
+    /**
+     * get the list of reviews
+     */
     public ArrayList<Review> getReviews() {
         ElasticsearchController.GetReviewsTask getReviewsTask = new ElasticsearchController.GetReviewsTask(id);
         getReviewsTask.execute();
@@ -160,6 +183,10 @@ public class Profile {
         return new ArrayList<Review>();
     }
 
+    /**
+     * get the average rating
+     * @return rating
+     */
     public float getRating() {
         ArrayList<Review> reviews = getReviews();
         float res = 0;

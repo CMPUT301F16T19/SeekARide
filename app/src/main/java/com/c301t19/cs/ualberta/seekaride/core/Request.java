@@ -1,8 +1,5 @@
 package com.c301t19.cs.ualberta.seekaride.core;
 
-import org.osmdroid.util.GeoPoint;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -76,6 +73,10 @@ public class Request {
         this.riderId = riderId;
     }
 
+    /**
+     * copy constructor of request
+     * @param r
+     */
     public Request(Request r) {
         id = r.getId();
         riderId = r.getRiderProfile().getId();
@@ -112,6 +113,10 @@ public class Request {
        // editRequestTask.execute();
     }
 
+    /**
+     * Driver decline
+     * @param driverProfile
+     */
     public void driverDeclined(Profile driverProfile) {
 
         acceptedDriverProfiles.remove(driverProfile);
@@ -119,6 +124,11 @@ public class Request {
         // editRequestTask.execute();
     }
 
+    /**
+     * to see is there any Driver Accepted
+     * @param driverProfile
+     * @return boolean
+     */
     public boolean didDriverAccept(Profile driverProfile) {
         if (acceptedDriverProfiles.contains(driverProfile)) {
             return true;
@@ -251,6 +261,11 @@ public class Request {
         return true;
     }
 
+    /**
+     * rider Accept or not
+     * @param driverProfile
+     * @return boolean
+     */
     public boolean riderAccept(Profile driverProfile) {
         if (!acceptedDriverProfiles.contains(driverProfile))
         {
@@ -324,6 +339,11 @@ public class Request {
      */
     public String getId() { return id; }
 
+    /**
+     * to see 2 object are equals or not
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (id == null) {
@@ -333,28 +353,51 @@ public class Request {
         return ((Request) (obj)).getId().equals(id);
     }
 
+    /**
+     * set the description
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * set the price
+     * @param price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
-
+    /**
+     * to see the state of inProgress
+     * @return boolean
+     */
     public boolean isInProgress() {
         return inProgress;
     }
 
+    /**
+     * set InProgress
+     * @param inProgress
+     */
     @Deprecated
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }
 
+    /**
+     * set start location
+     * @param start
+     */
     public void setStart(Location start) {
         this.start = start;
     }
 
+    /**
+     * set Destination
+     * @param destination
+     */
     public void setDestination(Location destination) {
         this.destination = destination;
     }
