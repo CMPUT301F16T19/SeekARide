@@ -221,6 +221,7 @@ public class Driver extends User {
         }
 
         Request acceptedRequest = riderHasAccepted();
+        Log.i("accepted null", ((Boolean)(acceptedRequest==null)).toString());
         if (acceptedRequest != null && acceptedRequest.getAcceptedDriverProfile()!=null && acceptedRequest.getAcceptedDriverProfile().equals(getProfile())) {
             setRequestInProgress(acceptedRequest);
             Request current;
@@ -236,6 +237,9 @@ public class Driver extends User {
             }
             acceptedRequests = new ArrayList<Request>();
             acceptedRequests.add(acceptedRequest);
+        }
+        else {
+            setRequestInProgress(null);
         }
     }
 

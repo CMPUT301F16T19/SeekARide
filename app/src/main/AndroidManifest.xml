@@ -22,29 +22,43 @@
         </receiver>
         <service android:name=".activities.PollingService" ></service>
         <receiver android:name=".activities.PollServerBroadcastReceiver" ></receiver>
-        <activity android:name=".activities.LoginActivity" >
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.RiderActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activities.DriverActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activities.AddRequestActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activities.SearchRequestsActivity" android:launchMode="singleTask"/>
+        <activity
+            android:name=".activities.RiderActivity"
+            android:label="Rider"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".activities.DriverActivity"
+            android:launchMode="singleTask"
+            android:label="Driver"/>
+        <activity
+            android:name=".activities.AddRequestActivity"
+            android:launchMode="singleTask"
+            android:label="Add Request"/>
+        <activity
+            android:name=".activities.SearchRequestsActivity"
+            android:launchMode="singleTask"
+            android:label="Look for Requests"/>
         <activity
             android:name=".activities.NewAccountActivity"
-            android:label="@string/title_activity_new_account" />
+            android:label="New Account" />
         <activity
             android:name=".activities.ViewProfileActivity"
-            android:label="@string/title_activity_view_profile" />
+            android:label="View Profile" />
         <activity
             android:name=".activities.EditAccountActivity"
-            android:label="@string/title_activity_edit_account" />
+            android:label="My Profile" />
         <activity
             android:name=".activities.EditRequestActivity" android:launchMode="singleTask"
-            android:label="@string/title_activity_edit_request" />
+            android:label="Edit Request" />
         <activity
             android:name=".AcceptRiderActivity"
             android:label="@string/title_activity_accept_rider" />
@@ -53,10 +67,10 @@
             android:label="@string/title_activity_accept_driver" />
         <activity
             android:name=".activities.SearchResultsActivity"
-            android:label="@string/title_activity_search_results" />
+            android:label="Search Results" />
         <activity
             android:name=".activities.ViewOfferActivity"
-            android:label="@string/title_activity_view_offer" />
+            android:label="View Request" />
         <activity
             android:name=".deprecated.ReviewOfferActivity"
             android:label="@string/title_activity_review_offer" />
@@ -65,7 +79,7 @@
             android:label="@string/title_activity_map" />
         <activity
             android:name=".activities.RequestCompleteActivity"
-            android:label="@string/title_activity_rcomplete" />
+            android:label="Request In Progress" />
         <activity android:name=".deprecated.TestingActivity" />
         <activity android:name=".deprecated.LoginActivity" />
         <activity android:name=".activities.ChooseLocationActivity"></activity>

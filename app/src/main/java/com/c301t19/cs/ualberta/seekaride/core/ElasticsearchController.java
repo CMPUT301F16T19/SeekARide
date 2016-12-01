@@ -72,6 +72,7 @@ public class ElasticsearchController {
             Index index;
             if (id == null)
             {
+                Log.i("making", "id");
                 index = new Index.Builder(userProfile).index(INDEX).type("userProfile").build();
             }
             else
@@ -79,6 +80,7 @@ public class ElasticsearchController {
                 index = new Index.Builder(userProfile).index(INDEX).type("userProfile").id(id).build();
             }
             try {
+                Log.i("getting", "id");
                 client.execute(index);
             }
             catch (Exception e) {
@@ -547,6 +549,7 @@ public class ElasticsearchController {
 
     private static void verifySettings() {
         // if the client hasn't been initialized then we should make it!
+        Log.i("going to", "verify settings");
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
             DroidClientConfig config = builder.build();
@@ -555,6 +558,7 @@ public class ElasticsearchController {
             factory.setDroidClientConfig(config);
             client = (JestDroidClient) factory.getObject();
         }
+        Log.i("finished", "verify");
     }
 
     protected static ArrayList<Request> filterRequestsInProgress(ArrayList<Request> requests) {
