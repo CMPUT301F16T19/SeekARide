@@ -24,7 +24,7 @@
         <receiver android:name=".activities.PollServerBroadcastReceiver" ></receiver>
         <activity
             android:name=".activities.LoginActivity"
-            android:label="Login">
+            android:label="SeekARide">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
